@@ -1,3 +1,15 @@
-body {
-	background-color: lightgrey;
+header {
+	display: flex;
+	justify-content: center;
+}
+
+.album-wrapper {
+	padding:15px;
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+}
+
+.album {
+	max-width:300px;
 }

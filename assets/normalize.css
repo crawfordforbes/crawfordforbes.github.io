@@ -347,3 +347,15 @@ template {
 [hidden] {
   display: none;
 }
+
+
+
+body {
+	background-color: lightgrey;
+}
+h1, h3, h5 {
+	font-family: 'ABeeZee', sans-serif;
+}
+h2, h4, h6 {
+	font-family: 'Zilla Slab', serif;
+}
