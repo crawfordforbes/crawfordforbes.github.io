@@ -39,6 +39,12 @@
 		$.ajax({
 			url : apiURL,
 			success: function (data) {
+				console.log(data)
+				
+				data.sort(function(a,b){
+					
+					return parseInt(b.name) - parseInt(a.name)
+				})
 				data.forEach(function(pic, idx){	  
 					if(idx===0){
 						$("[data-image]").html("")
