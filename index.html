@@ -5,37 +5,120 @@
 	<link rel="stylesheet" type="text/css" href="./assets/normalize.css">
 	<link rel="stylesheet" type="text/css" href="./assets/styles.css">
 	<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=ABeeZee:400,400i|Zilla+Slab:500&display=swap" rel="stylesheet">
+	src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=ABeeZee:400,400i|Zilla+Slab:500&display=swap" rel="stylesheet">
 	<title>The Quinn Continuum</title>
 </head>
 <body>
 	<header>
-		<h1>Quinn</h1>
+		<h1>Quinn Adam Forbes</h1>
+		<ul>
+			<li>DOB: 10/25/19</li>
+			<li>Birth height: 21.5 inches</li>
+			<li>Birth weight: 8 pounds, 7 ounces</li>
+			<li>Marital status: Single; likely not yet ready to mingle</li>
+		</ul>
 	</header>
-	
-	<div class="album-wrapper" data-album-wrapper>
-		
+	<div class="single-image">
+		<div class="featured-image" data-image>Hold on to your butts</div>
+		<div class="arrows">
+			<div class="left arrow hide" data-left="-1" data-arrow>&larr;</div>
+			<div class="right arrow" data-right="1" data-arrow>&rarr;</div>
+		</div>
 	</div>
-	<div class="album-item" data-album-item-template>
-		<img src="" alt="">
+	<div class="album-wrapper" data-album>
 	</div>
+	<script>
+		var apiURL = "https://api.github.com/repos/crawfordforbes/crawfordforbes.github.io/contents/assets/images/";
+		var wrapper = $("[data-album]")
+		var numOfPics = 0;
+		var left = $("[data-left]")
+		var right = $("[data-right]")
+		$.ajax({
+			url : apiURL,
+			success: function (data) {
+				data.forEach(function(pic, idx){	  
+					if(idx===0){
+						$("[data-image]").html("")
+						$("[data-image]").attr("style", "background-image: url("+pic.download_url+");")
+					}      	
+					var div = document.createElement("div")
+					var divWrapper = document.createElement("div")
+					$(div).attr("style", "background-image:url("+pic.download_url+");");
+					$(divWrapper).attr("class", "pic-wrapper");
+					if(idx===0){
+						$(divWrapper).attr("class", "pic-wrapper selected");
+					}
+					$(div).attr("class", "pic");
+					$(div).attr("id", idx);
+					$(divWrapper).append(div)
+					$(wrapper).append(divWrapper)
+				})
+				numOfPics = data.length;
+			},
+			complete: function(){
+				var images = $(".pic")
+				$(images).each(function(idx, pic){
+					$(pic).on("click", function(){
+						var style = "background-image:"+this.style.backgroundImage;
+						$("[data-image]").attr("style", style)
+						var next = parseInt(this.id) + 1;
+						var prev = parseInt(this.id) - 1;
+						$(right).attr("data-right", next)
+						$(left).attr("data-left", prev)
+						checkArrows(this.id);
+					})
+				})
+			}
+		});
+		var arrows = $("[data-arrow]");
+		$(arrows).on("click", function(e){
+			var target = e.target;
+			var id;
+			if($(target).attr("data-right") && parseInt($(target).attr("data-right"))<numOfPics){
+				var id = parseInt($(target).attr("data-right"));
+				var next = id+1
+				$(target).attr("data-right", next)
+				var prev = id - 1;
+				$("[data-left]").attr("data-left", prev)
+				var newImg = $("#"+id);
+				var style = "background-image:"+newImg[0].style.backgroundImage;
+				$("[data-image]").attr("style", style)
+			}
+			if($(target).attr("data-left") && parseInt($(target).attr("data-left")) > -1){
+				var id = parseInt($(target).attr("data-left"));
+				var prev = id - 1
+				$(target).attr("data-left", prev)
+				var next = id + 1;
+				$("[data-right]").attr("data-right", next)
+				var newImg = $("#"+id);
+				var style = "background-image:"+newImg[0].style.backgroundImage;
+				$("[data-image]").attr("style", style)
+			}
+			if(id !== undefined){
+				checkArrows(id)
+			}
+		})
+		function checkArrows(id){
+			var images = $(".pic")			
+			$(images).each(function(idx, pic){
+				$(pic).parent().removeClass("selected")
+			})
+			var selected = $("#"+id);
+			$(selected).parent().addClass("selected")
+			if(id >= numOfPics - 1){
+				$(right).addClass("hide")
+			} else {
+				$(right).removeClass("hide")
+			}
+			if(id < 1){
+				$(left).addClass("hide")
+			} else {
+				$(left).removeClass("hide")
+			}
+		}
+	</script>
 </body>
-<script>
-	var apiURL = "https://api.github.com/repos/crawfordforbes/crawfordforbes.github.io/contents/assets/images/";
-
-	$.ajax({
-	    url : folder,
-	    success: function (data) {
-	    	console.log(data)
-	        $(data).find("a").attr("href", function (i, val) {
-	            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
-	                $("body").append( "<img src='"+ folder + val +"'>" );
-	            } 
-	        });
-	    }
-	});
-</script>
 </html>
