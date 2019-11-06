@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="./assets/normalize.css">
 	<link rel="stylesheet" type="text/css" href="./assets/styles.css">
+	<link href="https://fonts.googleapis.com/css?family=ABeeZee&display=swap" rel="stylesheet">
 	<script
 	src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=ABeeZee&display=swap" rel="stylesheet">
 	<title>The Quinn Continuum</title>
 </head>
 <body>
@@ -88,7 +88,7 @@
 				$(target).attr("data-right", next);
 				var prev = id - 1;
 				$("[data-left]").attr("data-left", prev);
-				var newImg = $("#"+id);
+				var newImg = $("#" + id);
 				var style = "background-image:"+newImg[0].style.backgroundImage;
 				$(mainImg).attr("style", style);
 			}
@@ -98,7 +98,7 @@
 				$(target).attr("data-left", prev);
 				var next = id + 1;
 				$("[data-right]").attr("data-right", next);
-				var newImg = $("#"+id);
+				var newImg = $("#" + id);
 				var style = "background-image:"+newImg[0].style.backgroundImage;
 				$(mainImg).attr("style", style);
 			}
@@ -111,7 +111,7 @@
 			$(images).each(function( idx, pic ) {
 				$(pic).parent().removeClass("selected");
 			})
-			var selected = $("#"+id);
+			var selected = $("#" + id);
 			$(selected).parent().addClass("selected");
 			if( id >= numOfPics - 1 ) {
 				$(right).addClass("hide");
