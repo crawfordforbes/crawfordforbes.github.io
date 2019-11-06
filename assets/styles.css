@@ -30,11 +30,11 @@ header ul li {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	
+
 	border-radius: 10px;
 }
 .pic-wrapper {
-	width: calc(25% - 40px);
+	width: calc(25% - 42px);
 	height: calc(25vw - 40px);
 	padding: 10px;
 	margin: 10px;
@@ -59,6 +59,7 @@ header ul li {
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
+	margin-bottom: 30px;
 }
 .arrows {
 	display: flex;
