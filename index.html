@@ -9,7 +9,7 @@
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=ABeeZee:400,400i|Zilla+Slab:500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=ABeeZee&display=swap" rel="stylesheet">
 	<title>The Quinn Continuum</title>
 </head>
 <body>
@@ -23,7 +23,7 @@
 		</ul>
 	</header>
 	<div class="single-image">
-		<div class="featured-image" data-image>Hold on to your butts</div>
+		<div class="featured-image" data-image>Loading...</div>
 		<div class="arrows">
 			<div class="left arrow hide" data-left="-1" data-arrow>&larr;</div>
 			<div class="right arrow" data-right="1" data-arrow>&rarr;</div>
@@ -37,93 +37,91 @@
 		var numOfPics = 0;
 		var left = $("[data-left]")
 		var right = $("[data-right]")
+		var mainImg = $("[data-image]")
 		$.ajax({
 			url : apiURL,
-			success: function (data) {
-				console.log(data)
-				
-				data.sort(function(a,b){
-					
-					return parseInt(b.name) - parseInt(a.name)
+			success: function( data ) {
+				data.sort(function( a, b ) {
+					return parseInt( b.name ) - parseInt( a.name )
 				})
-				data.forEach(function(pic, idx){	  
-					if(idx===0){
-						$("[data-image]").html("")
-						$("[data-image]").attr("style", "background-image: url("+pic.download_url+");")
+				data.forEach(function( pic, idx ) {	  
+					if( idx === 0 ) {
+						$(mainImg).html("");
+						$(mainImg).attr("style", "background-image: url("+pic.download_url+");");
 					}      	
-					var div = document.createElement("div")
-					var divWrapper = document.createElement("div")
+					var div = document.createElement("div");
+					var divWrapper = document.createElement("div");
 					$(div).attr("style", "background-image:url("+pic.download_url+");");
 					$(divWrapper).attr("class", "pic-wrapper");
-					if(idx===0){
+					if( idx === 0 ) {
 						$(divWrapper).attr("class", "pic-wrapper selected");
 					}
 					$(div).attr("class", "pic");
 					$(div).attr("id", idx);
-					$(divWrapper).append(div)
-					$(wrapper).append(divWrapper)
+					$(divWrapper).append(div);
+					$(wrapper).append(divWrapper);
 				})
 				numOfPics = data.length;
 			},
-			complete: function(){
-				var images = $(".pic")
-				$(images).each(function(idx, pic){
-					$(pic).on("click", function(){
+			complete: function() {
+				var images = $(".pic");
+				$(images).each(function( idx, pic ) {
+					$(pic).on("click", function() {
 						var style = "background-image:"+this.style.backgroundImage;
-						$("[data-image]").attr("style", style)
+						$(mainImg).attr("style", style);
 						var next = parseInt(this.id) + 1;
 						var prev = parseInt(this.id) - 1;
-						$(right).attr("data-right", next)
-						$(left).attr("data-left", prev)
+						$(right).attr("data-right", next);
+						$(left).attr("data-left", prev);
 						checkArrows(this.id);
 					})
 				})
 			}
 		});
 		var arrows = $("[data-arrow]");
-		$(arrows).on("click", function(e){
+		$(arrows).on("click", function( e ) {
 			var target = e.target;
 			var id;
-			if($(target).attr("data-right") && parseInt($(target).attr("data-right"))<numOfPics){
+			if( $(target).attr("data-right") && parseInt($(target).attr("data-right")) < numOfPics ) {
 				var id = parseInt($(target).attr("data-right"));
-				var next = id+1
-				$(target).attr("data-right", next)
-				var prev = id - 1;
-				$("[data-left]").attr("data-left", prev)
-				var newImg = $("#"+id);
-				var style = "background-image:"+newImg[0].style.backgroundImage;
-				$("[data-image]").attr("style", style)
-			}
-			if($(target).attr("data-left") && parseInt($(target).attr("data-left")) > -1){
-				var id = parseInt($(target).attr("data-left"));
-				var prev = id - 1
-				$(target).attr("data-left", prev)
 				var next = id + 1;
-				$("[data-right]").attr("data-right", next)
+				$(target).attr("data-right", next);
+				var prev = id - 1;
+				$("[data-left]").attr("data-left", prev);
 				var newImg = $("#"+id);
 				var style = "background-image:"+newImg[0].style.backgroundImage;
-				$("[data-image]").attr("style", style)
+				$(mainImg).attr("style", style);
 			}
-			if(id !== undefined){
+			if( $(target).attr("data-left") && parseInt($(target).attr("data-left")) > -1 ) {
+				var id = parseInt($(target).attr("data-left"));
+				var prev = id - 1;
+				$(target).attr("data-left", prev);
+				var next = id + 1;
+				$("[data-right]").attr("data-right", next);
+				var newImg = $("#"+id);
+				var style = "background-image:"+newImg[0].style.backgroundImage;
+				$(mainImg).attr("style", style);
+			}
+			if( id !== undefined ) {
 				checkArrows(id)
 			}
 		})
-		function checkArrows(id){
-			var images = $(".pic")			
-			$(images).each(function(idx, pic){
-				$(pic).parent().removeClass("selected")
+		function checkArrows( id ) {
+			var images = $(".pic");			
+			$(images).each(function( idx, pic ) {
+				$(pic).parent().removeClass("selected");
 			})
 			var selected = $("#"+id);
-			$(selected).parent().addClass("selected")
-			if(id >= numOfPics - 1){
-				$(right).addClass("hide")
+			$(selected).parent().addClass("selected");
+			if( id >= numOfPics - 1 ) {
+				$(right).addClass("hide");
 			} else {
-				$(right).removeClass("hide")
+				$(right).removeClass("hide");
 			}
-			if(id < 1){
-				$(left).addClass("hide")
+			if( id < 1 ) {
+				$(left).addClass("hide");
 			} else {
-				$(left).removeClass("hide")
+				$(left).removeClass("hide");
 			}
 		}
 	</script>

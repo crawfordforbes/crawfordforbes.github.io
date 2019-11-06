@@ -39,7 +39,7 @@ main {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: 1em;
 }
 
 /* Grouping content
@@ -352,10 +352,11 @@ template {
 
 body {
 	background-color: lightgrey;
-}
-h1, h3, h5 {
 	font-family: 'ABeeZee', sans-serif;
 }
-h2, h4, h6 {
-	font-family: 'Zilla Slab', serif;
+
+div {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box; 
 }
