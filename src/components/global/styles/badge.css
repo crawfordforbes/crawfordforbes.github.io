@@ -1,0 +1,4 @@
+.find-it-on-github-badge .badge-full-area-content {
+  display: flex;
+  flex-direction: column-reverse;
+}

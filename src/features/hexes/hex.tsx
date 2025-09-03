@@ -1,5 +1,4 @@
-import Badge from "../../components/global/badge"
-import { getImgUrl } from "../../utils/images"
+import { getImgUrl } from "@/utils/images"
 import { useId } from "react"
 
 import type { JSX } from "react"
@@ -18,12 +17,8 @@ type HexProps = {
   hexOnClick?: () => void,
   hexWidth?: number,
   hexMargin?: number,
-  badge1IconClass?: string,
-  badge1Link?: string,
-  badge1Title?: string,
-  badge2IconClass?: string,
-  badge2Link?: string,
-  badge2Title?: string,
+  badge1?: JSX.Element,
+  badge2?: JSX.Element,
 }
 
 function Hex({  
@@ -36,17 +31,13 @@ function Hex({
   hexOnClick,
   hexWidth = 160,
   hexMargin = 10,
-  badge1IconClass,
-  badge1Link,
-  badge1Title,
-  badge2IconClass,
-  badge2Link,
-  badge2Title,
+  badge1,
+  badge2,
 }: HexProps) {
   
   // Determine if there is any text content to display
   function hasTextContent() {
-    return badge1IconClass || badge1Title || badge2IconClass || badge2Title || hexTitle;
+    return badge1 || badge2 || hexTitle;
   }
 
   // Determine if there is any full area content to display
@@ -74,9 +65,25 @@ function Hex({
   // Render the full area content based on the provided props
   function renderFullAreaContent() {
     if(hexOnClick) {
-      return <button onClick={hexOnClick} className="hex-full-area-content" aria-label={hexTitle ? hexTitle : 'Hex button'}>{renderImageAndSvg()}</button>;
+      return (
+        <button
+          onClick={hexOnClick}
+          className="hex-full-area-content"
+          aria-label={hexTitle ? hexTitle : 'Hex button'}
+        >
+          {renderImageAndSvg()}
+        </button>
+      );
     } else if (hexLink) {
-      return <a href={hexLink} className="hex-full-area-content" aria-label={hexTitle ? hexTitle : 'Hex hexLink'}>{renderImageAndSvg()}</a>;
+      return (
+        <a
+          href={hexLink}
+          className="hex-full-area-content"
+          aria-label={hexTitle ? hexTitle : 'Hex hexLink'}
+        >
+          {renderImageAndSvg()}
+        </a>
+      );
     } else {
       return <span className="hex-full-area-content">{renderImageAndSvg()}</span>;
     }
@@ -87,8 +94,10 @@ function Hex({
     return (
       <div className="hex-text-content">
         {hexTitle && <h3 className="hex-title">{hexTitle}</h3>}
-        {badge1IconClass || badge1Title && <Badge iconClass={badge1IconClass} link={badge1Link} title={badge1Title}/>}
-        {badge2IconClass || badge2Title && <Badge iconClass={badge2IconClass} link={badge2Link} title={badge2Title}/>}
+        {badge1 || badge2 ? <div className="hex-badges">
+          {badge1}
+          {badge2}
+          </div> : <></>}
       </div>
     )
   }

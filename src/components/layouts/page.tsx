@@ -1,7 +1,7 @@
-import ProjectsFilterWrapper from "../../features/projects-filter/projects-filter-wrapper"
-import ContentPanel from "../global/content-panel"
-import Hero from "../hero/hero"
-import Footer from "../footer/footer"
+import ProjectsFilterWrapper from "@/features/projects-filter/projects-filter-wrapper"
+import ContentPanel from "@/components/global/content-panel"
+import Hero from "./hero"
+import Footer from "./footer"
 
 function Page() {
 

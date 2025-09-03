@@ -1,20 +1,73 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faReact, faGithub, faGit, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faFileArrowDown, faSpinner } from "@fortawesome/free-solid-svg-icons"
+
+library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedinIn, faSpinner)
+
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+import './styles/badge.css'
 
 type BadgeProps = {
-  iconClass?: string,
-  link?: string,
-  title?: string,
-  
+  iconClass?: IconProp;
+  link?: string;
+  title?: string;
+  badgeOnClick?: () => void;
+  extraClass?: string;
 }
 
-function Badge({ iconClass = "default-icon", link = "https://example.com", title = "Default Badge" }: BadgeProps) {
+const Badge = ({
+  iconClass, 
+  title, 
+  link, 
+  badgeOnClick,
+  extraClass
+}: BadgeProps) => {
+
+  // optional font awesome icon
+  const FAicon = iconClass ? <FontAwesomeIcon icon={iconClass} /> : <></>
+
+  function renderContent() {
+    return (
+      <>
+        {FAicon}
+        <span>{title}</span>
+      </>
+    )
+  }
+
+  function renderFullAreaContent() {
+    if(badgeOnClick) {
+      return (
+        <button 
+          onClick={badgeOnClick} 
+          className="badge-full-area-content" 
+          aria-label={title ? title : 'badge button'}
+        >
+          {renderContent()}
+        </button>
+      );
+    } else if (link) {
+      return (
+        <a 
+          href={link} 
+          className="badge-full-area-content" 
+          aria-label={title ? title : 'badge link'}
+        >
+          {renderContent()}
+        </a>
+      );
+    } else {
+      return <span className="badge-full-area-content">{renderContent()}</span>;
+    }
+  }
 
   return (
-    <div className="badge">
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        <span className={`badge-icon ${iconClass}`}>{title}</span>
-      </a>
+    <div className={`badge ${extraClass ? extraClass : ''}`}>
+      {renderFullAreaContent()}
     </div>
   )
-}
+};
 
-export default Badge
+export default Badge;
