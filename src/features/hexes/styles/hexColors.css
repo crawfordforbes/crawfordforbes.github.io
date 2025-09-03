@@ -1,0 +1,5 @@
+/* Hex Colors */
+.hex.orange-pink-gradient {
+  background: var(--orange);
+  background: linear-gradient(30deg, var(--orange) 0%, var(--pink) 100%);
+}

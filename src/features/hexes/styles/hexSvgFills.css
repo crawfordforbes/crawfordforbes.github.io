@@ -1,0 +1,68 @@
+
+.hex {
+  --hex-top: var(--orange);
+  --outer-wall-top-left: var(--blue);
+  --outer-wall-top-right: var(--cyan);
+  --outer-wall-right: var(--teal);
+  --outer-wall-bottom-right: var(--green);
+  --outer-wall-bottom-left: var(--teal);
+  --outer-wall-left: var(--cyan);
+  --hex-wall-top-left: var(--yellow);
+  --hex-wall-top-right: var(--red);
+  --hex-wall-right: var(--pink);
+  --hex-wall-bottom-right: var(--purple);
+  --hex-wall-bottom-left: var(--pink);
+  --hex-wall-left: var(--red);
+}
+
+.hex .hex-top {
+  fill: var(--hex-top);
+}
+
+.hex .outer-wall-top-left {
+  fill: var(--outer-wall-top-left);
+}
+
+.hex .outer-wall-top-right {
+  fill: var(--outer-wall-top-right);
+}
+
+.hex .outer-wall-right {
+  fill: var(--outer-wall-right)
+}
+
+.hex .outer-wall-bottom-right {
+  fill: var(--outer-wall-bottom-right);
+}
+
+.hex .outer-wall-bottom-left {
+  fill: var(--outer-wall-bottom-left);
+}
+
+.hex .outer-wall-left {
+  fill: var(--outer-wall-left);
+}
+
+.hex .hex-wall-top-left {
+  fill: var(--hex-wall-top-left);
+}
+
+.hex .hex-wall-top-right {
+  fill: var(--hex-wall-top-right);
+}
+
+.hex .hex-wall-right {
+  fill: var(--hex-wall-right)
+}
+
+.hex .hex-wall-bottom-right {
+  fill: var(--hex-wall-bottom-right);
+}
+
+.hex .hex-wall-bottom-left {
+  fill: var(--hex-wall-bottom-left);
+}
+
+.hex .hex-wall-left {
+  fill: var(--hex-wall-left);
+}

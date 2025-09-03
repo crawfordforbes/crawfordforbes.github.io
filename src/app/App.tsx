@@ -1,10 +1,11 @@
 import './App.css'
+import Page from '../components/layouts/page'
 
 function App() {
 
   return (
     <>
-      hello world
+      <Page />
     </>
   )
 }
