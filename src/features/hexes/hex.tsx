@@ -1,5 +1,6 @@
+import { useId, useContext } from "react"
 import { getImgUrl } from "@/utils/images"
-import { useId } from "react"
+import { IsDesktopContext } from "@/utils/context"
 
 import type { JSX } from "react"
 
@@ -29,12 +30,16 @@ function Hex({
   hexImagePath, 
   hexSvgComponent,
   hexOnClick,
-  hexWidth = 160,
-  hexMargin = 10,
+  hexWidth,
+  hexMargin = 3,
   badge1,
   badge2,
 }: HexProps) {
-  
+
+  const isDesktop = useContext(IsDesktopContext);
+  if (!hexWidth) {
+    hexWidth = isDesktop ? 250 : 170;
+  }
   // Determine if there is any text content to display
   function hasTextContent() {
     return badge1 || badge2 || hexTitle;
@@ -110,7 +115,7 @@ function Hex({
 
   // Inline styles for adjustable width and margin
   const css = 
-    `.hex.${uuid} .hex-row:nth-child(odd) {
+    `.hex-row:nth-child(even):has(.hex.${uuid}) {
         margin-left: calc(${hexWidth}px / 2 + ${hexMargin}px);
     }
     .hex.${uuid} {

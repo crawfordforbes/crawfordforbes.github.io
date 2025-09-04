@@ -22,13 +22,16 @@
   --green: #68cb97;
   --lime: #a9e583;
   --yellow: #f9f871;
+
+  --mobile-hex-width: 176px;
+  --desktop-hex-width: 256px;
 }
 
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: flex-start center;
   min-width: 320px;
   min-height: 100vh;
 }
