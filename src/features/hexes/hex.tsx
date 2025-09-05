@@ -1,6 +1,8 @@
 import { useId, useContext } from "react"
 import { getImgUrl } from "@/utils/images"
 import { IsDesktopContext } from "@/utils/context"
+import Badge from "@/components/global/badge"
+import { badgeData } from "@/data/global/badges" 
 
 import type { JSX } from "react"
 
@@ -18,8 +20,8 @@ type HexProps = {
   hexOnClick?: () => void,
   hexWidth?: number,
   hexMargin?: number,
-  badge1?: JSX.Element,
-  badge2?: JSX.Element,
+  badge1Id?: string,
+  badge2Id?: string,
 }
 
 function Hex({  
@@ -32,8 +34,8 @@ function Hex({
   hexOnClick,
   hexWidth,
   hexMargin = 3,
-  badge1,
-  badge2,
+  badge1Id,
+  badge2Id,
 }: HexProps) {
 
   const isDesktop = useContext(IsDesktopContext);
@@ -42,7 +44,7 @@ function Hex({
   }
   // Determine if there is any text content to display
   function hasTextContent() {
-    return badge1 || badge2 || hexTitle;
+    return badge1Id || badge2Id || hexTitle;
   }
 
   // Determine if there is any full area content to display
@@ -99,9 +101,9 @@ function Hex({
     return (
       <div className="hex-text-content">
         {hexTitle && <h3 className="hex-title">{hexTitle}</h3>}
-        {badge1 || badge2 ? <div className="hex-badges">
-          {badge1}
-          {badge2}
+        {badge1Id || badge2Id ? <div className="hex-badges">
+          {badge1Id && <Badge {...badgeData[badge1Id]} />}
+          {badge2Id && <Badge {...badgeData[badge2Id]} />}
           </div> : <></>}
       </div>
     )

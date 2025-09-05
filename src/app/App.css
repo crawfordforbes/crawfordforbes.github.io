@@ -1,4 +1,0 @@
-body {
-  background: var(--orange);
-  background: linear-gradient(45deg, var(--orange) 0%, var(--red) 11%, var(--pink) 22%, var(--purple) 33%, var(--blue) 44%, var(--cyan) 55%, var(--teal) 66%, var(--green) 77%, var(--lime) 88%, var(--yellow) 100%);
-}

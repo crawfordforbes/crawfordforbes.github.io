@@ -5,12 +5,12 @@ import { faEnvelope, faFileArrowDown, faSpinner } from "@fortawesome/free-solid-
 
 library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedinIn, faSpinner)
 
-import type { IconProp } from "@fortawesome/fontawesome-svg-core";
+import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
 
 import './styles/badge.css'
 
 type BadgeProps = {
-  iconClass?: IconProp;
+  iconClass?: [IconPrefix, IconName];
   link?: string;
   title?: string;
   badgeOnClick?: () => void;
@@ -37,6 +37,7 @@ const Badge = ({
     )
   }
 
+  // make the full badge clickable as needed
   function renderFullAreaContent() {
     if(badgeOnClick) {
       return (

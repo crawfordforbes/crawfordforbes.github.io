@@ -1,5 +1,6 @@
-import './App.css'
 import Page from '../components/layouts/page'
+
+import './styles/index.css'
 
 function App() {
 

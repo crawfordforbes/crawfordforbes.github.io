@@ -67,3 +67,13 @@
   text-decoration: none;
   z-index: 2;
 }
+
+.hex-grid.shifted-up {
+  margin-top:calc((var(--mobile-hex-width) * (49 / 44)) / 2 * -1);
+}
+
+@media (min-width: 64em) {
+  .hex-grid.shifted-up {
+    margin-top:calc((var(--desktop-hex-width) * (49 / 44)) / 2 * -1);
+  }
+}

@@ -1,0 +1,28 @@
+:root {
+  font-family: var(--font-body), system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: flex-start center;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--orange);
+  background: linear-gradient(45deg, var(--orange) 0%, var(--red) 11%, var(--pink) 22%, var(--purple) 33%, var(--blue) 44%, var(--cyan) 55%, var(--teal) 66%, var(--green) 77%, var(--lime) 88%, var(--yellow) 100%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+p {
+  font-family: var(--font-body);
+}

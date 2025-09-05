@@ -1,0 +1,26 @@
+:root {
+  --font-bakbak: 'Bakbak One';
+  --font-redhat: 'Red Hat Text';
+
+  --font-display: var(--font-bakbak), sans-serif;
+  --font-body: var(--font-redhat), sans-serif;
+
+
+  --orange: #cd7e2c ;
+  --red: #cd5e57;
+  --pink: #ae5378;
+  --purple: #7a5484;
+  --blue: #4f6d7a;
+  --cyan: #428d95;
+  --teal: #41ad9f;
+  --green: #68cb97;
+  --lime: #a9e583;
+  --yellow: #f9f871;
+
+  --mobile-hex-width: 128px;
+  --desktop-hex-width: 176px;
+
+  --content-max-width: 1280px;
+  --content-margin: 0 auto;
+  --content-padding: 0 20px;
+}
