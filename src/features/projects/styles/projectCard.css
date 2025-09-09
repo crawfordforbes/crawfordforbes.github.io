@@ -1,0 +1,13 @@
+.project-index .results {
+  position: relative;
+}
+.project-title-card .banner-image {
+    display: block;
+  position: relative;
+  width: 100%;
+  height: 139px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

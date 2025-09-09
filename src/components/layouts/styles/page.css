@@ -1,10 +1,11 @@
 .content {
+  width: 100vw;
   max-width: var(--content-max-width);
   margin: var(--content-margin);
   padding: var(--content-padding);
 }
 
-.text-area {
+.text-area-gradient {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 16px;
   border-radius: 8px;

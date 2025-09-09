@@ -1,6 +1,6 @@
 import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
 
-type ContactInfoType = {
+type ContactsType = {
   [key: string]: {
     id: string;
     title?: string;
@@ -9,7 +9,7 @@ type ContactInfoType = {
   }
 }
 
-export const contactInfo: ContactInfoType = {
+export const contactData: ContactsType = {
   "name": {
     "id": "name",
     "title": "Crawford Forbes"

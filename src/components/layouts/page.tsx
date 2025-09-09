@@ -1,11 +1,13 @@
-import ProjectsFilterWrapper from "@/features/projects-filter/projects-filter-wrapper"
-import Header from "./header"
-import Hero from "./hero"
-import IntroPanel from "./introPanel"
-import Footer from "./footer"
 import { IsDesktopContext } from "@/utils/context"
 import { useContext } from "react"
 import { useMediaQuery } from "usehooks-ts";
+
+import Header from "./header"
+import Hero from "./hero"
+import IntroPanel from "./introPanel"
+import ProjectDetail from "@/features/projects/projectDetail"
+import ProjectIndex from "@/features/projects/projectIndex"
+import Footer from "./footer"
 
 import './styles/page.css'
 
@@ -21,7 +23,8 @@ function Page() {
       <Header />
       <Hero />
       <IntroPanel />
-      <ProjectsFilterWrapper />
+      <ProjectIndex />
+      {/* <ProjectDetail id={"sunshine-nights"}/> */}
       <Footer />
     </IsDesktopContext>
 

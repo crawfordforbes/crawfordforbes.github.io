@@ -7,7 +7,7 @@ import BottomRight from "@/features/hexes/svg/bottom-right"
 
 import type { JSX } from "react"
 
-export type HexOptions = {
+export type HexesType = {
   [key: string]: {
     id: string,
     hexLink?: string,
@@ -24,7 +24,7 @@ export type HexOptions = {
   }
 }
 
-export const hexData:HexOptions = {
+export const hexData:HexesType = {
   "gradient-orange-pink": {
     id: "gradient-orange-pink",
     hexClass: "gradient-orange-pink"

@@ -54,7 +54,7 @@ function IntroPanel() {
         </div>
       </div>
       <div className="right-col col">
-        <div className="text-area">
+        <div className="text-area-gradient">
           <h2>intro blurb</h2>
           <p>"this is a smart quote about how art and code are one and the same" - someone, probably</p>
           <p>

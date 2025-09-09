@@ -1,0 +1,12 @@
+.project-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.project-filter .filter-title {
+  padding: 5px 15px;
+}
+
+.project-filter .filter-title.selected {
+  background-color: aqua;
+}

@@ -1,0 +1,53 @@
+.project-detail {
+  --mobile-hex-x-offset-scale: 2.5;
+  --mobile-hex-wrapper-x-offset: -186px;
+  --mobile-hex-wrapper-y-offset: -186px;
+}
+
+.project-detail .project-header {
+  position: relative;
+}
+
+.project-detail .project-header-hex-wrapper {
+  position: absolute;
+  top: var(--mobile-hex-wrapper-y-offset);
+  z-index: 1;
+}
+
+.project-detail .project-header-hex-wrapper.hex-left {
+  left: var(--mobile-hex-wrapper-x-offset);
+}
+
+.project-detail .project-header-hex-wrapper.hex-right {
+  right: var(--mobile-hex-wrapper-x-offset);
+}
+
+.project-detail .banner-wrapper {
+  position: relative;
+}
+
+.project-detail .back-to-index-button {
+  position: absolute;
+  left: 16px;
+  top: -16px;
+  z-index: 1;
+}
+
+.project-detail .banner-image {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 139px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.project-detail .banner-image .project-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

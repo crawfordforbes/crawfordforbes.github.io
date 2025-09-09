@@ -1,5 +1,5 @@
-import { headerLayouts } from "@/data/layouts/header";
 import HexGridLayout from "@/features/hexes/hexGridLayout";
+import { headerLayouts } from "@/data/hexes/layouts";
 
 import './styles/header.css'
 
