@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { IsDesktopContext } from "@/utils/context";
+import { MediaQueryContext } from "@/utils/context";
 import { getImgUrl } from "@/utils/images";
 
 import Hex from "../hexes/hex"
@@ -16,15 +16,19 @@ import './styles/projectDetail.css'
 
 type ProjectDetailProps = {
   id: string,
-  onClick?: ()=>void
+  onClick?: ()=>void,
+  onPreviousClick?: ()=>void,
+  onNextClick?: ()=>void,
 }
 
 
 function ProjectDetail({
   id, 
-  onClick
+  onClick,
+  onPreviousClick,
+  onNextClick
 }:ProjectDetailProps) {
-  const isDesktop = useContext(IsDesktopContext);
+  const mediaQuery = useContext(MediaQueryContext);
   
   const project = projectData[id];
   
@@ -44,16 +48,17 @@ function ProjectDetail({
       <header className="project-header">
 
         <div className="hex-left project-header-hex-wrapper">
-          {!isDesktop ? 
-            <div className="layout-gh-wrapper">
+          {mediaQuery === "mobile" ? 
+            <div className="layout-prev-wrapper">
             <HexGridLayout layouts={projectDetailHeaderLeftLayouts} />
-            {project.githubLink ?
+            {onPreviousClick ?
               <div className="hex-row">
                 <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
                 <Hex 
                   hexClass="gradient-blue-cyan-teal-green" 
-                  badgeComponent1={ghBadge} 
+                  hexTitle="<-"
                   hexWidth={122} 
+                  hexOnClick={() => onPreviousClick()} 
                 />
               </div>
               :
@@ -66,10 +71,17 @@ function ProjectDetail({
           :
             <div className="desktop">
               <div className="hex-grid">
-                <div className="hex-row">
-                  <Hex hexClass="gradient-orange-pink"/>
-                  <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
-                </div>
+                {onPreviousClick ? 
+                  <div className="hex-row">
+                    <Hex hexClass="gradient-orange-pink" hexOnClick={() => onPreviousClick()} hexTitle="<-"/>
+                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
+                  </div>
+                : 
+                  <div className="hex-row">
+                    <Hex hexClass="gradient-orange-pink"/>
+                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
+                  </div>
+                }
 
                 <div className="hex-row">
                   <Hex 
@@ -100,7 +112,7 @@ function ProjectDetail({
             </div>
           }
 
-          {isDesktop ?
+          {mediaQuery === "mobile" ?
             project.externalLink && project.externalLink.length > 0 ? 
             <a 
               href={project.externalLink} 
@@ -126,11 +138,40 @@ function ProjectDetail({
         </div>
         <div className="hex-right project-header-hex-wrapper">
           <h2 className="project-title">{project.title}</h2>
-          {!isDesktop ?
-            <HexGridLayout layouts={projectDetailHeaderRightLayouts} />
+          {mediaQuery === "mobile" ?
+            <div className="layout-next-wrapper">
+              <HexGridLayout layouts={projectDetailHeaderRightLayouts} />
+              {onNextClick ?
+                <div className="hex-row">
+                  <Hex 
+                    hexClass="gradient-blue-cyan-teal-green" 
+                    hexTitle="<-"
+                    hexWidth={122} 
+                    hexOnClick={() => onNextClick()} 
+                    />
+                  <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
+                </div>
+                :
+                <div className="hex-row">
+                  <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
+                  <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
+                </div>
+              }
+            </div>
           :
             <div className="desktop">
               <div className="hex-grid">
+                {onNextClick ? 
+                  <div className="hex-row">
+                    <Hex hexClass="gradient-orange-pink" hexOnClick={() => onNextClick()} hexTitle="->"/>
+                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
+                  </div>
+                : 
+                  <div className="hex-row">
+                    <Hex hexClass="gradient-orange-pink"/>
+                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
+                  </div>
+                }
                 <div className="hex-row">
                   <Hex hexClass="gradient-orange-pink"/>
                 </div>
@@ -157,14 +198,10 @@ function ProjectDetail({
           }
           
         </div>
-          {project.descriptionHTML &&
-            <div className="project-description" dangerouslySetInnerHTML={{ __html: project.descriptionHTML}} >
-          </div>
-          }
         
+        {project.descriptionHTML && <div className="project-description" dangerouslySetInnerHTML={{ __html: project.descriptionHTML}} ></div>}
 
-        
-        {!isDesktop && 
+        {mediaQuery === "mobile" && 
           <div className="mobile">
             <div className="hex-grid">
               <div className="hex-row">

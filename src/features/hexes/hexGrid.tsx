@@ -13,7 +13,10 @@ function HexGrid({
   shiftedUp,
   hexWidth
 }: HexGridProps) {
-
+if (!grid) {
+  console.log("did you miss registering a grid or a row somewhere? The grid in hexGrid.tsx is undefined.")
+  return <></>
+}
   // breaks out each hex grid's rows
   return (
     <div className={`hex-grid ${shiftedUp ? 'shifted-up' : ''} ${grid.id}`}>
@@ -30,7 +33,6 @@ function HexGrid({
           return repeatPlaceholderArray.map((id)=>{
             return(<HexRow key={`${idx}_${id}`} row={rows.id} hexWidth={hexWidth}/>)
           })
-          // <HexRow key={idx} row={row} hexWidth={hexWidth}/>
         })}
     </div>
   )

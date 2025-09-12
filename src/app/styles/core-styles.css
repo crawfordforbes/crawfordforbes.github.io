@@ -7,15 +7,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
   margin: 0;
   display: flex;
   place-items: flex-start center;
-  min-width: 320px;
   min-height: 100vh;
-  background: var(--orange);
-  background: linear-gradient(30deg, var(--orange) 0%, var(--red) 11%, var(--pink) 22%, var(--purple) 33%, var(--blue) 44%, var(--cyan) 55%, var(--teal) 66%, var(--green) 77%, var(--lime) 88%, var(--yellow) 100%);
+  background: var(--body-bg);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,18 +22,4 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   font-family: var(--font-body);
-}
-
-
-.desktop {
-  display: none;
-}
-
-@media screen and (min-width: 64em) {
-  .desktop {
-    display: block;
-  }
-  .mobile {
-    display: none;
-  }
 }

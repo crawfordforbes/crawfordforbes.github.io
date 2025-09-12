@@ -12,9 +12,9 @@ function Hero() {
           <img src="https://picsum.photos/360/720" alt="Hero Image" />
         </picture>
       </div>
-      <div className="text-area-gradient">
-        <h1 className="my-name">Crawford Forbes</h1>
-        <h3 className="my-titles">Developer, Artist, Person with qualities you like!</h3>
+      <div className="hero-content">
+        <h1 className="title">Crawford<br/>Forbes</h1>
+        <h3 className="subtitle">Developer<br/>Artist</h3>
       </div>
     </div>
   )

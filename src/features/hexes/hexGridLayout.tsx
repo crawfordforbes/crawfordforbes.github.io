@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { IsDesktopContext } from "@/utils/context";
+import { MediaQueryContext } from "@/utils/context";
 
 import HexGrid from "./hexGrid";
 import type { LayoutsType } from "@/data/hexes/layouts"
@@ -14,16 +14,26 @@ function HexGridLayout({
   layouts,
   hexWidth
 }: HexGridLayoutProps) {
-  const isDesktop = useContext(IsDesktopContext);
+
+  const mediaQuery = useContext(MediaQueryContext);
+
+  hexWidth = hexWidth ? hexWidth : 0;
+
+  const layout = layouts[mediaQuery] ? layouts[mediaQuery] : undefined;
+  const grid = layout && gridData[layout?.grid] ? gridData[layout?.grid] : undefined;
+
+  if(!grid) {
+    console.log("did you register your layouts and grids correctly? grid is undefined in hexGridLayout.tsx")
+  }
 
   // chooses which hex grid to display based on screen size
   return (
-    <div className={`hex-grid-layout ${isDesktop ? 'desktop' : 'mobile'}`}>
-      <HexGrid 
-        grid={isDesktop ? gridData[layouts.desktop.grid] : gridData[layouts.mobile.grid]} 
-        shiftedUp={isDesktop ? layouts.desktop.shiftedUp : layouts.mobile.shiftedUp} 
-        hexWidth={isDesktop ? layouts.desktop.hexWidth ? layouts.desktop.hexWidth : hexWidth ? hexWidth : 0 : layouts.mobile.hexWidth ? layouts.mobile.hexWidth : hexWidth ? hexWidth : 0}
-      />
+    <div className={`hex-grid-layout ${mediaQuery}`}>
+      {grid && layout && <HexGrid 
+        grid={grid} 
+        shiftedUp={layout.shiftedUp} 
+        hexWidth={layout.hexWidth ? layout.hexWidth : hexWidth}
+      />}
     </div>
   )
 }

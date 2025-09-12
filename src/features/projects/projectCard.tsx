@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { IsDesktopContext } from "@/utils/context";
+import { MediaQueryContext } from "@/utils/context";
 import { getImgUrl } from "@/utils/images";
 
 import type { ProjectType } from "@/data/projects/projects";
@@ -17,13 +17,13 @@ function ProjectCard({
   onClick
 }: ProjectCardProps) {
 
-  const isDesktop = useContext(IsDesktopContext);
+  const mediaQuery = useContext(MediaQueryContext);
 
   const bannerImage = imageData[project.bannerImgId]
 
   return (
     <li className="project-title-card">
-      {isDesktop ?
+      {mediaQuery === 'mobile' ?
         <span 
           className="banner-image" 
           style={{backgroundImage: `url(${getImgUrl(bannerImage.mobilePath)})`}} 

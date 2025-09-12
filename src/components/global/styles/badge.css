@@ -1,4 +1,7 @@
-.find-it-on-github-badge .badge-full-area-content {
-  display: flex;
-  flex-direction: column-reverse;
+.hex-badges, .hex-badges a {
+  color: var(--white-text);
+}
+
+.hex.with-svg .hex-badges .badge svg {
+  display: none;
 }

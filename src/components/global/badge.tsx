@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faReact, faGithub, faGit, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { faReact, faGithub, faGit, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faFileArrowDown, faSpinner } from "@fortawesome/free-solid-svg-icons"
 
-library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedinIn, faSpinner)
+library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedin, faSpinner)
 
 import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
 
@@ -32,7 +32,7 @@ const Badge = ({
     return (
       <>
         {FAicon}
-        <span>{title}</span>
+        <h3 className='badge-title'>{title}</h3>
       </>
     )
   }

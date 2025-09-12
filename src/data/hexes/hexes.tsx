@@ -5,6 +5,8 @@ import Right from "@/features/hexes/svg/right"
 import BottomLeft from "@/features/hexes/svg/bottom-left"
 import BottomRight from "@/features/hexes/svg/bottom-right"
 
+import { contactData } from "../contacts"
+
 import type { JSX } from "react"
 
 export type HexesType = {
@@ -25,21 +27,41 @@ export type HexesType = {
 }
 
 export const hexData:HexesType = {
-  "gradient-orange-pink": {
-    id: "gradient-orange-pink",
-    hexClass: "gradient-orange-pink"
-  },
-  "gradient-blue-cyan-teal-green": {
-    id: "gradient-blue-cyan-teal-green",
-    hexClass: "gradient-blue-cyan-teal-green"
-  },
-  "svg-top-left-github-index": {
-    id: "svg-top-left-github-index",
-    hexSvgComponent: <TopLeft />,
+  /* decorative */
+
+  /* contacts */
+  "contacts-github-index": {
+    id: "contacts-github-index",
+    hexSvgComponent: <TopRight />,
+    hexLink: contactData?.["github"]?.url || "https://github.com/crawfordforbes",
     badge1Id: "github-index"
   },
-  "svg-right-link-projects": {
-    id: "svg-right-link-projects",
+  "contacts-email": {
+    id: "contacts-email",
+    hexSvgComponent: <Left />,
+    hexLink: contactData?.["email"]?.url || "crawford.forbes@gmail.com",
+    badge1Id: "email"
+  },
+  "logo": {
+    id: "logo",
+    hexLink: "/",
+    hexTitle: "Crawford Forbes"
+  },
+  "contacts-linked-in": {
+    id: "contacts-linked-in",
+    hexSvgComponent: <Right />,
+    hexLink: contactData?.["linked-in"]?.url || "https://www.linkedin.com/in/crawfordforbes/",
+    badge1Id: "linked-in"
+  },
+  "contacts-resume": {
+    id: "contacts-resume",
+    hexSvgComponent: <BottomLeft />,
+    hexLink: contactData?.["resume"]?.url || "/tbd",
+    badge1Id: "resume"
+  },
+  /* nav */
+  "nav-projects": {
+    id: "nav-projects",
     hexSvgComponent: <Right />,
     hexLink: "/#projects-filter-wrapper",
     hexTitle: "Projects"

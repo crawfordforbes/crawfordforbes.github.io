@@ -23,6 +23,7 @@ function projectIndex({
 
   const [selectedCatIds, setSelectedCatIds] = useState(selectedCatIdsProps ? selectedCatIdsProps : [])
   const [selectedProjectId, setSelectedProjectId] = useState(selectedProjectIdProp ? selectedProjectIdProp : undefined)
+  const [showMobileFilter, setShowMobileFilter] = useState(false)
 
   function handleFilterClick(filterId: string) {
     if(selectedCatIds.some((id) => id === filterId)) {
@@ -44,19 +45,49 @@ function projectIndex({
     .filter(id => categoryData[id].filterable)
     .map(id => categoryData[id]);
 
+  const projectDataKeys = Object.keys(projectData)
+  let sortedProjectsArray = projectDataKeys.map((key, idx)=>{return projectData[key]}).sort((a, b) => {
+    return a.title.localeCompare(b.title);
+  }).filter(project=>{
+    return project.catIds?.some(catId=>selectedCatIds.includes(catId))
+  })
+
+  function handlePreviousClick(currentProjectId: string) {
+    let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
+    let prevIdx = currentIdx <= 0 ? sortedProjectsArray.length - 1 : currentIdx - 1;
+    console.log(currentProjectId, currentIdx, prevIdx, sortedProjectsArray[prevIdx].id)
+    setSelectedProjectId(sortedProjectsArray[prevIdx].id);
+  }
+
+  function handleNextClick(currentProjectId: string) {
+    let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
+    let nextIdx = currentIdx >= sortedProjectsArray.length - 1 ? 0 : currentIdx + 1;
+    console.log(currentProjectId, currentIdx, nextIdx, sortedProjectsArray[nextIdx].id)
+    setSelectedProjectId(sortedProjectsArray[nextIdx].id);
+  }
+
+  function handleMobileFilterToggleClick() {
+    setShowMobileFilter(!showMobileFilter)
+  }
+
   function renderfilteredProjects() {
-    const projectDataKeys = Object.keys(projectData);
+
     if(selectedCatIds.length <= 0){
-      return projectDataKeys.map((key, idx)=>{
-        const project = projectData[key]
+      return sortedProjectsArray.map((project, idx)=>{
+        
         return (<ProjectCard key={idx} project={project} onClick={handleCardClick}/>)
       })
       
     } else {
-      return projectDataKeys.map((key, idx)=>{
-        const project = projectData[key]
+      return sortedProjectsArray.map((project, idx)=>{
         if(project.catIds?.some(catId=>selectedCatIds.includes(catId))) {
-          return (<ProjectCard key={idx} project={project} onClick={handleCardClick}/>)
+          return (
+            <ProjectCard 
+              key={idx} 
+              project={project} 
+              onClick={handleCardClick}
+            />
+          )
         }
       })
     }
@@ -66,20 +97,32 @@ function projectIndex({
     <div className="project-feature">
       {!selectedProjectId ? 
         <div className="project-index">
-          <div className="filters">
+          <div className={`filters ${showMobileFilter ? 'show-mobile-filter' : 'hide-mobile-filter'}`}>
             <div className="filterToggle">
-              <Hex hexClass="gradient-orange-pink" hexTitle="toggle" hexWidth={64}/>
+              <Hex 
+                hexClass="gradient-orange-pink" 
+                hexTitle="toggle" 
+                hexWidth={64} 
+                hexOnClick={handleMobileFilterToggleClick}
+              />
             </div>
-            <ProjectFilter
-              selectedCatIds={selectedCatIds}
-              availableCatIds={availableCatIds}
-              onClick={handleFilterClick}
-            />
+            <div className="mobile-filter-control">
+              <ProjectFilter
+                selectedCatIds={selectedCatIds}
+                availableCatIds={availableCatIds}
+                onClick={handleFilterClick}
+                />
+            </div>
           </div>
           <ol className="results">{renderfilteredProjects()}</ol>
         </div>
         :
-        <ProjectDetail id={selectedProjectId} onClick={handleReturnToIndexClick}/>
+        <ProjectDetail
+          id={selectedProjectId}
+          onClick={handleReturnToIndexClick}
+          onPreviousClick={() => handlePreviousClick(selectedProjectId)}
+          onNextClick={() => handleNextClick(selectedProjectId)}
+        />
       }
     </div>
   )

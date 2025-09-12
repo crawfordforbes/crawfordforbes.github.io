@@ -11,14 +11,18 @@ function HexRow({
   row,
   hexWidth
 }: HexRowProps) {
-
+if (!row) {
+  console.log("did you miss registering a grid or a row somewhere?")
+  return <></>
+}
   // fills the row with hex.repeat number of hex.id hexes
   return (
-    <div className="hex-row">
+    <div className={`hex-row ${row}`}>
       {rowData && rowData[row] && rowData[row].hexes.map((hexObj, idx) => {
           const hexId = hexObj.id
-          let props = {...hexData[hexId]};
-          props.hexWidth = hexWidth !== 0 ? hexWidth : undefined;
+          let props = {...hexData[hexId]}.id ? {...hexData[hexId]} : {hexClass: hexId};
+          props = { ...props, hexWidth: hexWidth !== 0 ? hexWidth : undefined };
+          
           let maxHexes = hexObj.repeat || 1;
 
           let repeatPlaceholderArray = []

@@ -1,15 +1,18 @@
 .hero {
+  --title-size: 5rem;
+  --subtitle-size: 2rem;
+  --content-width: auto;
+  --content-padding: 8px;
+  --content-height: 112px;
+  --content-top: 300px;
+  --content-right: 0;
+  --content-text-align: right;
+
   position: relative;
   width: 100vw;
   height: calc(100vw * 9 / 16); /* 16:9 Aspect Ratio */
   min-height: 720px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  text-align: center;
-  overflow: hidden;
+  color: var(--white-text);
   z-index:1;
 }
 
@@ -21,14 +24,201 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,.2) 95%, rgba(0,0,0,0));
 }
 
 .hero .hex-grid {
   z-index: 1;
 }
 
-.hero .text-area-gradient {
+.hero .hero-content {
   position: absolute;
-  top: 300px;
-  right: 16px;
+  top: var(--content-top);
+  right: var(--content-right);
+  width: var(--content-width);
+  padding: 0 var(--content-padding) var(--content-padding);
+  text-align: var(--content-text-align);
+}
+
+.hero .title {
+  --shadow-scale: 1.75px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+  font-size: var(--title-size);
+  line-height: .9;
+  animation: titleGlow 12s ease infinite;
+}
+
+.hero .subtitle {
+  --shadow-scale: 1.5px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+  font-size: var(--subtitle-size);
+  line-height: 1.2;
+  animation: titleGlow 32s ease infinite;
+}
+
+/* title and subtitle placement media queries */
+@media screen and (min-width: 27em){
+  .hero {
+    --title-size: 6rem;
+    --subtitle-size: 2.5rem;
+    --content-top: 300px; 
+    --content-padding: 16px
+  }
+}
+
+@media screen and (min-width: 36em){
+  .hero {
+    --title-size: 8rem;
+    --subtitle-size: 3rem;
+    --content-top: 280px; 
+  }
+}
+
+@media screen and (min-width: 40em){
+  .hero {
+    --title-size: 6rem;
+    --subtitle-size: 3.5rem;
+    --content-top: 190px;
+  }
+}
+
+@media screen and (min-width: 44em){
+  .hero {
+    --title-size: 7rem;
+    --subtitle-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 49em){
+  .hero {
+    --title-size: 8rem;
+    --subtitle-size: 4.5rem;
+  }
+}
+
+@media screen and (min-width: 55em){
+  .hero {
+    --title-size: 9rem;
+  }
+}
+
+@media screen and (min-width: 60em){
+  .hero {
+    --title-size: 10rem;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .hero {
+    --content-top: 160px;
+  }
+}
+
+@media screen and (min-width: 68em){
+  .hero {
+    --title-size: 11rem;
+  }
+}
+
+@media screen and (min-width: 76em){
+  .hero {
+    --title-size: 12rem;
+    --subtitle-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 80em){
+  .hero {
+    --title-size: 12rem;
+  }
+}
+
+@media screen and (min-width: 84em){
+  .hero {
+    --title-size: 13rem;
+  }
+}
+
+@media screen and (min-width: 92em){
+  .hero {
+    --title-size: 15rem;
+  }
+}
+
+@media screen and (min-width: 98em){
+  .hero {
+    --title-size: 16rem;
+  }
+}
+
+@media screen and (min-width: 104em){
+  .hero {
+    --title-size: 17rem;
+  }
+}
+
+@media screen and (min-width: 108em){
+  .hero {
+    --title-size: 18rem;
+  }
+}
+
+@media screen and (min-width: 112em){
+  .hero {
+    --title-size: 19rem;
+  }
+}
+
+@media screen and (min-width: 126em){
+  .hero {
+    --title-size: 20rem;
+  }
+}
+
+@media screen and (min-width: 130em){
+  .hero {
+    --title-size: 21rem;
+  }
+}
+
+@media screen and (min-width: 138em){
+  .hero {
+    --title-size: 22rem;
+  }
+}
+
+@media screen and (min-width: 142em){
+  .hero {
+    --title-size: 23rem;
+  }
+}
+
+@media screen and (min-width: 146em){
+  .hero {
+    --title-size: 24rem;
+  }
+}
+
+@media screen and (min-width: 148em){
+  .hero {
+    --title-size: 25rem;
+  }
+}
+
+@media screen and (min-width: 152em){
+  .hero {
+    --title-size: 26rem;
+  }
+}
+
+@media screen and (min-width: 156em){
+  .hero {
+    --title-size: 27rem;
+  }
+}
+
+@media screen and (min-width: 160em){
+  .hero {
+    --title-size: 28rem;
+  }
 }

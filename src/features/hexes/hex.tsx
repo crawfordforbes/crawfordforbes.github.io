@@ -1,6 +1,6 @@
 import { useId, useContext } from "react"
 import { getImgUrl } from "@/utils/images"
-import { IsDesktopContext } from "@/utils/context"
+import { MediaQueryContext } from "@/utils/context"
 
 import Badge from "@/components/global/badge"
 import { badgeData } from "@/data/global/badges" 
@@ -43,9 +43,25 @@ function Hex({
   badgeComponent2,
 }: HexProps) {
 
-  const isDesktop = useContext(IsDesktopContext);
+  const mediaQuery = useContext(MediaQueryContext);
   if (!hexWidth) {
-    hexWidth = isDesktop ? 250 : 170;
+ 
+    switch (mediaQuery) {
+      case "mobile":
+        hexWidth = 122;
+        break;
+      case "tablet":
+        hexWidth = 170;
+        break;
+      case "desktop":
+        hexWidth = 250;
+        break;
+      case "large":
+        hexWidth = 250;
+        break;
+      default: 
+        hexWidth = 170;
+    }
   }
   // Determine if there is any text content to display
   function hasTextContent() {

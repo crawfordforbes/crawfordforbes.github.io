@@ -1,18 +1,18 @@
 
 .hex {
-  --hex-top: var(--orange);
-  --outer-wall-top-left: var(--blue);
-  --outer-wall-top-right: var(--cyan);
-  --outer-wall-right: var(--teal);
-  --outer-wall-bottom-right: var(--green);
-  --outer-wall-bottom-left: var(--teal);
-  --outer-wall-left: var(--cyan);
-  --hex-wall-top-left: var(--yellow);
-  --hex-wall-top-right: var(--red);
-  --hex-wall-right: var(--pink);
-  --hex-wall-bottom-right: var(--purple);
-  --hex-wall-bottom-left: var(--pink);
-  --hex-wall-left: var(--red);
+  --hex-top: var(--body-bg);
+  --outer-wall-top-left: var(--color-6);
+  --outer-wall-top-right: var(--color-7);
+  --outer-wall-right: var(--color-8);
+  --outer-wall-bottom-right: var(--color-9);
+  --outer-wall-bottom-left: var(--color-8);
+  --outer-wall-left: var(--color-7);
+  --hex-wall-top-left: var(--color-11);
+  --hex-wall-top-right: var(--color-2);
+  --hex-wall-right: var(--color-3);
+  --hex-wall-bottom-right: var(--color-4);
+  --hex-wall-bottom-left: var(--color-3);
+  --hex-wall-left: var(--color-2);
 }
 
 .hex .hex-top {
