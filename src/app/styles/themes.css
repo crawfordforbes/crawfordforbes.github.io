@@ -1,0 +1,63 @@
+:root {
+  
+}
+
+:root:has(.outdoors-theme) {
+  --color-1: #361008;
+  --color-2: #582F0E;
+  --color-3: #7F4F24;
+  --color-4: #936639;
+  --color-5: #785f3c;
+  --color-6: #A68A64;
+  --color-7: #B6AD90;
+  --color-8: #C2C5AA;
+  --color-9: #656D4A;
+  --color-10: #30422a;
+  --color-11: #414833;
+  --color-12: #333D29;
+
+  --color-bg: #f6f9da;
+
+  --black: #102222;
+  --white: #fff;
+}
+
+:root:has(.magic-escape) {
+  --color-1: #71093B;
+  --color-2: #990B52;
+  --color-3: #d4458d;
+  --color-4: #CB8B15;
+  --color-5: #EAAA34;
+  --color-6: #e7cfa3;
+  --color-7: #749ED2;
+  --color-8: #467EC3;
+  --color-9: #1554a0;
+  --color-10: #023578;
+  --color-11: #022450;
+  --color-12: #0b0250;
+
+  --color-bg: #F1F4F9;
+
+  --black: #102222;
+  --white: #fff;
+}
+
+:root:has(.mystic-depths) {
+  --color-1: #252933;
+  --color-2: #2a2533;
+  --color-3: #404556;
+  --color-4: #423041;
+  --color-5: #60515C;
+  --color-6: #8f7a81;
+  --color-7: #386775;
+  --color-8: #387573;
+  --color-9: #20504E;
+  --color-10: #205035;
+  --color-11: #193D31;
+  --color-12: #17292B;
+
+  --color-bg: var(--color-1);
+
+  --black: #102222;
+  --white: #fff;
+}

@@ -50,5 +50,55 @@ export const badgeData:BadgesType = {
   "solo": {
     id: "solo",
     title: "Solo Dev"
+  },
+  "toggle-open": {
+    id: "toggle-open",
+    iconClass: ['fas', 'xmark'],
+  },
+  "toggle-close": {
+    id: "toggle-close",
+    iconClass: ['fas', 'bars'],
+  }
+}
+
+export const techBadgeData:BadgesType = {
+  /* contacts */
+  "ruby": {
+    id: "ruby",
+    title: "Ruby",
+    iconClass: ['fas', 'code'],
+  },
+    "sinatra": {
+    id: "sinatra",
+    title: "Sinatra",
+    iconClass: ['fas', 'server'],
+  },
+}
+
+export const catBadgeData:BadgesType = {
+  "developer": {
+    id: "developer",
+    title: "Developer",
+    iconClass: ['fas', 'code'],
+  },
+  "designer": {
+    id: "designer",
+    title: "Designer",
+    iconClass: ['fas', 'icons'],
+  },
+  "solo": {
+    id: "solo",
+    title: "Solo",
+    iconClass: ['fas', 'person'],
+  },
+  "contributor": {
+    id: "contributor",
+    title: "Contributor",
+    iconClass: ['fas', 'people-group'],
+  },
+  "lead": {
+    id: "lead",
+    title: "Lead",
+    iconClass: ['fas', 'people-arrows'],
   }
 }

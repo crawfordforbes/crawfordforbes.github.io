@@ -5,13 +5,15 @@ import type { GridType }  from "@/data/hexes/grids"
 type HexGridProps = {
   grid: GridType,
   shiftedUp?: boolean,
-  hexWidth?: number
+  hexWidth?: number,
+  hexMargin?: number,
 }
 
 function HexGrid({  
   grid,
   shiftedUp,
-  hexWidth
+  hexWidth,
+  hexMargin
 }: HexGridProps) {
 if (!grid) {
   console.log("did you miss registering a grid or a row somewhere? The grid in hexGrid.tsx is undefined.")
@@ -31,7 +33,13 @@ if (!grid) {
           }
 
           return repeatPlaceholderArray.map((id)=>{
-            return(<HexRow key={`${idx}_${id}`} row={rows.id} hexWidth={hexWidth}/>)
+            return(
+              <HexRow 
+              key={`${idx}_${id}`} 
+              row={rows.id} 
+              hexWidth={hexWidth} 
+              hexMargin={hexMargin}/>
+            )
           })
         })}
     </div>

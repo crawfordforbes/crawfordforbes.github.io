@@ -34,3 +34,12 @@
   font-weight: 700;
   src: url('../../assets/fonts/red-hat-text-v18-latin-700.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+/* oxanium-600 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Oxanium';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../assets/fonts/oxanium-v21-latin-600.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}

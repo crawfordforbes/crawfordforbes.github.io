@@ -1,7 +1,107 @@
-.hex-badges, .hex-badges a {
-  color: var(--white-text);
+.badge {
+  --title-size: var(--badge-text-size);
 }
-
 .hex.with-svg .hex-badges .badge svg {
   display: none;
 }
+
+.badge .badge-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge .badge-content .fa-icon {
+  position: relative;
+}
+
+.badge .badge-content .fa-icon svg {
+  z-index: 1;
+  position: relative;
+}
+
+.badge .badge-content .fa-icon::after {
+  --radius : 24px; 
+  --background-color: transparent;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 9999px;
+  background-color: transparent;
+  z-index: 0;
+}
+
+
+.badge.primary .badge-content {
+  background-color: var(--badge-primary-color-bg);
+  color: var(--badge-primary-color-text);
+  border: var(--badge-border-width) solid var(--badge-primary-color-border);
+}
+
+.badge.primary.highlight .badge-content .fa-icon {
+  color: var(--badge-primary-color-text-highlight);
+  transition: color var(--transition-rules);
+}
+
+.badge.primary.highlight .badge-content .fa-icon::after {
+  background-color: var(--badge-primary-color-bg-highlight);
+  transition: background-color var(--transition-rules);
+}
+
+
+.badge.secondary .badge-content {
+  background-color: var(--badge-secondary-color-bg);
+  color: var(--badge-secondary-color-text);
+  border: var(--badge-border-width) solid var(--badge-secondary-color-border);
+}
+
+.badge.secondary.highlight .badge-content .fa-icon {
+  color: var(--badge-secondary-color-text-highlight);
+  transition: color var(--transition-rules);
+}
+
+.badge.secondary.highlight .badge-content .fa-icon::after {
+  background-color: var(--badge-secondary-color-bg-highlight);
+  transition: background-color var(--transition-rules);
+}
+
+
+.badge.tertiary .badge-content {
+  background-color: var(--badge-tertiary-color-bg);
+  color: var(--badge-tertiary-color-text);
+  border: var(--badge-border-width) solid var(--badge-tertiary-color-border);
+}
+
+.badge.tertiary.highlight .badge-content .fa-icon {
+  color: var(--badge-tertiary-color-text-highlight);
+  transition: color var(--transition-rules);
+}
+
+.badge.tertiary.highlight .badge-content .fa-icon::after {
+  background-color: var(--badge-tertiary-color-bg-highlight);
+  transition: background-color var(--transition-rules);
+}
+
+
+
+
+.badge.pill .badge-content {
+  border-radius: 9999px;
+  padding: 4px 12px;
+  line-height: 1.25rem;
+  width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.badge.pill .badge-content:has(:not(.fa-icon)) {
+  padding: 8px 16px;
+}
+

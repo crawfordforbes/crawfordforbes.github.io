@@ -1,6 +1,8 @@
-:root {
-  --shadow-scale: .5px;
-  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+/* animations */
+@property --gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 35deg;
 }
 
 /* 4 drop shadows surround the text and fade through the gradient colors in a progressively faster animation. */
@@ -66,4 +68,19 @@
   95% {
     --gradient-angle: 180deg
   }
+}
+
+
+.to-from-colors .badge-content{
+  background: var(--from-color);
+  background: linear-gradient(var(--gradient-angle), var(--to-color) 50%, var(--from-color) 50%);
+  background-size: 301% 100%;
+  background-position: 100% 0; 
+  transition: background-position var(--transition-rules), color var(--transition-rules);
+  color: var(--from-text);
+} 
+
+.to-from-colors:hover .badge-content{
+  background-position: 0 0;
+  color: var(--to-text);
 }

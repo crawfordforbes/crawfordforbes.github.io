@@ -1,4 +1,5 @@
 import type { CategoryType } from "@/data/projects/categories"
+import Badge from "@/components/global/badge";
 
 import './styles/projectFilter.css'
 
@@ -6,26 +7,55 @@ type projectFilterProps = {
   selectedCatIds: string[],
   availableCatIds: CategoryType[],
   onClick: (id: string) => void;
+  hoveredFilters?: string;
+  highlightFilterHover: (id: string) => void;
 }
 
 function ProjectFilter({  
   selectedCatIds,
   availableCatIds,
-  onClick
+  onClick,
+  hoveredFilters,
+  highlightFilterHover,
 }: projectFilterProps) {
+  const handleMouseEnter = (filterId: string) => {
+    highlightFilterHover(filterId);
+  };
 
+  const handleMouseLeave = () => {
+    highlightFilterHover("");
+  };
 
 
   return (
-    <ol className="project-filter">
-      {availableCatIds && availableCatIds.map((catId, idx)=>{
-        return (
-          <li key={idx} className="filter">
-            <span className={`filter-title ${selectedCatIds.some((id) => id === catId.id) ? 'selected' : ''}`} onClick={() => onClick(catId.id)}>{catId.title}</span>
-          </li>
-        )
-      })}
-    </ol>
+    <section className="project-feature filter-container">
+      <div className="variable-height-hex filter-wrapper">
+        <ol className="filter-list">
+          {availableCatIds && availableCatIds.map((catId, idx)=>{
+            const selected = selectedCatIds.some((id) => id === catId.id) || (hoveredFilters && hoveredFilters === catId.id)
+            let placement = idx < availableCatIds.length / 2 ? "top" : "bottom";
+            return (
+              <li 
+                key={idx} 
+                className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
+                onMouseEnter={() => handleMouseEnter(catId.id)}
+                onMouseLeave={() => handleMouseLeave()}
+              >
+                <span 
+                  className='filter-title' 
+                  onClick={() => onClick(catId.id)}
+                  >
+                  <Badge 
+                    title={catId.title} 
+                    iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
+                  />
+                </span>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+    </section>
   )
 }
 

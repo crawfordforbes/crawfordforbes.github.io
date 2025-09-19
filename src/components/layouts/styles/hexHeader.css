@@ -1,0 +1,38 @@
+.hex-header {
+  --header-offset: 32px;
+  --left: calc(50% - var(--header-offset));
+  --width: calc(100vw + (var(--header-offset) * 2));
+
+  position: absolute;
+  top: 0;
+  left: var(--left);
+  transform: translateX(-50%);
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow-x: clip;
+  width: var(--width);
+}
+
+.hex-header .hex:has(a) {
+  pointer-events: all;
+}
+
+.hex-header .hex:not([class*="-body-bg"]) {
+  animation: gradientAngleSpin 198s ease infinite;
+}
+
+.hex-header .hex[class*="-body-bg"] {
+  --gradient-angle: 180deg;
+}
+
+.hex-header .hex-row:has(.hex[class*="-body-bg"]) + .hex-row:has(.hex[class*="-body-bg"]) .hex[class*="-body-bg"] {
+  --gradient-angle: 0deg;
+}
+
+@media screen and (min-width: 520px){
+  .hex-header .hex-row.header-mobile-2 .hex:last-of-type {
+    order: -1;
+  }
+}
+

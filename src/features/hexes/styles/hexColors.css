@@ -1,17 +1,11 @@
-.hex {
-  /* --gradient-angle: 180deg; */
-  --color-1-of-2: 50%;
-  --color-2-of-2: 100%;
-}
-
 .hex.gradient-orange-pink {
-  background: var(--orange);
-  background: linear-gradient(var(--gradient-angle), var(--orange) 0%, var(--pink) 100%);
+  background: var(--color-1);
+  background: linear-gradient(var(--gradient-angle), var(--color-1) 0%, var(--color-3) 100%);
 }
 
 .hex.gradient-blue-cyan-teal-green {
-  background: var(--blue);
-  background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 33%, var(--teal) 66%, var(--green) 100%);
+  background: var(--color-6);
+  background: linear-gradient(135deg, var(--color-6) 0%, var(--color-7) 33%, var(--color-8) 66%, var(--color-9) 100%);
 }
 
 .hex.transparent {
@@ -189,3 +183,16 @@
 .hex.img-bottom-right {
   background-position: bottom right;
 }
+
+.gradient-primary-color-bg {
+  background: linear-gradient(var(--gradient-angle), var(--primary-color-bg) var(--color-1-of-2), var(--primary-color-bg-100) var(--color-2-of-2));
+}
+
+.gradient-secondary-color-bg {
+  background: linear-gradient(var(--gradient-angle), var(--secondary-color-bg) var(--color-1-of-2), var(--secondary-color-bg-100) var(--color-2-of-2));
+}
+
+.gradient-tertiary-color-bg {
+  background: linear-gradient(var(--gradient-angle), var(--tertiary-color-bg) var(--color-1-of-2), var(--tertiary-color-bg-100) var(--color-2-of-2));
+}
+

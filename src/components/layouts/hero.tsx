@@ -4,7 +4,7 @@ function Hero() {
 
 
   return (
-    <div className="hero">
+    <section className="hero">
       <div className="hero-bg-image">
         <picture>
           <source srcSet="https://picsum.photos/1920/1080" media="(min-width: 1024px)" />
@@ -12,11 +12,11 @@ function Hero() {
           <img src="https://picsum.photos/360/720" alt="Hero Image" />
         </picture>
       </div>
-      <div className="hero-content">
+      <section className="hero-content overlay">
         <h1 className="title">Crawford<br/>Forbes</h1>
         <h3 className="subtitle">Developer<br/>Artist</h3>
-      </div>
-    </div>
+      </section>
+    </section>
   )
 }
 

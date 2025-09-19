@@ -2,17 +2,16 @@ type ImagesType = {
   [key:string]: {
     id: string,
     mobilePath: string,
-    desktopPath: string,
+    desktopPath?: string,
     additionalMobileStyling?: string,
     additionalDesktopStyling?: string,
   }
 }
 
 export const imageData:ImagesType = {
-  "sunshine-banner": {
-    id: "sunshine-banner",
-    mobilePath: '../../src/assets/images/projects/sunshine-nights-banner.png',
-    desktopPath: '../../src/assets/images/projects/sunshine-nights-banner.png'
+  "sunshine-card": {
+    id: "sunshine-card",
+    mobilePath: '../../src/assets/images/projects/sunshine-nights-card.png'
   },
   "sunshine-primary": {
     id: "sunshine-primary",

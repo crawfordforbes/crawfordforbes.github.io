@@ -1,6 +1,6 @@
-
+/* TODO refresh these */
 .hex {
-  --hex-top: var(--body-bg);
+  --hex-top: var(--color-1);
   --outer-wall-top-left: var(--color-6);
   --outer-wall-top-right: var(--color-7);
   --outer-wall-right: var(--color-8);

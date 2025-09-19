@@ -6,17 +6,17 @@ import Hex from "../hexes/hex"
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 
 import { projectData } from "@/data/projects/projects"
-import { projectDetailHeaderLeftLayouts, projectDetailHeaderRightLayouts } from "@/data/hexes/layouts";
+import { cardBorder } from "@/data/hexes/layouts";
 import { imageData } from "@/data/images";
 
 import Badge from "@/components/global/badge"
-import { badgeData } from "@/data/global/badges";
+import { badgeData, techBadgeData } from "@/data/global/badges";
 
 import './styles/projectDetail.css'
 
 type ProjectDetailProps = {
   id: string,
-  onClick?: ()=>void,
+  onBackButtonClick?: ()=>void,
   onPreviousClick?: ()=>void,
   onNextClick?: ()=>void,
 }
@@ -24,7 +24,7 @@ type ProjectDetailProps = {
 
 function ProjectDetail({
   id, 
-  onClick,
+  onBackButtonClick,
   onPreviousClick,
   onNextClick
 }:ProjectDetailProps) {
@@ -32,191 +32,93 @@ function ProjectDetail({
   
   const project = projectData[id];
   
-  const bannerImage = imageData[project.bannerImgId]
+  const cardImage = imageData[project.cardImgId]
   const primaryImage = imageData[project.primaryImgId]
   const secondaryImage = imageData[project.secondaryImgId]
 
-  const ghBadge = project.githubLink ? 
-    <Badge 
-      iconClass={['fab', 'github']} 
-      title={"See the Code"} 
-      link={project.githubLink} 
-    /> : <></>
+  const hasLinks = project.githubLink || project.externalLink;
 
-  return (
-    <div className="project-detail content"> 
-      <header className="project-header">
+    const ghBadge = project.githubLink ? 
+      <li><Badge 
+        iconClass={['fab', 'github']} 
+        title={"See the Code"} 
+        link={project.githubLink} 
+        extraClass="pill primary"
+      /></li> : <></>
 
-        <div className="hex-left project-header-hex-wrapper">
-          {mediaQuery === "mobile" ? 
-            <div className="layout-prev-wrapper">
-            <HexGridLayout layouts={projectDetailHeaderLeftLayouts} />
-            {onPreviousClick ?
-              <div className="hex-row">
-                <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
-                <Hex 
-                  hexClass="gradient-blue-cyan-teal-green" 
-                  hexTitle="<-"
-                  hexWidth={122} 
-                  hexOnClick={() => onPreviousClick()} 
+    const externalLinkBadge = project.externalLink ? 
+      <li><Badge 
+        iconClass={['fas', 'external-link-alt']} 
+        title={"View Live"} 
+        link={project.externalLink} 
+        extraClass="pill primary"
+      /></li> : <></>
+
+    function renderTechBadges() {
+      if (project?.techIds && project?.techIds.length > 0) {
+        return project?.techIds.map((id,idx)=>{
+          if(techBadgeData[id]){
+            return(
+              <li key={idx}>
+                <Badge 
+                  title={techBadgeData[id]?.title} 
+                  iconClass={techBadgeData[id]?.iconClass} 
+                  extraClass={"pill secondary"} 
                 />
-              </div>
-              :
-              <div className="hex-row">
-                <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
-                <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
-              </div>
-            }
-            </div>
-          :
-            <div className="desktop">
-              <div className="hex-grid">
-                {onPreviousClick ? 
-                  <div className="hex-row">
-                    <Hex hexClass="gradient-orange-pink" hexOnClick={() => onPreviousClick()} hexTitle="<-"/>
-                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
-                  </div>
-                : 
-                  <div className="hex-row">
-                    <Hex hexClass="gradient-orange-pink"/>
-                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
-                  </div>
-                }
-
-                <div className="hex-row">
-                  <Hex 
-                    hexClass="gradient-blue-cyan-teal-green" 
-                    hexImagePath={primaryImage.desktopPath} 
-                    hexWidth={346} 
-                  />
-                </div>
-              </div>
-            </div>
+              </li>
+            )
           }
-        </div>
-        <div className="banner-wrapper">
-          {onClick &&
-            <div className="optional back-to-index-button">
-              <Hex 
-                hexClass="gradient-blue-cyan-teal-green mobile" 
-                hexTitle="Back" 
-                hexWidth={58} 
-                hexOnClick={() => onClick()} 
-              />
-              <Hex 
-                hexClass="gradient-blue-cyan-teal-green desktop" 
-                hexTitle="Back" 
-                hexWidth={82} 
-                hexOnClick={() => onClick()} 
-              />
-            </div>
-          }
+        })
+      }
+    }
 
-          {mediaQuery === "mobile" ?
-            project.externalLink && project.externalLink.length > 0 ? 
-            <a 
-              href={project.externalLink} 
-              target="_blank" 
-              className="banner-image" 
-              style={{backgroundImage: `url(${getImgUrl(bannerImage.mobilePath)})`}}
-            >
-            </a>
-              : 
-            <span className="banner-image" style={{backgroundImage: `url(${getImgUrl(bannerImage.mobilePath)})`}}></span>
-            :
-            project.externalLink && project.externalLink.length > 0 ? 
-            <a 
-              href={project.externalLink} 
-              target="_blank" 
-              className="banner-image" 
-              style={{backgroundImage: `url(${getImgUrl(bannerImage.desktopPath)})`}}
-            >
-            </a>
-              : 
-            <span className="banner-image" style={{backgroundImage: `url(${getImgUrl(bannerImage.desktopPath)})`}}></span>
-          }
-        </div>
-        <div className="hex-right project-header-hex-wrapper">
-          <h2 className="project-title">{project.title}</h2>
-          {mediaQuery === "mobile" ?
-            <div className="layout-next-wrapper">
-              <HexGridLayout layouts={projectDetailHeaderRightLayouts} />
-              {onNextClick ?
-                <div className="hex-row">
-                  <Hex 
-                    hexClass="gradient-blue-cyan-teal-green" 
-                    hexTitle="<-"
-                    hexWidth={122} 
-                    hexOnClick={() => onNextClick()} 
-                    />
-                  <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
-                </div>
-                :
-                <div className="hex-row">
-                  <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
-                  <Hex hexClass="gradient-blue-cyan-teal-green" hexWidth={122} />
-                </div>
-              }
-            </div>
-          :
-            <div className="desktop">
-              <div className="hex-grid">
-                {onNextClick ? 
-                  <div className="hex-row">
-                    <Hex hexClass="gradient-orange-pink" hexOnClick={() => onNextClick()} hexTitle="->"/>
-                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
-                  </div>
-                : 
-                  <div className="hex-row">
-                    <Hex hexClass="gradient-orange-pink"/>
-                    <Hex hexClass="gradient-blue-cyan-teal-green" badgeComponent1={ghBadge} />
-                  </div>
-                }
-                <div className="hex-row">
-                  <Hex hexClass="gradient-orange-pink"/>
-                </div>
-                <div className="hex-row">
-                  <Hex hexClass="gradient-blue-cyan-teal-green" hexImagePath={secondaryImage.desktopPath} />
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-
-      </header>
-
-      <article className="project-body text-area-gradient">
-
-        <div className="meta">
-          {ghBadge}
-          {project.catIds &&
-            <ol className="cats">
-              {project.catIds.map((id, idx)=>{
-                return <li key={idx} > <Badge {...badgeData[id]} /> </li>
-              })}
+  return(
+    <div className="project-detail-container">
+    <article className="card project-feature project-detail">
+      <header className="card-top">
+        <section className="header-image">
+          <div className="inner">
+            <img 
+              className="image mobile" 
+              src={getImgUrl(cardImage.mobilePath)} 
+              // src="https://picsum.photos/480/360"
+              alt={`${project.title} - Main Project Image`} 
+            />
+            <Hex hexClass="image" hexWidth={640} hexImagePath={cardImage?.desktopPath} />
+          </div>
+        </section>
+        <section className="header-content">   
+          <h2 className="title overlay">{project.title}</h2>
+          {hasLinks && 
+            <ol className="badges-list links">
+              {ghBadge}
+              {externalLinkBadge}
             </ol>
           }
-          
+        </section>
+        <HexGridLayout layouts={cardBorder} extraClass="card-border"/>
+      </header>
+      <section className="info-panel">
+        <ol className="tech-list">
+          <span className="tech-title">Technologies used:</span>
+          {renderTechBadges()}
+        </ol>
+        <div className="text-area text-area-gradient">
+          {project.descriptionHTML && <div className="description" dangerouslySetInnerHTML={{ __html: project.descriptionHTML}} ></div>}
         </div>
-        
-        {project.descriptionHTML && <div className="project-description" dangerouslySetInnerHTML={{ __html: project.descriptionHTML}} ></div>}
-
-        {mediaQuery === "mobile" && 
-          <div className="mobile">
-            <div className="hex-grid">
-              <div className="hex-row">
-                <Hex hexClass="gradient-blue-cyan-teal-green" hexImagePath={primaryImage.mobilePath} />
-                <Hex hexClass="gradient-orange-pink"/>
-              </div>
-              <div className="hex-row">
-                <Hex hexClass="gradient-orange-pink"/>
-                <Hex hexClass="gradient-blue-cyan-teal-green" hexImagePath={secondaryImage.mobilePath} />
-              </div>
+      </section>
+      <footer>
+        <div className="hex-grid">
+          <div className="hex-row">
+              <Hex hexClass="image-hex" hexWidth={640} hexImagePath={primaryImage?.desktopPath} />
             </div>
+          <div className="hex-row">
+            <Hex />
+            <Hex hexClass="image-hex" hexWidth={640} hexImagePath={secondaryImage?.desktopPath} />
           </div>
-        }
-
-      </article>
+        </div>
+      </footer>
+    </article>
     </div>
   )
 }

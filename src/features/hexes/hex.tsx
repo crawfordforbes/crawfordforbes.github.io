@@ -1,6 +1,5 @@
-import { useId, useContext } from "react"
+import { useId, useMemo, memo } from "react"
 import { getImgUrl } from "@/utils/images"
-import { MediaQueryContext } from "@/utils/context"
 
 import Badge from "@/components/global/badge"
 import { badgeData } from "@/data/global/badges" 
@@ -35,7 +34,7 @@ function Hex({
   hexImagePath, 
   hexSvgComponent,
   hexOnClick,
-  hexWidth,
+  hexWidth = 122,
   hexMargin = 3,
   badge1Id,
   badge2Id,
@@ -43,26 +42,6 @@ function Hex({
   badgeComponent2,
 }: HexProps) {
 
-  const mediaQuery = useContext(MediaQueryContext);
-  if (!hexWidth) {
- 
-    switch (mediaQuery) {
-      case "mobile":
-        hexWidth = 122;
-        break;
-      case "tablet":
-        hexWidth = 170;
-        break;
-      case "desktop":
-        hexWidth = 250;
-        break;
-      case "large":
-        hexWidth = 250;
-        break;
-      default: 
-        hexWidth = 170;
-    }
-  }
   // Determine if there is any text content to display
   function hasTextContent() {
     return badge1Id || badge2Id || hexTitle || badgeComponent1 || badgeComponent2;
@@ -120,7 +99,7 @@ function Hex({
   // Render the text content (title and badges) if available
   function renderTextContent() {
     return (
-      <div className="hex-text-content">
+      <section className="hex-text-content">
         {hexTitle && <h3 className="hex-title">{hexTitle}</h3>}
         {badge1Id || badge2Id  || badgeComponent1 || badgeComponent2? <div className="hex-badges">
           {badge1Id && <Badge {...badgeData[badge1Id]} />}
@@ -129,7 +108,7 @@ function Hex({
           {badgeComponent2 && badgeComponent2}
           </div> : <></>}
 
-      </div>
+      </section>
     )
   }
 
@@ -137,7 +116,7 @@ function Hex({
   const uuid = useId();
 
   // Combine classes based on props
-  const classes = `hex ${uuid} ${hexClass ? hexClass : ''} ${hexImagePath ? 'with-image' : ''} ${hexSvgComponent ? 'with-svg' : ''} ${hexOnClick ? 'clickable' : ''} ${hexLink ? 'linkable' : ''}`;
+  const classes = `hex ${uuid} ${hexClass ? hexClass : ''} ${hexImagePath ? 'with-image' : ''} ${hexSvgComponent ? 'with-svg' : ''} ${hexOnClick ? 'with-onclick' : ''} ${hexLink ? 'with-link' : ''}`; // todo remove unused classes
 
   // Inline styles for adjustable width and margin
   const css = 
@@ -150,7 +129,18 @@ function Hex({
         margin: ${hexMargin}px ${hexMargin}px calc(${hexMargin}px - ${hexWidth}px * 0.2886 + 1px); 
         height: calc(${hexWidth}px * 1.1547);
     }`;
+  // how to keep this from happening on every render?
 
+  // If hexClass is "random", apply a random background color from predefined CSS variables, memoized per mount
+  const randomColor = useMemo(() => {
+    if (hexClass === "random") {
+      return `var(--color-${Math.floor(Math.random() * 12) + 1})`;
+    }
+    return undefined;
+  }, [hexClass]);
+  if(hexClass === "random" && !hexStyle) {
+    hexStyle = { background: randomColor };
+  }
   
   return (
     <div className={classes} style={hexStyle}>
@@ -163,4 +153,4 @@ function Hex({
   )
 }
 
-export default Hex
+export default memo(Hex);

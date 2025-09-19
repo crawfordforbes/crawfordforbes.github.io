@@ -1,12 +1,92 @@
-.project-filter {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.project-filter .filter-title {
-  padding: 5px 15px;
+.project-index .filters {
+  --icon-size: 1.5rem;
+  --title-size: 1rem;
+
+  position: sticky;
+  top:0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  height: 0;
 }
 
-.project-filter .filter-title.selected {
-  background-color: aqua;
+/* mobile filter toggle button */
+.project-index .filter-toggle.hex {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.project-index .filters.hide-mobile-filter .filter-wrapper {
+  left: -152px;
+  transition: left var(--transition-rules);
+}
+
+/* filter wrapper styles */
+.project-index .filter-wrapper {
+    top: 112px;
+    left: 0;
+    color: var(--project-filter-text);
+    transition: left var(--transition-rules);
+    pointer-events: all;
+}
+
+/* filter list styles */
+
+.project-index .filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+}
+
+.project-index .filter-item {
+  font-family: var(--font-display);
+  font-size: var(--icon-size);
+  padding: 4px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+.project-index .filter-item .badge-title {
+  font-size: var(--title-size);
+}
+
+.project-index .filter-item:hover,
+.project-index .filter-item.selected {
+  background-color: var(--project-filter-bg-hover-top);
+  color: var(--project-filter-text-hover-top);
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+.project-index .filter-item.bottom {
+  color: var(--project-filter-text-contrast);
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+.project-index .filter-item.bottom:hover,
+.project-index .filter-item.bottom.selected {
+  background-color: var(--project-filter-bg-hover-bottom);
+  color: var(--project-filter-text-hover-bottom);
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+@media screen and (min-width: 40em){
+  .project-index .filter-toggle {
+    display: none;
+  }
+
+  .project-index .filter-wrapper,
+  .project-index .filters.hide-mobile-filter .filter-wrapper {
+    top: var(--variable-height-hex-triangle-height);
+    left: 0;
+  }
+}
+
+@media screen and (min-width: 64em){
+  .project-index .filters{
+    --title-size: 1.125rem;
+  }
 }

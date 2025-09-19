@@ -28,7 +28,10 @@ export type HexesType = {
 
 export const hexData:HexesType = {
   /* decorative */
-
+  "card-border": {
+    id: "card-border",
+    hexClass: "decorative-hex",
+  },
   /* contacts */
   "contacts-github-index": {
     id: "contacts-github-index",
@@ -65,5 +68,6 @@ export const hexData:HexesType = {
     hexSvgComponent: <Right />,
     hexLink: "/#projects-filter-wrapper",
     hexTitle: "Projects"
-  }
+  },
+
 }

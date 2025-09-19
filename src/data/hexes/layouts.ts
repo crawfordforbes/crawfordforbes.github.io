@@ -5,7 +5,8 @@ export type LayoutsType = {
     id: MediaSizes,
     grid: string,
     shiftedUp?: boolean,
-    hexWidth?: number
+    hexWidth?: number,
+    hexMargin?: number,
   }
 }
 
@@ -165,5 +166,76 @@ export const projectDetailFooterLayouts: LayoutsType  = {
     grid: "project-detail-header-right-desktop",
     shiftedUp: false,
     hexWidth: 170
+  },
+}
+
+export const projectIndexBackdrop: LayoutsType  = {
+  "mobile" : {
+    id: "mobile",
+    grid: "project-index-backdrop-mobile",
+    shiftedUp: false,
+    hexWidth: 58
+  },
+  "tablet" : {
+    id: "tablet",
+    grid: "project-index-backdrop-mobile",
+    shiftedUp: false,
+    hexWidth: 122
+  },
+  "desktop" : {
+    id: "desktop",
+    grid: "project-index-backdrop-desktop",
+    shiftedUp: false,
+    hexWidth: 170
+  },
+  "large" : {
+    id: "large",
+    grid: "project-index-backdrop-desktop",
+    shiftedUp: false,
+    hexWidth: 170
+  },
+  "x-large" : {
+    id: "x-large",
+    grid: "project-index-backdrop-desktop",
+    shiftedUp: false,
+    hexWidth: 170
+  },
+}
+
+export const cardBorder: LayoutsType  = {
+  "mobile" : {
+    id: "mobile",
+    grid: "card-border",
+    shiftedUp: false,
+    hexWidth: 32,
+    hexMargin: 0,
+  },
+  "tablet" : {
+    id: "tablet",
+    grid: "card-border",
+    shiftedUp: false,
+    hexWidth: 32,
+    hexMargin: 0,
+  },
+  "desktop" : {
+    id: "desktop",
+    grid: "card-border",
+    shiftedUp: false,
+    hexWidth: 32,
+    hexMargin: 0,
+  },
+  "large" : {
+    id: "large",
+    grid: "card-border",
+    shiftedUp: false,
+    hexWidth: 32,
+    hexMargin: 0,
+  },
+  "x-large" : {
+    id: "x-large",
+    grid: "card-border",
+    shiftedUp: false,
+    hexWidth: 32,
+    hexMargin: 0,
   },
 }

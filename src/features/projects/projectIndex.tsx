@@ -7,9 +7,10 @@ import type { CategoryType } from "@/data/projects/categories";
 
 import ProjectDetail from "./projectDetail";
 import ProjectFilter from "./projectFilter";
-import ProjectCard from "./projectCard";
+import ProjectResult from "./projectResult";
 import { projectData } from "@/data/projects/projects";
 import './styles/projectIndex.css'
+
 
 type projectIndexProps = {
   selectedCatIdsProps?: string[],
@@ -24,6 +25,11 @@ function projectIndex({
   const [selectedCatIds, setSelectedCatIds] = useState(selectedCatIdsProps ? selectedCatIdsProps : [])
   const [selectedProjectId, setSelectedProjectId] = useState(selectedProjectIdProp ? selectedProjectIdProp : undefined)
   const [showMobileFilter, setShowMobileFilter] = useState(false)
+  const [highlightFilterOnHover, setHighlightFilterOnHover] = useState("")
+
+  const [sortedProjectsArray, setSortedProjectsArray] = useState(Object.keys(projectData).map((key)=>{return projectData[key]}).sort((a, b) => {
+    return a.title.localeCompare(b.title);
+  }))
 
   function handleFilterClick(filterId: string) {
     if(selectedCatIds.some((id) => id === filterId)) {
@@ -33,7 +39,7 @@ function projectIndex({
     }
   }
 
-  function handleCardClick(projectId: string) {
+  function handleCardDetailClick(projectId: string) {
     setSelectedProjectId(projectId)
   }
 
@@ -45,24 +51,15 @@ function projectIndex({
     .filter(id => categoryData[id].filterable)
     .map(id => categoryData[id]);
 
-  const projectDataKeys = Object.keys(projectData)
-  let sortedProjectsArray = projectDataKeys.map((key, idx)=>{return projectData[key]}).sort((a, b) => {
-    return a.title.localeCompare(b.title);
-  }).filter(project=>{
-    return project.catIds?.some(catId=>selectedCatIds.includes(catId))
-  })
-
   function handlePreviousClick(currentProjectId: string) {
     let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
     let prevIdx = currentIdx <= 0 ? sortedProjectsArray.length - 1 : currentIdx - 1;
-    console.log(currentProjectId, currentIdx, prevIdx, sortedProjectsArray[prevIdx].id)
     setSelectedProjectId(sortedProjectsArray[prevIdx].id);
   }
 
   function handleNextClick(currentProjectId: string) {
     let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
     let nextIdx = currentIdx >= sortedProjectsArray.length - 1 ? 0 : currentIdx + 1;
-    console.log(currentProjectId, currentIdx, nextIdx, sortedProjectsArray[nextIdx].id)
     setSelectedProjectId(sortedProjectsArray[nextIdx].id);
   }
 
@@ -70,23 +67,40 @@ function projectIndex({
     setShowMobileFilter(!showMobileFilter)
   }
 
-  function renderfilteredProjects() {
+  function highlightFilterHover(filterId: string) {
+    setHighlightFilterOnHover(filterId);
+  }
 
+  function renderfilteredProjects() {
     if(selectedCatIds.length <= 0){
       return sortedProjectsArray.map((project, idx)=>{
-        
-        return (<ProjectCard key={idx} project={project} onClick={handleCardClick}/>)
+        return (
+          <ProjectResult 
+            key={idx}
+            project={project}
+            selectProjectClick={handleCardDetailClick}
+            selectedCatIds={selectedCatIds}
+            selectFilterClick={handleFilterClick}
+            highlightFilterHover={highlightFilterHover}
+            hoveredFilters={highlightFilterOnHover}
+          />
+        )
       })
       
     } else {
       return sortedProjectsArray.map((project, idx)=>{
         if(project.catIds?.some(catId=>selectedCatIds.includes(catId))) {
           return (
-            <ProjectCard 
-              key={idx} 
-              project={project} 
-              onClick={handleCardClick}
-            />
+            <li key={idx}>
+              <ProjectResult 
+                project={project}
+                selectProjectClick={handleCardDetailClick}
+                selectedCatIds={selectedCatIds}
+                selectFilterClick={handleFilterClick}
+                highlightFilterHover={highlightFilterHover}
+                hoveredFilters={highlightFilterOnHover}
+              />
+            </li>
           )
         }
       })
@@ -94,37 +108,44 @@ function projectIndex({
   }
 
   return (
-    <div className="project-feature">
+    <section className="project-feature index-container">
+
       {!selectedProjectId ? 
-        <div className="project-index">
+        <section className="project-index">
           <div className={`filters ${showMobileFilter ? 'show-mobile-filter' : 'hide-mobile-filter'}`}>
-            <div className="filterToggle">
-              <Hex 
-                hexClass="gradient-orange-pink" 
-                hexTitle="toggle" 
-                hexWidth={64} 
-                hexOnClick={handleMobileFilterToggleClick}
+            {<Hex 
+              hexClass="filter-toggle hex-button" 
+              hexWidth={64} 
+              hexOnClick={handleMobileFilterToggleClick}
+              badge1Id={showMobileFilter ? 'toggle-open' : 'toggle-close'}
+            />}
+            <ProjectFilter
+              selectedCatIds={selectedCatIds}
+              availableCatIds={availableCatIds}
+              onClick={handleFilterClick}
+              hoveredFilters={highlightFilterOnHover}
+              highlightFilterHover={highlightFilterHover}
               />
-            </div>
-            <div className="mobile-filter-control">
-              <ProjectFilter
-                selectedCatIds={selectedCatIds}
-                availableCatIds={availableCatIds}
-                onClick={handleFilterClick}
-                />
-            </div>
           </div>
           <ol className="results">{renderfilteredProjects()}</ol>
-        </div>
+        </section>
         :
-        <ProjectDetail
-          id={selectedProjectId}
-          onClick={handleReturnToIndexClick}
-          onPreviousClick={() => handlePreviousClick(selectedProjectId)}
-          onNextClick={() => handleNextClick(selectedProjectId)}
-        />
+        <section className="selected-project">
+          <Hex 
+            hexClass="back-button hex-button" 
+            hexTitle="Back" 
+            hexWidth={64} 
+            hexOnClick={() => handleReturnToIndexClick()} 
+          />
+          <ProjectDetail
+            id={selectedProjectId}
+            onBackButtonClick={handleReturnToIndexClick}
+            onPreviousClick={() => handlePreviousClick(selectedProjectId)}
+            onNextClick={() => handleNextClick(selectedProjectId)}
+          />
+        </section>
       }
-    </div>
+    </section>
   )
 }
 

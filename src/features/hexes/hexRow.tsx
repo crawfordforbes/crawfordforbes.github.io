@@ -5,11 +5,13 @@ import { rowData } from "@/data/hexes/rows"
 type HexRowProps = {
   row: string,
   hexWidth?: number
+  hexMargin?: number,
 }
 
 function HexRow({  
   row,
-  hexWidth
+  hexWidth,
+  hexMargin,
 }: HexRowProps) {
 if (!row) {
   console.log("did you miss registering a grid or a row somewhere?")
@@ -21,7 +23,7 @@ if (!row) {
       {rowData && rowData[row] && rowData[row].hexes.map((hexObj, idx) => {
           const hexId = hexObj.id
           let props = {...hexData[hexId]}.id ? {...hexData[hexId]} : {hexClass: hexId};
-          props = { ...props, hexWidth: hexWidth !== 0 ? hexWidth : undefined };
+          props = { ...props, hexWidth: hexWidth !== 0 ? hexWidth : undefined, hexMargin: hexMargin || hexMargin === 0 ? hexMargin : undefined };
           
           let maxHexes = hexObj.repeat || 1;
 

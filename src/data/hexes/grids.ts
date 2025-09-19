@@ -27,7 +27,7 @@ export const gridData:GridsType = {
   },
   "header-desktop": {
     id: "header-desktop",
-    rows: [{id:"header-desktop-1"}, {id:"header-desktop-2"}, {id:"header-desktop-3"}, {id:"header-desktop-4"}, {id:"header-desktop-5"}, {id:"header-desktop-6"}, {id:"header-desktop-7"}, {id:"header-desktop-8"}, {id:"header-desktop-9"}, {id:"header-desktop-10"}, {id:"header-desktop-11"}
+    rows: [{id:"header-desktop-1"}, {id:"header-desktop-2"}, {id:"header-desktop-3"}, {id:"header-desktop-4"}, {id:"header-desktop-5"}, {id:"header-desktop-6"}, {id:"header-desktop-7"}, {id:"header-desktop-8"}, {id:"header-desktop-9"}, {id:"header-desktop-10"}, {id:"header-desktop-11"}, {id:"header-desktop-12"}, {id:"header-desktop-13"}, {id:"header-desktop-14"}, {id:"header-desktop-15"}, {id:"header-desktop-16"}, {id:"header-desktop-17"},
     ]
   },
   "header-large": {
@@ -42,6 +42,15 @@ export const gridData:GridsType = {
   "intro-panel": {
     id: "intro-panel",
     rows: [{id:""},{id:"intro-panel-1"}, {id:"intro-panel-2"}, {id:"intro-panel-3"}]
+  },
+  /* project index */
+  "project-index-backdrop-mobile": {
+    id: "project-index-backdrop-mobile",
+    rows: [{id:"project-index-backdrop-mobile", repeat: 12}]
+  },
+  "project-index-backdrop-desktop": {
+    id: "project-index-backdrop-desktop",
+    rows: [{id:"project-index-backdrop-mobile", repeat: 12}]
   },
   /* project detail */
   "project-detail-header-left-mobile": {
@@ -59,5 +68,10 @@ export const gridData:GridsType = {
   "project-detail-header-right-desktop": {
     id: "project-detail-header-right-desktop",
     rows: [{id:"project-detail-header-right-desktop-1"}, {id:"project-detail-header-right-desktop-2"}, ]
+  },
+  /* project card border */
+  "card-border": {
+    id: "card-border",
+    rows: [{id:"card-border"}]
   },
 }

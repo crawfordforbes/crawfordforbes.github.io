@@ -103,6 +103,43 @@ export const rowData:RowsType = {
     id: "header-desktop-8",
     hexes: [{id:"gradient-11-body-bg", repeat: 1}, ]
   },
+  /* === */
+  "header-desktop-9": {
+    id: "header-desktop-9",
+    hexes: [{id:"gradient-11-body-bg", repeat: 2}, ]
+  },
+  "header-desktop-10": {
+    id: "header-desktop-10",
+    hexes: [{id:"gradient-10-11", repeat: 1}, ]
+  },
+  "header-desktop-11": {
+    id: "header-desktop-11",
+    hexes: [{id:"gradient-8-10", repeat: 2}, ]
+  },
+  "header-desktop-12": {
+    id: "header-desktop-12",
+    hexes: [{id:"gradient-6-8", repeat: 1}, ]
+  },
+  "header-desktop-13": {
+    id: "header-desktop-13",
+    hexes: [{id:"gradient-4-6", repeat: 2}, ]
+  },
+  "header-desktop-14": {
+    id: "header-desktop-14",
+    hexes: [{id:"gradient-3-4", repeat: 1}]
+  },
+  "header-desktop-15": {
+    id: "header-desktop-15",
+    hexes: [{id:"gradient-2-3", repeat: 2}]
+  },
+  "header-desktop-16": {
+    id: "header-desktop-16",
+    hexes: [{id:"gradient-1-2", repeat: 1}]
+  },
+  "header-desktop-17": {
+    id: "header-desktop-17",
+    hexes: [{id:"gradient-1-body-bg", repeat: 2}]
+  },
     /* large */
   "header-large-1": {
     id: "header-large-1",
@@ -316,10 +353,21 @@ export const rowData:RowsType = {
     id: "intro-panel-3",
     hexes: [{id:"contacts-resume"}]
   },
+  /* project index */
+  "project-index-backdrop-mobile": {
+    id: "project-index-backdrop-mobile",
+    hexes: [{id:"random", repeat: 12}]
+  },
   /* project detail */
   "project-detail-header-left-mobile-1": {
     id: "project-detail-header-left-mobile-1",
     hexes: [{id:"gradient-orange-pink", repeat: 2}]
+  },
+
+  /* card border */
+  "card-border": {
+    id: "card-border",
+    hexes: [{id:"card-border", repeat: 18}]
   }
 
 }

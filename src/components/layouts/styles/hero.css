@@ -1,19 +1,15 @@
 .hero {
   --title-size: 5rem;
   --subtitle-size: 2rem;
-  --content-width: auto;
   --content-padding: 8px;
-  --content-height: 112px;
   --content-top: 300px;
-  --content-right: 0;
-  --content-text-align: right;
 
   position: relative;
   width: 100vw;
   height: calc(100vw * 9 / 16); /* 16:9 Aspect Ratio */
   min-height: 720px;
-  color: var(--white-text);
-  z-index:1;
+  margin-bottom: 16px;
+  z-index: 1;
 }
 
 .hero-bg-image img {
@@ -34,28 +30,29 @@
 .hero .hero-content {
   position: absolute;
   top: var(--content-top);
-  right: var(--content-right);
-  width: var(--content-width);
+  right: 0;
+  width: auto;
   padding: 0 var(--content-padding) var(--content-padding);
-  text-align: var(--content-text-align);
+  text-align: right;
 }
 
 .hero .title {
-  --shadow-scale: 1.75px;
+  --shadow-scale: 1.25px;
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
-  font-size: var(--title-size);
+
   line-height: .9;
-  animation: titleGlow 12s ease infinite;
+  animation: titleGlow 16s ease infinite;
 }
 
 .hero .subtitle {
-  --shadow-scale: 1.5px;
+  --shadow-scale: .75px;
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
-  font-size: var(--subtitle-size);
+
   line-height: 1.2;
   animation: titleGlow 32s ease infinite;
 }
 
+/* todo: do this smarter with clamp() */
 /* title and subtitle placement media queries */
 @media screen and (min-width: 27em){
   .hero {
@@ -79,6 +76,8 @@
     --title-size: 6rem;
     --subtitle-size: 3.5rem;
     --content-top: 190px;
+
+    margin-bottom: 32px;
   }
 }
 

@@ -1,4 +1,34 @@
 .project-index {
-  display: flex;
-  flex-direction: row;
+  --filter-transition: .3s ease-out;
+
+  position: relative;
+}
+
+.project-index .results {
+  flex: 1 1 auto;
+  position: relative;
+  padding: 32px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  z-index: 0;
+}
+
+.selected-project {
+  position: relative;
+}
+
+.selected-project .back-button {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  z-index: 2;
+}
+
+@media screen and (min-width: 40em){
+  .project-index {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
 }

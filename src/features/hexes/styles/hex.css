@@ -13,6 +13,7 @@
   clip-path: var(--hex-clip-path);
   position: relative;
   pointer-events: all;
+  border: 0;
 }
 
 .hex.with-bg {
@@ -45,17 +46,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--default-hex-color);
   text-decoration: none;
   z-index: 1;
   background-color: transparent;
 }
 
-.hex.clickable,
-.hex.clickable button,
-.hex.linkable {
-  cursor: pointer;
-}
+
 
 .hex .hex-text-content {
   position: absolute;
@@ -65,9 +62,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--default-hex-color);
   text-decoration: none;
   z-index: 2;
+}
+
+.hex.with-link .hex-text-content,
+.hex.with-onclick .hex-text-content {
+  pointer-events: none;
 }
 
 .hex-grid.shifted-up {
