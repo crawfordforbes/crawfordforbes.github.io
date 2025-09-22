@@ -138,7 +138,7 @@
   pointer-events: none;
 }
 
-.card-top .title {
+.card-top .title.primary {
   text-align: right;
   max-width: calc(100% - 56px);
 }
@@ -175,6 +175,7 @@
   left: 50%;
   transform: translateX(-50%);  
   width: 100%;
+  z-index: 1;
 }
 
 .decorative-hex-border .hex-row {

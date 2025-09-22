@@ -132,6 +132,9 @@
   --variable-height-hex-top-color: var(--primary-color);
   --variable-height-hex-bottom-color: var(--primary-color-contrast);
 
+  --variable-height-hex-top-color-detail: var(--primary-color-contrast);
+  --variable-height-hex-bottom-color-detail: var(--primary-color);
+
   /* project filter */
   --project-filter-toggle-width: 64px;
   --project-filter-text: var(--primary-color-text);
@@ -141,9 +144,9 @@
   --project-filter-bg-hover-bottom: var(--variable-height-hex-top-color);
   --project-filter-text-hover-bottom: var(--primary-color-text);
 
-  --project-filter-toggle-bg: var(--variable-height-hex-top-color);
-  --project-filter-toggle-bg-hover: var(--variable-height-hex-bottom-color);
-  --project-filter-toggle-text: var(--primary-color-text);
+  --project-filter-toggle-bg: var(--quaternary-color);
+  --project-filter-toggle-bg-hover: var(--quaternary-color-contrast);
+  --project-filter-toggle-text: var(--quaternary-color-text);
 
   /* project index */
 

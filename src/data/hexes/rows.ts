@@ -367,7 +367,7 @@ export const rowData:RowsType = {
   /* card border */
   "card-border": {
     id: "card-border",
-    hexes: [{id:"card-border", repeat: 18}]
+    hexes: [{id:"card-border", repeat: 48}]
   }
 
 }

@@ -1,9 +1,15 @@
-.card.project-detail  {
-  padding-top: 32px;
+.project-detail-container {
+  container-name: project-detail;
+  container-type: inline-size;
 }
 
-.project-detail .image:not(.mobile) {
-  display: none;
+.project-detail-container .header-content {
+  container-name: desktop-project-detail;
+  container-type: inline-size;
+}
+
+.card.project-detail  {
+  padding-top: 32px;
 }
 
 .project-detail .card-top {
@@ -11,38 +17,162 @@
   overflow: hidden;
 }
 
-.project-detail .main {
-
+.project-detail .card-top .header-content {
+  pointer-events: all;
 }
 
-.project-detail .tech-container {
-
+.project-detail .info-panel {
+  padding: 24px 16px;
 }
 
-.project-detail .tech-list {
-
+.project-detail .desktop {
+  display: none;
 }
 
-.project-detail .tech-title {
+@media screen and (min-width: 48em){
 
+  .card.project-detail {
+    padding-top: 0;
+    overflow: visible;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+
+  .project-detail .desktop {
+    display: block;
+  }
+
+  .project-detail .mobile {
+    display: none;
+  }
+
+  .project-detail .card-top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: visible;
+    border-radius: 0;
+    aspect-ratio: 8/3;
+  }
+
+  .project-detail .card-top .inner::before {
+    display: none;
+  }
+
+  .project-detail .card-top .header-image,
+  .project-detail .card-top .header-content {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 50%;
+    height: 100%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    justify-content: center;
+    padding: 16px 32px;
+    gap: 32px;
+  }
+
+  .project-detail .card-top .header-image .hex.image.desktop {
+    --offset: 1px;
+    --half-size: calc(((100vw - var(--offset) - 32px) / 2));
+    --hex-width: clamp(320px, var(--half-size), 640px);
+    width: var(--hex-width);
+    min-width: var(--hex-width);
+    /* margin: 3px 3px calc(3px - var(--hex-width) * 0.2886 + 1px); */
+    margin: 0;
+    height: calc(var(--hex-width) * 1.1547);
+    max-width: 50%;
+    z-index: 1;
+  }
+
+  .project-detail .info-panel {
+    background: none;
+    padding-top: 12%;
+  }
+
+  .project-detail {
+    background: linear-gradient(180deg, var(--info-panel-bg-top-color) 10%, var(--info-panel-bg-bottom-color) 100%);
+  }
+  
+  .project-detail .decorative-hex-border {
+    top: -10px;
+    overflow: hidden;
+    bottom: auto;
+    z-index: -1;
+  }
+
+  .project-detail .variable-height-hex {
+    --variable-height-hex-top-color: var(--variable-height-hex-top-color-detail);
+    --variable-height-hex-bottom-color: var(--variable-height-hex-bottom-color-detail);
+    position: absolute;
+    top: 100%;
+    height: auto;
+  } 
+
+  .project-detail .variable-height-hex .badges-list {
+    padding: 0 16px;
+  }
+
+  .project-detail .text-area.with-tech-badges {
+    margin-right: 192px;
+  }
 }
 
-.project-detail .description-container {
-
+@media screen and (min-width: 64em){
+  .project-detail .card-top .header-image .hex.image.desktop {
+    --offset: 208px;
+  }
 }
 
-.project-detail .description {
-
+@media screen and (min-width: 90em){
+  .project-detail .card-top .header-image .hex.image.desktop {
+    --offset: 336px;
+  }
 }
 
-.project-detail .image-area {
-
+@container project-detail (width > 300px) {
+  .project-detail {
+    --title-size: 2.5rem;
+  }
 }
 
-.project-detail .hex-grid {
-
+@container project-detail (width > 340px) {
+  .project-detail {
+    --title-size: 3rem;
+  }
 }
 
-.project-detail .hex-row {
+@container project-detail (width > 400px) {
+  .project-detail {
+    --title-size: 4rem;
+  }
+}
 
+@container project-detail (width > 500px) {
+  .project-detail {
+    --title-size: 6rem;
+  }
+}
+
+@container desktop-project-detail (width > 300px) {
+  .title.primary {
+    --title-size: 2.5rem;
+  }
+}
+
+@container desktop-project-detail (width > 340px) {
+  .title.primary {
+    --title-size: 3rem;
+  }
+}
+
+@container desktop-project-detail (width > 400px) {
+  .title.primary {
+    --title-size: 4rem;
+  }
+}
+
+@container desktop-project-detail (width > 500px) {
+  .title.primary {
+    --title-size: 6rem;
+  }
 }

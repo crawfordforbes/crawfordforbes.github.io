@@ -53,6 +53,8 @@ const Badge = ({
       return (
         <a 
           href={link} 
+          target="_blank"
+          rel="noopener noreferrer"
           className="badge-content" 
           aria-label={title ? title : 'badge link'}
         >

@@ -85,6 +85,8 @@ function Hex({
       return (
         <a
           href={hexLink}
+          target="_blank"
+          rel="noopener noreferrer"
           className="hex-full-area-content"
           aria-label={hexTitle ? hexTitle : 'Hex hexLink'}
         >

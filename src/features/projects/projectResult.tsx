@@ -120,7 +120,7 @@ function ProjectResult({
           </button>
         </section>
         <section className="header-content">
-          <h2 className="title overlay">{project.title}</h2>
+          <h2 className="title primary overlay">{project.title}</h2>
           {hasTechIds &&
             <ol className="techs badges-list">{renderTechBadges()}</ol> 
           }
