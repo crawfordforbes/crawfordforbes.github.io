@@ -1,9 +1,9 @@
 export type ProjectType = {
     id: string,
     title: string,
-    cardImgId: string,
     primaryImgId: string,
-    secondaryImgId: string,
+    secondaryImgId?: string,
+    tertiaryImgId?: string,
     githubLink?: string,
     externalLink?: string,
     catIds?: string[],
@@ -16,9 +16,9 @@ export type ProjectsType = {
   [key: string]: {
     id: string,
     title: string,
-    cardImgId: string,
     primaryImgId: string,
-    secondaryImgId: string,
+    secondaryImgId?: string,
+    tertiaryImgId?: string,
     githubLink?: string,
     externalLink?: string,
     catIds?: string[],
@@ -31,9 +31,9 @@ export const projectData:ProjectsType = {
   "sunshine-nights": {
     id: "sunshine-nights",
     title: "Sunshine Nights",
-    cardImgId: "sunshine-card",
     primaryImgId: "sunshine-primary",
     secondaryImgId: "sunshine-secondary",
+    tertiaryImgId: "sunshine-tertiary",
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
     catIds: ["developer", "designer", ],
@@ -44,7 +44,6 @@ export const projectData:ProjectsType = {
   "crawford-forbes": {
     id: "crawford-forbes",
     title: "Crawford Forbes Portfolio",
-    cardImgId: "sunshine-card",
     primaryImgId: "sunshine-primary",
     secondaryImgId: "sunshine-secondary",
     catIds: ["developer", "designer", "solo"],
@@ -54,7 +53,6 @@ export const projectData:ProjectsType = {
   "sunshine-nights-2": {
     id: "sunshine-nights-2",
     title: "2Sunshine Nights",
-    cardImgId: "sunshine-card",
     primaryImgId: "sunshine-primary",
     secondaryImgId: "sunshine-secondary",
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
@@ -67,7 +65,6 @@ export const projectData:ProjectsType = {
   "sunshine-nights-3": {
     id: "sunshine-nights-3",
     title: "3Sunshine Nights",
-    cardImgId: "sunshine-card",
     primaryImgId: "sunshine-primary",
     secondaryImgId: "sunshine-secondary",
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
@@ -80,7 +77,6 @@ export const projectData:ProjectsType = {
   "sunshine-nights-4": {
     id: "sunshine-nights-4",
     title: "4Sunshine Nights",
-    cardImgId: "sunshine-card",
     primaryImgId: "sunshine-primary",
     secondaryImgId: "sunshine-secondary",
     githubLink: "https://github.com/crawfordforbes/sunshinev4",

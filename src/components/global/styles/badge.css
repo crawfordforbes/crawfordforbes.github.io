@@ -10,6 +10,8 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  background-color: inherit;
+  color: inherit;
 }
 
 .badge .badge-content .fa-icon {
@@ -38,6 +40,20 @@
   z-index: 0;
 }
 
+.badge.pill .badge-content {
+  border-radius: 9999px;
+  padding: 4px 12px;
+  line-height: 1.25rem;
+  width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.badge.pill .badge-content:has(:not(.fa-icon)) {
+  padding: 8px 16px;
+}
+
+/* colors */
 
 .badge.primary .badge-content {
   background-color: var(--badge-primary-color-bg);
@@ -74,7 +90,6 @@
   transition: background-color var(--transition-rules);
 }
 
-
 .badge.tertiary .badge-content {
   background-color: var(--badge-tertiary-color-bg);
   color: var(--badge-tertiary-color-text);
@@ -93,18 +108,4 @@
 }
 
 
-
-
-.badge.pill .badge-content {
-  border-radius: 9999px;
-  padding: 4px 12px;
-  line-height: 1.25rem;
-  width: fit-content;
-  text-transform: uppercase;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
-}
-
-.badge.pill .badge-content:has(:not(.fa-icon)) {
-  padding: 8px 16px;
-}
 

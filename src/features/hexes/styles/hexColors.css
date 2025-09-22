@@ -26,7 +26,6 @@
   background: linear-gradient(var(--gradient-angle), var(--color-1) var(--color-1-of-2), var(--color-3) var(--color-2-of-2));
 }
 
-
 .hex.gradient-2-3 {
   background: var(--color-2);
   background: linear-gradient(var(--gradient-angle), var(--color-2) var(--color-1-of-2), var(--color-3) var(--color-2-of-2));

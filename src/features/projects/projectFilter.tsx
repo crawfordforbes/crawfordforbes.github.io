@@ -33,7 +33,7 @@ function ProjectFilter({
         <ol className="filter-list">
           {availableCatIds && availableCatIds.map((catId, idx)=>{
             const selected = selectedCatIds.some((id) => id === catId.id) || (hoveredFilters && hoveredFilters === catId.id)
-            let placement = idx < availableCatIds.length / 2 ? "top" : "bottom";
+            let placement = idx + 1 <= availableCatIds.length / 2 ? "top" : "bottom";
             return (
               <li 
                 key={idx} 

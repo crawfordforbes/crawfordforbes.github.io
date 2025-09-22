@@ -29,6 +29,10 @@
   display: none;
 }
 
+.project-detail .info-panel .badge .badge-content {
+  background-color: var(--variable-height-hex-top-color-detail);
+}
+
 @media screen and (min-width: 48em){
 
   .card.project-detail {
@@ -101,12 +105,30 @@
   }
 
   .project-detail .variable-height-hex {
-    --variable-height-hex-top-color: var(--variable-height-hex-top-color-detail);
-    --variable-height-hex-bottom-color: var(--variable-height-hex-bottom-color-detail);
     position: absolute;
     top: 100%;
     height: auto;
+    background: linear-gradient(var(--gradient-angle), var(--variable-height-hex-top-color-detail), var(--variable-height-hex-bottom-color-detail));
   } 
+
+  .project-detail .variable-height-hex::before,
+  .project-detail .variable-height-hex::after {
+    border-color: transparent transparent var(--variable-height-hex-top-color-detail) transparent;
+  }
+
+  .project-detail .variable-height-hex::after {
+    border-color: var(--variable-height-hex-bottom-color-detail) transparent transparent transparent;
+  }
+
+
+  .project-detail .variable-height-hex .badge.top .badge-content {
+    background-color: var(--variable-height-hex-bottom-color-detail);
+  }
+
+  .project-detail .variable-height-hex .badge.bottom .badge-content {
+    background-color: var(--variable-height-hex-top-color-detail);
+  }
+
 
   .project-detail .variable-height-hex .badges-list {
     padding: 0 16px;

@@ -6,9 +6,10 @@ import HexGridLayout from "@/features/hexes/hexGridLayout";
 import { projectData } from "@/data/projects/projects"
 import { cardBorder } from "@/data/hexes/layouts";
 import { imageData } from "@/data/images";
+import { imagePath } from "@/data/images";
 
 import Badge from "@/components/global/badge"
-import { badgeData, techBadgeData } from "@/data/global/badges";
+import { techBadgeData } from "@/data/global/badges";
 
 import './styles/projectDetail.css'
 
@@ -22,16 +23,13 @@ type ProjectDetailProps = {
 
 function ProjectDetail({
   id, 
-  onBackButtonClick,
-  onPreviousClick,
-  onNextClick
 }:ProjectDetailProps) {
   
   const project = projectData[id];
-  
-  const cardImage = imageData[project.cardImgId]
-  const primaryImage = imageData[project.primaryImgId]
-  const secondaryImage = imageData[project.secondaryImgId]
+
+  const primaryImage = imagePath + 'projects/' + imageData[project.primaryImgId].fileName
+  const secondaryImage = project.secondaryImgId ? imagePath + 'projects/' + imageData[project.secondaryImgId].fileName : '';
+  const tertiaryImage = project.tertiaryImgId ? imagePath + 'projects/' + imageData[project.tertiaryImgId].fileName : '';
 
   const hasLinks = project.githubLink || project.externalLink;
   const hasTechBadges = !!(project.techIds && project.techIds.length > 0);
@@ -54,14 +52,17 @@ function ProjectDetail({
 
   function renderTechBadges() {
     if (project?.techIds && project?.techIds.length > 0) {
+      const threshold = project.techIds.length;
+
       return project?.techIds.map((id,idx)=>{
         if(techBadgeData[id]){
+          let placement = idx + 1 <= threshold / 2 ? "top" : "bottom";
           return(
             <li key={idx}>
               <Badge 
                 title={techBadgeData[id]?.title} 
                 iconClass={techBadgeData[id]?.iconClass} 
-                extraClass={"pill secondary"} 
+                extraClass={`pill inherit ${placement}`} 
               />
             </li>
           )
@@ -78,11 +79,10 @@ function ProjectDetail({
           <div className="inner">
             <img 
               className="image mobile" 
-              src={getImgUrl(cardImage.mobilePath)} 
-              // src="https://picsum.photos/480/360"
+              src={getImgUrl(primaryImage)} 
               alt={`${project.title} - Main Project Image`} 
             />
-            <Hex hexClass="image desktop" hexWidth={640} hexImagePath={cardImage?.mobilePath} />
+            <Hex hexClass="image desktop" hexWidth={640} hexImagePath={primaryImage} />
           </div>
         </section>
         <section className="header-content">   

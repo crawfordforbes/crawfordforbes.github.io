@@ -4,6 +4,7 @@ import Badge from "@/components/global/badge";
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/images";
+import { imagePath } from "@/data/images";
 
 import './styles/ProjectResult.css'
 import { techBadgeData, catBadgeData } from "@/data/global/badges";
@@ -96,7 +97,7 @@ function ProjectResult({
     />
   } /> : <></>;
 
-  const cardImage = imageData[project.cardImgId]
+  const cardImagePath = imagePath + "projects/" + imageData[project.primaryImgId].fileName;
   
   const hasTechIds: boolean = !!(project?.techIds && project?.techIds.length > 0);
   const hasCatIds: boolean = !!(project?.catIds && project?.catIds.length > 0);
@@ -113,8 +114,7 @@ function ProjectResult({
           >
             <img 
               className="image" 
-              src={getImgUrl(cardImage.mobilePath)} 
-              // src="https://picsum.photos/480/360"
+              src={getImgUrl(cardImagePath)} 
               alt={`${project.title} - card image`} 
             />
           </button>

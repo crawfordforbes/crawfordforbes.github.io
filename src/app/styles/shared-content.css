@@ -23,6 +23,7 @@
     margin: 0 16px 0 var(--offset);
     width: calc(100vw - var(--offset) - 32px);
   }
+
   .content.two-col {
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
@@ -72,6 +73,7 @@
 .card {
   overflow: hidden;
   border-radius: var(--border-radius);
+  height: 100%;
 }
 
 .card-top {
@@ -198,6 +200,7 @@
   background: linear-gradient(180deg, var(--info-panel-bg-top-color) 10%, var(--info-panel-bg-bottom-color) 100%);
   color: var(--info-panel-text);
   z-index: 0;
+  height: 100%;
 }
 
 /* variable height hex styles */

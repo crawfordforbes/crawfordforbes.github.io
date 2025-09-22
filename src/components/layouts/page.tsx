@@ -57,9 +57,9 @@ function Page() {
           <Hero />
         </header>
         <main className="content">
-          <ProjectIndex />
-          {/* <IntroPanel /> */}
           {/* <ProjectDetail id={"sunshine-nights"}/> */}
+          {/* <IntroPanel /> */}
+          <ProjectIndex />
         </main>
         <Footer />
       </div>

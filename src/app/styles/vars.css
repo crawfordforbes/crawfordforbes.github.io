@@ -92,6 +92,13 @@
   --shadow-scale: .65px; /* for textGlow animation shadows, set to 0 to turn off, but be sure to add some bg gradients in their place */
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1); /* for textGlow animation shadows, set to 0 to turn off, but be sure to add some bg gradients in their place */
 
+  /* animations */
+  --from-color: var(--quaternary-color);
+  --from-text: var(--quaternary-color-text);
+  --to-color: var(--quaternary-color-contrast);
+  --to-text: var(--quaternary-color-text-contrast);
+  --gradient-angle: 30deg;
+
   /* badges */
   --badge-text-size: 0.875rem;
   --badge-border-width: 1px;
@@ -132,8 +139,8 @@
   --variable-height-hex-top-color: var(--primary-color);
   --variable-height-hex-bottom-color: var(--primary-color-contrast);
 
-  --variable-height-hex-top-color-detail: var(--primary-color-contrast);
-  --variable-height-hex-bottom-color-detail: var(--primary-color);
+  --variable-height-hex-top-color-detail: var(--secondary-color-contrast);
+  --variable-height-hex-bottom-color-detail: var(--secondary-color);
 
   /* project filter */
   --project-filter-toggle-width: 64px;
@@ -148,7 +155,7 @@
   --project-filter-toggle-bg-hover: var(--quaternary-color-contrast);
   --project-filter-toggle-text: var(--quaternary-color-text);
 
-  /* project index */
+  /* projects */
 
   /* info panel */
   --info-panel-bg-top-color: var(--primary-color);
@@ -165,10 +172,5 @@
   --back-button-bg-bottom-color: var(--primary-color);
   --back-button-text: var(--primary-color-text);
 
-  /* animations */
-  --from-color: var(--quaternary-color);
-  --from-text: var(--quaternary-color-text);
-  --to-color: var(--quaternary-color-contrast);
-  --to-text: var(--quaternary-color-text-contrast);
-  --gradient-angle: 30deg;
+
 }
