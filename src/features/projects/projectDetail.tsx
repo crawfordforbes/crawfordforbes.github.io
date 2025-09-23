@@ -11,7 +11,10 @@ import { imagePath } from "@/data/images";
 import Badge from "@/components/global/badge"
 import { techBadgeData } from "@/data/global/badges";
 
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+
 import './styles/projectDetail.css'
+import './styles/splide.min.css'
 
 type ProjectDetailProps = {
   id: string,
@@ -77,12 +80,33 @@ function ProjectDetail({
       <header className="card-top">
         <section className="header-image">
           <div className="inner">
-            <img 
+            <Splide aria-label={`${project.title} - Slider`} className="mobile image-slider" options={ { rewind: true, gap: '1rem', pagination: false } }>
+              {primaryImage.length > 0 && <SplideSlide>
+                <img className="image mobile" src={getImgUrl(primaryImage)} alt={`${project.title} - Main Project Image`} />
+              </SplideSlide>}
+              {secondaryImage.length > 0 && <SplideSlide>
+                <img className="image mobile" src={getImgUrl(secondaryImage)} alt={`${project.title} - Secondary Project Image`} />
+              </SplideSlide>}
+              {tertiaryImage.length > 0 && <SplideSlide>
+                <img className="image mobile" src={getImgUrl(tertiaryImage)} alt={`${project.title} - Tertiary Project Image`} />
+              </SplideSlide>}
+            </Splide>
+            {/* <img 
               className="image mobile" 
               src={getImgUrl(primaryImage)} 
               alt={`${project.title} - Main Project Image`} 
-            />
-            <Hex hexClass="image desktop" hexWidth={640} hexImagePath={primaryImage} />
+            /> */}
+            <Splide aria-label={`${project.title} - Slider`} className="desktop image-slider" options={ { rewind: true, pagination: false } }>
+              {primaryImage.length > 0 && <SplideSlide>
+                <Hex hexClass="image desktop" hexWidth={640} hexImagePath={primaryImage} />
+              </SplideSlide>}
+              {secondaryImage.length > 0 && <SplideSlide>
+                <Hex hexClass="image desktop" hexWidth={640} hexImagePath={secondaryImage} />
+              </SplideSlide>}
+              {tertiaryImage.length > 0 && <SplideSlide>
+                <Hex hexClass="image desktop" hexWidth={640} hexImagePath={tertiaryImage} />
+              </SplideSlide>}
+            </Splide>
           </div>
         </section>
         <section className="header-content">   
