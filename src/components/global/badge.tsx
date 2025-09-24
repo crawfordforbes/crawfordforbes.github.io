@@ -69,9 +69,9 @@ const Badge = ({
   const badgeClass = extraClass ? `badge ${extraClass}` : 'badge';
 
   return (
-    <section className={badgeClass}>
+    <article className={badgeClass}>
       {renderFullAreaContent()}
-    </section>
+    </article>
   )
 };
 

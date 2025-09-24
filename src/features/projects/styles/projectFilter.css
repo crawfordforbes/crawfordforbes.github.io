@@ -3,7 +3,7 @@
   --title-size: 1rem;
 
   position: sticky;
-  top:0;
+  top: 24px;
   left: 0;
   z-index: 1;
   pointer-events: none;
@@ -32,13 +32,18 @@
     pointer-events: all;
 }
 
+.project-index .filter-wrapper h2 {
+  --title-size: 1.625rem;
+  padding-left: 16px;
+}
+
 /* filter list styles */
 
 .project-index .filter-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 8px;
+  padding: 0 8px;
 }
 
 .project-index .filter-item {
@@ -50,8 +55,8 @@
   transition: background-color var(--transition-rules), color var(--transition-rules);
 }
 
-.project-index .filter-item .badge-title {
-  font-size: var(--title-size);
+.project-index .filter-item .title {
+  --title-size: 1rem;
 }
 
 .project-index .filter-item:hover,

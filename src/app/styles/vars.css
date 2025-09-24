@@ -123,8 +123,6 @@
   --badge-tertiary-color-bg-highlight: var(--tertiary-color-contrast);
   --badge-tertiary-color-text-highlight: var(--tertiary-color-text-contrast);
   --badge-tertiary-color-border-highlight: var(--badge-tertiary-color-border);
-  
-
 
   /* hexes */
   --default-hex-color: var(--color-dark-text);
@@ -139,8 +137,12 @@
   --variable-height-hex-top-color: var(--primary-color);
   --variable-height-hex-bottom-color: var(--primary-color-contrast);
 
-  --variable-height-hex-top-color-detail: var(--secondary-color-contrast);
-  --variable-height-hex-bottom-color-detail: var(--secondary-color);
+  --variable-height-hex-top-color-detail: var(--color-7);
+  --variable-height-hex-bottom-color-detail: var(--color-8);
+
+  /* projects */
+  --project-index-intro-bg: var(--primary-color-contrast);
+  --project-index-intro-text: var(--primary-color-text-contrast);
 
   /* project filter */
   --project-filter-toggle-width: 64px;
@@ -155,7 +157,6 @@
   --project-filter-toggle-bg-hover: var(--quaternary-color-contrast);
   --project-filter-toggle-text: var(--quaternary-color-text);
 
-  /* projects */
 
   /* info panel */
   --info-panel-bg-top-color: var(--primary-color);
@@ -172,5 +173,8 @@
   --back-button-bg-bottom-color: var(--primary-color);
   --back-button-text: var(--primary-color-text);
 
-
+  /* intro panel */
+  --intro-panel-bg-top-color: var(--secondary-color);
+  --intro-panel-bg-bottom-color: var(--secondary-color-contrast);
+  --intro-panel-text: var(--secondary-color-text);
 }

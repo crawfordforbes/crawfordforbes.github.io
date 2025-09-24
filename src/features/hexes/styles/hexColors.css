@@ -1,13 +1,3 @@
-.hex.gradient-orange-pink {
-  background: var(--color-1);
-  background: linear-gradient(var(--gradient-angle), var(--color-1) 0%, var(--color-3) 100%);
-}
-
-.hex.gradient-blue-cyan-teal-green {
-  background: var(--color-6);
-  background: linear-gradient(135deg, var(--color-6) 0%, var(--color-7) 33%, var(--color-8) 66%, var(--color-9) 100%);
-}
-
 .hex.transparent {
   background: transparent;
 }

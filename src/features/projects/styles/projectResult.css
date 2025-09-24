@@ -1,6 +1,8 @@
 .project-result-container {
   container-name: project-result;
   container-type: inline-size;
+
+  height: 100%;
 }
 
 .project-result {

@@ -340,29 +340,6 @@ export const rowData:RowsType = {
     id: "header-x-large-26",
     hexes: [{id:"gradient-1-body-bg", repeat: 2}]
   },
-  /* intro panel */
-  "intro-panel-1": {
-    id: "intro-panel-1",
-    hexes: [{id:"contacts-github-index"}]
-  },
-  "intro-panel-2": {
-    id: "intro-panel-2",
-    hexes: [{id:"contacts-email"},{id:"contacts-linked-in"}]
-  },
-  "intro-panel-3": {
-    id: "intro-panel-3",
-    hexes: [{id:"contacts-resume"}]
-  },
-  /* project index */
-  "project-index-backdrop-mobile": {
-    id: "project-index-backdrop-mobile",
-    hexes: [{id:"random", repeat: 12}]
-  },
-  /* project detail */
-  "project-detail-header-left-mobile-1": {
-    id: "project-detail-header-left-mobile-1",
-    hexes: [{id:"gradient-orange-pink", repeat: 2}]
-  },
 
   /* card border */
   "card-border": {

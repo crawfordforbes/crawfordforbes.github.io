@@ -1,15 +1,15 @@
 export type ProjectType = {
     id: string,
-    title: string,
-    primaryImgId: string,
-    secondaryImgId?: string,
-    tertiaryImgId?: string,
-    githubLink?: string,
-    externalLink?: string,
-    catIds?: string[],
-    descriptionHTML?: string,
-    short_description?: string,
-    techIds?: string[],
+    title: string, // the project title
+    primaryImgId: string, // the main image for the project, will appear on the index component
+    secondaryImgId?: string, // an optional second image, this only appears on the project detail component
+    tertiaryImgId?: string, // an optional third image, this only appears on the project detail component
+    githubLink?: string, // an optional link to the github repo
+    externalLink?: string, // an optional link to the live project
+    roleIds?: string[], // an array of role ids that this project belongs to. In this case roles are: 'developer', 'designer', 'solo', 'contributor', and 'lead'. On the project index component these are used as filters, and on the project detail component they appear as labels.
+    descriptionHTML?: string, // a longer description of the project, this is HTML so it can contain links and formatting. this appears on the detail component
+    short_description?: string, // a one-liner description of the project, this appears on the index component
+    techIds?: string[], // an array of technology ids that were used in this project, such as 'react', 'ruby', 'sinatra', etc.
 }
 
 export type ProjectsType = {
@@ -21,7 +21,7 @@ export type ProjectsType = {
     tertiaryImgId?: string,
     githubLink?: string,
     externalLink?: string,
-    catIds?: string[],
+    roleIds?: string[],
     descriptionHTML?: string,
     short_description?: string,
     techIds?: string[],
@@ -36,7 +36,7 @@ export const projectData:ProjectsType = {
     tertiaryImgId: "sunshine-tertiary",
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
-    catIds: ["developer", "designer", ],
+    roleIds: ["developer", "designer", ],
     descriptionHTML: `<p>Upon finishing bootcamp, I built this site for a friend's band in New York City. It consists of a fully functioning CMS with users, a Sinatra server, a postgres database, and a vanilla javascript frontend. The site's history reflects the changing landscape of a touring artist's internet needs; we removed a fully custom media gallery and reduced content here as the artist world moved to instagram and other social media sites. At one point years ago React was used in the front end, but with such minimal user interaction and site structure it wasn't worth the load time.</p>`,
     short_description: "A band website with a custom CMS built with Sinatra and Postgres.",
     techIds: ["ruby", "sinatra", "activerecord"]
@@ -46,7 +46,7 @@ export const projectData:ProjectsType = {
     title: "Crawford Forbes Portfolio",
     primaryImgId: "sunshine-primary",
     secondaryImgId: "sunshine-secondary",
-    catIds: ["developer", "designer", "solo"],
+    roleIds: ["developer", "designer", "solo"],
     descriptionHTML: `<p>Let's be frank, this is more of a meta-portfolio site, now that it's featuring itself. Time is a flat black circle, and so is this metaphor, as you're probably going to read this again at some point.</p>`,
     // techIds: ["react", "vite"]
   },
@@ -57,7 +57,7 @@ export const projectData:ProjectsType = {
     secondaryImgId: "sunshine-secondary",
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
-    catIds: ["developer", "designer", ],
+    roleIds: ["developer", "designer", ],
     descriptionHTML: `<p>2Upon finishing bootcamp, I built this site for a friend's band in New York City. It consists of a fully functioning CMS with users, a Sinatra server, a postgres database, and a vanilla javascript frontend. The site's history reflects the changing landscape of a touring artist's internet needs; we removed a fully custom media gallery and reduced content here as the artist world moved to instagram and other social media sites. At one point years ago React was used in the front end, but with such minimal user interaction and site structure it wasn't worth the load time.</p>`,
     short_description: "2A band website with a custom CMS built with Sinatra and Postgres.",
     techIds: ["ruby", "sinatra", "activerecord"]
@@ -69,7 +69,7 @@ export const projectData:ProjectsType = {
     secondaryImgId: "sunshine-secondary",
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
-    catIds: ["developer", "designer", ],
+    roleIds: ["developer", "designer", ],
     descriptionHTML: `<p>3Upon finishing bootcamp, I built this site for a friend's band in New York City. It consists of a fully functioning CMS with users, a Sinatra server, a postgres database, and a vanilla javascript frontend. The site's history reflects the changing landscape of a touring artist's internet needs; we removed a fully custom media gallery and reduced content here as the artist world moved to instagram and other social media sites. At one point years ago React was used in the front end, but with such minimal user interaction and site structure it wasn't worth the load time.</p>`,
     short_description: "3A band website with a custom CMS built with Sinatra and Postgres.",
     techIds: ["ruby", "sinatra", "activerecord"]
@@ -81,7 +81,7 @@ export const projectData:ProjectsType = {
     secondaryImgId: "sunshine-secondary",
     githubLink: "https://github.com/crawfordforbes/sunshinev4",
     externalLink:"http://sunshinenights.com/",
-    catIds: ["developer", "designer", ],
+    roleIds: ["developer", "designer", ],
     descriptionHTML: `<p>4Upon finishing bootcamp, I built this site for a friend's band in New York City. It consists of a fully functioning CMS with users, a Sinatra server, a postgres database, and a vanilla javascript frontend. The site's history reflects the changing landscape of a touring artist's internet needs; we removed a fully custom media gallery and reduced content here as the artist world moved to instagram and other social media sites. At one point years ago React was used in the front end, but with such minimal user interaction and site structure it wasn't worth the load time.</p>`,
     short_description: "4A band website with a custom CMS built with Sinatra and Postgres.",
     techIds: ["ruby", "sinatra", "activerecord"]

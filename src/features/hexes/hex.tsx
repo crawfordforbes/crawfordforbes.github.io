@@ -2,7 +2,7 @@ import { useId, useMemo, memo } from "react"
 import { getImgUrl } from "@/utils/images"
 
 import Badge from "@/components/global/badge"
-import { badgeData } from "@/data/global/badges" 
+import { contactBadgeData, utilsBadgeData } from "@/data/global/badges" 
 
 import type { JSX } from "react"
 
@@ -100,17 +100,18 @@ function Hex({
 
   // Render the text content (title and badges) if available
   function renderTextContent() {
+    let allBadgeData = { ...contactBadgeData, ...utilsBadgeData };
     return (
-      <section className="hex-text-content">
+      <article className="hex-text-content">
         {hexTitle && <h3 className="hex-title">{hexTitle}</h3>}
         {badge1Id || badge2Id  || badgeComponent1 || badgeComponent2? <div className="hex-badges">
-          {badge1Id && <Badge {...badgeData[badge1Id]} />}
-          {badge2Id && <Badge {...badgeData[badge2Id]} />}
+          {badge1Id && <Badge {...allBadgeData[badge1Id]} />}
+          {badge2Id && <Badge {...allBadgeData[badge2Id]} />}
           {badgeComponent1 && badgeComponent1}
           {badgeComponent2 && badgeComponent2}
           </div> : <></>}
 
-      </section>
+      </article>
     )
   }
 

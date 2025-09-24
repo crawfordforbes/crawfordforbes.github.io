@@ -7,7 +7,7 @@ import { imageData } from "@/data/images";
 import { imagePath } from "@/data/images";
 
 import './styles/ProjectResult.css'
-import { techBadgeData, catBadgeData } from "@/data/global/badges";
+import { techBadgeData, roleBadgeData } from "@/data/global/badges";
 
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 import { cardBorder } from "@/data/hexes/layouts";
@@ -17,7 +17,7 @@ import Hex from "@/features/hexes/hex";
 type ProjectResultProps = {
   project: ProjectType,
   selectProjectClick: (id: string) => void;
-  selectedCatIds?: string[];
+  selectedRoleIds?: string[];
   selectFilterClick: (id: string) => void;
   highlightFilterHover: (id: string) => void;
   hoveredFilters?: string;
@@ -26,7 +26,7 @@ type ProjectResultProps = {
 function ProjectResult({  
   project,
   selectProjectClick,
-  selectedCatIds,
+  selectedRoleIds,
   selectFilterClick,
   highlightFilterHover,
   hoveredFilters,
@@ -41,21 +41,21 @@ function ProjectResult({
   };
 
 
-  function renderCatBadges() {
-    if (project?.catIds && project?.catIds.length > 0) {
-      return project?.catIds.map((id,idx)=>{
-        const selectedId = (selectedCatIds && selectedCatIds.length > 0 && selectedCatIds.some((catId) => catId === id) ) || (hoveredFilters && hoveredFilters === id)
+  function renderRoleBadges() {
+    if (project?.roleIds && project?.roleIds.length > 0) {
+      return project?.roleIds.map((id,idx)=>{
+        const selectedId = (selectedRoleIds && selectedRoleIds.length > 0 && selectedRoleIds.some((roleId) => roleId === id) ) || (hoveredFilters && hoveredFilters === id)
         return (
           <li
             key={idx}
-            onMouseEnter={() => handleMouseEnter(catBadgeData[id]?.id)}
+            onMouseEnter={() => handleMouseEnter(roleBadgeData[id]?.id)}
             onMouseLeave={() => handleMouseLeave()}
           >
             <Badge 
-              title={catBadgeData[id]?.title} 
-              iconClass={catBadgeData[id]?.iconClass} 
+              title={roleBadgeData[id]?.title} 
+              iconClass={roleBadgeData[id]?.iconClass} 
               extraClass={selectedId ? "pill primary highlight" : "pill primary"} 
-              badgeOnClick={() => selectFilterClick(catBadgeData[id]?.id)}
+              badgeOnClick={() => selectFilterClick(roleBadgeData[id]?.id)}
             />
           </li>
         )
@@ -100,14 +100,14 @@ function ProjectResult({
   const cardImagePath = imagePath + "projects/" + imageData[project.primaryImgId].fileName;
   
   const hasTechIds: boolean = !!(project?.techIds && project?.techIds.length > 0);
-  const hasCatIds: boolean = !!(project?.catIds && project?.catIds.length > 0);
+  const hasRoleIds: boolean = !!(project?.roleIds && project?.roleIds.length > 0);
   const hasLinks = !!(project.githubLink || project.externalLink);
 
   return (
     <div className="project-result-container">
     <article className="card project-feature project-result">
       <header className="card-top">
-        <section className="header-image">
+        <div className="header-image">
           <button 
             className="inner" 
             onClick={() => selectProjectClick(project.id)}
@@ -118,7 +118,7 @@ function ProjectResult({
               alt={`${project.title} - card image`} 
             />
           </button>
-        </section>
+        </div>
         <section className="header-content">
           <h2 className="title primary overlay">{project.title}</h2>
           {hasTechIds &&
@@ -129,8 +129,8 @@ function ProjectResult({
       </header>
       <section className={ `info-panel ${hasLinks ? "has-footer-links" : ""}` }>
 
-        {hasCatIds &&
-          <ol className="cats badges-list">{renderCatBadges()}</ol> 
+        {hasRoleIds &&
+          <ol className="roles badges-list">{renderRoleBadges()}</ol> 
         }
         {project.short_description &&
           <p className="description">{project.short_description}</p>

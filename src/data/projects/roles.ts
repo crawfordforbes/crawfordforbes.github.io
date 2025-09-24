@@ -1,10 +1,10 @@
-export type CategoryType = {
+export type RoleType = {
   id: string;
   title: string;
   filterable?: boolean
 }
 
-type CategoriesType = {
+type RolesType = {
   [key: string]: {
     id: string;
     title: string;
@@ -12,7 +12,7 @@ type CategoriesType = {
   }
 }
 
-export const categoryData: CategoriesType = {
+export const roleData: RolesType = {
   "developer": {
     id: "developer",
     title: "Developer",

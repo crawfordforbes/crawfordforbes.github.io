@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import Hex from "@/features/hexes/hex";
 
-import { categoryData } from "@/data/projects/categories";
-import type { CategoryType } from "@/data/projects/categories";
+import { roleData } from "@/data/projects/roles";
+import type { RoleType } from "@/data/projects/roles";
 
 import ProjectDetail from "./projectDetail";
 import ProjectFilter from "./projectFilter";
@@ -13,16 +13,16 @@ import './styles/projectIndex.css'
 
 
 type projectIndexProps = {
-  selectedCatIdsProps?: string[],
+  selectedRoleIdsProps?: string[],
   selectedProjectIdProp?: string
 }
 
 function projectIndex({  
-  selectedCatIdsProps,
+  selectedRoleIdsProps,
   selectedProjectIdProp
 }: projectIndexProps) {
 
-  const [selectedCatIds, setSelectedCatIds] = useState(selectedCatIdsProps ? selectedCatIdsProps : [])
+  const [selectedRoleIds, setSelectedRoleIds] = useState(selectedRoleIdsProps ? selectedRoleIdsProps : [])
   const [selectedProjectId, setSelectedProjectId] = useState(selectedProjectIdProp ? selectedProjectIdProp : undefined)
   const [showMobileFilter, setShowMobileFilter] = useState(false)
   const [highlightFilterOnHover, setHighlightFilterOnHover] = useState("")
@@ -32,10 +32,10 @@ function projectIndex({
   }))
 
   function handleFilterClick(filterId: string) {
-    if(selectedCatIds.some((id) => id === filterId)) {
-      setSelectedCatIds(selectedCatIds.filter(id => id !== filterId));
+    if(selectedRoleIds.some((id) => id === filterId)) {
+      setSelectedRoleIds(selectedRoleIds.filter(id => id !== filterId));
     } else {
-      setSelectedCatIds([...selectedCatIds, filterId]);
+      setSelectedRoleIds([...selectedRoleIds, filterId]);
     }
   }
 
@@ -47,9 +47,9 @@ function projectIndex({
     setSelectedProjectId(undefined)
   }
 
-  let availableCatIds: CategoryType[] = Object.keys(categoryData)
-    .filter(id => categoryData[id].filterable)
-    .map(id => categoryData[id]);
+  let availableRoleIds: RoleType[] = Object.keys(roleData)
+    .filter(id => roleData[id].filterable)
+    .map(id => roleData[id]);
 
   function handlePreviousClick(currentProjectId: string) {
     let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
@@ -72,30 +72,32 @@ function projectIndex({
   }
 
   function renderfilteredProjects() {
-    if(selectedCatIds.length <= 0){
+    if(selectedRoleIds.length <= 0){
       return sortedProjectsArray.map((project, idx)=>{
         return (
-          <ProjectResult 
-            key={idx}
-            project={project}
-            selectProjectClick={handleCardDetailClick}
-            selectedCatIds={selectedCatIds}
-            selectFilterClick={handleFilterClick}
-            highlightFilterHover={highlightFilterHover}
-            hoveredFilters={highlightFilterOnHover}
-          />
+          <li key={idx}>
+            <ProjectResult 
+              key={idx}
+              project={project}
+              selectProjectClick={handleCardDetailClick}
+              selectedRoleIds={selectedRoleIds}
+              selectFilterClick={handleFilterClick}
+              highlightFilterHover={highlightFilterHover}
+              hoveredFilters={highlightFilterOnHover}
+            />
+          </li>
         )
       })
       
     } else {
       return sortedProjectsArray.map((project, idx)=>{
-        if(project.catIds?.some(catId=>selectedCatIds.includes(catId))) {
+        if(project.roleIds?.some(roleId=>selectedRoleIds.includes(roleId))) {
           return (
             <li key={idx}>
               <ProjectResult 
                 project={project}
                 selectProjectClick={handleCardDetailClick}
-                selectedCatIds={selectedCatIds}
+                selectedRoleIds={selectedRoleIds}
                 selectFilterClick={handleFilterClick}
                 highlightFilterHover={highlightFilterHover}
                 hoveredFilters={highlightFilterOnHover}
@@ -108,33 +110,42 @@ function projectIndex({
   }
 
   return (
-    <section className="project-feature index-container">
+    <article className="project-feature index-container">
 
       {!selectedProjectId ? 
-        <section className="project-index">
+        <article className="project-index">
           <div className={`filters ${showMobileFilter ? 'show-mobile-filter' : 'hide-mobile-filter'}`}>
             {<Hex 
-              hexClass="filter-toggle hex-button" 
+              hexClass="filter-toggle hex-button mobile" 
               hexWidth={64} 
               hexOnClick={handleMobileFilterToggleClick}
               badge1Id={showMobileFilter ? 'toggle-open' : 'toggle-close'}
             />}
             <ProjectFilter
-              selectedCatIds={selectedCatIds}
-              availableCatIds={availableCatIds}
+              selectedRoleIds={selectedRoleIds}
+              availableRoleIds={availableRoleIds}
               onClick={handleFilterClick}
               hoveredFilters={highlightFilterOnHover}
               highlightFilterHover={highlightFilterHover}
               />
           </div>
-          <ol className="results">{renderfilteredProjects()}</ol>
-        </section>
+          <div className="helper-results">
+            <div className="intro-text"><p>Filter by role to see projects I led, contributed to, or built solo. Click a card for the case study.</p></div>
+            <ol className="results">{renderfilteredProjects()}</ol>
+          </div>
+        </article>
         :
-        <section className="selected-project">
+        <article className="selected-project">
           <Hex 
-            hexClass="back-button hex-button" 
+            hexClass="back-button hex-button mobile" 
             hexTitle="Back" 
             hexWidth={64} 
+            hexOnClick={() => handleReturnToIndexClick()} 
+          />
+          <Hex 
+            hexClass="back-button hex-button desktop" 
+            hexTitle="Back" 
+            hexWidth={96} 
             hexOnClick={() => handleReturnToIndexClick()} 
           />
           <ProjectDetail
@@ -143,9 +154,9 @@ function projectIndex({
             onPreviousClick={() => handlePreviousClick(selectedProjectId)}
             onNextClick={() => handleNextClick(selectedProjectId)}
           />
-        </section>
+        </article>
       }
-    </section>
+    </article>
   )
 }
 

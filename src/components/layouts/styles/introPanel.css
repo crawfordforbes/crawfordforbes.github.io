@@ -1,10 +1,45 @@
 .intro-panel {
+  --title-size: 2rem;
   position: relative;
   z-index: 1;
+  margin-bottom: 32px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-@media screen and (min-width: 64em) {
-  .intro-panel .right-col {
-    order: -1;    
+.intro-panel {
+  position: relative;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.intro-panel h3 {
+  --shadow-scale: .25px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+
+  font-size: var(--title-size);
+
+  background-size: cover;
+  background-position: center;
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-image var(--transition-rules);
+  animation: titleGlow 16s ease infinite;
+}
+
+@media screen and (min-width: 40em){
+  .intro-panel {
+    --title-size: 4rem;
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (min-width: 64em){
+  .intro-panel {
+    --title-size: 5rem;
   }
 }

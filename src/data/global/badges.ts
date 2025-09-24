@@ -13,7 +13,17 @@ export type BadgesType = {
   }
 }
 
-export const badgeData:BadgesType = {
+export const utilsBadgeData:BadgesType = {
+  "toggle-open": {
+    id: "toggle-open",
+    iconClass: ['fas', 'xmark'],
+  },
+  "toggle-close": {
+    id: "toggle-close",
+    iconClass: ['fas', 'bars'],
+  }
+}
+export const contactBadgeData:BadgesType = {
   /* contacts */
   "github-index": {
     id: "github-index",
@@ -39,26 +49,6 @@ export const badgeData:BadgesType = {
     link: contactData?.["resume"]?.url || "/tbd",
     title: contactData?.["resume"]?.title || "Resume"
   },
-  "fullstack": {
-    id: "fullstack",
-    title: "Fullstack"
-  },
-  "designer": {
-    id: "designer",
-    title: "Designer"
-  },
-  "solo": {
-    id: "solo",
-    title: "Solo Dev"
-  },
-  "toggle-open": {
-    id: "toggle-open",
-    iconClass: ['fas', 'xmark'],
-  },
-  "toggle-close": {
-    id: "toggle-close",
-    iconClass: ['fas', 'bars'],
-  }
 }
 
 export const techBadgeData:BadgesType = {
@@ -75,7 +65,7 @@ export const techBadgeData:BadgesType = {
   },
 }
 
-export const catBadgeData:BadgesType = {
+export const roleBadgeData:BadgesType = {
   "developer": {
     id: "developer",
     title: "Developer",

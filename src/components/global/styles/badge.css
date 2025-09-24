@@ -53,6 +53,13 @@
   padding: 8px 16px;
 }
 
+.badge.pill .title {
+  --title-size: 1rem;
+
+  position: relative;
+  top: 1px;
+}
+
 /* colors */
 
 .badge.primary .badge-content {

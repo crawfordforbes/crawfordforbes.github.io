@@ -58,7 +58,7 @@ function Page() {
         </header>
         <main className="content">
           {/* <ProjectDetail id={"sunshine-nights"}/> */}
-          {/* <IntroPanel /> */}
+          <IntroPanel />
           <ProjectIndex />
         </main>
         <Footer />

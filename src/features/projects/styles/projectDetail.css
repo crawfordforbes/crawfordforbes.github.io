@@ -39,12 +39,16 @@
 }
 
 .project-detail .splide__arrow {
+  --radius: 38px;
+
   background-color: var(--info-panel-bg-top-color);
   color: var(--info-panel-text-color);
   top: calc((100vw * 3 / 4) - 64px);
   opacity: 1;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
   transition: background-color var(--transition-rules);
+  width: var(--radius);
+  height: var(--radius);
 }
 
 .project-detail .splide__arrow:hover {
@@ -122,7 +126,7 @@
 
   .project-detail .info-panel {
     background: none;
-    padding-top: 12%;
+    padding-top: 14%;
   }
 
   .project-detail {
@@ -164,10 +168,11 @@
 
   .project-detail .variable-height-hex .badges-list {
     padding: 0 16px;
+    gap: 16px;
   }
 
   .project-detail .text-area.with-tech-badges {
-    margin-right: 192px;
+    margin-right: 208px;
   }
 }
 

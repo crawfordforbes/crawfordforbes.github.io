@@ -45,14 +45,14 @@ const mediaQuery = useContext(MediaQueryContext);
 
   // chooses which hex grid to display based on screen size
   return (
-    <section className={`hex-grid-layout ${mediaQuery} ${extraClass ? extraClass : ""}`}>
+    <article className={`hex-grid-layout ${mediaQuery} ${extraClass ? extraClass : ""}`}>
       {grid && layout && <HexGrid 
         grid={grid} 
         shiftedUp={layout.shiftedUp} 
         hexWidth={layout.hexWidth ? layout.hexWidth : hexWidth}
         hexMargin={layout.hexMargin || layout.hexMargin === 0 ? layout.hexMargin : 3}
       />}
-    </section>
+    </article>
   )
 }
 

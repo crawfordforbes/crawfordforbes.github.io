@@ -6,9 +6,9 @@ import './styles/hexHeader.css'
 function HexHeader() {
 
   return (
-    <section className="hex-header">
+    <article className="hex-header">
       <HexGridLayout layouts={headerLayouts} />
-    </section>
+    </article>
   )
 }
 
