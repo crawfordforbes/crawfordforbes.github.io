@@ -14,6 +14,7 @@ import { cardBorder } from "@/data/hexes/layouts";
 
 import Hex from "@/features/hexes/hex";
 import { roleData } from "@/data/projects/roles";
+import { Link, NavLink } from "react-router";
 
 type ProjectResultProps = {
   project: ProjectType,
@@ -146,11 +147,13 @@ function ProjectResult({
         {project.short_description &&
           <p className="description">{project.short_description}</p>
         }
-        <Badge 
-          title="Learn More"
-          extraClass="to-from-colors pill read-more" 
-          badgeOnClick={() => selectProjectClick(project.id)}
-        />
+        <NavLink to={`/project/${project.id}`}>
+          <Badge 
+            title="Learn More"
+            extraClass="to-from-colors pill read-more" 
+            badgeOnClick={() => selectProjectClick(project.id)}
+          />
+        </NavLink>
         <footer className="footer-links">
           {ghBadge}
           {externalLink}

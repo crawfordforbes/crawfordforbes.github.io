@@ -180,4 +180,7 @@
   --intro-panel-bg-top-color: var(--secondary-color);
   --intro-panel-bg-bottom-color: var(--secondary-color-contrast);
   --intro-panel-text: var(--secondary-color-text);
+
+  /* footer */
+  --footer-bg-top-color: var(--quaternary-color);
 }

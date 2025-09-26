@@ -59,9 +59,10 @@ img {
   width:100%;
   height:auto
 }
-a {
+a, a:visited, a:hover, a:active {
   text-decoration: none;
   cursor: pointer;
+  color: inherit;
 }
 button {
   cursor: pointer;

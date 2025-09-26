@@ -24,7 +24,7 @@
 }
 
 @media screen and (min-width: 64em) {
-  .page:has(.hex-header) .content {
+  div:has(.hex-header) .content {
     --offset: 208px; /* 1.5 hexes and a 16px margin */
     margin: 0 16px 0 var(--offset);
     width: calc(100vw - var(--offset) - 32px);
@@ -37,7 +37,7 @@
 }
 
 @media screen and (min-width: 90em){
-  .page:has(.hex-header) .content {
+  div:has(.hex-header) .content {
     --offset: 336px; /* 2.5 hexes and a 16px margin */
   }
 }

@@ -11,6 +11,7 @@ import ProjectResult from "./projectResult";
 import { projectData } from "@/data/projects/projects";
 import './styles/projectIndex.css'
 import { techData } from "@/data/projects/techs";
+import { NavLink, useParams } from "react-router";
 
 
 type projectIndexProps = {
@@ -24,10 +25,30 @@ function projectIndex({
   selectedTechIdsProps,
   selectedProjectIdProp
 }: projectIndexProps) {
+  let availableRoleIds: RoleType[] = Object.keys(roleData)
+    .filter(id => roleData[id].filterable)
+    .map(id => roleData[id]);
 
-  const [selectedRoleIds, setSelectedRoleIds] = useState(selectedRoleIdsProps ? selectedRoleIdsProps : [])
-  const [selectedTechIds, setSelectedTechIds] = useState(selectedTechIdsProps ? selectedTechIdsProps : [])
-  const [selectedProjectId, setSelectedProjectId] = useState(selectedProjectIdProp ? selectedProjectIdProp : undefined)
+  let availableTechIds: RoleType[] = Object.keys(techData)
+    .filter(id => techData[id].filterable)
+    .map(id => techData[id]);
+  const params = useParams();
+  const paramFilterIds = params.filterId ? params.filterId.split(',') : [];
+
+  const filteredRoleIds = paramFilterIds.filter(id => availableRoleIds.some(role => role.id === id));
+  const filteredTechIds = paramFilterIds.filter(id => availableTechIds.some(tech => tech.id === id));
+
+  const preSelectedRoleIds = filteredRoleIds && filteredRoleIds.length > 0 ? filteredRoleIds : selectedRoleIdsProps;
+
+  const preSelectedTechIds = filteredTechIds && filteredTechIds.length > 0 ? filteredTechIds : selectedTechIdsProps;
+
+  const paramProjectId = params.projectId ? params.projectId : undefined;
+
+  const preSelectedProjectId = paramProjectId ? paramProjectId : selectedProjectIdProp;
+
+  const [selectedRoleIds, setSelectedRoleIds] = useState(preSelectedRoleIds ? preSelectedRoleIds : [])
+  const [selectedTechIds, setSelectedTechIds] = useState(preSelectedTechIds ? preSelectedTechIds : [])
+  const [selectedProjectId, setSelectedProjectId] = useState(preSelectedProjectId ? preSelectedProjectId : undefined)
   const [showMobileFilter, setShowMobileFilter] = useState(false)
   const [highlightFilterOnHover, setHighlightFilterOnHover] = useState("")
 
@@ -59,13 +80,7 @@ function projectIndex({
     setSelectedProjectId(undefined)
   }
 
-  let availableRoleIds: RoleType[] = Object.keys(roleData)
-    .filter(id => roleData[id].filterable)
-    .map(id => roleData[id]);
 
-  let availableTechIds: RoleType[] = Object.keys(techData)
-    .filter(id => techData[id].filterable)
-    .map(id => techData[id]);
 
   function handlePreviousClick(currentProjectId: string) {
     let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
@@ -159,18 +174,20 @@ function projectIndex({
         </article>
         :
         <article className="selected-project">
-          <Hex 
-            hexClass="back-button hex-button mobile" 
-            hexTitle="Back" 
-            hexWidth={64} 
-            hexOnClick={() => handleReturnToIndexClick()} 
-          />
-          <Hex 
-            hexClass="back-button hex-button desktop" 
-            hexTitle="Back" 
-            hexWidth={96} 
-            hexOnClick={() => handleReturnToIndexClick()} 
-          />
+          <NavLink to="/">
+            <Hex 
+              hexClass="back-button hex-button mobile" 
+              hexTitle="More Projects" 
+              hexWidth={64} 
+              hexOnClick={() => handleReturnToIndexClick()} 
+            />
+            <Hex 
+              hexClass="back-button hex-button desktop" 
+              hexTitle="More Projects" 
+              hexWidth={96} 
+              hexOnClick={() => handleReturnToIndexClick()} 
+            />
+          </NavLink>
           <ProjectDetail
             id={selectedProjectId}
             onBackButtonClick={handleReturnToIndexClick}

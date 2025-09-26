@@ -2,6 +2,7 @@ import type { RoleType } from "@/data/projects/roles"
 import Badge from "@/components/global/badge";
 
 import './styles/projectFilter.css'
+import { NavLink } from "react-router";
 
 type projectFilterProps = {
   selectedRoleIds: string[],
@@ -32,6 +33,8 @@ function ProjectFilter({
     highlightFilterHover("");
   };
 
+  const selectedFiltersArr = [...selectedRoleIds, ...selectedTechIds];
+
 
   return (
     <article className="project-feature filter-container">
@@ -48,15 +51,17 @@ function ProjectFilter({
                 onMouseEnter={() => handleMouseEnter(roleId.id)}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <span 
-                  className='filter-title' 
-                  onClick={() => selectRoleFilterClick(roleId.id)}
-                  >
-                  <Badge 
-                    title={roleId.title} 
-                    iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
-                  />
-                </span>
+                <NavLink to={`/filters/${selectedFiltersArr.some(id => id === roleId.id) ? selectedFiltersArr.filter(id => id !== roleId.id).join(',') : [...selectedFiltersArr, roleId.id].join(',')}`}>
+                  <span 
+                    className='filter-title' 
+                    onClick={() => selectRoleFilterClick(roleId.id)}
+                    >
+                    <Badge 
+                      title={roleId.title} 
+                      iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
+                    />
+                  </span>
+                </NavLink>
               </li>
             )
           })}
@@ -73,15 +78,17 @@ function ProjectFilter({
                 onMouseEnter={() => handleMouseEnter(techId.id)}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <span 
-                  className='filter-title' 
-                  onClick={() => selectTechFilterClick(techId.id)}
-                  >
-                  <Badge 
-                    title={techId.title} 
-                    iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
-                  />
-                </span>
+                <NavLink to={`/filters/${selectedFiltersArr.some(id => id === techId.id) ? selectedFiltersArr.filter(id => id !== techId.id).join(',') : [...selectedFiltersArr, techId.id].join(',')}`}>
+                  <span 
+                    className='filter-title' 
+                    onClick={() => selectTechFilterClick(techId.id)}
+                    >
+                    <Badge 
+                      title={techId.title} 
+                      iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
+                    />
+                  </span>
+                </NavLink>
               </li>
             )
           })}

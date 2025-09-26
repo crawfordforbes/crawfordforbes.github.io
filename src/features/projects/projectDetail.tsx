@@ -13,11 +13,13 @@ import { techData } from "@/data/projects/techs";
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
+import { useParams } from "react-router";
+
 import './styles/projectDetail.css'
 import './styles/splide.min.css'
 
 type ProjectDetailProps = {
-  id: string,
+  id?: string,
   onBackButtonClick?: ()=>void,
   onPreviousClick?: ()=>void,
   onNextClick?: ()=>void,
@@ -27,8 +29,17 @@ type ProjectDetailProps = {
 function ProjectDetail({
   id, 
 }:ProjectDetailProps) {
-  
-  const project = projectData[id];
+  let params = useParams()
+  let thisProjectId:string = id ? id : params.projectId ? params.projectId : '';
+  if(!thisProjectId || !projectData[thisProjectId]){
+    return(
+      <div className="project-detail-container">
+        <h2>Project Not Found</h2>
+        <p>Sorry, the project you are looking for does not exist. </p>
+      </div>
+    )
+  }
+  const project = projectData[thisProjectId];
 
   const primaryImage = imagePath + 'projects/' + imageData[project.primaryImgId].fileName
   const secondaryImage = project.secondaryImgId ? imagePath + 'projects/' + imageData[project.secondaryImgId].fileName : '';
