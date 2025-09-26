@@ -7,18 +7,21 @@ import { imageData } from "@/data/images";
 import { imagePath } from "@/data/images";
 
 import './styles/ProjectResult.css'
-import { techBadgeData, roleBadgeData } from "@/data/global/badges";
+import { techData } from "@/data/projects/techs";
 
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 import { cardBorder } from "@/data/hexes/layouts";
 
 import Hex from "@/features/hexes/hex";
+import { roleData } from "@/data/projects/roles";
 
 type ProjectResultProps = {
   project: ProjectType,
   selectProjectClick: (id: string) => void;
   selectedRoleIds?: string[];
-  selectFilterClick: (id: string) => void;
+  selectRoleFilterClick: (id: string) => void;
+  selectedTechIds?: string[];
+  selectTechFilterClick: (id: string) => void;
   highlightFilterHover: (id: string) => void;
   hoveredFilters?: string;
 }
@@ -27,7 +30,9 @@ function ProjectResult({
   project,
   selectProjectClick,
   selectedRoleIds,
-  selectFilterClick,
+  selectRoleFilterClick,
+  selectedTechIds,
+  selectTechFilterClick,
   highlightFilterHover,
   hoveredFilters,
 }: ProjectResultProps) {
@@ -48,14 +53,14 @@ function ProjectResult({
         return (
           <li
             key={idx}
-            onMouseEnter={() => handleMouseEnter(roleBadgeData[id]?.id)}
+            onMouseEnter={() => handleMouseEnter(roleData[id]?.id)}
             onMouseLeave={() => handleMouseLeave()}
           >
             <Badge 
-              title={roleBadgeData[id]?.title} 
-              iconClass={roleBadgeData[id]?.iconClass} 
+              title={roleData[id]?.title} 
+              iconClass={roleData[id]?.iconClass} 
               extraClass={selectedId ? "pill primary highlight" : "pill primary"} 
-              badgeOnClick={() => selectFilterClick(roleBadgeData[id]?.id)}
+              badgeOnClick={() => selectRoleFilterClick(roleData[id]?.id)}
             />
           </li>
         )
@@ -66,16 +71,22 @@ function ProjectResult({
   function renderTechBadges() {
     if (project?.techIds && project?.techIds.length > 0) {
       return project?.techIds.map((id,idx)=>{
-        if(techBadgeData[id]){
-          return(
-            <li key={idx}>
-              <Badge 
-                title={techBadgeData[id]?.title} 
-                iconClass={techBadgeData[id]?.iconClass} 
-                extraClass={"pill tertiary"} 
-              />
-            </li>
-          )
+        const selectedId = (selectedTechIds && selectedTechIds.length > 0 && selectedTechIds.some((techId) => techId === id) ) || (hoveredFilters && hoveredFilters === id)
+        if(techData[id]){
+           return (
+          <li
+            key={idx}
+            onMouseEnter={() => handleMouseEnter(techData[id]?.id)}
+            onMouseLeave={() => handleMouseLeave()}
+          >
+            <Badge 
+              title={techData[id]?.title} 
+              iconClass={techData[id]?.iconClass} 
+              extraClass={selectedId ? "pill primary highlight" : "pill primary"} 
+              badgeOnClick={() => selectTechFilterClick(techData[id]?.id)}
+            />
+          </li>
+        )
         }
       })
     }

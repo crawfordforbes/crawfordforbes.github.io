@@ -2,13 +2,14 @@ import { useId, useMemo, memo } from "react"
 import { getImgUrl } from "@/utils/images"
 
 import Badge from "@/components/global/badge"
-import { contactBadgeData, utilsBadgeData } from "@/data/global/badges" 
+import { utilsData } from "@/data/global/utils" 
 
 import type { JSX } from "react"
 
 import './styles/hex.css'
 import './styles/hexColors.css'
 import './styles/hexSvgFills.css'
+import { contactData } from "@/data/contacts"
 
 type HexProps = {
   hexLink?: string,
@@ -100,7 +101,7 @@ function Hex({
 
   // Render the text content (title and badges) if available
   function renderTextContent() {
-    let allBadgeData = { ...contactBadgeData, ...utilsBadgeData };
+    let allBadgeData = { ...contactData, ...utilsData };
     return (
       <article className="hex-text-content">
         {hexTitle && <h3 className="hex-title">{hexTitle}</h3>}

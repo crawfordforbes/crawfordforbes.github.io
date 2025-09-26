@@ -3,7 +3,6 @@ import { useState } from 'react'
 import './styles/nav.css'
 import Badge from './badge';
 
-import { contactBadgeData } from '@/data/global/badges';
 import Hex from '@/features/hexes/hex';
 import { contactData } from '@/data/contacts';
 
@@ -22,9 +21,9 @@ function Nav() {
       return (
         <li key={idx}>
           <Badge 
-            iconClass={contactBadgeData?.[item]?.iconClass}
-            title={contactBadgeData?.[item]?.title}
-            link={contactBadgeData?.[item]?.link}
+            iconClass={contactData?.[item]?.iconClass}
+            title={contactData?.[item]?.title}
+            link={contactData?.[item]?.link}
             extraClass="pill secondary nav-badge"
           />
         </li>

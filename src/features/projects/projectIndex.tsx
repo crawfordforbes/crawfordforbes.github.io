@@ -10,19 +10,23 @@ import ProjectFilter from "./projectFilter";
 import ProjectResult from "./projectResult";
 import { projectData } from "@/data/projects/projects";
 import './styles/projectIndex.css'
+import { techData } from "@/data/projects/techs";
 
 
 type projectIndexProps = {
   selectedRoleIdsProps?: string[],
+  selectedTechIdsProps?: string[],
   selectedProjectIdProp?: string
 }
 
 function projectIndex({  
   selectedRoleIdsProps,
+  selectedTechIdsProps,
   selectedProjectIdProp
 }: projectIndexProps) {
 
   const [selectedRoleIds, setSelectedRoleIds] = useState(selectedRoleIdsProps ? selectedRoleIdsProps : [])
+  const [selectedTechIds, setSelectedTechIds] = useState(selectedTechIdsProps ? selectedTechIdsProps : [])
   const [selectedProjectId, setSelectedProjectId] = useState(selectedProjectIdProp ? selectedProjectIdProp : undefined)
   const [showMobileFilter, setShowMobileFilter] = useState(false)
   const [highlightFilterOnHover, setHighlightFilterOnHover] = useState("")
@@ -31,11 +35,19 @@ function projectIndex({
     return a.title.localeCompare(b.title);
   }))
 
-  function handleFilterClick(filterId: string) {
+  function handleRoleFilterClick(filterId: string) {
     if(selectedRoleIds.some((id) => id === filterId)) {
       setSelectedRoleIds(selectedRoleIds.filter(id => id !== filterId));
     } else {
       setSelectedRoleIds([...selectedRoleIds, filterId]);
+    }
+  }
+
+  function handleTechFilterClick(filterId: string) {
+    if(selectedTechIds.some((id) => id === filterId)) {
+      setSelectedTechIds(selectedTechIds.filter(id => id !== filterId));
+    } else {
+      setSelectedTechIds([...selectedTechIds, filterId]);
     }
   }
 
@@ -50,6 +62,10 @@ function projectIndex({
   let availableRoleIds: RoleType[] = Object.keys(roleData)
     .filter(id => roleData[id].filterable)
     .map(id => roleData[id]);
+
+  let availableTechIds: RoleType[] = Object.keys(techData)
+    .filter(id => techData[id].filterable)
+    .map(id => techData[id]);
 
   function handlePreviousClick(currentProjectId: string) {
     let currentIdx = sortedProjectsArray.findIndex(project => project.id === currentProjectId);
@@ -72,7 +88,7 @@ function projectIndex({
   }
 
   function renderfilteredProjects() {
-    if(selectedRoleIds.length <= 0){
+    if(selectedRoleIds.length <= 0 && selectedTechIds.length <= 0) {
       return sortedProjectsArray.map((project, idx)=>{
         return (
           <li key={idx}>
@@ -81,7 +97,9 @@ function projectIndex({
               project={project}
               selectProjectClick={handleCardDetailClick}
               selectedRoleIds={selectedRoleIds}
-              selectFilterClick={handleFilterClick}
+              selectRoleFilterClick={handleRoleFilterClick}
+              selectedTechIds={selectedTechIds}
+              selectTechFilterClick={handleTechFilterClick}
               highlightFilterHover={highlightFilterHover}
               hoveredFilters={highlightFilterOnHover}
             />
@@ -91,14 +109,16 @@ function projectIndex({
       
     } else {
       return sortedProjectsArray.map((project, idx)=>{
-        if(project.roleIds?.some(roleId=>selectedRoleIds.includes(roleId))) {
+        if(project.roleIds?.some(roleId=>selectedRoleIds.includes(roleId)) || project.techIds?.some(techId=>selectedTechIds.includes(techId))) {
           return (
             <li key={idx}>
               <ProjectResult 
                 project={project}
                 selectProjectClick={handleCardDetailClick}
                 selectedRoleIds={selectedRoleIds}
-                selectFilterClick={handleFilterClick}
+                selectRoleFilterClick={handleRoleFilterClick}
+                selectedTechIds={selectedTechIds}
+                selectTechFilterClick={handleTechFilterClick}
                 highlightFilterHover={highlightFilterHover}
                 hoveredFilters={highlightFilterOnHover}
               />
@@ -124,7 +144,10 @@ function projectIndex({
             <ProjectFilter
               selectedRoleIds={selectedRoleIds}
               availableRoleIds={availableRoleIds}
-              onClick={handleFilterClick}
+              selectRoleFilterClick={handleRoleFilterClick}
+              selectedTechIds={selectedTechIds}
+              availableTechIds={availableTechIds}
+              selectTechFilterClick={handleTechFilterClick}
               hoveredFilters={highlightFilterOnHover}
               highlightFilterHover={highlightFilterHover}
               />

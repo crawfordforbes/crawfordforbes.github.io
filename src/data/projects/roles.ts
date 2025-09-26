@@ -1,14 +1,18 @@
+import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
+
 export type RoleType = {
   id: string;
   title: string;
-  filterable?: boolean
+  iconClass?: [IconPrefix, IconName];
+  filterable?: boolean;
 }
 
 type RolesType = {
   [key: string]: {
     id: string;
     title: string;
-    filterable?: boolean
+    iconClass?: [IconPrefix, IconName];
+    filterable?: boolean;
   }
 }
 
@@ -16,26 +20,31 @@ export const roleData: RolesType = {
   "developer": {
     id: "developer",
     title: "Developer",
-    filterable: true
+    iconClass: ['fas', 'code'],
+    filterable: true,
   },
   "designer": {
     id: "designer",
     title: "Designer",
-    filterable: true
+    iconClass: ['fas', 'icons'],
+    filterable: true,
   },
   "solo": {
     id: "solo",
     title: "Solo",
-    filterable: true
+    iconClass: ['fas', 'person'],
+    filterable: true,
   },
   "contributor": {
     id: "contributor",
     title: "Contributor",
-    filterable: true
+    iconClass: ['fas', 'people-group'],
+    filterable: true,
   },
   "lead": {
     id: "lead",
     title: "Lead",
-    filterable: true
+    iconClass: ['fas', 'people-arrows'],
+    filterable: true,
   }
 }

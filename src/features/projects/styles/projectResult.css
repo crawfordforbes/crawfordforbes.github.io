@@ -42,6 +42,10 @@
   max-width: calc(100% - 56px);
 }
 
+.project-result .badge .badge-content {
+  pointer-events: all;
+}
+
 .project-result .read-more {
   width: fit-content;
 }
@@ -85,6 +89,7 @@
 
 .project-result .link-badge a {
   pointer-events: all;
+  z-index: 3;
 }
 
 .project-result .link-badge .title {

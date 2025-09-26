@@ -9,7 +9,7 @@ import { imageData } from "@/data/images";
 import { imagePath } from "@/data/images";
 
 import Badge from "@/components/global/badge"
-import { techBadgeData } from "@/data/global/badges";
+import { techData } from "@/data/projects/techs";
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
@@ -58,13 +58,13 @@ function ProjectDetail({
       const threshold = project.techIds.length;
 
       return project?.techIds.map((id,idx)=>{
-        if(techBadgeData[id]){
+        if(techData[id]){
           let placement = idx + 1 <= threshold / 2 ? "top" : "bottom";
           return(
             <li key={idx}>
               <Badge 
-                title={techBadgeData[id]?.title} 
-                iconClass={techBadgeData[id]?.iconClass} 
+                title={techData[id]?.title} 
+                iconClass={techData[id]?.iconClass} 
                 extraClass={`pill inherit ${placement}`} 
               />
             </li>

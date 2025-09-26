@@ -6,7 +6,10 @@ import './styles/projectFilter.css'
 type projectFilterProps = {
   selectedRoleIds: string[],
   availableRoleIds: RoleType[],
-  onClick: (id: string) => void;
+  selectedTechIds: string[],
+  availableTechIds: RoleType[],
+  selectRoleFilterClick: (id: string) => void;
+  selectTechFilterClick: (id: string) => void;
   hoveredFilters?: string;
   highlightFilterHover: (id: string) => void;
 }
@@ -14,7 +17,10 @@ type projectFilterProps = {
 function ProjectFilter({  
   selectedRoleIds,
   availableRoleIds,
-  onClick,
+  selectedTechIds,
+  availableTechIds,
+  selectRoleFilterClick,
+  selectTechFilterClick,
   hoveredFilters,
   highlightFilterHover,
 }: projectFilterProps) {
@@ -34,7 +40,7 @@ function ProjectFilter({
         <ol className="filter-list">
           {availableRoleIds && availableRoleIds.map((roleId, idx)=>{
             const selected = selectedRoleIds.some((id) => id === roleId.id) || (hoveredFilters && hoveredFilters === roleId.id)
-            let placement = idx + 1 <= availableRoleIds.length / 2 ? "top" : "bottom";
+            let placement = idx <= (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
             return (
               <li 
                 key={idx} 
@@ -44,10 +50,35 @@ function ProjectFilter({
               >
                 <span 
                   className='filter-title' 
-                  onClick={() => onClick(roleId.id)}
+                  onClick={() => selectRoleFilterClick(roleId.id)}
                   >
                   <Badge 
                     title={roleId.title} 
+                    iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
+                  />
+                </span>
+              </li>
+            )
+          })}
+        </ol>
+        <h2 className="title">Technology</h2>
+        <ol className="filter-list">
+          {availableTechIds && availableTechIds.map((techId, idx)=>{
+            const selected = selectedTechIds.some((id) => id === techId.id) || (hoveredFilters && hoveredFilters === techId.id)
+            let placement = idx + availableRoleIds.length <= (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
+            return (
+              <li 
+                key={idx} 
+                className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
+                onMouseEnter={() => handleMouseEnter(techId.id)}
+                onMouseLeave={() => handleMouseLeave()}
+              >
+                <span 
+                  className='filter-title' 
+                  onClick={() => selectTechFilterClick(techId.id)}
+                  >
+                  <Badge 
+                    title={techId.title} 
                     iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
                   />
                 </span>
