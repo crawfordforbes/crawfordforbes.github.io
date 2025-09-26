@@ -9,11 +9,12 @@
 }
 
 .project-index .intro-text {
-  margin: 0 0 8px 72px;
+  margin: 0 0 8px 80px;
   padding: 8px 16px;
   background-color: var(--project-index-intro-bg);
   color: var(--project-index-intro-text);
   border-radius: var(--border-radius);
+  filter: var(--drop-shadow);
 }
 
 .project-index .results {
@@ -40,7 +41,9 @@
   display: none;
 }
 
-
+.project-index .intro-text p {
+  margin: 0;
+}
 
 
 @media screen and (min-width: 40em){

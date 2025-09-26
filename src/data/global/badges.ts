@@ -10,6 +10,7 @@ export type BadgesType = {
     title?: string;
     badgeOnClick?: () => void;
     extraClass?: string;
+    linktype?: string;
   }
 }
 
@@ -41,7 +42,15 @@ export const contactBadgeData:BadgesType = {
     id: "email",
     iconClass: contactData?.["email"]?.iconClass || ['fas', 'envelope'],
     link: contactData?.["email"]?.url || "crawford.forbes@gmail.com",
-    title: contactData?.["email"]?.title || "Email"
+    title: contactData?.["email"]?.title || "Email",
+    linktype: contactData?.["email"]?.linktype || "email",
+  },
+  "hire": {
+    id: "hire",
+    iconClass: contactData?.["hire"]?.iconClass || ['fas', 'envelope'],
+    link: contactData?.["hire"]?.url || "crawford.forbes@gmail.com",
+    title: contactData?.["hire"]?.title || "Let's Talk",
+    linktype: contactData?.["hire"]?.linktype || "email",
   },
   "resume": {
     id: "resume",
@@ -49,8 +58,13 @@ export const contactBadgeData:BadgesType = {
     link: contactData?.["resume"]?.url || "/tbd",
     title: contactData?.["resume"]?.title || "Resume"
   },
+  'projects-link': {
+    id: 'projects-link',
+    iconClass: ['fas', 'code'],
+    link: '/#projects',
+    title: 'Projects' 
+  },
 }
-
 export const techBadgeData:BadgesType = {
   /* contacts */
   "ruby": {

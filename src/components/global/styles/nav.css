@@ -1,0 +1,88 @@
+.nav {
+  --nav-width: 344px;
+  --nav-height: calc(var(--nav-width) * 1.1547);
+  --shadow-width: 64px;
+  --shadow-height: calc(var(--shadow-width) * 1.1547);
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  z-index: 3;
+  filter: var(--drop-shadow);
+}
+
+.nav .shadow {
+  filter: var(--drop-shadow);
+  width: var(--shadow-width);
+  min-width: var(--shadow-width);
+  margin: 3px 3px calc(3px - var(--shadow-width) * 0.2886 + 1px);
+  height: var(--shadow-height);
+  z-index: 1;
+  position: relative;
+}
+
+.nav-toggle {
+  position: fixed;
+  top: 14px;
+  right: 83px;
+  z-index: 2;
+  background-color: var(--primary-color-contrast);
+  color: var(--primary-color-contrast-text);
+  filter: var(--drop-shadow);
+}
+
+.nav-hex {
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+  position: fixed;
+  top: -322px;
+  right: 0;
+  transition: top 0.5s ease, right 0.5s ease;
+  width: var(--nav-width);
+  min-width: var(--nav-width);
+  height: var(--nav-height);
+}
+
+.nav-hex.open {
+  top: -161px;
+  right: 343px;
+  transition: top 0.5s ease, right 0.5s ease;
+}
+
+.nav .hex-content {
+  position: absolute;
+  top: 84px;
+  left: 0;
+  transform: translate(0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+
+.nav .locale {
+  position: absolute;
+  top: 32px;
+  left: 16px;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  color: var(--primary-color-contrast-text);
+}
+
+.nav .nav-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}

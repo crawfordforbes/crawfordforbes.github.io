@@ -1,5 +1,3 @@
-import { useDebouncedMediaQueryContext } from "@/utils/useDebouncedMediaQueryContext";
-
 import { useContext } from "react";
 import { MediaQueryContext } from "@/utils/context";
 
@@ -23,8 +21,7 @@ function HexGridLayout({
   hexWidth,
   extraClass,
 }: HexGridLayoutProps) {
-  // set up media query context so that it is held in state and can be debounced when resizing the screen
-  // const mediaQuery = useDebouncedMediaQueryContext(150)
+
 const mediaQuery = useContext(MediaQueryContext);
 
 

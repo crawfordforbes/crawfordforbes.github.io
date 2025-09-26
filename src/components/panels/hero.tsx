@@ -1,3 +1,4 @@
+import { contactData } from '@/data/contacts'
 import './styles/hero.css'
 
 function Hero() {
@@ -13,8 +14,8 @@ function Hero() {
         </picture>
       </div>
       <section className="hero-content overlay">
-        <h1 className="title">Crawford<br/>Forbes</h1>
-        <h3 className="subtitle">Lead + Web Developer<br/>Creator</h3> 
+        <h1 className="title">{contactData.fname.title}<br/>{contactData.lname.title}</h1>
+        <h3 className="subtitle">{contactData.tagline1.title}<br/>{contactData.tagline2.title}</h3>
       </section>
     </article>
   )

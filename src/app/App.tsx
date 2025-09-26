@@ -1,4 +1,4 @@
-import Page from '../components/layouts/page'
+import Page from '../components/panels/page'
 
 import './styles/index.css'
 

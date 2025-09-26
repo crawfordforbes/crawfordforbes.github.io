@@ -46,7 +46,7 @@
   line-height: 1.25rem;
   width: fit-content;
   text-transform: uppercase;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  filter: var(--drop-shadow);
 }
 
 .badge.pill .badge-content:has(:not(.fa-icon)) {

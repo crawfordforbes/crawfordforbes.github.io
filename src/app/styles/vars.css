@@ -84,6 +84,9 @@
   --hex-clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
   --transition-rules: .3s ease-out;
   --border-radius: 8px;
+  --drop-shadow: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+  --drop-shadow-top: drop-shadow(0px -2px 4px rgba(0, 0, 0, 0.2));
+  --drop-shadow-bottom: drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.05)); /* color and y hack for variable height hex bottom shadow */
   
   /* titles */
   --overlay-title-color: var(--color-light-text);

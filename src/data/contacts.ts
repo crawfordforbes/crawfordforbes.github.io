@@ -1,11 +1,19 @@
 import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
 
+export type ContactType = {
+  id: string;
+  title?: string;
+  url?: string;
+  iconClass?: [IconPrefix, IconName]
+}
+
 type ContactsType = {
   [key: string]: {
     id: string;
     title?: string;
     url?: string;
-    iconClass?: [IconPrefix, IconName]
+    linktype?: string;
+    iconClass?: [IconPrefix, IconName];
   }
 }
 
@@ -14,6 +22,27 @@ export const contactData: ContactsType = {
     id: "name",
     title: "Crawford Forbes"
   },
+  "fname" : {
+    id: "fname",
+    title: "Crawford"
+  },
+  "lname" : {
+    id: "lname",
+    title: "Forbes"
+  },
+  "tagline1": {
+    id: "tagline1",
+    title: "Lead + Developer"
+  },
+  "tagline2": {
+    id: "tagline2",
+    title: "Creator"
+  },
+  "locale": {
+    id: "locale",
+    title: "Remote | US Based"
+  },
+  /* contacts */
   "github": {
     id: "github",
     title: "Github",
@@ -30,6 +59,14 @@ export const contactData: ContactsType = {
     id: "email",
     title: "Email",
     url: "crawford.forbes@gmail.com",
+    linktype: "email",
+    iconClass: ['fas', 'envelope']
+  },
+    "hire": {
+    id: "hire",
+    title: "Let's Talk",
+    url: "crawford.forbes@gmail.com",
+    linktype: "email",
     iconClass: ['fas', 'envelope']
   },
   "resume": {

@@ -15,7 +15,7 @@ export const headerLayouts: LayoutsType  = {
     id: "mobile",
     grid: "header-mobile",
     shiftedUp: true,
-    hexWidth: 122
+    hexWidth: 90
   },
   "tablet" : {
     id: "tablet",

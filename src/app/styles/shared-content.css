@@ -223,6 +223,7 @@
   flex-direction: column;
   gap: 16px;
   background: linear-gradient(var(--gradient-angle), var(--variable-height-hex-top-color), var(--variable-height-hex-bottom-color));
+  filter: var(--drop-shadow);
 }
 
 .variable-height-hex::before,
@@ -245,6 +246,7 @@
   bottom: calc((var(--variable-height-hex-triangle-height) * -1) + 1px);
   border-width: var(--variable-height-hex-triangle-height) var(--variable-height-hex-triangle-width) 0 var(--variable-height-hex-triangle-width);
   border-color: var(--variable-height-hex-bottom-color) transparent transparent transparent;
+  filter: var(--drop-shadow-bottom);
 }
 
 @media screen and (min-width: 64em){

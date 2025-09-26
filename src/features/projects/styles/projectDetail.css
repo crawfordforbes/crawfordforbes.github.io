@@ -45,7 +45,7 @@
   color: var(--info-panel-text-color);
   top: calc((100vw * 3 / 4) - 64px);
   opacity: 1;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  filter: var(--drop-shadow);
   transition: background-color var(--transition-rules);
   width: var(--radius);
   height: var(--radius);

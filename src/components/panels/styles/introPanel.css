@@ -12,7 +12,7 @@
 .intro-panel {
   position: relative;
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  filter: var(--drop-shadow);
 }
 
 .intro-panel h3 {
