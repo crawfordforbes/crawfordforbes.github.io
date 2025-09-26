@@ -1,4 +1,4 @@
-import { contactData } from '@/data/contacts'
+import { contactData } from '@/data/global/contacts'
 import './styles/hero.css'
 
 function Hero() {

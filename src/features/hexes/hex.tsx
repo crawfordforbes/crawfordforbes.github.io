@@ -9,7 +9,7 @@ import type { JSX } from "react"
 import './styles/hex.css'
 import './styles/hexColors.css'
 import './styles/hexSvgFills.css'
-import { contactData } from "@/data/contacts"
+import { contactData } from "@/data/global/contacts"
 
 type HexProps = {
   hexLink?: string,

@@ -4,7 +4,7 @@ import './styles/nav.css'
 import Badge from './badge';
 
 import Hex from '@/features/hexes/hex';
-import { contactData } from '@/data/contacts';
+import { contactData } from '@/data/global/contacts';
 
 function Nav() {
 

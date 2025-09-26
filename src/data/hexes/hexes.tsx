@@ -5,7 +5,7 @@ import Right from "@/features/hexes/svg/right"
 import BottomLeft from "@/features/hexes/svg/bottom-left"
 import BottomRight from "@/features/hexes/svg/bottom-right"
 
-import { contactData } from "../contacts"
+import { contactData } from "../global/contacts"
 
 import type { JSX } from "react"
 

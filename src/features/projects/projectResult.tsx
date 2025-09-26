@@ -3,8 +3,8 @@ import { getImgUrl } from "@/utils/images";
 import Badge from "@/components/global/badge";
 
 import type { ProjectType } from "@/data/projects/projects";
-import { imageData } from "@/data/images";
-import { imagePath } from "@/data/images";
+import { imageData } from "@/data/global/images";
+import { imagePath } from "@/data/global/images";
 
 import './styles/ProjectResult.css'
 import { techData } from "@/data/projects/techs";

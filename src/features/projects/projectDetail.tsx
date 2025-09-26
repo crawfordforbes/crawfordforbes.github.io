@@ -5,8 +5,8 @@ import HexGridLayout from "@/features/hexes/hexGridLayout";
 
 import { projectData } from "@/data/projects/projects"
 import { cardBorder } from "@/data/hexes/layouts";
-import { imageData } from "@/data/images";
-import { imagePath } from "@/data/images";
+import { imageData } from "@/data/global/images";
+import { imagePath } from "@/data/global/images";
 
 import Badge from "@/components/global/badge"
 import { techData } from "@/data/projects/techs";
