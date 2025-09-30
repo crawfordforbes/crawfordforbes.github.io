@@ -9,6 +9,7 @@
   pointer-events: none;
   height: 0;
   filter: var(--drop-shadow);
+  margin-bottom: 600px;
 }
 
 /* mobile filter toggle button */
@@ -54,6 +55,10 @@
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+.project-index .filter-item .filter-link {
+  border-radius: var(--border-radius);
 }
 
 .project-index .filter-item .title {

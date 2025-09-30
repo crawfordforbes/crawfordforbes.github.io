@@ -35,6 +35,7 @@
   z-index: 0;
 }
 
+.hex.full-area .hex-text-content,
 .hex .hex-full-area-content {
   position: absolute;
   top: 0;
@@ -50,6 +51,16 @@
   text-decoration: none;
   z-index: 1;
   background-color: transparent;
+  transform: none;
+}
+
+.hex.full-area .hex-text-content *:not(.fa-icon, svg, .title) {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;  
 }
 
 .hex .hex-text-content {

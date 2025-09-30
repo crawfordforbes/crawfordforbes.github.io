@@ -12,7 +12,6 @@ type ContactsType = {
     id: string;
     title?: string;
     link?: string;
-    linktype?: string;
     iconClass?: [IconPrefix, IconName];
   }
 }
@@ -58,15 +57,13 @@ export const contactData: ContactsType = {
   "email": {
     id: "email",
     title: "Email",
-    link: "crawford.forbes@gmail.com",
-    linktype: "email",
+    link: "mailto:crawford.forbes@gmail.com",
     iconClass: ['fas', 'envelope']
   },
-    "hire": {
+  "hire": {
     id: "hire",
     title: "Let's Talk",
-    link: "crawford.forbes@gmail.com",
-    linktype: "email",
+    link: "mailto:crawford.forbes@gmail.com",
     iconClass: ['fas', 'envelope']
   },
   "resume": {
@@ -78,7 +75,7 @@ export const contactData: ContactsType = {
   'projects-link': {
     id: 'projects-link',
     iconClass: ['fas', 'code'],
-    link: '/#projects',
+    link: '#projects',
     title: 'Projects' 
   },
 }

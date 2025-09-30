@@ -1,4 +1,5 @@
 import { createContext } from "react";
 import type { MediaSizes } from "@/types/layout";
 
-export const MediaQueryContext = createContext<MediaSizes>("mobile")
+// Context for media query (screen size)
+export const MediaQueryContext = createContext<MediaSizes>("mobile");

@@ -27,16 +27,25 @@
   top: 14px;
   right: 83px;
   z-index: 2;
-  background-color: var(--primary-color-contrast);
-  color: var(--primary-color-contrast-text);
+  background-color: var(--nav-toggle-bg);
+  color: var(--nav-toggle-bg-text);
   filter: var(--drop-shadow);
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+.nav-toggle:hover,
+.nav-toggle-button:focus-within .nav-toggle {
+  background-color: var(--nav-toggle-bg-hover);
+  color: var(--nav-toggle-text);
+  cursor: pointer;
+  transition: background-color var(--transition-rules), color var(--transition-rules);
 }
 
 .nav-hex {
-  background-color: var(--primary-color);
-  color: var(--primary-color-text);
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
   position: fixed;
-  top: -322px;
+  top: -358px;
   right: 0;
   transition: top 0.5s ease, right 0.5s ease;
   width: var(--nav-width);
@@ -74,7 +83,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  color: var(--primary-color-contrast-text);
+  color: var(--nav-text);
 }
 
 .nav .nav-links {

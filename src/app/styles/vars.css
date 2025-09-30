@@ -87,6 +87,7 @@
   --drop-shadow: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
   --drop-shadow-top: drop-shadow(0px -2px 4px rgba(0, 0, 0, 0.2));
   --drop-shadow-bottom: drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.05)); /* color and y hack for variable height hex bottom shadow */
+  --focus-shadow: var(--primary-color-contrast);
   
   /* titles */
   --overlay-title-color: var(--color-light-text);
@@ -129,6 +130,7 @@
 
   /* hexes */
   --default-hex-color: var(--color-dark-text);
+  --default-hex-color-hover: var(--color-light-text);
 
   /* variable height hex */
   --variable-height-hex-width: 160px;
@@ -142,6 +144,14 @@
 
   --variable-height-hex-top-color-detail: var(--color-7);
   --variable-height-hex-bottom-color-detail: var(--color-8);
+
+  /* nav */
+  --nav-toggle-bg: var(--primary-color-contrast);
+  --nav-toggle-text: var(--primary-color-text-contrast);
+  --nav-toggle-bg-hover: var(--primary-color);
+  --nav-toggle-bg-text: var(--primary-color-text);
+  --nav-bg: var(--quaternary-color);
+  --nav-text: var(--quaternary-color-text);
 
   /* projects */
   --project-index-intro-bg: var(--primary-color-contrast);
@@ -182,5 +192,11 @@
   --intro-panel-text: var(--secondary-color-text);
 
   /* footer */
-  --footer-bg-top-color: var(--quaternary-color);
+  --footer-content-bg-top-color: var(--quaternary-color);
+  --footer-content-bg-bottom-color: var(--quaternary-color-contrast);
+  --footer-content-text: var(--quaternary-color-text);  
+  --footer-nav-bg-top-color: var(--tertiary-color);
+  --footer-nav-bg-bottom-color: var(--tertiary-color-contrast);
+  --footer-decorative-hex-color-odd: var(--primary-color);
+  --footer-decorative-hex-color-even: var(--primary-color-contrast);
 }

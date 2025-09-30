@@ -14,7 +14,7 @@ import { cardBorder } from "@/data/hexes/layouts";
 
 import Hex from "@/features/hexes/hex";
 import { roleData } from "@/data/projects/roles";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
 
 type ProjectResultProps = {
   project: ProjectType,
@@ -62,6 +62,7 @@ function ProjectResult({
               iconClass={roleData[id]?.iconClass} 
               extraClass={selectedId ? "pill primary highlight" : "pill primary"} 
               badgeOnClick={() => selectRoleFilterClick(roleData[id]?.id)}
+              noTabIndex={true}
             />
           </li>
         )
@@ -85,6 +86,7 @@ function ProjectResult({
               iconClass={techData[id]?.iconClass} 
               extraClass={selectedId ? "pill primary highlight" : "pill primary"} 
               badgeOnClick={() => selectTechFilterClick(techData[id]?.id)}
+              noTabIndex={true}
             />
           </li>
         )
@@ -94,18 +96,20 @@ function ProjectResult({
   }
 
   const ghBadge = project.githubLink ? 
-  <Hex hexClass="link-badge" hexWidth={136} hexLink={project.githubLink} badgeComponent1={
+  <Hex hexClass="link-badge" hexWidth={136} badgeComponent1={
     <Badge 
       iconClass={['fab', 'github']} 
       title={"See the Code"} 
+      link={project.githubLink}
     />
   } /> : <></>;
   
   const externalLink = project.externalLink ? 
-  <Hex hexClass="link-badge" hexWidth={136} hexLink={project.externalLink} badgeComponent1={
+  <Hex hexClass="link-badge" hexWidth={136} badgeComponent1={
     <Badge 
       iconClass={['fas', 'up-right-from-square']} 
       title={"Visit the Site"} 
+      link={project.externalLink}
     />
   } /> : <></>;
 
@@ -123,6 +127,7 @@ function ProjectResult({
           <button 
             className="inner" 
             onClick={() => selectProjectClick(project.id)}
+            tabIndex={-1}
           >
             <img 
               className="image" 
@@ -147,13 +152,19 @@ function ProjectResult({
         {project.short_description &&
           <p className="description">{project.short_description}</p>
         }
-        <NavLink to={`/project/${project.id}`}>
+        <Link 
+          to={`/project/${project.id}`} 
+          role="button" 
+          className="read-more-link" 
+          aria-label={`Read more about ${project.title}`}
+        >
           <Badge 
             title="Learn More"
             extraClass="to-from-colors pill read-more" 
             badgeOnClick={() => selectProjectClick(project.id)}
+            noTabIndex={true}
           />
-        </NavLink>
+        </Link>
         <footer className="footer-links">
           {ghBadge}
           {externalLink}

@@ -74,7 +74,9 @@
 }
 
 .badge.primary:has(a, button):hover .badge-content .fa-icon::after,
-.badge.primary.highlight .badge-content .fa-icon::after {
+.badge.primary.highlight .badge-content .fa-icon::after,
+.badge.primary:has(a, button):focus .badge-content .fa-icon::after,
+.badge.primary:has(a, button):focus-within .badge-content .fa-icon::after {
   background-color: var(--badge-primary-color-bg-highlight);
   transition: background-color var(--transition-rules);
 }
@@ -92,7 +94,9 @@
 }
 
 .badge.secondary:has(a, button):hover .badge-content .fa-icon::after,
-.badge.secondary.highlight .badge-content .fa-icon::after {
+.badge.secondary.highlight .badge-content .fa-icon::after,
+.badge.secondary:has(a, button):focus .badge-content .fa-icon::after,
+.badge.secondary:has(a, button):focus-within .badge-content .fa-icon::after {
   background-color: var(--badge-secondary-color-bg-highlight);
   transition: background-color var(--transition-rules);
 }
@@ -109,7 +113,9 @@
 }
 
 .badge.tertiary:has(a, button):hover .badge-content .fa-icon::after,
-.badge.tertiary.highlight .badge-content .fa-icon::after {
+.badge.tertiary.highlight .badge-content .fa-icon::after,
+.badge.tertiary:has(a, button):focus .badge-content .fa-icon::after,
+.badge.tertiary:has(a, button):focus-within .badge-content .fa-icon::after {
   background-color: var(--badge-tertiary-color-bg-highlight);
   transition: background-color var(--transition-rules);
 }

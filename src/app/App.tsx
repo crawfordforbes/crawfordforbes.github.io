@@ -34,15 +34,30 @@ function App() {
   }, [screenSize.width]);
 
   return (
-    <MediaQueryContext value={mediaSize} >
-    <BrowserRouter>
-    <Routes>
-      <Route path="/filters?/:filterId/projects?/:projectId" element={<Portfolio />} />
-      <Route path="*" element={<Portfolio />} />
-    </Routes>
-    </BrowserRouter>
-    </MediaQueryContext>
-  )
+    <>
+      {/* Skip to main content link for accessibility */}
+      <a 
+        href="#main-content" 
+        className="skip-link" 
+        tabIndex={0} 
+        onClick={() => {
+          const el = document.getElementById('main-content');
+          if (el) el.focus();
+        }}
+      >
+        Skip to main content
+      </a>
+      <MediaQueryContext value={mediaSize}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/filters?/:filterId?" element={<Portfolio />} />
+            <Route path="/filters?/:filterId/projects?/:projectId" element={<Portfolio />} />
+            <Route path="*" element={<Portfolio />} />
+          </Routes>
+        </BrowserRouter>
+      </MediaQueryContext>
+    </>
+  );
 }
 
 export default App

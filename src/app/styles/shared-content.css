@@ -1,3 +1,20 @@
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: #fff;
+  color: #000;
+  padding: 8px 16px;
+  z-index: 1000;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: left 0.2s;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+}
+
 .content {
   max-width: var(--content-max-width);
   margin: var(--content-margin);
@@ -43,7 +60,7 @@
 }
 
 @media screen and (min-width: 120em){
-  .page:has(.hex-header) .content {
+  div:has(.hex-header) .content {
     --offset: auto; /* back to normal */
     margin: 0 var(--offset);
   }
@@ -69,6 +86,9 @@
   animation: titleGlow 32s ease infinite;
 }
 
+.copyright {
+  font-size: 0.875rem;
+}
 /* imagebox style card */
 
 .card-container {  

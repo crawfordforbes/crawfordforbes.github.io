@@ -22,3 +22,4 @@ export const utilsData:BadgesType = {
     iconClass: ['fas', 'bars'],
   }
 }
+

@@ -59,3 +59,21 @@ export function useDebounce<Func extends SomeFunction>(
 
   return debouncedFunction;
 }
+
+export const scrollToTarget = (targetId: string, time: number = 1500) => {
+  const targetElement = document.getElementById(targetId);
+  const targetY = targetElement ? targetElement.getBoundingClientRect().top + window.pageYOffset : 0;
+  let start: number | null = null;
+  function step(timestamp: number) {
+    if (!start) start = timestamp;
+    const progress = timestamp - start;
+    const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const easedProgress = easeInOutCubic(Math.min(progress / time, 1));
+    window.scrollTo(0, window.pageYOffset + (targetY - window.pageYOffset) * easedProgress);
+    if (progress < time) {
+      window.requestAnimationFrame(step);
+    }
+  }
+  window.requestAnimationFrame(step);
+  targetElement?.focus();
+};

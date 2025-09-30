@@ -7,7 +7,6 @@ import Footer from "../../components/panels/footer"
 
 function Portfolio() {
 
-
   return (
     <div className="portfolio">
       <header>
@@ -15,7 +14,7 @@ function Portfolio() {
         <HexHeader />
         <Hero />
       </header>
-      <main className="content">
+      <main className="content" id="main-content" tabIndex={-1}>
         <IntroPanel />
         <ProjectIndex />
       </main>

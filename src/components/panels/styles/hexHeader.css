@@ -16,6 +16,14 @@
 
 .hex-header .hex:has(a) {
   pointer-events: all;
+  color: var(--default-hex-color);
+  transition: color var(--transition-rules);
+}
+
+.hex-header .hex:has(a):hover {
+  cursor: pointer;
+  color: var(--default-hex-color-hover);
+  transition: color var(--transition-rules);
 }
 
 .hex-header .hex:not([class*="-body-bg"]) {
@@ -29,6 +37,12 @@
 .hex-header .hex-row:has(.hex[class*="-body-bg"]) + .hex-row:has(.hex[class*="-body-bg"]) .hex[class*="-body-bg"] {
   --gradient-angle: 0deg;
 }
+
+.hex-header .hex *:focus-visible {
+  outline-offset: -16px;
+}
+
+
 
 @media screen and (min-width: 520px){
   .hex-header .hex-row.header-mobile-2 .hex:last-of-type {

@@ -23,6 +23,8 @@ export type HexesType = {
     hexMargin?: number,
     badge1Id?: string,
     badge2Id?: string,
+    noTabIndex?: boolean,
+    fullAreaContent?: boolean
   }
 }
 
@@ -35,15 +37,13 @@ export const hexData:HexesType = {
   /* contacts */
   "contacts-github-index": {
     id: "contacts-github-index",
-    hexSvgComponent: <TopRight />,
-    hexLink: contactData?.["github"]?.url || "https://github.com/crawfordforbes",
-    badge1Id: "github-index"
+    badge1Id: "github-index",
+    hexClass: "gradient-2-3 full-area",
   },
   "contacts-email": {
     id: "contacts-email",
-    hexSvgComponent: <Left />,
-    hexLink: contactData?.["email"]?.url || "crawford.forbes@gmail.com",
-    badge1Id: "email"
+    badge1Id: "email",
+    hexClass: "gradient-2-3 full-area",
   },
   "logo": {
     id: "logo",
@@ -53,21 +53,19 @@ export const hexData:HexesType = {
   "contacts-linked-in": {
     id: "contacts-linked-in",
     hexSvgComponent: <Right />,
-    hexLink: contactData?.["linked-in"]?.url || "https://www.linkedin.com/in/crawfordforbes/",
+    hexLink: contactData?.["linked-in"]?.link || "https://www.linkedin.com/in/crawfordforbes/",
     badge1Id: "linked-in"
   },
   "contacts-resume": {
     id: "contacts-resume",
     hexSvgComponent: <BottomLeft />,
-    hexLink: contactData?.["resume"]?.url || "/tbd",
+    hexLink: contactData?.["resume"]?.link || "/tbd",
     badge1Id: "resume"
   },
   /* nav */
   "nav-projects": {
     id: "nav-projects",
-    hexSvgComponent: <Right />,
-    hexLink: "/#projects-filter-wrapper",
-    hexTitle: "Projects"
+    badge1Id: "projects-link",
+    hexClass: "gradient-2-3 full-area",
   },
-
 }

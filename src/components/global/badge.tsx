@@ -15,6 +15,7 @@ type BadgeProps = {
   title?: string;
   badgeOnClick?: () => void;
   extraClass?: string;
+  noTabIndex?: boolean;
 }
 
 const Badge = ({
@@ -22,7 +23,8 @@ const Badge = ({
   title, 
   link, 
   badgeOnClick,
-  extraClass
+  extraClass,
+  noTabIndex
 }: BadgeProps) => {
 
   // optional font awesome icon
@@ -45,6 +47,7 @@ const Badge = ({
           onClick={badgeOnClick} 
           className="badge-content" 
           aria-label={title ? title : 'badge button'}
+          tabIndex={noTabIndex ? -1 : 0}
         >
           {renderContent()}
         </button>
@@ -57,6 +60,7 @@ const Badge = ({
           rel="noopener noreferrer"
           className="badge-content" 
           aria-label={title ? title : 'badge link'}
+          tabIndex={noTabIndex ? -1 : 0}
         >
           {renderContent()}
         </a>

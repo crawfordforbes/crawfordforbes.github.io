@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Hex from "@/features/hexes/hex";
 
@@ -11,19 +11,20 @@ import ProjectResult from "./projectResult";
 import { projectData } from "@/data/projects/projects";
 import './styles/projectIndex.css'
 import { techData } from "@/data/projects/techs";
-import { NavLink, useParams } from "react-router";
+import { Link, useParams } from "react-router";
+import { scrollToTarget } from '@/utils/site';
 
 
 type projectIndexProps = {
   selectedRoleIdsProps?: string[],
   selectedTechIdsProps?: string[],
-  selectedProjectIdProp?: string
+  selectedProjectIdProp?: string,
 }
 
 function projectIndex({  
   selectedRoleIdsProps,
   selectedTechIdsProps,
-  selectedProjectIdProp
+  selectedProjectIdProp,
 }: projectIndexProps) {
   let availableRoleIds: RoleType[] = Object.keys(roleData)
     .filter(id => roleData[id].filterable)
@@ -55,6 +56,14 @@ function projectIndex({
   const [sortedProjectsArray, setSortedProjectsArray] = useState(Object.keys(projectData).map((key)=>{return projectData[key]}).sort((a, b) => {
     return a.title.localeCompare(b.title);
   }))
+
+  // Scroll to projects section on initial load if URL contains a projectId. todo: add options for different sections
+  useEffect(() => {
+    const goToProjects = params.projectId || params.filterId;
+    if (goToProjects) {
+      scrollToTarget("projects");
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleRoleFilterClick(filterId: string) {
     if(selectedRoleIds.some((id) => id === filterId)) {
@@ -145,10 +154,10 @@ function projectIndex({
   }
 
   return (
-    <article className="project-feature index-container">
+    <article className="project-feature index-container" id="projects">
 
       {!selectedProjectId ? 
-        <article className="project-index">
+        <article className="project-index" aria-live="polite" aria-atomic="true">
           <div className={`filters ${showMobileFilter ? 'show-mobile-filter' : 'hide-mobile-filter'}`}>
             {<Hex 
               hexClass="filter-toggle hex-button mobile" 
@@ -174,20 +183,23 @@ function projectIndex({
         </article>
         :
         <article className="selected-project">
-          <NavLink to="/">
+          {/* todo fix to="/" */}
+          <Link to="/" role="button" className="back-link" aria-label="Back to Projects List">
             <Hex 
               hexClass="back-button hex-button mobile" 
               hexTitle="More Projects" 
               hexWidth={64} 
               hexOnClick={() => handleReturnToIndexClick()} 
+              noTabIndex={true}
             />
             <Hex 
               hexClass="back-button hex-button desktop" 
               hexTitle="More Projects" 
               hexWidth={96} 
               hexOnClick={() => handleReturnToIndexClick()} 
+              noTabIndex={true}
             />
-          </NavLink>
+          </Link>
           <ProjectDetail
             id={selectedProjectId}
             onBackButtonClick={handleReturnToIndexClick}

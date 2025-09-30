@@ -3,6 +3,7 @@ import { getImgUrl } from "@/utils/images"
 
 import Badge from "@/components/global/badge"
 import { utilsData } from "@/data/global/utils" 
+import { scrollToTarget } from "@/utils/site"
 
 import type { JSX } from "react"
 
@@ -25,6 +26,7 @@ type HexProps = {
   badge2Id?: string,
   badgeComponent1?: JSX.Element,
   badgeComponent2?: JSX.Element,
+  noTabIndex?: boolean,
 }
 
 function Hex({  
@@ -41,6 +43,7 @@ function Hex({
   badge2Id,
   badgeComponent1,
   badgeComponent2,
+  noTabIndex,
 }: HexProps) {
 
   // Determine if there is any text content to display
@@ -70,32 +73,51 @@ function Hex({
     );
   }
 
+  function scrollToElementOnClick(targetId: string) {
+    scrollToTarget(targetId);
+  }
+
   // Render the full area content based on the provided props
   function renderFullAreaContent() {
     if(hexOnClick) {
       return (
         <button
           onClick={hexOnClick}
-          className="hex-full-area-content"
+          className="hex-full-area-content onclick"
           aria-label={hexTitle ? hexTitle : 'Hex button'}
+          tabIndex={noTabIndex ? -1 : 1}
         >
           {renderImageAndSvg()}
         </button>
       );
     } else if (hexLink) {
-      return (
-        <a
-          href={hexLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hex-full-area-content"
-          aria-label={hexTitle ? hexTitle : 'Hex hexLink'}
-        >
-          {renderImageAndSvg()}
-        </a>
-      );
+      if(hexLink[0] === "#") { // internal link
+        return (
+          <button 
+            onClick={() => scrollToElementOnClick(hexLink.slice(1))}
+            className="hex-full-area-content internal"
+            aria-label={hexTitle ? hexTitle : 'Hex hexLink'}
+            tabIndex={noTabIndex ? -1 : 0}
+          >
+            {renderImageAndSvg()}
+          </button>
+        );
+      } else { // external link
+        return (
+          <a
+            href={hexLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hex-full-area-content external"
+            aria-label={hexTitle ? hexTitle : 'Hex hexLink'}
+            tabIndex={noTabIndex ? -1 : 0}
+          >
+            {renderImageAndSvg()}
+          </a>
+        );
+      }
     } else {
-      return <span className="hex-full-area-content">{renderImageAndSvg()}</span>;
+      return <span className="hex-full-area-content no-link">{renderImageAndSvg()}</span>;
     }
   }
 
@@ -133,7 +155,6 @@ function Hex({
         margin: ${hexMargin}px ${hexMargin}px calc(${hexMargin}px - ${hexWidth}px * 0.2886 + 1px); 
         height: calc(${hexWidth}px * 1.1547);
     }`;
-  // how to keep this from happening on every render?
 
   // If hexClass is "random", apply a random background color from predefined CSS variables, memoized per mount
   const randomColor = useMemo(() => {
@@ -147,7 +168,7 @@ function Hex({
   }
   
   return (
-    <div className={classes} style={hexStyle}>
+    <div className={classes} style={hexStyle} tabIndex={hexOnClick || hexLink ? 0 : undefined} aria-pressed={hexOnClick ? "false" : undefined} aria-label={hexTitle ? hexTitle : (hexOnClick ? 'Hex button' : (hexLink ? 'Hex link' : undefined))}>
       <style>
         {css}
       </style>

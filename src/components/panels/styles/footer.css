@@ -1,3 +1,92 @@
-.footer .temp-space {
-  height: 600px;
+.footer {
+  --hex-content-width: calc(100vw * 208 / 360);
+  height: 700px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer .footer-hex-wrapper {
+  width: 100vw;
+}
+
+.footer .hex-grid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer .footer-hex.decorative {
+  background: linear-gradient(30deg, var(--footer-decorative-hex-color-odd) 0%, var(--footer-decorative-hex-color-even) 100%);
+  filter: var(--drop-shadow);
+}
+
+.footer .footer-hex.decorative:nth-child(even) {
+  background: linear-gradient(30deg, var(--footer-decorative-hex-color-even) 0%, var(--footer-decorative-hex-color-odd) 100%);
+}
+
+.footer .footer-hex.footer-text {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--footer-content-bg-top-color);
+  background: linear-gradient(30deg, var(--footer-content-bg-top-color) 10%, var(--footer-content-bg-bottom-color) 100%);
+  color: var(--footer-content-text);
+}
+
+.footer .footer-hex.footer-links {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--footer-nav-bg-top-color);
+  background: linear-gradient(30deg, var(--footer-nav-bg-top-color) 10%, var(--footer-nav-bg-bottom-color) 100%);
+  color: var(--footer-content-text);
+}
+
+.footer .footer-hex.footer-text.hex .hex-text-content {
+  left: 16px;
+  transform: translate(0, -50%);
+  max-width: var(--hex-content-width);
+}
+
+.footer .footer-hex.footer-links.hex .hex-text-content {
+  left: auto;
+  right: 16px;
+  transform: translate(0, -50%);
+  max-width: var(--hex-content-width);
+}
+
+.footer .footer-hex.footer-links.hex .hex-text-content .nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.footer .footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer .title {
+  --shadow-scale: .25px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+  --title-size: 1.625rem;
+
+  animation: titleGlow 16s ease infinite;
+}
+
+.footer .description,
+.footer .copyright {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 500px) {
+  .footer .title {
+    --title-size: 2rem;
+  } 
 }
