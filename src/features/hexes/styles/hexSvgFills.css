@@ -13,6 +13,10 @@
   --hex-wall-bottom-right: var(--color-4);
   --hex-wall-bottom-left: var(--color-3);
   --hex-wall-left: var(--color-2);
+  --outer-hex: var(--primary-color);
+  --middle-hex: var(--primary-color-contrast);
+  --inner-hex: var(--color-5);
+  --logo-text-color: var(--white);
 }
 
 .hex .hex-top {
@@ -65,4 +69,29 @@
 
 .hex .hex-wall-left {
   fill: var(--hex-wall-left);
+}
+
+.hex .outer-hex {
+  fill: var(--outer-hex);
+}
+
+.hex .middle-hex {
+  fill: var(--middle-hex);
+}
+
+.hex .inner-hex {
+  fill: var(--inner-hex);
+}
+
+.hex .logo-text {
+  --shadow-scale: 1.75px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+
+  fill: var(--logo-text-color);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 6rem;
+  transform: translateY(12px);
+
+  animation: titleGlow 16s ease infinite;
 }

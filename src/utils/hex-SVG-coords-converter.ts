@@ -1,3 +1,20 @@
+type LogoSVG = {
+  yFactor: number,
+  width: number,
+  height: number,
+  outerHex: string,
+  middleHex: string,
+  innerHex: string
+}
+
+const logoSVG:LogoSVG = {
+  yFactor: 0.58,
+  width: 160,
+  height: 320,
+  outerHex: "80,00 160,80 160,240 80,320 00,240 00,80",
+  middleHex: "80,40 140,100 140,220 80,280 20,220 20,100",
+  innerHex: "80,80 120,120 120,200 80,240 40,200 40,120",
+}
 
 type HexSVG = {
   yFactor: number,
@@ -215,7 +232,23 @@ const hexSVGTable: hexSVGTableType = {
       className: "outer-wall-top-left",
     },
   },
+  logoSVG: {
+    outerHex: {
+      coords: logoSVG.outerHex,
+      className: "outer-hex"
+    },
+    middleHex: {
+      coords: logoSVG.middleHex,
+      className: "middle-hex"
+    },
+    innerHex: {
+      coords: logoSVG.innerHex,
+      className: "inner-hex"
+    }
+  }
 }
+
+
 
 
 

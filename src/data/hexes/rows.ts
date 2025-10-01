@@ -19,7 +19,7 @@ export const rowData:RowsType = {
   },
   "header-mobile-2": {
     id: "header-mobile-2",
-    hexes: [{id:"contacts-email"}, {id:"contacts-github-index"}, {id:"nav-projects"}, {id:"gradient-2-4", repeat: 1} ]
+    hexes: [{id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"}, {id:"gradient-2-4", repeat: 1} ]
   },
   "header-mobile-3": {
     id: "header-mobile-3",
@@ -48,7 +48,7 @@ export const rowData:RowsType = {
   },
   "header-tablet-2": {
     id: "header-tablet-2",
-    hexes: [{id:"gradient-2-4", repeat: 2}, {id:"contacts-email"}, {id:"contacts-github-index"}, {id:"nav-projects"}]
+    hexes: [{id:"gradient-2-4", repeat: 2}, {id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"}, ]
   },
   "header-tablet-3": {
     id: "header-tablet-3",
@@ -77,7 +77,7 @@ export const rowData:RowsType = {
   },
   "header-desktop-2": {
     id: "header-desktop-2",
-    hexes: [{id:"gradient-2-3", repeat: 5}, {id:"contacts-email"}, {id:"contacts-github-index"}, {id:"nav-projects"}]
+    hexes: [{id:"gradient-2-3", repeat: 5}, {id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"},]
   },
   "header-desktop-3": {
     id: "header-desktop-3",
@@ -147,7 +147,7 @@ export const rowData:RowsType = {
   },
   "header-large-2": {
     id: "header-large-2",
-    hexes: [{id:"gradient-2-3", repeat: 4}, {id:"contacts-email"}, {id:"contacts-github-index"}, {id:"nav-projects"}]
+    hexes: [{id:"gradient-2-3", repeat: 4}, {id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"},]
   },
   "header-large-3": {
     id: "header-large-3",
@@ -241,7 +241,7 @@ export const rowData:RowsType = {
   },
   "header-x-large-2": {
     id: "header-x-large-2",
-    hexes: [{id:"gradient-1-2", repeat: 4}, {id:"contacts-email"}, {id:"contacts-github-index"}, {id:"nav-projects"}]
+    hexes: [{id:"gradient-1-2", repeat: 4}, {id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"},]
   },
   "header-x-large-3": {
     id: "header-x-large-3",

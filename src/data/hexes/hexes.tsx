@@ -3,6 +3,7 @@ import TopRight from "@/features/hexes/svg/top-right"
 import Left from "@/features/hexes/svg/left"
 import Right from "@/features/hexes/svg/right"
 import BottomLeft from "@/features/hexes/svg/bottom-left"
+import Logo from "@/features/hexes/svg/logo"
 import BottomRight from "@/features/hexes/svg/bottom-right"
 
 import { contactData } from "../global/contacts"
@@ -29,6 +30,13 @@ export type HexesType = {
 }
 
 export const hexData:HexesType = {
+  /* logo */
+  "logo": {
+    id: "logo",
+    hexSvgComponent: <Logo />,
+    hexLink: "/",
+    hexClass: "logo",
+  },
   /* decorative */
   "card-border": {
     id: "card-border",
@@ -44,11 +52,6 @@ export const hexData:HexesType = {
     id: "contacts-email",
     badge1Id: "email",
     hexClass: "gradient-2-3 full-area",
-  },
-  "logo": {
-    id: "logo",
-    hexLink: "/",
-    hexTitle: "Crawford Forbes"
   },
   "contacts-linked-in": {
     id: "contacts-linked-in",
