@@ -7,10 +7,9 @@ import { useScreenSize } from '@/utils/site';
 import type { MediaSizes } from '@/types/layout';
 import ProjectDetail from '@/features/projects/projectDetail';
 import Portfolio from './routes/portfolio';
-import { printAllHexSVGs } from "@/utils/hex-SVG-coords-converter";
 
 function App() {
-  printAllHexSVGs();
+
     // a media query used to determine hexlayouts and hexWidths.
   const screenSize = useScreenSize();
   function getScreenSize(): MediaSizes {

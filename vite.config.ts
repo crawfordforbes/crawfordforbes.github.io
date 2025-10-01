@@ -4,7 +4,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/crawfordforbes/', // Replace 'crawfordforbes' with your actual repository name
+  base: '/', // Replace 'crawfordforbes' with your actual repository name
   plugins: [react()],
   resolve: {
         alias: {

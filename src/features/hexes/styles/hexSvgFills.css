@@ -13,9 +13,9 @@
   --hex-wall-bottom-right: var(--color-4);
   --hex-wall-bottom-left: var(--color-3);
   --hex-wall-left: var(--color-2);
-  --outer-hex: var(--primary-color);
-  --middle-hex: var(--primary-color-contrast);
-  --inner-hex: var(--color-5);
+  --outer-hex: var(--color-4);
+  --middle-hex: var(--color-8);
+  --inner-hex: var(--color-10);
   --logo-text-color: var(--white);
 }
 
@@ -90,7 +90,7 @@
   fill: var(--logo-text-color);
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 6rem;
+  font-size: 7rem;
   transform: translateY(12px);
 
   animation: titleGlow 16s ease infinite;
