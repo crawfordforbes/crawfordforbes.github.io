@@ -5,7 +5,6 @@ import { MediaQueryContext } from '@/utils/context';
 import { useEffect, useState } from 'react';
 import { useScreenSize } from '@/utils/site';
 import type { MediaSizes } from '@/types/layout';
-import ProjectDetail from '@/features/projects/projectDetail';
 import Portfolio from './routes/portfolio';
 
 function App() {

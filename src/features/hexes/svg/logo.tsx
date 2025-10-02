@@ -35,7 +35,7 @@ const Logo = () => {
   };
   
   return (
-    <div className="logo-wrapper" ref={componentRef}>
+    <div className="logo-wrapper" ref={makingLogo ? componentRef : null}>
       {makingLogo && <div className="fixed">
         <button onClick={handleDownload} className="download-logo-button" aria-label="Download logo as PNG image" title="Download logo as PNG image">⬇️</button>
       </div>}

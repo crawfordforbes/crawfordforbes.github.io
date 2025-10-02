@@ -24,3 +24,5 @@ export function useDebouncedMediaQueryContext(debounceMs = 100) {
 
   return debouncedValue;
 }
+
+export type UseDebouncedMediaQueryContextReturn = ReturnType<typeof useDebouncedMediaQueryContext>

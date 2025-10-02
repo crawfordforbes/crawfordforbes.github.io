@@ -2,8 +2,9 @@ import { getImgUrl } from "@/utils/images";
 
 import Hex from "../hexes/HexSimple"
 import HexGridLayout from "@/features/hexes/hexGridLayout";
+import LazyImage from "../../components/global/LazyImage";
+import { getProjectById, generateImageAlt } from "../../utils/projectUtilities";
 
-import { projectData } from "@/data/projects/projects"
 import { cardBorder } from "@/data/hexes/layouts";
 import { imageData } from "@/data/global/images";
 import { imagePath } from "@/data/global/images";
@@ -31,7 +32,10 @@ function ProjectDetail({
 }:ProjectDetailProps) {
   let params = useParams()
   let thisProjectId:string = id ? id : params.projectId ? params.projectId : '';
-  if(!thisProjectId || !projectData[thisProjectId]){
+  
+  const project = getProjectById(thisProjectId);
+  
+  if(!project){
     return(
       <div className="project-detail-container">
         <h2>Project Not Found</h2>
@@ -39,7 +43,6 @@ function ProjectDetail({
       </div>
     )
   }
-  const project = projectData[thisProjectId];
 
   const primaryImage = imagePath + 'projects/' + imageData[project.primaryImgId].fileName
   const secondaryImage = project.secondaryImgId ? imagePath + 'projects/' + imageData[project.secondaryImgId].fileName : '';
@@ -68,7 +71,7 @@ function ProjectDetail({
     if (project?.techIds && project?.techIds.length > 0) {
       const threshold = project.techIds.length;
 
-      return project?.techIds.map((id,idx)=>{
+      return project?.techIds.map((id: string, idx: number)=>{
         if(techData[id]){
           let placement = idx + 1 <= threshold / 2 ? "top" : "bottom";
           return(
@@ -93,13 +96,25 @@ function ProjectDetail({
             <div className="inner">
               <Splide aria-label={`${project.title} - Slider`} className="mobile image-slider" options={ { rewind: true, gap: '1rem', pagination: false } }>
                 {primaryImage.length > 0 && <SplideSlide>
-                  <img className="image mobile" src={getImgUrl(primaryImage)} alt={`${project.title} - Main Project Image`} />
+                  <LazyImage 
+                    src={getImgUrl(primaryImage)} 
+                    alt={generateImageAlt(project.title, 'primary')}
+                    className="image mobile"
+                  />
                 </SplideSlide>}
                 {secondaryImage.length > 0 && <SplideSlide>
-                  <img className="image mobile" src={getImgUrl(secondaryImage)} alt={`${project.title} - Secondary Project Image`} />
+                  <LazyImage 
+                    src={getImgUrl(secondaryImage)} 
+                    alt={generateImageAlt(project.title, 'secondary')}
+                    className="image mobile"
+                  />
                 </SplideSlide>}
                 {tertiaryImage.length > 0 && <SplideSlide>
-                  <img className="image mobile" src={getImgUrl(tertiaryImage)} alt={`${project.title} - Tertiary Project Image`} />
+                  <LazyImage 
+                    src={getImgUrl(tertiaryImage)} 
+                    alt={generateImageAlt(project.title, 'tertiary')}
+                    className="image mobile"
+                  />
                 </SplideSlide>}
               </Splide>
               {/* <img 

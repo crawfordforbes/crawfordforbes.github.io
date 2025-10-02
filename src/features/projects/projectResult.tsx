@@ -1,6 +1,7 @@
 
 import { getImgUrl } from "@/utils/images";
 import Badge from "@/components/global/badge";
+import { memo } from "react";
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/global/images";
@@ -173,4 +174,4 @@ function ProjectResult({
   )
 }
 
-export default ProjectResult
+export default memo(ProjectResult)
