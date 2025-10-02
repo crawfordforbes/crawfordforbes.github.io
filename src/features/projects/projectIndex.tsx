@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Hex from "@/features/hexes/hex";
+import Hex from "@/features/hexes/HexSimple";
 
 import { roleData } from "@/data/projects/roles";
 import type { RoleType } from "@/data/projects/roles";
@@ -160,10 +160,10 @@ function projectIndex({
         <article className="project-index" aria-live="polite" aria-atomic="true">
           <div className={`filters ${showMobileFilter ? 'show-mobile-filter' : 'hide-mobile-filter'}`}>
             {<Hex 
-              hexClass="filter-toggle hex-button mobile" 
+              hexClass="filter-toggle hex-button mobile icon-bg" 
               hexWidth={64} 
-              hexOnClick={handleMobileFilterToggleClick}
-              badge1Id={showMobileFilter ? 'toggle-open' : 'toggle-close'}
+              onClick={handleMobileFilterToggleClick}
+              content={showMobileFilter ? 'toggle-open' : 'toggle-close'}
             />}
             <ProjectFilter
               selectedRoleIds={selectedRoleIds}
@@ -187,17 +187,17 @@ function projectIndex({
           <Link to="/" role="button" className="back-link" aria-label="Back to Projects List">
             <Hex 
               hexClass="back-button hex-button mobile" 
-              hexTitle="More Projects" 
+              content="more-projects"
               hexWidth={64} 
-              hexOnClick={() => handleReturnToIndexClick()} 
-              noTabIndex={true}
+              onClick={() => handleReturnToIndexClick()} 
+              tabIndex={-1}
             />
             <Hex 
               hexClass="back-button hex-button desktop" 
-              hexTitle="More Projects" 
+              content="more-projects"
               hexWidth={96} 
-              hexOnClick={() => handleReturnToIndexClick()} 
-              noTabIndex={true}
+              onClick={() => handleReturnToIndexClick()} 
+              tabIndex={-1}
             />
           </Link>
           <ProjectDetail

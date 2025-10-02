@@ -29,6 +29,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 16px;
   background: var(--footer-content-bg-top-color);
   background: linear-gradient(30deg, var(--footer-content-bg-top-color) 10%, var(--footer-content-bg-bottom-color) 100%);
@@ -39,10 +40,19 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
   gap: 16px;
   background: var(--footer-nav-bg-top-color);
   background: linear-gradient(30deg, var(--footer-nav-bg-top-color) 10%, var(--footer-nav-bg-bottom-color) 100%);
   color: var(--footer-content-text);
+}
+
+.footer .footer-hex.footer-links .nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .footer .footer-hex.footer-text.hex .hex-text-content {

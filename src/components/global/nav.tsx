@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './styles/nav.css'
 import Badge from './badge';
 
-import Hex from '@/features/hexes/hex';
+import Hex from '@/features/hexes/HexSimple';
 import { contactData } from '@/data/global/contacts';
 import { scrollToTarget } from '@/utils/site';
 
@@ -60,7 +60,11 @@ function Nav() {
     <nav className="nav" aria-label="Main navigation">
       <div className="shadow">
         <button className="nav-toggle-button" onClick={toggleMenu} aria-label={`${isMenuOpen ? 'Close' : 'Menu'}`} tabIndex={0}>
-          <Hex hexClass="nav-toggle" hexTitle={`${isMenuOpen ? 'Close' : 'Menu'}`} hexWidth={64}/>
+          <Hex 
+            hexClass="nav-toggle icon-bg" 
+            content={isMenuOpen ? "toggle-open" : "toggle-close"} 
+            hexWidth={64}
+          />
         </button>
       </div>
       <div className={`nav-hex hex ${isMenuOpen ? 'open' : 'closed'}`} aria-expanded={isMenuOpen} role="region" aria-label="Navigation Menu">

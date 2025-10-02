@@ -1,4 +1,4 @@
-import Hex from '@/features/hexes/hex'
+import Hex from '@/features/hexes/HexSimple'
 import './styles/footer.css'
 import { contactData } from '@/data/global/contacts'
 import { footerContent } from '@/data/content/footer'
@@ -57,7 +57,7 @@ function Footer() {
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
-            <Hex hexClass="footer-hex footer-text" hexWidth={360} badgeComponent1={
+            <Hex hexClass="footer-hex footer-text" hexWidth={360} content={
               <div className="footer-content">
                 <h2 className="title">{contactData.name.title}</h2>
                 <p className="description">{footerContent.description}</p>
@@ -72,7 +72,7 @@ function Footer() {
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
-            <Hex hexClass="footer-hex footer-links" hexWidth={360} badgeComponent1={
+            <Hex hexClass="footer-hex footer-links" hexWidth={360} content={
               <div className="footer-text">
                 <ol className="nav-links">
                   {renderBadges()}

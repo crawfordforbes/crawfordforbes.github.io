@@ -13,10 +13,7 @@
   --hex-wall-bottom-right: var(--color-4);
   --hex-wall-bottom-left: var(--color-3);
   --hex-wall-left: var(--color-2);
-  --outer-hex: var(--color-4);
-  --middle-hex: var(--color-8);
-  --inner-hex: var(--color-10);
-  --logo-text-color: var(--white);
+
 }
 
 .hex .hex-top {
@@ -71,6 +68,10 @@
   fill: var(--hex-wall-left);
 }
 
+.hex.logo * {
+  transition: fill var(--transition-rules), color var(--transition-rules);
+}
+
 .hex .outer-hex {
   fill: var(--outer-hex);
 }
@@ -92,6 +93,15 @@
   font-weight: 800;
   font-size: 7rem;
   transform: translateY(12px);
+  color: var(--logo-text-color);
 
   animation: titleGlow 16s ease infinite;
+}
+
+.hex.logo:hover * {
+  --outer-hex: var(--outer-hex-hover);
+  --middle-hex: var(--middle-hex-hover);
+  --inner-hex: var(--inner-hex-hover);
+  --logo-text-color: var(--logo-text-color-hover);
+  transition: fill var(--transition-rules), color var(--transition-rules);
 }

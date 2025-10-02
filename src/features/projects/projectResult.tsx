@@ -12,7 +12,7 @@ import { techData } from "@/data/projects/techs";
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 import { cardBorder } from "@/data/hexes/layouts";
 
-import Hex from "@/features/hexes/hex";
+import Hex from "@/features/hexes/HexSimple";
 import { roleData } from "@/data/projects/roles";
 import { Link } from "react-router";
 
@@ -96,20 +96,18 @@ function ProjectResult({
   }
 
   const ghBadge = project.githubLink ? 
-  <Hex hexClass="link-badge" hexWidth={136} badgeComponent1={
+  <Hex href={project.githubLink} hexClass="link-badge" hexWidth={136} content={
     <Badge 
       iconClass={['fab', 'github']} 
       title={"See the Code"} 
-      link={project.githubLink}
     />
   } /> : <></>;
   
   const externalLink = project.externalLink ? 
-  <Hex hexClass="link-badge" hexWidth={136} badgeComponent1={
+  <Hex href={project.externalLink} hexClass="link-badge" hexWidth={136} content={
     <Badge 
       iconClass={['fas', 'up-right-from-square']} 
       title={"Visit the Site"} 
-      link={project.externalLink}
     />
   } /> : <></>;
 

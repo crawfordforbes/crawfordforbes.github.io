@@ -41,12 +41,3 @@
 .hex-header .hex *:focus-visible {
   outline-offset: -16px;
 }
-
-
-
-@media screen and (min-width: 520px){
-  .hex-header .hex-row.header-mobile-2 .hex:last-of-type {
-    order: -1;
-  }
-}
-

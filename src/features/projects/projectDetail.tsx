@@ -1,6 +1,6 @@
 import { getImgUrl } from "@/utils/images";
 
-import Hex from "../hexes/hex"
+import Hex from "../hexes/HexSimple"
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 
 import { projectData } from "@/data/projects/projects"
@@ -109,13 +109,13 @@ function ProjectDetail({
               /> */}
               <Splide aria-label={`${project.title} - Slider`} className="desktop image-slider" options={ { rewind: true, pagination: false } }>
                 {primaryImage.length > 0 && <SplideSlide>
-                  <Hex hexClass="image desktop" hexWidth={640} hexImagePath={primaryImage} />
+                  <Hex hexClass="image desktop" hexWidth={640} content={primaryImage} />
                 </SplideSlide>}
                 {secondaryImage.length > 0 && <SplideSlide>
-                  <Hex hexClass="image desktop" hexWidth={640} hexImagePath={secondaryImage} />
+                  <Hex hexClass="image desktop" hexWidth={640} content={secondaryImage} />
                 </SplideSlide>}
                 {tertiaryImage.length > 0 && <SplideSlide>
-                  <Hex hexClass="image desktop" hexWidth={640} hexImagePath={tertiaryImage} />
+                  <Hex hexClass="image desktop" hexWidth={640} content={tertiaryImage} />
                 </SplideSlide>}
               </Splide>
             </div>

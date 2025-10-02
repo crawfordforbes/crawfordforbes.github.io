@@ -276,3 +276,27 @@
     --variable-height-hex-triangle-height: var(--variable-height-hex-triangle-height-desktop);
   }
 }
+
+/* hexes */
+.hex.icon-bg .badge .badge-content .fa-icon {
+  font-size: 4rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  color: var(--white);
+  opacity: 0.25;
+  transition: color var(--transition-rules), font-size var(--transition-rules), opacity var(--transition-rules);
+}
+
+.hex.icon-bg .title {
+  color: var(--white);
+  font-size: 1.5rem;
+}
+
+.hex.icon-bg:hover .badge .badge-content .fa-icon {
+  font-size: 5rem;
+  color: var(--black);
+  opacity: 0.65;
+  transition: color var(--transition-rules), font-size var(--transition-rules), opacity var(--transition-rules);
+}

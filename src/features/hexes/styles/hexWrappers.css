@@ -1,0 +1,44 @@
+/* Hex wrapper styles for interactive hexes */
+
+.hex-wrapper {
+  display: block;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+
+.hex-wrapper:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.hex-wrapper:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.hex-wrapper:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ensure hex content maintains its styling when wrapped */
+.hex-wrapper .hex {
+  pointer-events: none; /* Prevent double-click handling */
+}
+
+/* Optional: Add hover effects to wrapper */
+.hex-wrapper:hover .hex {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+.hex-wrapper:active .hex {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}

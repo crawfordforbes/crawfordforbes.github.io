@@ -145,6 +145,17 @@
   --variable-height-hex-top-color-detail: var(--color-7);
   --variable-height-hex-bottom-color-detail: var(--color-8);
 
+  /* logo */
+  --outer-hex: var(--color-4);
+  --middle-hex: var(--color-8);
+  --inner-hex: var(--color-10);
+  --logo-text-color: var(--white);
+
+  --outer-hex-hover: var(--color-6);
+  --middle-hex-hover: var(--color-7);
+  --inner-hex-hover: var(--color-9);
+  --logo-text-color-hover: var(--white);
+
   /* nav */
   --nav-toggle-bg: var(--primary-color-contrast);
   --nav-toggle-text: var(--primary-color-text-contrast);

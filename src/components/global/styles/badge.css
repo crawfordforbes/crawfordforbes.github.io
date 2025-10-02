@@ -1,9 +1,6 @@
 .badge {
   --title-size: var(--badge-text-size);
 }
-.hex.with-svg .hex-badges .badge svg {
-  display: none;
-}
 
 .badge .badge-content {
   display: flex;

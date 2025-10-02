@@ -79,10 +79,11 @@
   color: var(--link-badge-text);
   position: relative;
   top: 48px;
+  padding-top: 16px;
   transition: top var(--transition-rules), background-color var(--transition-rules), color var(--transition-rules);
 }
 
-.project-result .link-badge .hex-text-content {
+.project-result .link-badge .hex-visual-content {
   color: var(--link-badge-text);
   transition: color var(--transition-rules);
 }
@@ -106,8 +107,8 @@
   transition: top var(--transition-rules), background-color var(--transition-rules);
 }
 
-.project-result .link-badge:hover .hex-text-content,
-.project-result .link-badge:focus-within .hex-text-content {
+.project-result .link-badge:hover .hex-visual-content,
+.project-result .link-badge:focus-within .hex-visual-content {
   color: var(--link-badge-text-hover);
   transition: color var(--transition-rules);
 }
@@ -116,12 +117,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.project-result .link-badge .hex-text-content {
-  width: 100%;
-  top: 16px;
-  transform: translateX(-50%);
 }
 
 @media screen and (min-width: 40em){

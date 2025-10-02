@@ -95,3 +95,15 @@
   gap: 16px;
   width: 100%;
 }
+
+.nav .hex.icon-bg .badge .badge-content .fa-icon {
+  font-size: 2rem;
+}
+
+.nav .hex.icon-bg .title {
+  font-size: 1.25rem;
+}
+
+.nav .hex.icon-bg:hover .badge .badge-content .fa-icon {
+  font-size: 2.5rem;
+}

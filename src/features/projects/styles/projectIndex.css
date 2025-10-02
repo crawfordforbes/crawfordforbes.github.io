@@ -45,6 +45,13 @@
   margin: 0;
 }
 
+.project-index .hex.icon-bg .badge .badge-content .fa-icon {
+  font-size: 2rem;
+}
+
+.project-index .hex.icon-bg:hover .badge .badge-content .fa-icon {
+  font-size: 2.5rem;
+}
 
 @media screen and (min-width: 40em){
   .project-index {
