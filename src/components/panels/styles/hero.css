@@ -12,6 +12,21 @@
   z-index: 1;
 }
 
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Remove aspect-ratio on mobile when min-height takes precedence */
+}
+
+@media (min-width: 40em) {
+  .hero-bg-image {
+    aspect-ratio: 16/9; /* Tablet/Desktop landscape */
+  }
+}
+
 .hero-bg-image img {
   position: absolute;
   top: 0;

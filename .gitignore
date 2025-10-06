@@ -13,6 +13,7 @@ dist-ssr
 *.local
 notes.txt
 content.txt
+docs
 
 # Editor directories and files
 .vscode/*

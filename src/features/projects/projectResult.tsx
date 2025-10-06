@@ -2,6 +2,8 @@
 import { getImgUrl } from "@/utils/images";
 import Badge from "@/components/global/badge";
 import { memo } from "react";
+import OptimizedImage from "@/components/global/OptimizedImage";
+import { createImageSources, imageSizes } from "@/components/global/OptimizedImage";
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/global/images";
@@ -114,6 +116,9 @@ function ProjectResult({
 
   const cardImagePath = imagePath + "projects/" + imageData[project.primaryImgId].fileName;
   
+  // Create responsive image sources for project cards
+  const cardImageSources = createImageSources(cardImagePath.replace(/\.[^/.]+$/, ""), [300, 600, 800]);
+  
   const hasTechIds: boolean = !!(project?.techIds && project?.techIds.length > 0);
   const hasRoleIds: boolean = !!(project?.roleIds && project?.roleIds.length > 0);
   const hasLinks = !!(project.githubLink || project.externalLink);
@@ -128,10 +133,13 @@ function ProjectResult({
             onClick={() => selectProjectClick(project.id)}
             tabIndex={-1}
           >
-            <img 
-              className="image" 
-              src={getImgUrl(cardImagePath)} 
-              alt={`${project.title} - card image`} 
+            <OptimizedImage
+              src={getImgUrl(cardImagePath)}
+              alt={`${project.title} - card image`}
+              sources={cardImageSources}
+              sizes={imageSizes.card}
+              className="image"
+              objectFit="cover"
             />
           </button>
         </div>

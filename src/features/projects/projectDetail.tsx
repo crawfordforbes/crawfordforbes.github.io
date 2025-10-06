@@ -1,8 +1,8 @@
-import { getImgUrl } from "@/utils/images";
+import { getImgUrl, generateImageSources, imagePaths } from "@/utils/images";
 
 import Hex from "../hexes/HexSimple"
 import HexGridLayout from "@/features/hexes/hexGridLayout";
-import LazyImage from "../../components/global/LazyImage";
+import OptimizedImage from "../../components/global/OptimizedImage";
 import { getProjectById, generateImageAlt } from "../../utils/projectUtilities";
 
 import { cardBorder } from "@/data/hexes/layouts";
@@ -96,32 +96,33 @@ function ProjectDetail({
             <div className="inner">
               <Splide aria-label={`${project.title} - Slider`} className="mobile image-slider" options={ { rewind: true, gap: '1rem', pagination: false } }>
                 {primaryImage.length > 0 && <SplideSlide>
-                  <LazyImage 
+                  <OptimizedImage 
                     src={getImgUrl(primaryImage)} 
                     alt={generateImageAlt(project.title, 'primary')}
                     className="image mobile"
+                    aspectRatio="4/3"
+                    objectFit="cover"
                   />
                 </SplideSlide>}
                 {secondaryImage.length > 0 && <SplideSlide>
-                  <LazyImage 
+                  <OptimizedImage 
                     src={getImgUrl(secondaryImage)} 
                     alt={generateImageAlt(project.title, 'secondary')}
                     className="image mobile"
+                    aspectRatio="4/3"
+                    objectFit="cover"
                   />
                 </SplideSlide>}
                 {tertiaryImage.length > 0 && <SplideSlide>
-                  <LazyImage 
+                  <OptimizedImage 
                     src={getImgUrl(tertiaryImage)} 
                     alt={generateImageAlt(project.title, 'tertiary')}
                     className="image mobile"
+                    aspectRatio="4/3"
+                    objectFit="cover"
                   />
                 </SplideSlide>}
               </Splide>
-              {/* <img 
-                className="image mobile" 
-                src={getImgUrl(primaryImage)} 
-                alt={`${project.title} - Main Project Image`} 
-              /> */}
               <Splide aria-label={`${project.title} - Slider`} className="desktop image-slider" options={ { rewind: true, pagination: false } }>
                 {primaryImage.length > 0 && <SplideSlide>
                   <Hex hexClass="image desktop" hexWidth={640} content={primaryImage} />

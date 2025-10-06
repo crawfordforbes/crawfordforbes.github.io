@@ -1,6 +1,8 @@
 import { useId, useMemo, memo } from "react"
 import { getImgUrl } from "@/utils/images"
 import Badge from "@/components/global/badge"
+import OptimizedImage from "@/components/global/OptimizedImage"
+import { createImageSources, imageSizes } from "@/components/global/OptimizedImage"
 import { utilsData } from "@/data/global/utils" 
 import { contactData } from "@/data/global/contacts"
 import { scrollToTarget } from "@/utils/site"
@@ -47,9 +49,7 @@ function Hex({
       // Default to badge lookup for strings
       return 'badge'
     }
-    if (typeof content === <Badge />) {
-      return 'badge'
-    }
+
     // JSX elements are visual content
     return 'visual'
   }
@@ -66,11 +66,33 @@ function Hex({
 
     if (typeToRender === 'image' && typeof content === 'string') {
       // Handle image path as string
-      return (
-        <div className="hex-visual-content">
-          <img src={getImgUrl(content)} alt="" className="hex-image"/>
-        </div>
-      )
+      const useOptimizedImage = hexWidth >= 300; // Use OptimizedImage for larger hexes
+      
+      if (useOptimizedImage) {
+        // Generate responsive sources for larger hex images
+        const basePath = content.replace(/\.[^/.]+$/, ""); // Remove extension
+        const imageSources = createImageSources(basePath, [400, 600, 800, 1200]);
+        
+        return (
+          <div className="hex-visual-content">
+            <OptimizedImage
+              src={getImgUrl(content)}
+              alt=""
+              sources={imageSources}
+              sizes={imageSizes.project}
+              className="hex-image"
+              objectFit="cover"
+            />
+          </div>
+        );
+      } else {
+        // Use regular img for small hexes (icons, logos)
+        return (
+          <div className="hex-visual-content">
+            <img src={getImgUrl(content)} alt="" className="hex-image"/>
+          </div>
+        );
+      }
     }
 
     if (typeToRender === 'badge') {
