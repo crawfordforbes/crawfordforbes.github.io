@@ -2,7 +2,6 @@ import type { RoleType } from "@/data/projects/roles"
 import Badge from "@/components/global/badge";
 
 import './styles/projectFilter.css'
-import { Link } from "react-router";
 
 type projectFilterProps = {
   selectedRoleIds: string[],
@@ -33,8 +32,6 @@ function ProjectFilter({
     highlightFilterHover("");
   };
 
-  const selectedFiltersArr = [...selectedRoleIds, ...selectedTechIds];
-
 
   return (
     <article className="project-feature filter-container">
@@ -51,19 +48,17 @@ function ProjectFilter({
                 onMouseEnter={() => handleMouseEnter(roleId.id)}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <Link 
-                  to={`/filters/${selectedFiltersArr.some(id => id === roleId.id) ? selectedFiltersArr.filter(id => id !== roleId.id).join(',') : [...selectedFiltersArr, roleId.id].join(',')}`}
+                <button 
                   onClick={() => selectRoleFilterClick(roleId.id)} 
-                  role="button" 
                   aria-label={`Filter by ${roleId.title}`}
-                  className='filter-link'
+                  className='filter-button'
                 >
                   <Badge 
                     title={roleId.title} 
                     iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
                     noTabIndex={true}
                   />
-                </Link>
+                </button>
               </li>
             )
           })}
@@ -80,19 +75,17 @@ function ProjectFilter({
                 onMouseEnter={() => handleMouseEnter(techId.id)}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <Link 
-                  to={`/filters/${selectedFiltersArr.some(id => id === techId.id) ? selectedFiltersArr.filter(id => id !== techId.id).join(',') : [...selectedFiltersArr, techId.id].join(',')}`} 
+                <button 
                   onClick={() => selectTechFilterClick(techId.id)}
-                  role="button" 
                   aria-label={`Filter by ${techId.title}`}
-                  className='filter-link'
+                  className='filter-button'
                 >
                   <Badge 
                     title={techId.title} 
                     iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
                     noTabIndex={true}
                   />
-                </Link>
+                </button>
               </li>
             )
           })}

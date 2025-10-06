@@ -72,3 +72,52 @@
     display: block;
   }
 }
+
+/* Error Banner */
+.error-banner {
+  background-color: var(--color-danger-bg, #ffeaea);
+  border: 1px solid var(--color-danger, #ff6b6b);
+  border-radius: var(--border-radius, 4px);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--color-danger-text, #d63384);
+}
+
+.error-banner .error-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.error-banner p {
+  margin: 0;
+  flex: 1;
+}
+
+.error-banner .dismiss-error {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-danger, #ff6b6b);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.error-banner .dismiss-error:hover {
+  background-color: var(--color-danger-hover-bg, rgba(255, 107, 107, 0.1));
+}
+
+.error-banner .dismiss-error:focus {
+  outline: 2px solid var(--color-danger, #ff6b6b);
+  outline-offset: 2px;
+}
+
+@media screen and (min-width: 40em){
+  .project-index.routing-error {
+    flex-direction: column;
+  }
+}

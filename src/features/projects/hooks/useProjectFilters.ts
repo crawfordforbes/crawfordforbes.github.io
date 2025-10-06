@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { 
   getAllProjectsSorted, 
   filterProjects, 
@@ -6,10 +6,27 @@ import {
   getFilterableTechs 
 } from '../../../utils/projectUtilities'
 
-export function useProjectFilters(initialRoleIds?: string[], initialTechIds?: string[]) {
-  const [selectedRoleIds, setSelectedRoleIds] = useState(initialRoleIds || [])
-  const [selectedTechIds, setSelectedTechIds] = useState(initialTechIds || [])
+export function useProjectFilters(
+  urlRoleFilters?: string[], 
+  urlTechFilters?: string[],
+  onFiltersChange?: (roleIds: string[], techIds: string[]) => void
+) {
+  const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>([])
+  const [selectedTechIds, setSelectedTechIds] = useState<string[]>([])
   const [highlightFilterOnHover, setHighlightFilterOnHover] = useState("")
+
+  // Sync URL filters with local state (without triggering callbacks)
+  useEffect(() => {
+    if (urlRoleFilters && JSON.stringify(urlRoleFilters) !== JSON.stringify(selectedRoleIds)) {
+      setSelectedRoleIds(urlRoleFilters)
+    }
+  }, [urlRoleFilters]) // Intentionally excluding selectedRoleIds to avoid loops
+
+  useEffect(() => {
+    if (urlTechFilters && JSON.stringify(urlTechFilters) !== JSON.stringify(selectedTechIds)) {
+      setSelectedTechIds(urlTechFilters)
+    }
+  }, [urlTechFilters]) // Intentionally excluding selectedTechIds to avoid loops
 
   const availableRoleIds = useMemo(() => getFilterableRoles(), [])
   const availableTechIds = useMemo(() => getFilterableTechs(), [])
@@ -21,25 +38,28 @@ export function useProjectFilters(initialRoleIds?: string[], initialTechIds?: st
   )
 
   const toggleRoleFilter = useCallback((filterId: string) => {
-    setSelectedRoleIds(prev => 
-      prev.includes(filterId) 
-        ? prev.filter(id => id !== filterId)
-        : [...prev, filterId]
-    )
-  }, [])
+    const newRoleIds = selectedRoleIds.includes(filterId) 
+      ? selectedRoleIds.filter(id => id !== filterId)
+      : [...selectedRoleIds, filterId]
+    
+    setSelectedRoleIds(newRoleIds)
+    onFiltersChange?.(newRoleIds, selectedTechIds)
+  }, [selectedRoleIds, selectedTechIds, onFiltersChange])
 
   const toggleTechFilter = useCallback((filterId: string) => {
-    setSelectedTechIds(prev =>
-      prev.includes(filterId)
-        ? prev.filter(id => id !== filterId) 
-        : [...prev, filterId]
-    )
-  }, [])
+    const newTechIds = selectedTechIds.includes(filterId)
+      ? selectedTechIds.filter(id => id !== filterId) 
+      : [...selectedTechIds, filterId]
+    
+    setSelectedTechIds(newTechIds)
+    onFiltersChange?.(selectedRoleIds, newTechIds)
+  }, [selectedRoleIds, selectedTechIds, onFiltersChange])
 
   const clearAllFilters = useCallback(() => {
     setSelectedRoleIds([])
     setSelectedTechIds([])
-  }, [])
+    onFiltersChange?.([], [])
+  }, [onFiltersChange])
 
   return {
     // State

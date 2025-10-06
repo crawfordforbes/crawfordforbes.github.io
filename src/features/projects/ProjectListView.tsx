@@ -2,6 +2,7 @@ import { memo } from "react";
 import ProjectFilterBar from "./ProjectFilterBar";
 import ProjectGrid from "./ProjectGrid";
 import type { ProjectContainerRenderProps } from "./ProjectContainer";
+import './styles/projectIndex.css';
 
 type ProjectListViewProps = {
   filters: ProjectContainerRenderProps['filters'],
@@ -14,7 +15,7 @@ type ProjectListViewProps = {
  */
 function ProjectListView({ filters, routing, ui }: ProjectListViewProps) {
   return (
-    <article className="project-index" aria-live="polite" aria-atomic="true">
+    <article className={`project-index ${routing.hasError ? 'routing-error' : ''}`} aria-live="polite" aria-atomic="true">
       <ProjectFilterBar filters={filters} ui={ui} />
       <ProjectGrid filters={filters} routing={routing} />
     </article>

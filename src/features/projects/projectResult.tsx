@@ -1,5 +1,5 @@
 
-import { getImgUrl } from "@/utils/images";
+import { getImgUrl, imagePaths } from "@/utils/images";
 import Badge from "@/components/global/badge";
 import { memo } from "react";
 import OptimizedImage from "@/components/global/OptimizedImage";
@@ -7,7 +7,6 @@ import { createImageSources, imageSizes } from "@/components/global/OptimizedIma
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/global/images";
-import { imagePath } from "@/data/global/images";
 
 import './styles/ProjectResult.css'
 import { techData } from "@/data/projects/techs";
@@ -17,7 +16,6 @@ import { cardBorder } from "@/data/hexes/layouts";
 
 import Hex from "@/features/hexes/HexSimple";
 import { roleData } from "@/data/projects/roles";
-import { Link } from "react-router";
 
 type ProjectResultProps = {
   project: ProjectType,
@@ -114,10 +112,12 @@ function ProjectResult({
     />
   } /> : <></>;
 
-  const cardImagePath = imagePath + "projects/" + imageData[project.primaryImgId].fileName;
+  const cardImagePath = "projects/" + imageData[project.primaryImgId].fileName;
   
   // Create responsive image sources for project cards
-  const cardImageSources = createImageSources(cardImagePath.replace(/\.[^/.]+$/, ""), [300, 600, 800]);
+  // These will use optimized images once generated (e.g., project-name-300w.webp, project-name-600w.webp)
+  const cardImageBasePath = cardImagePath.replace(/\.[^/.]+$/, ""); // Remove extension
+  const cardImageSources = createImageSources(cardImageBasePath, [300, 600, 800]);
   
   const hasTechIds: boolean = !!(project?.techIds && project?.techIds.length > 0);
   const hasRoleIds: boolean = !!(project?.roleIds && project?.roleIds.length > 0);
@@ -136,7 +136,8 @@ function ProjectResult({
             <OptimizedImage
               src={getImgUrl(cardImagePath)}
               alt={`${project.title} - card image`}
-              sources={cardImageSources}
+              sources={[]} // Temporarily disable responsive sources until optimized images are generated
+              fallbackSrc={imagePaths.hero.full}
               sizes={imageSizes.card}
               className="image"
               objectFit="cover"
@@ -159,19 +160,12 @@ function ProjectResult({
         {project.short_description &&
           <p className="description">{project.short_description}</p>
         }
-        <Link 
-          to={`/project/${project.id}`} 
-          role="button" 
-          className="read-more-link" 
-          aria-label={`Read more about ${project.title}`}
-        >
-          <Badge 
-            title="Learn More"
-            extraClass="to-from-colors pill read-more" 
-            badgeOnClick={() => selectProjectClick(project.id)}
-            noTabIndex={true}
-          />
-        </Link>
+        <Badge 
+          title="Learn More"
+          extraClass="to-from-colors pill read-more" 
+          badgeOnClick={() => selectProjectClick(project.id)}
+          noTabIndex={true}
+        />
         <footer className="footer-links">
           {ghBadge}
           {externalLink}

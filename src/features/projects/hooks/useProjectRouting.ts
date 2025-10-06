@@ -1,47 +1,82 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useParams } from 'react-router'
+import { useParams, useSearchParams, useNavigate } from 'react-router'
 import { scrollToTarget } from '@/utils/site'
-import { shouldAutoScrollToProjects, sanitizeFilterIds } from '../../../utils/projectUtilities'
+import { shouldAutoScrollToProjects, isValidProjectId } from '../../../utils/projectUtilities'
 
 export function useProjectRouting(initialProjectId?: string) {
   const params = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [selectedProjectId, setSelectedProjectId] = useState(initialProjectId)
 
-  // Parse URL parameters for filters
-  const urlFilterIds = sanitizeFilterIds(params.filterId)
+  // Parse URL parameters
   const urlProjectId = params.projectId
+  
+  // Parse filter query parameters
+  const roleFilters = searchParams.get('roles')?.split(',').filter(Boolean) || []
+  const techFilters = searchParams.get('techs')?.split(',').filter(Boolean) || []
 
   // Auto-scroll to projects on load if URL has project/filter params
   useEffect(() => {
-    if (shouldAutoScrollToProjects({ projectId: params.projectId, filterId: params.filterId })) {
+    const hasFilters = roleFilters.length > 0 || techFilters.length > 0
+    if (shouldAutoScrollToProjects({ projectId: urlProjectId, hasFilters })) {
       scrollToTarget("projects")
     }
-  }, [params.projectId, params.filterId])
+  }, [urlProjectId, roleFilters.length, techFilters.length])
 
-  // Sync URL project ID with local state
+  // Sync URL project ID with local state and validate
   useEffect(() => {
     if (urlProjectId) {
-      setSelectedProjectId(urlProjectId)
+      if (isValidProjectId(urlProjectId)) {
+        setSelectedProjectId(urlProjectId)
+      } else {
+        // Invalid project ID - redirect to portfolio with 404 indication
+        navigate('/portfolio?error=project-not-found', { replace: true })
+      }
+    } else {
+      setSelectedProjectId(undefined)
     }
-  }, [urlProjectId])
+  }, [urlProjectId, navigate])
 
   const selectProject = useCallback((projectId: string) => {
-    setSelectedProjectId(projectId)
-  }, [])
+    if (isValidProjectId(projectId)) {
+      navigate(`/portfolio/${projectId}`)
+    }
+  }, [navigate])
 
   const clearSelectedProject = useCallback(() => {
-    setSelectedProjectId(undefined)
-  }, [])
+    // Return to portfolio list, preserving current filters but removing error
+    const currentParams = new URLSearchParams(searchParams)
+    currentParams.delete('error') // Remove error parameter
+    const cleanSearch = currentParams.toString()
+    navigate(`/portfolio${cleanSearch ? `?${cleanSearch}` : ''}`)
+  }, [navigate, searchParams])
+
+  const updateFilters = useCallback((roleIds: string[], techIds: string[]) => {
+    const newParams = new URLSearchParams()
+    
+    if (roleIds.length > 0) {
+      newParams.set('roles', roleIds.join(','))
+    }
+    if (techIds.length > 0) {
+      newParams.set('techs', techIds.join(','))
+    }
+    
+    setSearchParams(newParams)
+  }, [setSearchParams])
 
   return {
     // State
     selectedProjectId,
-    urlFilterIds,
+    roleFilters,
+    techFilters,
     urlProjectId,
+    hasError: searchParams.get('error') === 'project-not-found',
     
     // Actions  
     selectProject,
     clearSelectedProject,
+    updateFilters,
   }
 }
 

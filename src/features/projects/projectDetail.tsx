@@ -1,4 +1,4 @@
-import { getImgUrl, generateImageSources, imagePaths } from "@/utils/images";
+import { getImgUrl } from "@/utils/images";
 
 import Hex from "../hexes/HexSimple"
 import HexGridLayout from "@/features/hexes/hexGridLayout";

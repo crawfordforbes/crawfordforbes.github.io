@@ -16,7 +16,7 @@ function ProjectGrid({ filters, routing }: ProjectGridProps) {
   const projects = filters.filteredProjects;
   
   // Use pagination instead of virtualization
-  const pagination = useProjectPagination(projects, 3); // 6 projects per page
+  const pagination = useProjectPagination(projects, 6); // 6 projects per page
 
   const renderProject = (project: typeof projects[0]) => (
     <ProjectResult 
@@ -33,6 +33,24 @@ function ProjectGrid({ filters, routing }: ProjectGridProps) {
 
   return (
     <div className="helper-results">
+      {/* Show error banner if there's a project-not-found error */}
+      {routing.hasError && (
+        <div className="error-banner">
+          <div className="error-content">
+            <p>
+              <strong>Project not found.</strong> The project you're looking for doesn't exist or may have been removed.
+            </p>
+            <button 
+              onClick={routing.clearSelectedProject}
+              className="dismiss-error"
+              aria-label="Dismiss error message"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
+      
       <div className="intro-text">
         <p>Filter by role to see projects I led, contributed to, or built solo. Click a card for the case study.</p>
       </div>

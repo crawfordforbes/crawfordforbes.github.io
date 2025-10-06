@@ -25,18 +25,26 @@ export type ProjectContainerRenderProps = {
  * Uses render props pattern to provide data to child components.
  */
 function ProjectContainer({  
-  selectedRoleIdsProps,
-  selectedTechIdsProps,
-  selectedProjectIdProp,
+  selectedRoleIdsProps, // Legacy props - will be removed
+  selectedTechIdsProps, // Legacy props - will be removed  
+  selectedProjectIdProp, // Legacy props - will be removed
   children
 }: ProjectContainerProps) {
   
   // Monitor performance (set to true to enable)
   usePerformanceMonitor('ProjectContainer', false)
   
-  // Initialize all hooks
+  // Initialize routing first to get URL state
   const routing = useProjectRouting(selectedProjectIdProp)
-  const filters = useProjectFilters(selectedRoleIdsProps, selectedTechIdsProps)
+  
+  // Initialize filters with URL state and routing callback
+  const filters = useProjectFilters(
+    routing.roleFilters, 
+    routing.techFilters,
+    routing.updateFilters
+  )
+  
+  // Initialize other hooks
   const ui = useProjectUI()
   const navigation = useProjectNavigation(filters.filteredProjects, routing.selectedProjectId)
 

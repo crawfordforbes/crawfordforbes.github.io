@@ -49,8 +49,14 @@ function App() {
       <MediaQueryContext value={mediaSize}>
         <BrowserRouter>
           <Routes>
-            <Route path="/filters?/:filterId?" element={<Portfolio />} />
-            <Route path="/filters?/:filterId/projects?/:projectId" element={<Portfolio />} />
+            {/* Home page */}
+            <Route path="/" element={<Portfolio />} />
+            
+            {/* Portfolio routes */}
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:projectId" element={<Portfolio />} />
+            
+            {/* Fallback for any unmatched routes */}
             <Route path="*" element={<Portfolio />} />
           </Routes>
         </BrowserRouter>

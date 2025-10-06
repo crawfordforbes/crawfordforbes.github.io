@@ -9,6 +9,8 @@
   --links-max-width: 300px;
 
   filter: var(--drop-shadow);
+  height: 100%; /* Ensure height flows down to children */
+  min-height: 300px; /* Ensure minimum height for aspect-ratio to work */
 }
 
 .project-result .inner::after {
