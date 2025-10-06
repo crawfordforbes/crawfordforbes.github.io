@@ -14,8 +14,11 @@ function HexRow({
   hexMargin,
 }: HexRowProps) {
 if (!row) {
-  console.log("did you miss registering a grid or a row somewhere?")
-  return <></>
+  // Only log in development builds
+  if (import.meta.env.DEV) {
+    console.warn(`HexRow: Missing row data. Expected row identifier but received: ${row}`);
+  }
+  return null;
 }
   // fills the row with hex.repeat number of hex.id hexes
   return (

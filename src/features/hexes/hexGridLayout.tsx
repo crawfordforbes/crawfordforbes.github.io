@@ -37,7 +37,10 @@ const mediaQuery = useContext(MediaQueryContext);
   );
 
   if(!grid) {
-    console.log("did you register your layouts and grids correctly? grid is undefined in hexGridLayout.tsx")
+    if (import.meta.env.DEV) {
+      console.warn(`HexGridLayout: Grid not found for layout "${layout?.grid}". Check if the grid is properly registered in gridData.`);
+    }
+    return null;
   }
 
   // chooses which hex grid to display based on screen size

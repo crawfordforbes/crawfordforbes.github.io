@@ -14,9 +14,7 @@ export {
 
 // Validation functions
 export { 
-  isValidProjectId,
-  sanitizeFilterIds,
-  validateProjectFilters
+  isValidProjectId
 } from './validationUtils'
 
 // Formatting functions

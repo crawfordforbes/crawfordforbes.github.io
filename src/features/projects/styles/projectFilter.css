@@ -57,10 +57,6 @@
   transition: background-color var(--transition-rules), color var(--transition-rules);
 }
 
-.project-index .filter-item .filter-link {
-  border-radius: var(--border-radius);
-}
-
 .project-index .filter-item .title {
   --title-size: 1rem;
 }

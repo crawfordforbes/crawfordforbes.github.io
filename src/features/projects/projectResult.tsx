@@ -3,7 +3,7 @@ import { getImgUrl, imagePaths } from "@/utils/images";
 import Badge from "@/components/global/badge";
 import { memo } from "react";
 import OptimizedImage from "@/components/global/OptimizedImage";
-import { createImageSources, imageSizes } from "@/components/global/OptimizedImage";
+import { imageSizes } from "@/components/global/OptimizedImage";
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/global/images";
@@ -114,10 +114,9 @@ function ProjectResult({
 
   const cardImagePath = "projects/" + imageData[project.primaryImgId].fileName;
   
-  // Create responsive image sources for project cards
-  // These will use optimized images once generated (e.g., project-name-300w.webp, project-name-600w.webp)
-  const cardImageBasePath = cardImagePath.replace(/\.[^/.]+$/, ""); // Remove extension
-  const cardImageSources = createImageSources(cardImageBasePath, [300, 600, 800]);
+  // Note: Responsive image sources temporarily disabled until optimized images are generated
+  // const cardImageBasePath = cardImagePath.replace(/\.[^/.]+$/, ""); // Remove extension
+  // const cardImageSources = createImageSources(cardImageBasePath, [300, 600, 800]);
   
   const hasTechIds: boolean = !!(project?.techIds && project?.techIds.length > 0);
   const hasRoleIds: boolean = !!(project?.roleIds && project?.roleIds.length > 0);

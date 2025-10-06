@@ -2,12 +2,6 @@
  * Image utilities with optimization support
  */
 
-interface ImageSource {
-  src: string;
-  width: number;
-  type: string;
-}
-
 // Import hero images directly for proper Vite URL resolution
 import heroDesktop from '@/assets/images/hero-desktop.webp';
 import heroTablet from '@/assets/images/hero-tablet.webp';
@@ -70,34 +64,6 @@ export function getOptimizedImageUrl(
   return getImgUrl(`../assets/images/${filename}`);
 }
 
-// Generate multiple image sources for responsive images
-export function generateImageSources(
-  basePath: string,
-  sizes: number[] = [400, 800, 1200, 1600]
-): ImageSource[] {
-  const sources: ImageSource[] = [];
-  
-  // WebP sources
-  sizes.forEach(size => {
-    sources.push({
-      src: getOptimizedImageUrl(basePath, { width: size, format: 'webp' }),
-      width: size,
-      type: 'image/webp'
-    });
-  });
-  
-  // JPEG fallback sources
-  sizes.forEach(size => {
-    sources.push({
-      src: getOptimizedImageUrl(basePath, { width: size, format: 'jpeg' }),
-      width: size,
-      type: 'image/jpeg'
-    });
-  });
-  
-  return sources;
-}
-
 // Image path helpers for different categories - now using dynamic imports
 export const imagePaths = {
   hero: {
@@ -113,21 +79,5 @@ export const imagePaths = {
   }
 } as const;
 
-// Preload critical images
-export function preloadImage(src: string, as: 'image' = 'image') {
-  if (typeof window === 'undefined') return;
-  
-  const link = document.createElement('link');
-  link.rel = 'preload';
-  link.as = as;
-  link.href = src;
-  document.head.appendChild(link);
-}
-
-// Preload critical images for above-the-fold content
-export function preloadCriticalImages() {
-  // Preload hero images
-  preloadImage(getImgUrl(imagePaths.hero.mobile));
-  preloadImage(getImgUrl(imagePaths.hero.tablet));
-  preloadImage(getImgUrl(imagePaths.hero.desktop));
-}
+// Image URL generation functions are above
+// createImageSources is in OptimizedImage.tsx where it's used

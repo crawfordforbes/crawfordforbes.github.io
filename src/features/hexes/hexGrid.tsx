@@ -16,8 +16,10 @@ function HexGrid({
   hexMargin
 }: HexGridProps) {
 if (!grid) {
-  console.log("did you miss registering a grid or a row somewhere? The grid in hexGrid.tsx is undefined.")
-  return <></>
+  if (import.meta.env.DEV) {
+    console.warn(`HexGrid: Missing grid data. Expected grid object but received: ${grid}`);
+  }
+  return null;
 }
   // breaks out each hex grid's rows
   return (

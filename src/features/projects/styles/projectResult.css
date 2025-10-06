@@ -48,10 +48,6 @@
   pointer-events: all;
 }
 
-.project-result .read-more-link {
-  width: fit-content;
-}
-
 .project-result .info-panel.has-footer-links {
   padding-bottom: 0;
 }
