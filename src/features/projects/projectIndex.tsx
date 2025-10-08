@@ -4,21 +4,15 @@ import ProjectDetailView from "./ProjectDetailView";
 import './styles/projectIndex.css'
 
 type projectIndexProps = {
-  selectedRoleIdsProps?: string[],
-  selectedTechIdsProps?: string[],
   selectedProjectIdProp?: string,
 }
 
 function ProjectIndex({  
-  selectedRoleIdsProps,
-  selectedTechIdsProps,
   selectedProjectIdProp,
 }: projectIndexProps) {
   
   return (
     <ProjectContainer
-      selectedRoleIdsProps={selectedRoleIdsProps}
-      selectedTechIdsProps={selectedTechIdsProps}
       selectedProjectIdProp={selectedProjectIdProp}
     >
       {({ filters, routing, navigation, ui }) => (

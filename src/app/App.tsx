@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 import './styles/index.css'
 import { MediaQueryContext } from '@/utils/context';
+import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
 import { useEffect, useState } from 'react';
 import { useScreenSize } from '@/utils/site';
 import type { MediaSizes } from '@/types/layout';
@@ -50,14 +51,30 @@ function App() {
         <BrowserRouter>
           <Routes>
             {/* Home page */}
-            <Route path="/" element={<Portfolio />} />
+            <Route path="/" element={
+              <PageErrorBoundary pageName="Home">
+                <Portfolio />
+              </PageErrorBoundary>
+            } />
             
             {/* Portfolio routes */}
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:projectId" element={<Portfolio />} />
+            <Route path="/portfolio" element={
+              <PageErrorBoundary pageName="Portfolio">
+                <Portfolio />
+              </PageErrorBoundary>
+            } />
+            <Route path="/portfolio/:projectId" element={
+              <PageErrorBoundary pageName="Project Detail">
+                <Portfolio />
+              </PageErrorBoundary>
+            } />
             
             {/* Fallback for any unmatched routes */}
-            <Route path="*" element={<Portfolio />} />
+            <Route path="*" element={
+              <PageErrorBoundary pageName="404">
+                <Portfolio />
+              </PageErrorBoundary>
+            } />
           </Routes>
         </BrowserRouter>
       </MediaQueryContext>

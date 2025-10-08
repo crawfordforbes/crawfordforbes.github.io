@@ -6,9 +6,7 @@ import {
 } from "./hooks";
 import { usePerformanceMonitor } from "@/utils/performance";
 
-export type ProjectContainerProps = {
-  selectedRoleIdsProps?: string[],
-  selectedTechIdsProps?: string[],
+interface ProjectContainerProps {
   selectedProjectIdProp?: string,
   children: (props: ProjectContainerRenderProps) => React.ReactNode
 }
@@ -25,8 +23,6 @@ export type ProjectContainerRenderProps = {
  * Uses render props pattern to provide data to child components.
  */
 function ProjectContainer({  
-  selectedRoleIdsProps, // Legacy props - will be removed
-  selectedTechIdsProps, // Legacy props - will be removed  
   selectedProjectIdProp, // Legacy props - will be removed
   children
 }: ProjectContainerProps) {
