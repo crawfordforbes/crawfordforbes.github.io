@@ -39,7 +39,27 @@ interface OptimizedImageProps {
 /**
  * Optimized image component with responsive images, lazy loading, and modern formats
  */
-function OptimizedImage({
+// Generate modern format sources for better optimization
+const generateModernSources = (baseSrc: string): ImageSource[] => {
+  const baseName = baseSrc.replace(/\.[^/.]+$/, ''); // Remove extension
+  const modernSources: ImageSource[] = [];
+
+  // AVIF (best compression, ~30-50% smaller than WebP)
+  modernSources.push({
+    src: `${baseName}.avif`,
+    type: 'image/avif'
+  });
+
+  // WebP (good compression, widely supported)
+  modernSources.push({
+    src: `${baseName}.webp`, 
+    type: 'image/webp'
+  });
+
+  return modernSources;
+};
+
+export const OptimizedImage = memo(({
   src,
   alt,
   className = '',
@@ -54,12 +74,15 @@ function OptimizedImage({
   priority = false,
   onLoad,
   onError
-}: OptimizedImageProps) {
+}: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(priority); // Load immediately if priority
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Generate modern format sources if none provided
+  const optimizedSources = sources.length > 0 ? sources : generateModernSources(src);
 
   // Intersection Observer for lazy loading
   useEffect(() => {
@@ -155,7 +178,7 @@ function OptimizedImage({
       {isInView && (
         <picture>
           {/* Modern format sources (WebP, AVIF) */}
-          {sources
+          {optimizedSources
             .filter(source => source.type && source.type !== 'image/jpeg' && source.type !== 'image/png')
             .map((source, index) => (
               <source
@@ -168,9 +191,9 @@ function OptimizedImage({
             ))}
           
           {/* Fallback sources (JPEG, PNG) */}
-          {sources.length > 0 && (
+          {optimizedSources.length > 0 && (
             <source
-              srcSet={generateSrcSet(sources)}
+              srcSet={generateSrcSet(optimizedSources)}
               sizes={sizes}
             />
           )}
@@ -190,9 +213,9 @@ function OptimizedImage({
       )}
     </div>
   );
-}
+});
 
-export default memo(OptimizedImage);
+export default OptimizedImage;
 
 // Helper function to create image sources for different formats and sizes
 export function createImageSources(
