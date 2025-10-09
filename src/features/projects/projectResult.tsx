@@ -4,6 +4,7 @@ import Badge from "@/components/global/badge";
 import { memo } from "react";
 import OptimizedImage from "@/components/global/OptimizedImage";
 import { imageSizes } from "@/components/global/OptimizedImage";
+import { createAccessibleDescription } from "@/utils/accessibility";
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/global/images";
@@ -124,17 +125,23 @@ function ProjectResult({
 
   return (
     <div className="project-result-container">
-    <article className="card project-feature project-result">
+    <article 
+      className="card project-feature project-result"
+      role="article"
+      aria-labelledby={`project-title-${project.id}`}
+      aria-describedby={project.short_description ? `project-desc-${project.id}` : undefined}
+    >
       <header className="card-top">
         <div className="header-image">
           <button 
             className="inner" 
             onClick={() => selectProjectClick(project.id)}
-            tabIndex={-1}
+            aria-label={`View details for ${project.title} project${project.short_description ? ': ' + createAccessibleDescription(project.short_description, 80) : ''}`}
+            tabIndex={0}
           >
             <OptimizedImage
               src={getImgUrl(cardImagePath)}
-              alt={`${project.title} - card image`}
+              alt={`${project.title} project preview`}
               sources={[]} // Temporarily disable responsive sources until optimized images are generated
               fallbackSrc={imagePaths.hero.full}
               sizes={imageSizes.card}
@@ -144,9 +151,16 @@ function ProjectResult({
           </button>
         </div>
         <section className="header-content">
-          <h2 className="title primary overlay">{project.title}</h2>
+          <h2 
+            id={`project-title-${project.id}`}
+            className="title primary overlay"
+          >
+            {project.title}
+          </h2>
           {hasTechIds &&
-            <ol className="techs badges-list">{renderTechBadges()}</ol> 
+            <div role="list" aria-label="Technologies used" className="techs badges-list">
+              {renderTechBadges()}
+            </div> 
           }
           <HexGridLayout layouts={cardBorder} extraClass="decorative-hex-border"/>
         </section>
@@ -154,18 +168,26 @@ function ProjectResult({
       <section className={ `info-panel ${hasLinks ? "has-footer-links" : ""}` }>
 
         {hasRoleIds &&
-          <ol className="roles badges-list">{renderRoleBadges()}</ol> 
+          <div role="list" aria-label="Project roles" className="roles badges-list">
+            {renderRoleBadges()}
+          </div> 
         }
-        {project.short_description &&
-          <p className="description">{project.short_description}</p>
-        }
+        {project.short_description && (
+          <p 
+            id={`project-desc-${project.id}`}
+            className="description"
+            aria-label={createAccessibleDescription(project.short_description, 120)}
+          >
+            {project.short_description}
+          </p>
+        )}
         <Badge 
           title="Learn More"
           extraClass="to-from-colors pill read-more" 
           badgeOnClick={() => selectProjectClick(project.id)}
-          noTabIndex={true}
+          noTabIndex={false}
         />
-        <footer className="footer-links">
+        <footer className="footer-links" aria-label="External project links">
           {ghBadge}
           {externalLink}
         </footer>

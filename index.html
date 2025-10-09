@@ -2,14 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    
+    <!-- Favicon and Apple touch icons -->
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="mask-icon" href="/favicon.png" color="#000000" />
+    
+    <!-- Viewport and mobile optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="theme-color"
+      content="#a9e583"
+      media="(prefers-color-scheme: light)" />
+    <meta
+      name="theme-color"
+      content="#4f6d7a"
+      media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
     
     <!-- Basic SEO -->
     <title>Crawford Forbes - Full Stack Developer & Designer</title>
     <meta name="description" content="Portfolio of Crawford Forbes, a full stack developer and designer specializing in modern web applications, UI/UX design, and creative solutions." />
-    <meta name="keywords" content="full stack developer, web developer, designer, portfolio, React, JavaScript, TypeScript, UI/UX" />
+    <meta name="keywords" content="full stack developer, web developer, designer, portfolio, React, JavaScript, TypeScript, UI/UX, frontend developer, web applications, responsive design, modern web development" />
     <meta name="author" content="Crawford Forbes" />
+    <meta name="generator" content="Vite + React" />
     
     <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content="Crawford Forbes - Full Stack Developer & Designer" />
@@ -19,19 +35,99 @@
     <meta property="og:image" content="https://crawfordforbes.github.io/crawfordforbes/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Crawford Forbes Portfolio" />
     
-    <!-- Twitter Card -->
+    <!-- Twitter/X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Crawford Forbes - Full Stack Developer & Designer" />
     <meta name="twitter:description" content="Portfolio of Crawford Forbes, a full stack developer and designer specializing in modern web applications, UI/UX design, and creative solutions." />
     <meta name="twitter:image" content="https://crawfordforbes.github.io/crawfordforbes/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Crawford Forbes Portfolio - Full Stack Developer & Designer" />
     
-    <!-- Additional SEO -->
-    <meta name="robots" content="index, follow" />
+    <!-- LinkedIn specific -->
+    <meta property="article:author" content="https://www.linkedin.com/in/crawfordforbes/" />
+    
+    <!-- Additional SEO and crawling directives -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
     <link rel="canonical" href="https://crawfordforbes.github.io/crawfordforbes" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://api.github.com https://*.sentry.io; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" />
+    
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="//github.com" />
+    <link rel="dns-prefetch" href="//linkedin.com" />
+    
+    <!-- JSON-LD Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Crawford Forbes",
+      "jobTitle": "Full Stack Developer",
+      "description": "Full stack lead developer specializing in modern web applications and creative solutions.",
+      "url": "https://crawfordforbes.github.io/crawfordforbes",
+      "image": "https://crawfordforbes.github.io/crawfordforbes/og-image.jpg",
+      "email": "crawford.forbes+hiring@gmail.com",
+      "sameAs": [
+        "https://github.com/crawfordforbes",
+        "https://www.linkedin.com/in/crawfordforbes/"
+      ],
+      "knowsAbout": [
+        "Web Development",
+        "React",
+        "JavaScript", 
+        "TypeScript",
+        "Frontend Development",
+        "Full Stack Development",
+        "Modern Web Applications"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Full Stack Developer",
+        "description": "Develops modern web applications and leads small development teams"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Independent Developer"
+      }
+    }
+    </script>
+    
+    <!-- Preload critical resources -->
+    <link rel="modulepreload" href="/src/app/main.tsx" />
+    
+    <!-- Resource hints for better performance -->
+    <link rel="prefetch" href="/src/assets/images/hero-desktop.webp" />
+    
   </head>
   <body>
+    <!-- Accessibility: Skip navigation for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div id="root"></div>
+    
+    <!-- Main application script -->
     <script type="module" src="/src/app/main.tsx"></script>
+    
+    <!-- No-JavaScript fallback -->
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>Crawford Forbes - Full Stack Developer</h1>
+        <p>This portfolio requires JavaScript to display properly.</p>
+        <p>Please enable JavaScript in your browser settings.</p>
+        <p>Contact: <a href="mailto:crawford.forbes+hiring@gmail.com">crawford.forbes+hiring@gmail.com</a></p>
+      </div>
+    </noscript>
   </body>
 </html>

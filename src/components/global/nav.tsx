@@ -59,7 +59,14 @@ function Nav() {
   return (
     <nav className="nav" aria-label="Main navigation">
       <div className="shadow">
-        <button className="nav-toggle-button" onClick={toggleMenu} aria-label={`${isMenuOpen ? 'Close' : 'Menu'}`} tabIndex={0}>
+        <button 
+          className="nav-toggle-button" 
+          onClick={toggleMenu} 
+          aria-label={`${isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}`} 
+          aria-expanded={isMenuOpen}
+          aria-controls="nav-menu"
+          tabIndex={0}
+        >
           <Hex 
             hexClass="nav-toggle icon-bg" 
             content={isMenuOpen ? "toggle-open" : "toggle-close"} 
@@ -67,16 +74,25 @@ function Nav() {
           />
         </button>
       </div>
-      <div className={`nav-hex hex ${isMenuOpen ? 'open' : 'closed'}`} aria-expanded={isMenuOpen} role="region" aria-label="Navigation Menu">
+      <div 
+        id="nav-menu"
+        className={`nav-hex hex ${isMenuOpen ? 'open' : 'closed'}`} 
+        aria-expanded={isMenuOpen} 
+        role="region" 
+        aria-label="Navigation menu"
+        aria-hidden={!isMenuOpen}
+      >
         <div className="hex-content">
-          <ol className="locale">
-            <li><h4>{contactData.fname.title} {contactData.lname.title}</h4></li>
-            <li><h4>{contactData.tagline1.title}</h4></li>
-            <li><h4>{contactData.locale.title}</h4></li>
-          </ol>
-          <ol className="nav-links">
-            {renderBadges()}
-          </ol>
+          <div className="locale" role="banner" aria-label="Site author information">
+            <div><h4>{contactData.fname.title} {contactData.lname.title}</h4></div>
+            <div><h4>{contactData.tagline1.title}</h4></div>
+            <div><h4>{contactData.locale.title}</h4></div>
+          </div>
+          <nav role="navigation" aria-label="Primary navigation links">
+            <ul className="nav-links" role="list">
+              {renderBadges()}
+            </ul>
+          </nav>
         </div>
       </div>
     </nav>

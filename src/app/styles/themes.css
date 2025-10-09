@@ -1,7 +1,3 @@
-:root {
-  
-}
-
 :root:has(.outdoors-theme) {
   --color-1: #361008;
   --color-2: #582F0E;

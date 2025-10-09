@@ -3,9 +3,16 @@ import { createRoot } from 'react-dom/client'
 import App from './App'
 import { AppErrorBoundary } from '../components/global/ErrorBoundaryWrappers'
 import { initPerformanceMonitoring } from '../utils/performance'
+import { analytics } from '../utils/analytics'
 
 // Initialize performance monitoring in development
 initPerformanceMonitoring()
+
+// Initialize analytics (will be no-op until tracking IDs are configured)
+analytics.initialize().then(() => {
+  // Track initial page view
+  analytics.trackPageView();
+});
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

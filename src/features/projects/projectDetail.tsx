@@ -158,7 +158,10 @@ function ProjectDetail({
 
           {project.descriptionHTML && 
             <div className={`text-area text-area-gradient ${hasTechBadges ? 'with-tech-badges' : ''}`}>
-              <div className="description" dangerouslySetInnerHTML={{ __html: project.descriptionHTML}} ></div>
+              <div 
+                className="description" 
+                dangerouslySetInnerHTML={{ __html: project.descriptionHTML}}
+              ></div>
             </div>
           }
 
