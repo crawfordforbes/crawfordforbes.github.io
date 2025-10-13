@@ -11,20 +11,18 @@ type BackButtonProps = {
  */
 function BackButton({ onBack }: BackButtonProps) {
   return (
-    <Link to="/portfolio" role="button" className="back-link" aria-label="Back to Projects List">
+    <Link to="/portfolio" role="button" className="back-link" aria-label="Back to Projects List" tabIndex={0}>
       <Hex 
         hexClass="back-button hex-button mobile" 
         content="more-projects"
         hexWidth={64} 
         onClick={onBack} 
-        tabIndex={-1}
       />
       <Hex 
         hexClass="back-button hex-button desktop" 
         content="more-projects"
         hexWidth={96} 
         onClick={onBack} 
-        tabIndex={-1}
       />
     </Link>
   )

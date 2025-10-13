@@ -3,7 +3,7 @@ import { getImgUrl } from "@/utils/images";
 import Hex from "../hexes/HexSimple"
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 import OptimizedImage from "../../components/global/OptimizedImage";
-import { getProjectById, generateImageAlt } from "../../utils/projectUtilities";
+import { getProjectById, generateImageAlt } from "../../utils/projects";
 
 import { cardBorder } from "@/data/hexes/layouts";
 import { imageData } from "@/data/global/images";

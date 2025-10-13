@@ -4,7 +4,7 @@ import {
   filterProjects, 
   getFilterableRoles, 
   getFilterableTechs 
-} from '../../../utils/projectUtilities'
+} from '../../../utils/projects'
 
 export function useProjectFilters(
   urlRoleFilters?: string[], 

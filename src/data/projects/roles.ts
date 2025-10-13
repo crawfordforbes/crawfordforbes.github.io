@@ -7,16 +7,7 @@ export type RoleType = {
   filterable?: boolean;
 }
 
-type RolesType = {
-  [key: string]: {
-    id: string;
-    title: string;
-    iconClass?: [IconPrefix, IconName];
-    filterable?: boolean;
-  }
-}
-
-export const roleData: RolesType = {
+export const roleData: Record<string, RoleType> = {
   "developer": {
     id: "developer",
     title: "Developer",

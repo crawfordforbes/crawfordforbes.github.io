@@ -32,66 +32,100 @@ function ProjectFilter({
     highlightFilterHover("");
   };
 
+  // Enhanced keyboard handler
+  const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      action();
+    }
+  };
 
   return (
-    <article className="project-feature filter-container">
+    <div className="project-feature filter-container" role="region" aria-label="Project filtering options">
       <div className="variable-height-hex filter-wrapper">
-        <h2 className="title">Role</h2>
-        <ol className="filter-list">
-          {availableRoleIds && availableRoleIds.map((roleId, idx)=>{
-            const selected = selectedRoleIds.some((id) => id === roleId.id) || (hoveredFilters && hoveredFilters === roleId.id)
-            let placement = idx <= (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
-            return (
-              <li 
-                key={idx} 
-                className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
-                onMouseEnter={() => handleMouseEnter(roleId.id)}
-                onMouseLeave={() => handleMouseLeave()}
-              >
-                <button 
-                  onClick={() => selectRoleFilterClick(roleId.id)} 
-                  aria-label={`Filter by ${roleId.title}`}
-                  className='filter-button'
+        
+        {/* Role Filters */}
+        <fieldset>
+          <legend className="title" id="role-filter-heading">Role</legend>
+          <ol 
+            className="filter-list" 
+            role="group" 
+            aria-labelledby="role-filter-heading"
+            aria-describedby="filter-status"
+          >
+            {availableRoleIds && availableRoleIds.map((roleId, idx) => {
+              const selected = selectedRoleIds.some((id) => id === roleId.id) || (hoveredFilters && hoveredFilters === roleId.id)
+              let placement = idx <= (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
+              
+              return (
+                <li 
+                  key={idx} 
+                  className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
+                  onMouseEnter={() => handleMouseEnter(roleId.id)}
+                  onMouseLeave={() => handleMouseLeave()}
                 >
-                  <Badge 
-                    title={roleId.title} 
-                    iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
-                    noTabIndex={true}
-                  />
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-        <h2 className="title">Technology</h2>
-        <ol className="filter-list">
-          {availableTechIds && availableTechIds.map((techId, idx)=>{
-            const selected = selectedTechIds.some((id) => id === techId.id) || (hoveredFilters && hoveredFilters === techId.id)
-            let placement = idx + availableRoleIds.length <= (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
-            return (
-              <li 
-                key={idx} 
-                className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
-                onMouseEnter={() => handleMouseEnter(techId.id)}
-                onMouseLeave={() => handleMouseLeave()}
-              >
-                <button 
-                  onClick={() => selectTechFilterClick(techId.id)}
-                  aria-label={`Filter by ${techId.title}`}
-                  className='filter-button'
+                  <button 
+                    onClick={() => selectRoleFilterClick(roleId.id)} 
+                    onKeyDown={(e) => handleKeyDown(e, () => selectRoleFilterClick(roleId.id))}
+                    aria-label={`${selected ? 'Remove' : 'Add'} ${roleId.title} role filter`}
+                    aria-pressed={selected ? "true" : "false"}
+                    className='filter-button'
+                    type="button"
+                  >
+                    <Badge 
+                      title={roleId.title} 
+                      iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
+                      noTabIndex={true}
+                    />
+                  </button>
+                </li>
+              )
+            })}
+          </ol>
+        </fieldset>
+
+        {/* Technology Filters */}
+        <fieldset>
+          <legend className="title" id="tech-filter-heading">Technology</legend>
+          <ol 
+            className="filter-list"
+            role="group" 
+            aria-labelledby="tech-filter-heading"
+            aria-describedby="filter-status"
+          >
+            {availableTechIds && availableTechIds.map((techId, idx) => {
+              const selected = selectedTechIds.some((id) => id === techId.id) || (hoveredFilters && hoveredFilters === techId.id)
+              let placement = idx + availableRoleIds.length <= (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
+              
+              return (
+                <li 
+                  key={idx} 
+                  className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
+                  onMouseEnter={() => handleMouseEnter(techId.id)}
+                  onMouseLeave={() => handleMouseLeave()}
                 >
-                  <Badge 
-                    title={techId.title} 
-                    iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
-                    noTabIndex={true}
-                  />
-                </button>
-              </li>
-            )
-          })}
-        </ol>
+                  <button 
+                    onClick={() => selectTechFilterClick(techId.id)}
+                    onKeyDown={(e) => handleKeyDown(e, () => selectTechFilterClick(techId.id))}
+                    aria-label={`${selected ? 'Remove' : 'Add'} ${techId.title} technology filter`}
+                    aria-pressed={selected ? "true" : "false"}
+                    className='filter-button'
+                    type="button"
+                  >
+                    <Badge 
+                      title={techId.title} 
+                      iconClass={selected ? ['fas', 'circle-xmark'] : ['fas', 'circle']}
+                      noTabIndex={true}
+                    />
+                  </button>
+                </li>
+              )
+            })}
+          </ol>
+        </fieldset>
+
       </div>
-    </article>
+    </div>
   )
 }
 

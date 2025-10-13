@@ -4,7 +4,7 @@ import Badge from "@/components/global/badge";
 import { memo } from "react";
 import OptimizedImage from "@/components/global/OptimizedImage";
 import { imageSizes } from "@/components/global/OptimizedImage";
-import { createAccessibleDescription } from "@/utils/accessibility";
+import { createAccessibleDescription } from "@/utils/ui";
 
 import type { ProjectType } from "@/data/projects/projects";
 import { imageData } from "@/data/global/images";
@@ -119,8 +119,8 @@ function ProjectResult({
   // const cardImageBasePath = cardImagePath.replace(/\.[^/.]+$/, ""); // Remove extension
   // const cardImageSources = createImageSources(cardImageBasePath, [300, 600, 800]);
   
-  const hasTechIds: boolean = !!(project?.techIds && project?.techIds.length > 0);
-  const hasRoleIds: boolean = !!(project?.roleIds && project?.roleIds.length > 0);
+  const hasTechIds = !!(project?.techIds && project?.techIds.length > 0);
+  const hasRoleIds = !!(project?.roleIds && project?.roleIds.length > 0);
   const hasLinks = !!(project.githubLink || project.externalLink);
 
   return (

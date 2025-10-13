@@ -1,5 +1,5 @@
 .hex-header {
-  --header-offset: 32px;
+  --header-offset: 20px;
   --left: calc(50% - var(--header-offset));
   --width: calc(100vw + (var(--header-offset) * 2));
 
@@ -8,10 +8,11 @@
   left: var(--left);
   transform: translateX(-50%);
   height: 100%;
+  width: var(--width);
   z-index: 2;
   pointer-events: none;
-  overflow-x: clip;
-  width: var(--width);
+  overflow: hidden;
+  contain: layout style paint;
 }
 
 .hex-header .hex:has(a) {

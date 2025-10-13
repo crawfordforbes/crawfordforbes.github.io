@@ -5,7 +5,6 @@ import IntroPanel from "../../components/panels/introPanel"
 import ProjectIndex from "@/features/projects/projectIndex"
 import Footer from "../../components/panels/footer"
 import { ComponentErrorBoundary } from "@/components/global/ErrorBoundaryWrappers"
-import { ErrorTestComponent } from "@/components/global/ErrorTestComponent"
 
 function Portfolio() {
 
@@ -33,9 +32,6 @@ function Portfolio() {
       <ComponentErrorBoundary componentName="Footer">
         <Footer />
       </ComponentErrorBoundary>
-      
-      {/* Error testing component (development only) */}
-      <ErrorTestComponent componentName="Portfolio" />
     </div>
   )
 }

@@ -8,7 +8,7 @@ import { analytics } from '../utils/analytics'
 // Initialize performance monitoring in development
 initPerformanceMonitoring()
 
-// Initialize analytics (will be no-op until tracking IDs are configured)
+// Initialize analytics (simplified implementation)
 analytics.initialize().then(() => {
   // Track initial page view
   analytics.trackPageView();

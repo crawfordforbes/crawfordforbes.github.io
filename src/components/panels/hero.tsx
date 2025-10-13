@@ -2,7 +2,7 @@ import { contactData } from '@/data/global/contacts'
 import './styles/hero.css'
 import OptimizedImage from '../global/OptimizedImage'
 import { imagePaths } from '@/utils/images'
-import { generateImageAlt } from '@/utils/projectUtilities'
+import { generateImageAlt } from '@/utils/projects'
 
 function Hero() {
   // Define responsive image sources for hero

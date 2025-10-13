@@ -1,8 +1,7 @@
+import { useState } from 'react';
 import { 
   useProjectFilters, 
-  useProjectRouting, 
-  useProjectNavigation, 
-  useProjectUI 
+  useProjectRouting
 } from "./hooks";
 import { usePerformanceMonitor } from "@/utils/performance";
 
@@ -14,8 +13,14 @@ interface ProjectContainerProps {
 export type ProjectContainerRenderProps = {
   filters: ReturnType<typeof useProjectFilters>,
   routing: ReturnType<typeof useProjectRouting>,
-  navigation: ReturnType<typeof useProjectNavigation>,
-  ui: ReturnType<typeof useProjectUI>,
+  navigation: {
+    goToPrevious: () => string | null;
+    goToNext: () => string | null;
+  };
+  ui: {
+    showMobileFilter: boolean;
+    toggleMobileFilter: () => void;
+  };
 }
 
 /**
@@ -40,9 +45,21 @@ function ProjectContainer({
     routing.updateFilters
   )
   
-  // Initialize other hooks
-  const ui = useProjectUI()
-  const navigation = useProjectNavigation(filters.filteredProjects, routing.selectedProjectId)
+  // Simple mobile filter state (was over-engineered useProjectUI hook)
+  const [showMobileFilter, setShowMobileFilter] = useState(false);
+  const ui = {
+    showMobileFilter,
+    toggleMobileFilter: () => setShowMobileFilter(prev => !prev)
+  };
+  
+  // Simple navigation logic (was over-engineered useProjectNavigation hook)
+  const currentIndex = routing.selectedProjectId 
+    ? filters.filteredProjects.findIndex(p => p.id === routing.selectedProjectId)
+    : -1;
+  const navigation = {
+    goToPrevious: () => currentIndex > 0 ? filters.filteredProjects[currentIndex - 1]?.id || null : null,
+    goToNext: () => currentIndex < filters.filteredProjects.length - 1 ? filters.filteredProjects[currentIndex + 1]?.id || null : null
+  };
 
   // Provide all state and actions to children via render props
   return (

@@ -3,9 +3,6 @@ import './styles/optimized-image.css';
 
 interface ImageSource {
   src: string;
-  width?: number;
-  height?: number;
-  media?: string; // CSS media query
   type?: string; // MIME type like 'image/webp'
 }
 
@@ -14,26 +11,11 @@ interface OptimizedImageProps {
   alt: string;
   className?: string;
   loading?: 'lazy' | 'eager';
-  
-  // Responsive image options
   sources?: ImageSource[];
   sizes?: string;
-  
-  // Fallback and placeholder
   fallbackSrc?: string;
-  placeholder?: React.ReactNode | 'blur' | 'skeleton';
-  blurDataURL?: string;
-  
-  // Styling
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-  aspectRatio?: string;
-  
-  // Performance
-  priority?: boolean; // For above-the-fold images
-  
-  // Callbacks
-  onLoad?: () => void;
-  onError?: () => void;
+  priority?: boolean;
 }
 
 /**
@@ -173,7 +155,11 @@ export const OptimizedImage = memo(({
       className={`optimized-image-container ${className}`}
       style={containerStyle}
     >
-      {(!isLoaded || hasError) && renderPlaceholder()}
+      {!isLoaded && !hasError && (
+        <div className="image-placeholder" aria-label="Loading image..." aria-busy="true">
+          {renderPlaceholder()}
+        </div>
+      )}
       
       {isInView && (
         <picture>
@@ -208,6 +194,7 @@ export const OptimizedImage = memo(({
             onLoad={handleLoad}
             onError={handleError}
             decoding="async"
+            aria-hidden={!isLoaded}
           />
         </picture>
       )}
@@ -220,8 +207,8 @@ export default OptimizedImage;
 // Helper function to create image sources for different formats and sizes
 export function createImageSources(
   basePath: string,
-  sizes: number[] = [400, 800, 1200, 1600], // Default: covers mobile to desktop
-  formats: string[] = ['webp', 'jpeg']
+  sizes = [400, 800, 1200, 1600], // Default: covers mobile to desktop
+  formats = ['webp', 'jpeg']
 ): ImageSource[] {
   const sources: ImageSource[] = [];
   

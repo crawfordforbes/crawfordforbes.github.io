@@ -15,11 +15,11 @@ export const rowData:RowsType = {
   /* mobile */
   "header-mobile-1": {
     id: "header-mobile-1",
-    hexes: [{id:"gradient-1-2", repeat: 6}]
+    hexes: [{id:"gradient-1-2", repeat: 8}]
   },
   "header-mobile-2": {
     id: "header-mobile-2",
-    hexes: [{id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"}, {id:"gradient-2-4", repeat: 1} ]
+    hexes: [{id:"logo"}, {id:"contacts-email"}, {id:"nav-projects"}, {id:"gradient-2-4", repeat: 4} ]
   },
   "header-mobile-3": {
     id: "header-mobile-3",
@@ -27,7 +27,7 @@ export const rowData:RowsType = {
   },
   "header-mobile-4": {
     id: "header-mobile-4",
-    hexes: [{id:""}]
+    hexes: [{id:"gradient-5-8"}]
   },
   "header-mobile-5": {
     id: "header-mobile-5",

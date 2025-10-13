@@ -1,152 +1,82 @@
-import { Component } from 'react';
-import type { ReactNode, ErrorInfo } from 'react';
-import { errorLogger } from '../../utils/errorLogger';
-import './styles/errorBoundary.css';
+import { Component, type ErrorInfo, type ReactNode } from "react";
+import './styles/errorBoundary.css'; // Fix case sensitivity
+
+interface ErrorBoundaryProps {
+  children: ReactNode;
+  level?: 'app' | 'page' | 'component';
+  componentName?: string;
+  fallback?: ReactNode;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
+}
 
 interface ErrorBoundaryState {
   hasError: boolean;
   error?: Error;
-  errorInfo?: ErrorInfo;
 }
 
-export interface ErrorBoundaryProps {
-  children: ReactNode;
-  level: 'app' | 'page' | 'component';
-  fallback?: ReactNode;
-  onError?: (error: Error, errorInfo: ErrorInfo) => void;
-  showErrorDetails?: boolean;
-}
-
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  state: ErrorBoundaryState = {
-    hasError: false,
-  };
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return {
-      hasError: true,
-      error,
-    };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Update state with error details
-    this.setState({
-      error,
-      errorInfo,
-    });
-
-    // Call optional error handler
-    this.props.onError?.(error, errorInfo);
-
-    // Log error using centralized logger
-    errorLogger.logError({
-      message: error.message,
-      stack: error.stack,
-      componentStack: errorInfo.componentStack ?? undefined,
-      level: this.props.level,
-    });
+    console.error(`Error in ${this.props.componentName || 'Component'}:`, error, errorInfo);
+    
+    // Call custom error handler if provided
+    if (this.props.onError) {
+      this.props.onError(error, errorInfo);
+    }
   }
-
-  private handleRetry = () => {
-    this.setState({
-      hasError: false,
-      error: undefined,
-      errorInfo: undefined,
-    });
-  };
-
-  private handleReload = () => {
-    window.location.reload();
-  };
 
   render() {
     if (this.state.hasError) {
       // Use custom fallback if provided
-      return this.props.fallback ?? this.renderDefaultFallback();
-    }
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
 
-    return this.props.children;
-  }
+      const level = this.props.level || 'component';
 
-  private renderDefaultFallback() {
-    const { level, showErrorDetails } = this.props;
-    const { error, errorInfo } = this.state;
-
-    const isDev = import.meta.env.DEV;
-
-    if (level === 'app') {
       return (
-        <div className="error-boundary error-boundary--app">
+        <div className={`error-boundary error-boundary--${level} ${this.state.hasError ? 'has-error' : ''}`} role="alert">
           <div className="error-boundary__content">
-            <h1>Oops! Something went wrong</h1>
-            <p>We're sorry, but the application has encountered an unexpected error.</p>
+            <span className="error-boundary__icon" aria-hidden="true">⚠️</span>
+            <h2 className="error-boundary__title">Something went wrong</h2>
+            <p className="error-boundary__message">
+              {this.props.componentName 
+                ? `There was an error loading the ${this.props.componentName} ${level}.` 
+                : `There was an error loading this ${level}.`}
+            </p>
             <div className="error-boundary__actions">
-              <button onClick={this.handleReload} className="error-boundary__button">
-                Reload Page
-              </button>
-            </div>
-            {showErrorDetails && isDev && (
-              <details className="error-boundary__details">
-                <summary>Error Details (Development)</summary>
-                <pre className="error-boundary__stack">
-                  {error?.message}
-                  {error?.stack}
-                </pre>
-              </details>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    if (level === 'page') {
-      return (
-        <div className="error-boundary error-boundary--page">
-          <div className="error-boundary__content">
-            <h2>Page Error</h2>
-            <p>Sorry, this page couldn't load properly.</p>
-            <div className="error-boundary__actions">
-              <button onClick={this.handleRetry} className="error-boundary__button">
+              <button 
+                onClick={() => this.setState({ hasError: false })}
+                className="error-boundary__button error-boundary__button--primary"
+              >
                 Try Again
               </button>
-              <button onClick={this.handleReload} className="error-boundary__button error-boundary__button--secondary">
+              <button 
+                onClick={() => window.location.reload()}
+                className="error-boundary__button error-boundary__button--secondary"
+              >
                 Reload Page
               </button>
             </div>
-            {showErrorDetails && isDev && (
-              <details className="error-boundary__details">
-                <summary>Error Details (Development)</summary>
-                <pre className="error-boundary__stack">
-                  {error?.message}
-                  {error?.stack}
-                  {errorInfo?.componentStack}
-                </pre>
-              </details>
-            )}
           </div>
         </div>
       );
     }
 
-    // Component level fallback
-    return (
-      <div className="error-boundary error-boundary--component">
-        <div className="error-boundary__content">
-          <p>Unable to load this section</p>
-          <button onClick={this.handleRetry} className="error-boundary__button error-boundary__button--small">
-            Retry
-          </button>
-          {showErrorDetails && isDev && (
-            <details className="error-boundary__details error-boundary__details--small">
-              <summary>Debug Info</summary>
-              <pre className="error-boundary__stack">
-                {error?.message}
-              </pre>
-            </details>
-          )}
-        </div>
-      </div>
-    );
+    // When no error, render children normally
+    return this.props.children;
   }
 }
+
+export default ErrorBoundary;
+
+// Legacy export for backwards compatibility
+export { ErrorBoundary as ComponentErrorBoundary };

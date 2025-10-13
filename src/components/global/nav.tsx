@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import './styles/nav.css'
 import Badge from './badge';
@@ -11,11 +11,23 @@ function Nav() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    // Add escape key handler
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMenuOpen]);
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  const navItems: string[] = ['hire', 'projects-link', 'linked-in', 'github-index', 'resume'];
+  const navItems = ['hire', 'projects-link', 'linked-in', 'github-index', 'resume'];
 
   function scrollToElementOnClick(targetId: string) {
     setIsMenuOpen(false);
@@ -81,6 +93,7 @@ function Nav() {
         role="region" 
         aria-label="Navigation menu"
         aria-hidden={!isMenuOpen}
+        {...(!isMenuOpen && { inert: true })}
       >
         <div className="hex-content">
           <div className="locale" role="banner" aria-label="Site author information">

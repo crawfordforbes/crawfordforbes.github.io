@@ -157,10 +157,10 @@
   --logo-text-color-hover: var(--white);
 
   /* nav */
-  --nav-toggle-bg: var(--primary-color-contrast);
-  --nav-toggle-text: var(--primary-color-text-contrast);
-  --nav-toggle-bg-hover: var(--primary-color);
-  --nav-toggle-bg-text: var(--primary-color-text);
+  --nav-toggle-bg: var(--primary-color);
+  --nav-toggle-text: var(--primary-color-text);
+  --nav-toggle-bg-hover: var(--primary-color-contrast);
+  --nav-toggle-bg-text: var(--primary-color-contrast-text);
   --nav-bg: var(--quaternary-color);
   --nav-text: var(--quaternary-color-text);
 
@@ -198,8 +198,8 @@
   --back-button-text: var(--primary-color-text);
 
   /* intro panel */
-  --intro-panel-bg-top-color: var(--secondary-color);
-  --intro-panel-bg-bottom-color: var(--secondary-color-contrast);
+  --intro-panel-bg-top-color: #f7f5d3c2;
+  --intro-panel-bg-bottom-color: var(--transparent);
   --intro-panel-text: var(--secondary-color-text);
 
   /* footer */

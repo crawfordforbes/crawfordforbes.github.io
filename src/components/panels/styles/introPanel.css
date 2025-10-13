@@ -1,5 +1,7 @@
 .intro-panel {
-  --title-size: 2rem;
+  --title-size: 3rem;
+  --y-offset: -180px;
+  --y-offset-margin: calc(var(--y-offset) + 16px);
   position: relative;
   z-index: 1;
   margin-bottom: 32px;
@@ -7,12 +9,13 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.intro-panel {
   position: relative;
+  top: var(--y-offset);
+  margin-bottom: var(--y-offset-margin);
   border-radius: var(--border-radius);
-  filter: var(--drop-shadow);
+  padding: 16px;
+  background: var(--intro-panel-bg-top-color);
+  color: var(--intro-panel-text);
 }
 
 .intro-panel h3 {

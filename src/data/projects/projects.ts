@@ -1,33 +1,18 @@
 export type ProjectType = {
-    id: string,
-    title: string, // the project title
-    primaryImgId: string, // the main image for the project, will appear on the index component
-    secondaryImgId?: string, // an optional second image, this only appears on the project detail component
-    tertiaryImgId?: string, // an optional third image, this only appears on the project detail component
-    githubLink?: string, // an optional link to the github repo
-    externalLink?: string, // an optional link to the live project
-    roleIds?: string[], // an array of role ids that this project belongs to. In this case roles are: 'developer', 'designer', 'solo', 'contributor', and 'lead'. On the project index component these are used as filters, and on the project detail component they appear as labels.
-    descriptionHTML?: string, // a longer description of the project, this is HTML so it can contain links and formatting. this appears on the detail component
-    short_description?: string, // a one-liner description of the project, this appears on the index component
-    techIds?: string[], // an array of technology ids that were used in this project, such as 'react', 'ruby', 'sinatra', etc.
+    id: string;
+    title: string;
+    primaryImgId: string;
+    secondaryImgId?: string;
+    tertiaryImgId?: string;
+    githubLink?: string;
+    externalLink?: string;
+    roleIds?: string[];
+    descriptionHTML?: string;
+    short_description?: string;
+    techIds?: string[];
 }
 
-export type ProjectsType = {
-  [key: string]: {
-    id: string,
-    title: string,
-    primaryImgId: string,
-    secondaryImgId?: string,
-    tertiaryImgId?: string,
-    githubLink?: string,
-    externalLink?: string,
-    roleIds?: string[],
-    descriptionHTML?: string,
-    short_description?: string,
-    techIds?: string[],
-  }
-}
-export const projectData:ProjectsType = {
+export const projectData: Record<string, ProjectType> = {
   "sunshine-nights": {
     id: "sunshine-nights",
     title: "Sunshine Nights",

@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
-import * as ErrorBoundaryModule from './ErrorBoundary';
-
-const { ErrorBoundary } = ErrorBoundaryModule;
+import ErrorBoundary from './ErrorBoundary';
 
 interface AppErrorBoundaryProps {
   children: ReactNode;
@@ -52,6 +50,7 @@ export const PageErrorBoundary = ({ children, pageName }: PageErrorBoundaryProps
   return (
     <ErrorBoundary 
       level="page" 
+      componentName={pageName}
       onError={handlePageError}
     >
       {children}
@@ -77,9 +76,10 @@ export const ComponentErrorBoundary = ({
 
   return (
     <ErrorBoundary 
-      level="component" 
-      onError={handleComponentError}
+      level="component"
+      componentName={componentName}
       fallback={fallback}
+      onError={handleComponentError}
     >
       {children}
     </ErrorBoundary>

@@ -1,8 +1,8 @@
 .hero {
-  --title-size: 5rem;
-  --subtitle-size: 2rem;
+  --title-size: 4rem;
+  --subtitle-size: 1.75rem;
   --content-padding: 8px;
-  --content-top: 300px;
+  --content-top: 96px;
 
   position: relative;
   width: 100vw;
@@ -71,28 +71,23 @@
 /* title and subtitle placement media queries */
 @media screen and (min-width: 27em){
   .hero {
-    --title-size: 6rem;
-    --subtitle-size: 2.5rem;
-    --content-top: 300px; 
-    --content-padding: 16px
+    --title-size: 5rem;
+    --subtitle-size: 2rem;
+    --content-top: 124px;
+    --content-padding: 16px;
   }
 }
 
 @media screen and (min-width: 36em){
   .hero {
-    --title-size: 8rem;
-    --subtitle-size: 3rem;
-    --content-top: 280px; 
+    --title-size: 6rem;
+    --subtitle-size: 2.25rem;
   }
 }
 
 @media screen and (min-width: 40em){
   .hero {
-    --title-size: 6rem;
-    --subtitle-size: 3.5rem;
-    --content-top: 190px;
-
-    margin-bottom: 32px;
+    --content-top: 148px;
   }
 }
 

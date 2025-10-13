@@ -15,13 +15,14 @@ export const headerLayouts: LayoutsType  = {
     id: "mobile",
     grid: "header-mobile",
     shiftedUp: true,
-    hexWidth: 90
+    hexWidth: 76,
+    hexMargin: 2,
   },
   "tablet" : {
     id: "tablet",
     grid: "header-tablet",
     shiftedUp: true,
-    hexWidth: 122
+    hexWidth: 106
   },
   "desktop" : {
     id: "desktop",

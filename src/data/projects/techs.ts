@@ -7,16 +7,7 @@ export type TechType = {
   filterable?: boolean;
 }
 
-type TechsType = {
-  [key: string]: {
-    id: string;
-    title: string;
-    iconClass?: [IconPrefix, IconName];
-    filterable?: boolean;
-  }
-}
-
-export const techData: TechsType = {
+export const techData: Record<string, TechType> = {
   "ruby": {
     id: "ruby",
     title: "Ruby",

@@ -34,51 +34,37 @@ function App() {
   }, [screenSize.width]);
 
   return (
-    <>
-      {/* Skip to main content link for accessibility */}
-      <a 
-        href="#main-content" 
-        className="skip-link" 
-        tabIndex={0} 
-        onClick={() => {
-          const el = document.getElementById('main-content');
-          if (el) el.focus();
-        }}
-      >
-        Skip to main content
-      </a>
-      <MediaQueryContext value={mediaSize}>
-        <BrowserRouter>
-          <Routes>
-            {/* Home page */}
-            <Route path="/" element={
-              <PageErrorBoundary pageName="Home">
-                <Portfolio />
-              </PageErrorBoundary>
-            } />
-            
-            {/* Portfolio routes */}
-            <Route path="/portfolio" element={
-              <PageErrorBoundary pageName="Portfolio">
-                <Portfolio />
-              </PageErrorBoundary>
-            } />
-            <Route path="/portfolio/:projectId" element={
-              <PageErrorBoundary pageName="Project Detail">
-                <Portfolio />
-              </PageErrorBoundary>
-            } />
-            
-            {/* Fallback for any unmatched routes */}
-            <Route path="*" element={
-              <PageErrorBoundary pageName="404">
-                <Portfolio />
-              </PageErrorBoundary>
-            } />
-          </Routes>
-        </BrowserRouter>
-      </MediaQueryContext>
-    </>
+    <MediaQueryContext value={mediaSize}>
+      <BrowserRouter>
+        <Routes>
+          {/* Home page */}
+          <Route path="/" element={
+            <PageErrorBoundary pageName="Home">
+              <Portfolio />
+            </PageErrorBoundary>
+          } />
+          
+          {/* Portfolio routes */}
+          <Route path="/portfolio" element={
+            <PageErrorBoundary pageName="Portfolio">
+              <Portfolio />
+            </PageErrorBoundary>
+          } />
+          <Route path="/portfolio/:projectId" element={
+            <PageErrorBoundary pageName="Project Detail">
+              <Portfolio />
+            </PageErrorBoundary>
+          } />
+          
+          {/* Fallback for any unmatched routes */}
+          <Route path="*" element={
+            <PageErrorBoundary pageName="404">
+              <Portfolio />
+            </PageErrorBoundary>
+          } />
+        </Routes>
+      </BrowserRouter>
+    </MediaQueryContext>
   );
 }
 

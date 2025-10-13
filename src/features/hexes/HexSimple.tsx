@@ -162,12 +162,23 @@ function Hex({
     </>
   )
 
+    // Add keyboard event handling
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (onClick) {
+        onClick();
+      }
+    }
+  };
+
   // Common props for all element types
   const commonProps = {
     className: classes,
     style: hexStyle,
     'aria-label': ariaLabel,
     tabIndex,
+    onKeyDown: handleKeyDown
   }
 
   // Determine what type of element to render based on interaction props

@@ -22,10 +22,50 @@
   border-color: var(--primary-color);
 }
 
+/* Error boundary container - should be invisible when no error */
 .error-boundary--component {
-  min-height: 150px;
-  background: var(--secondary-color-contrast);
-  border-color: var(--secondary-color);
+  /* Remove any fixed height - it should only have height when there's an error */
+  min-height: 0;
+  height: auto;
+  
+  /* Only show content when there's an actual error */
+  display: contents; /* This makes the boundary invisible in the layout */
+}
+
+/* Error state - when there IS an error */
+.error-boundary--component.has-error {
+  display: block;
+  height: auto;
+  min-height: 200px;
+  padding: 24px;
+  background: var(--error-bg, #fef2f2);
+  border: 1px solid var(--error-border, #fecaca);
+  border-radius: var(--border-radius, 8px);
+  margin: 16px 0;
+}
+
+/* Error content styling */
+.error-boundary--component .error-content {
+  text-align: center;
+}
+
+.error-boundary--component .error-title {
+  color: var(--error-color, #dc2626);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.error-boundary--component .error-message {
+  color: var(--error-text, #374151);
+  margin-bottom: 16px;
+}
+
+.error-boundary--component .error-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .error-boundary__content {

@@ -8,7 +8,7 @@ type ImagesType = {
   }
 }
 
-export const imagePath: string = '../../src/assets/images/';
+export const imagePath = '../../src/assets/images/';
 
 export const imageData:ImagesType = {
   "sunshine-primary": {

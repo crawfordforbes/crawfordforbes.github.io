@@ -9,7 +9,55 @@
   pointer-events: none;
   height: 0;
   filter: var(--drop-shadow);
-  margin-bottom: 600px;
+}
+
+/* Fieldset styling for better structure */
+.project-index .filter-wrapper fieldset {
+  border: none;
+  margin: 0 0 16px 0;
+  padding: 0;
+}
+
+.project-index .filter-wrapper legend {
+  padding: 0 16px 8px 16px;
+  font-weight: 600;
+}
+
+/* Enhanced focus styles for filter buttons */
+.project-index .filter-button {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-rules);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.project-index .filter-button:focus {
+  outline: 2px solid var(--focus-shadow);
+  outline-offset: 2px;
+  background-color: var(--project-filter-bg-hover-top);
+}
+
+.project-index .filter-button:focus-visible {
+  outline: 3px solid var(--focus-shadow);
+  outline-offset: 3px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .project-index .filter-button:focus {
+    outline-width: 3px;
+    background-color: var(--focus-shadow);
+    color: var(--body-bg);
+  }
+  
+  .project-index .filter-item.selected {
+    border: 2px solid currentColor;
+  }
 }
 
 /* mobile filter toggle button */

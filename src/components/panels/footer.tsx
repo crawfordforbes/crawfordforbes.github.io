@@ -8,7 +8,7 @@ import { scrollToTarget } from '@/utils/site';
 
 function Footer() {
 
-  const navItems: string[] = ['hire', 'github-index', 'projects-link', 'linked-in',  'resume'];
+  const navItems = ['hire', 'github-index', 'projects-link', 'linked-in',  'resume'];
 
   
   function scrollToElementOnClick(targetId: string) {
