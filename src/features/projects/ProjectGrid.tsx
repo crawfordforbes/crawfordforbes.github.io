@@ -2,46 +2,66 @@ import { memo } from "react";
 import ProjectResult from "./projectResult";
 import Pagination from "./Pagination";
 import { useProjectPagination } from "./hooks";
-import type { ProjectContainerRenderProps } from "./ProjectContainer";
+import type { ProjectType } from "@/data/projects/projects";
 
 type ProjectGridProps = {
-  filters: ProjectContainerRenderProps['filters'],
-  routing: ProjectContainerRenderProps['routing']
+  projects: ProjectType[];
+  onProjectSelect: (id: string) => void;
+  selectedRoleIds: string[];
+  selectedTechIds: string[];
+  onRoleToggle: (id: string) => void;
+  onTechToggle: (id: string) => void;
+  hasError: boolean;
+  onClearError: () => void;
+  // ADD: Global hover props
+  globalHoveredFilter: string;
+  onFilterHover: (filterId: string) => void;
 }
 
 /**
  * Component that renders the grid of project results
  */
-function ProjectGrid({ filters, routing }: ProjectGridProps) {
-  const projects = filters.filteredProjects;
-  
+function ProjectGrid({ 
+  projects, 
+  onProjectSelect, 
+  selectedRoleIds, 
+  selectedTechIds, 
+  onRoleToggle, 
+  onTechToggle,
+  hasError,
+  onClearError,
+  // ADD: Global hover props
+  globalHoveredFilter,
+  onFilterHover
+}: ProjectGridProps) {
   // Use pagination instead of virtualization
   const pagination = useProjectPagination(projects, 6); // 6 projects per page
 
-  const renderProject = (project: typeof projects[0]) => (
+  const renderProject = (project: ProjectType) => (
     <ProjectResult 
       project={project}
-      selectProjectClick={routing.selectProject}
-      selectedRoleIds={filters.selectedRoleIds}
-      selectRoleFilterClick={filters.toggleRoleFilter}
-      selectedTechIds={filters.selectedTechIds}
-      selectTechFilterClick={filters.toggleTechFilter}
-      highlightFilterHover={filters.setHighlightFilterOnHover}
-      hoveredFilters={filters.highlightFilterOnHover}
+      selectProjectClick={onProjectSelect}
+      selectedRoleIds={selectedRoleIds}
+      selectRoleFilterClick={onRoleToggle}
+      selectedTechIds={selectedTechIds}
+      selectTechFilterClick={onTechToggle}
+      // CHANGE: Use global hover state
+      highlightFilterHover={onFilterHover}
+      hoveredFilters={globalHoveredFilter}
     />
   );
 
   return (
     <div className="helper-results">
       {/* Show error banner if there's a project-not-found error */}
-      {routing.hasError && (
+      {hasError && (
         <div className="error-banner">
           <div className="error-content">
             <p>
               <strong>Project not found.</strong> The project you're looking for doesn't exist or may have been removed.
             </p>
             <button 
-              onClick={routing.clearSelectedProject}
+              onClick={onClearError}
               className="dismiss-error"
               aria-label="Dismiss error message"
             >

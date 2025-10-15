@@ -1,51 +1,85 @@
-/* Optimized Image Component Styles */
-
-.optimized-image-container {
+/* Simple Image Component Styles */
+.image-container {
   position: relative;
+  width: 100%;
+  height: 100%;
   display: block;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
 }
 
-.optimized-image-container img {
+.image-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: opacity 0.3s ease;
+  display: block;
+  transform: translateZ(0); /* GPU acceleration */
+  will-change: opacity;
 }
 
-/* Skeleton placeholder animation */
-.optimized-image-container .skeleton-placeholder {
+/* Loading placeholder */
+.image-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg, #f5f5f5);
+}
+
+.loading-skeleton {
+  width: 100%;
+  height: 100%;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
 }
 
 @keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
-/* Responsive aspect ratios */
-.optimized-image-container[style*="aspect-ratio"] {
+/* Error state */
+.image-error {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg, #f5f5f5);
+  color: var(--color-text, #666);
+  font-size: 0.875rem;
 }
 
-/* High performance rendering */
-.optimized-image-container img {
-  transform: translateZ(0); /* GPU acceleration */
-  will-change: opacity;
-}
-
-/* Dark mode considerations */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
-  .optimized-image-container .skeleton-placeholder {
+  .loading-skeleton {
     background: linear-gradient(90deg, #2a2a2a 25%, #1a1a1a 50%, #2a2a2a 75%);
     background-size: 200% 100%;
   }
+  
+  .image-error {
+    background: #2a2a2a;
+    color: #ccc;
+  }
+  
+  .image-loading {
+    background: #2a2a2a;
+  }
+}
+
+/* High performance rendering */
+.image-container img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Responsive aspect ratios */
+.image-container[style*="aspect-ratio"] {
+  width: 100%;
 }

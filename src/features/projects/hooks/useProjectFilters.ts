@@ -13,7 +13,6 @@ export function useProjectFilters(
 ) {
   const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>([])
   const [selectedTechIds, setSelectedTechIds] = useState<string[]>([])
-  const [highlightFilterOnHover, setHighlightFilterOnHover] = useState("")
 
   // Sync URL filters with local state (without triggering callbacks)
   useEffect(() => {
@@ -65,7 +64,6 @@ export function useProjectFilters(
     // State
     selectedRoleIds,
     selectedTechIds,
-    highlightFilterOnHover,
     availableRoleIds,
     availableTechIds,
     filteredProjects,
@@ -75,7 +73,6 @@ export function useProjectFilters(
     toggleRoleFilter,
     toggleTechFilter,
     clearAllFilters,
-    setHighlightFilterOnHover,
   }
 }
 

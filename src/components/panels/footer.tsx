@@ -57,7 +57,7 @@ function Footer() {
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
-            <Hex hexClass="footer-hex footer-text" hexWidth={360} content={
+            <Hex hexClass="footer-hex footer-text" hexWidth={360} contentType="visual" content={
               <div className="footer-content">
                 <h2 className="title">{contactData.name.title}</h2>
                 <p className="description">{footerContent.description}</p>

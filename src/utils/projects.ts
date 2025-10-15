@@ -1,6 +1,7 @@
 import { projectData } from '@/data/projects/projects'
 import { roleData } from '@/data/projects/roles'
 import { techData } from '@/data/projects/techs'
+import { imageData } from '@/data/global/images'
 import type { ProjectType } from '@/data/projects/projects'
 import type { RoleType } from '@/data/projects/roles'
 import type { TechType } from '@/data/projects/techs'
@@ -74,15 +75,14 @@ export function getFilterableTechs(): TechType[] {
 }
 
 // ===== FORMATTING =====
-export function generateImageAlt(projectTitle: string, imageType?: 'primary' | 'secondary' | 'tertiary'): string {
-  const typeMap = {
-    primary: 'Main Project Image',
-    secondary: 'Secondary Project Image', 
-    tertiary: 'Tertiary Project Image'
+export function generateImageAlt(projectTitle: string, imageId?: string): string {
+  // Try to get alt text from imageData first
+  if (imageId && imageData[imageId]?.alt) {
+    return imageData[imageId].alt
   }
   
-  const suffix = imageType ? typeMap[imageType] : 'Project Image'
-  return `${projectTitle} - ${suffix}`
+  // Fallback to generic alt text
+  return `${projectTitle} - Project Image`
 }
 
 // ===== ROUTING =====

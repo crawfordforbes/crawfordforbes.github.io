@@ -1,83 +1,92 @@
 /**
- * Image utilities with optimization support
+ * Simplified image utilities
  */
 
-// Import hero images directly for proper Vite URL resolution
-import heroDesktop from '@/assets/images/hero-desktop.webp';
-import heroTablet from '@/assets/images/hero-tablet.webp';
-import heroMobile from '@/assets/images/hero-mobile.webp';
-import heroFull from '@/assets/images/hero-full.jpeg';
+import type { ProjectType } from '@/data/projects/projects'
+import { imageData } from '@/data/global/images'
 
-// Function to dynamically import images using Vite's import.meta.glob
-const imageModules = import.meta.glob('/src/assets/images/**/*.{png,jpg,jpeg,webp,svg}', { 
-  eager: true, 
-  query: '?url',
-  import: 'default'
-});
+// Import hero images from new hero subfolder
+import heroDesktop from '@/assets/images/hero/hero-desktop.webp';
+import heroTablet from '@/assets/images/hero/hero-tablet.webp';
+import heroMobile from '@/assets/images/hero/hero-mobile.webp';
+import heroFull from '@/assets/images/hero/hero-full.jpeg';
 
-// Create a lookup map for easier access
-const imageMap = Object.fromEntries(
-  Object.entries(imageModules).map(([path, url]) => {
-    // Convert '/src/assets/images/projects/sunshine-nights-primary.png' 
-    // to 'projects/sunshine-nights-primary.png'
-    const relativePath = path.replace('/src/assets/images/', '');
-    return [relativePath, url as string];
-  })
-);
-
-// Enhanced image URL function that works with Vite's asset handling
-export function getImgUrl(relativePath: string): string {
-  // Remove leading '../assets/images/' or similar prefixes to normalize the path
-  const normalizedPath = relativePath.replace(/^\.\.\/assets\/images\//, '');
-  
-  // Try to find the image in our import map
-  const imageUrl = imageMap[normalizedPath];
-  
-  if (imageUrl) {
-    return imageUrl;
+// Project-specific image helper for new folder structure
+export function getProjectImageUrl(projectId: string, filename: string): string {
+  console.log("🔍 getProjectImageUrl called with:", { projectId, filename });
+  if (filename === "fallback") {
+    return imagePaths.hero.desktop;
+  }
+  if (!filename) {
+    console.error(`getProjectImageUrl: filename is "${filename}" for project "${projectId}"`);
+    return imagePaths.hero.desktop;
   }
   
-  // Fallback: log warning and try the original approach
-  console.warn(`Image not found in import map: ${normalizedPath}. Available images:`, Object.keys(imageMap));
-  return new URL(`/src/assets/images/${normalizedPath}`, import.meta.url).href;
+  if (!projectId) {
+    console.error(`getProjectImageUrl: projectId is "${projectId}" for filename "${filename}"`);
+    return imagePaths.hero.desktop;
+  }
+  
+  // Check if filename is already a full path
+  if (filename.startsWith('/src/assets/') || filename.startsWith('http')) {
+    console.log("⚠️ Filename already looks like a full path, returning as-is:", filename);
+    return filename;
+  }
+  
+  // FIXED: Build the path directly instead of calling getImageUrl again
+  const fullPath = `/src/assets/images/projects/${projectId}/${filename}`;
+  console.log(`✅ getProjectImageUrl: "${projectId}/${filename}" -> "${fullPath}"`);
+  return fullPath;
 }
 
-// Enhanced image URL generation with optimization
-export function getOptimizedImageUrl(
-  basePath: string, 
-  options: {
-    width?: number;
-    format?: 'webp' | 'jpeg' | 'png';
-    quality?: number;
-  } = {}
-): string {
-  const { width, format = 'webp' } = options;
+// Simple helper for getting image URLs
+export function getImageUrl(imagePath: string): string {
+  // Check if imagePath is already a full URL
+  if (imagePath.startsWith('http') || imagePath.startsWith('/src/assets/')) {
+    return imagePath;
+  }
   
-  // Remove file extension from basePath
-  const baseWithoutExt = basePath.replace(/\.[^/.]+$/, '');
-  
-  // Build optimized filename
-  let filename = baseWithoutExt;
-  if (width) filename += `-${width}w`;
-  filename += `.${format}`;
-  
-  return getImgUrl(`../assets/images/${filename}`);
+  if (!imagePath || imagePath === 'undefined') {
+    console.error(`getImageUrl: imagePath is "${imagePath}"`);
+    return imagePaths.hero.desktop;
+  }
+
+  // Use Vite's glob import approach - construct the path as a simple string
+  // Vite will handle this at build time
+  const fullPath = `/src/assets/images/${imagePath}`;
+  console.log(`getImageUrl: "${imagePath}" -> "${fullPath}"`);
+  return fullPath;
 }
 
-// Image path helpers for different categories - now using dynamic imports
+// Helper to get primary image for project cards - now uses first imageId
+export function getProjectPrimaryImageUrl(project: ProjectType): string {
+  // Get the first image from imageIds array
+  const primaryImageId = project.imageIds?.[0];
+  if (!primaryImageId) {
+    console.warn(`No images found for project: ${project.id}`);
+    // Return hero image as fallback
+    return imagePaths.hero.desktop;
+  }
+
+  const imageInfo = imageData[primaryImageId];
+  if (!imageInfo) {
+    console.warn(`Image not found for ID: ${primaryImageId}`);
+    // Return hero image as fallback
+    return imagePaths.hero.desktop;
+  }
+  
+  return getProjectImageUrl(project.id, imageInfo.fileName);
+}
+
+// Legacy function name for compatibility  
+export const getImgUrl = getImageUrl;
+
+// Image path helpers for different categories
 export const imagePaths = {
   hero: {
     desktop: heroDesktop,
     tablet: heroTablet,
     mobile: heroMobile,
     full: heroFull
-  },
-  
-  projects: {
-    // Helper function to get project image URLs
-    getImageUrl: (imageName: string) => getImgUrl(`projects/${imageName}`)
   }
 } as const;
-
-// Image URL generation functions are above
-// createImageSources is in OptimizedImage.tsx where it's used

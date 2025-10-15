@@ -128,6 +128,12 @@
   --badge-tertiary-color-text-highlight: var(--tertiary-color-text-contrast);
   --badge-tertiary-color-border-highlight: var(--badge-tertiary-color-border);
 
+  /* link badges */
+  --link-badge-bg: var(--primary-color);
+  --link-badge-text: var(--primary-color-text);
+  --link-badge-bg-hover: var(--primary-color-contrast);
+  --link-badge-text-hover: var(--primary-color-text-contrast);
+
   /* hexes */
   --default-hex-color: var(--color-dark-text);
   --default-hex-color-hover: var(--color-light-text);

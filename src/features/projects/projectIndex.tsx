@@ -1,6 +1,9 @@
-import ProjectContainer from "./ProjectContainer";
-import ProjectListView from "./ProjectListView";
-import ProjectDetailView from "./ProjectDetailView";
+import { useState } from 'react';
+import { useProjectFilters, useProjectRouting } from "./hooks";
+import ProjectFilterBar from "./ProjectFilterBar";
+import ProjectGrid from "./ProjectGrid";
+import ProjectDetail from "./projectDetail";
+import BackButton from "./BackButton";
 import './styles/projectIndex.css'
 
 type projectIndexProps = {
@@ -11,26 +14,68 @@ function ProjectIndex({
   selectedProjectIdProp,
 }: projectIndexProps) {
   
+  // Direct hook usage instead of render props
+  const routing = useProjectRouting(selectedProjectIdProp);
+  const filters = useProjectFilters(routing.roleFilters, routing.techFilters, routing.updateFilters);
+  const [showMobileFilter, setShowMobileFilter] = useState(false);
+  
+  // ADD: Global hover state management
+  const [globalHoveredFilter, setGlobalHoveredFilter] = useState<string>("");
+
+  // Simple navigation logic
+  const currentIndex = routing.selectedProjectId 
+    ? filters.filteredProjects.findIndex(p => p.id === routing.selectedProjectId)
+    : -1;
+  const navigation = {
+    goToPrevious: () => currentIndex > 0 ? filters.filteredProjects[currentIndex - 1]?.id || null : null,
+    goToNext: () => currentIndex < filters.filteredProjects.length - 1 ? filters.filteredProjects[currentIndex + 1]?.id || null : null
+  };
+
+  // Project detail view
+  if (routing.selectedProjectId) {
+    return (
+      <article className="project-feature index-container" id="projects">
+        <div className="project-detail-view">
+          <div className="selected-project">
+            <BackButton onBack={routing.clearSelectedProject} />
+            <ProjectDetail id={routing.selectedProjectId} navigation={navigation} />
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  // Project list view
   return (
-    <ProjectContainer
-      selectedProjectIdProp={selectedProjectIdProp}
-    >
-      {({ filters, routing, navigation, ui }) => (
-        !routing.selectedProjectId ? (
-          <ProjectListView 
-            filters={filters}
-            routing={routing}
-            ui={ui}
-          />
-        ) : (
-          <ProjectDetailView
-            routing={routing}
-            navigation={navigation}
-          />
-        )
-      )}
-    </ProjectContainer>
-  )
+    <article className="project-feature index-container" id="projects">
+      <div className="project-index project-list-view">
+        <ProjectFilterBar 
+          filters={filters}
+          ui={{
+            showMobileFilter,
+            toggleMobileFilter: () => setShowMobileFilter(!showMobileFilter)
+          }}
+          // ADD: Pass global hover state
+          globalHoveredFilter={globalHoveredFilter}
+          onFilterHover={setGlobalHoveredFilter}
+        />
+        
+        <ProjectGrid 
+          projects={filters.filteredProjects}
+          onProjectSelect={routing.selectProject}
+          selectedRoleIds={filters.selectedRoleIds}
+          selectedTechIds={filters.selectedTechIds}
+          onRoleToggle={filters.toggleRoleFilter}
+          onTechToggle={filters.toggleTechFilter}
+          hasError={routing.hasError}
+          onClearError={routing.clearSelectedProject}
+          // ADD: Pass global hover state
+          globalHoveredFilter={globalHoveredFilter}
+          onFilterHover={setGlobalHoveredFilter}
+        />
+      </div>
+    </article>
+  );
 }
 
 export default ProjectIndex

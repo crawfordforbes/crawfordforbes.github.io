@@ -1,8 +1,7 @@
 import { useId, useMemo, memo } from "react"
-import { getImgUrl } from "@/utils/images"
+import { getImageUrl } from "@/utils/images"
 import Badge from "@/components/global/badge"
 import OptimizedImage from "@/components/global/OptimizedImage"
-import { createImageSources, imageSizes } from "@/components/global/OptimizedImage"
 import { utilsData } from "@/data/global/utils" 
 import { contactData } from "@/data/global/contacts"
 import { scrollToTarget } from "@/utils/site"
@@ -16,10 +15,9 @@ type HexProps = {
   hexClass?: string,
   hexStyle?: React.CSSProperties,
   content?: string | JSX.Element,
-  contentType?: 'auto' | 'image' | 'badge' | 'visual',
+  contentType?: 'image' | 'badge' | 'visual' | 'text',
   hexWidth?: number,
   hexMargin?: number,
-  // Interaction props (previously in wrappers)
   onClick?: () => void,
   href?: string,
   ariaLabel?: string,
@@ -27,10 +25,10 @@ type HexProps = {
 }
 
 function Hex({  
-  hexClass,
+  hexClass = '',
   hexStyle, 
   content,
-  contentType = 'auto',
+  contentType = 'text',
   hexWidth = 122,
   hexMargin = 3,
   onClick,
@@ -39,88 +37,50 @@ function Hex({
   tabIndex,
 }: HexProps) {
 
-  // Auto-detect content type if not explicitly specified
-  const detectContentType = (content: string | JSX.Element): 'image' | 'badge' | 'visual' => {
-    if (typeof content === 'string') {
-      // Check for image file extensions
-      if (content.match(/\.(png|jpg|jpeg|svg|webp)$/i)) return 'image'
-      // Check for image paths or URLs
-      if (content.includes('/') || content.startsWith('http')) return 'image'
-      // Default to badge lookup for strings
-      return 'badge'
-    }
-
-    // JSX elements are visual content
-    return 'visual'
-  }
-
-  const finalContentType = contentType === 'auto' && content 
-    ? detectContentType(content)
-    : contentType
-
-  // Unified content rendering function
+  // Simplified content rendering - no auto-detection
   const renderContent = () => {
     if (!content) return null
-
-    const typeToRender = finalContentType
-
-    if (typeToRender === 'image' && typeof content === 'string') {
-      // Handle image path as string
-      const useOptimizedImage = hexWidth >= 300; // Use OptimizedImage for larger hexes
-      
-      if (useOptimizedImage) {
-        // Generate responsive sources for larger hex images
-        const basePath = content.replace(/\.[^/.]+$/, ""); // Remove extension
-        const imageSources = createImageSources(basePath, [400, 600, 800, 1200]);
-        
+    
+    switch (contentType) {
+      case 'image':
         return (
           <div className="hex-visual-content">
-            <OptimizedImage
-              src={getImgUrl(content)}
-              alt=""
-              sources={imageSources}
-              sizes={imageSizes.project}
-              className="hex-image"
-              objectFit="cover"
-            />
+            {hexWidth >= 300 ? (
+              <OptimizedImage
+                src={getImageUrl(content as string)}
+                alt=""
+                className="hex-image"
+                objectFit="cover"
+              />
+            ) : (
+              <img src={getImageUrl(content as string)} alt="" className="hex-image" />
+            )}
           </div>
-        );
-      } else {
-        // Use regular img for small hexes (icons, logos)
+        )
+      
+      case 'badge':
+        return (
+          <div className="hex-text-content">
+            <div className="hex-badges">
+              <Badge {...{ ...contactData, ...utilsData }[content as string]} />
+            </div>
+          </div>
+        )
+      
+      case 'visual':
         return (
           <div className="hex-visual-content">
-            <img src={getImgUrl(content)} alt="" className="hex-image"/>
+            {content}
           </div>
-        );
-      }
-    }
-
-    if (typeToRender === 'badge') {
-      // Handle badge content
-      const allBadgeData = { ...contactData, ...utilsData }
+        )
       
-      return (
-        <article className="hex-text-content">
-          <div className="hex-badges">
-            {typeof content === 'string' 
-              ? <Badge {...allBadgeData[content]} />
-              : content
-            }
+      default: // text
+        return (
+          <div className="hex-text-content">
+            {content}
           </div>
-        </article>
-      )
+        )
     }
-
-    if (typeToRender === 'visual') {
-      // Handle JSX visual content (SVGs, custom components)
-      return (
-        <div className="hex-visual-content">
-          {content}
-        </div>
-      )
-    }
-
-    return null
   }
 
   // Handle link clicks (internal vs external)
@@ -136,11 +96,11 @@ function Hex({
 
   // Combine classes based on props
   const contentClass = content 
-    ? (finalContentType === 'image' || (typeof content === 'string' && finalContentType === 'auto' && detectContentType(content) === 'image')) 
+    ? contentType === 'image' 
       ? 'with-image' 
       : 'with-svg'
     : ''
-  const classes = `hex ${uuid} ${hexClass || ''} ${contentClass}`.trim()
+  const classes = `hex ${uuid} ${hexClass} ${contentClass}`.trim()
 
   // Memoize CSS to avoid regenerating on every render
   const css = useMemo(() => 

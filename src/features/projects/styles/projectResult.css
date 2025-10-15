@@ -1,151 +1,333 @@
 .project-result-container {
-  container-name: project-result;
+  container-name: project-card;
   container-type: inline-size;
-
   height: 100%;
 }
 
 .project-result {
   --links-max-width: 300px;
-
+  
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 320px;
   filter: var(--drop-shadow);
-  height: 100%; /* Ensure height flows down to children */
-  min-height: 300px; /* Ensure minimum height for aspect-ratio to work */
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  position: relative;
 }
 
+/* Header image section */
+.project-result .card-top {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-result .header-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.project-result .header-image .inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Fixed gradient overlay */
 .project-result .inner::after {
   content: "";
-  pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
   width: 100%;
   height: 100%;
-  background: var(--color-1);
-  background: linear-gradient(var(--gradient-angle), var(--color-1) 16%, var(--color-3) 33%, var(--color-5) 50%, var(--color-7) 66%, var(--color-9) 83%, var(--color-11) 100%);
-  z-index: -1;
-  opacity:0;
+  background: linear-gradient(
+    var(--gradient-angle), 
+    var(--color-1) 16%, 
+    var(--color-3) 33%, 
+    var(--color-5) 50%, 
+    var(--color-7) 66%, 
+    var(--color-9) 83%, 
+    var(--color-11) 100%
+  );
+  opacity: 0;
   transition: opacity var(--transition-rules);
+  pointer-events: none;
+  z-index: 1;
   animation: gradientAngleSpin 48s ease infinite;
 }
 
 .project-result:hover .inner::after {
-  opacity:.6;
-  transition: opacity var(--transition-rules);
+  opacity: 0.6;
 }
 
+/* Image styling */
 .project-result .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   mix-blend-mode: hard-light;
+  position: relative;
+  z-index: 0;
 }
 
+/* Header content positioning */
+.project-result .header-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.project-result .header-content > * {
+  pointer-events: all;
+}
+
+/* Title styling */
 .project-result h2.title {
+  --title-size: 2rem;
+  
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   text-align: right;
+  margin: 0;
+  font-size: var(--title-size);
+  line-height: 1.1;
   max-width: calc(100% - 56px);
+  align-self: flex-end;
 }
 
 .project-result .badge .badge-content {
   pointer-events: all;
 }
 
+/* Badge lists */
+.project-result .badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Info panel - fixed layout */
+.project-result .info-panel {
+  flex: 0 0 auto;
+  padding: 16px;
+  background: var(--info-panel-bg-top-color);
+  background: linear-gradient(180deg, 
+    var(--info-panel-bg-top-color) 10%, 
+    var(--info-panel-bg-bottom-color) 100%
+  );
+  color: var(--info-panel-text);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
 .project-result .info-panel.has-footer-links {
   padding-bottom: 0;
 }
 
-.project-result .footer-links {
-  --link-offset: 32px;
-  --link-left-offset: calc(var(--link-offset) * -1);
-  --link-width-offset: calc(100% + (var(--link-offset) * 2));
-
-  
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-  width: var(--link-width-offset);
-  max-width: var(--links-max-width);
-  margin-top: -48px;
-  pointer-events: none;;
+/* Description */
+.project-result .description {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: inherit;
 }
 
-.project-result .link-badge {
+/* Read more button */
+
+
+/* Footer links - hex badges in a row below the card */
+.project-result .footer-links {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 0;
+  z-index: 2;
+}
+
+.project-result .footer-links .link-badge {
   background-color: var(--link-badge-bg);
   color: var(--link-badge-text);
   position: relative;
-  top: 48px;
-  padding-top: 16px;
+  /* Mobile: show fully by default */
+  top: 0;
   transition: top var(--transition-rules), background-color var(--transition-rules), color var(--transition-rules);
+  pointer-events: all;
 }
 
-.project-result .link-badge .hex-visual-content {
+.project-result .footer-links .link-badge .hex-visual-content {
   color: var(--link-badge-text);
   transition: color var(--transition-rules);
 }
 
-.project-result .link-badge a {
+.project-result .footer-links .link-badge a {
   pointer-events: all;
   z-index: 3;
+  text-decoration: none;
+  color: inherit;
 }
 
-.project-result .link-badge .title {
-  min-width: 150px;
-  text-align: center;
-}
-
-.project-result .link-badge:hover,
-.project-result .link-badge:focus-within {
-  background-color: var(--link-badge-bg-hover);
-  color: var(--link-badge-text-hover);
-  position: relative;
-  top: 32px;
-  transition: top var(--transition-rules), background-color var(--transition-rules);
-}
-
-.project-result .link-badge:hover .hex-visual-content,
-.project-result .link-badge:focus-within .hex-visual-content {
-  color: var(--link-badge-text-hover);
-  transition: color var(--transition-rules);
-}
-
-.project-result .link-badge .badge-content{
+/* Link content structure - icon and text are static, never move independently */
+.project-result .footer-links .link-content {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  gap: 8px;
+  padding: 16px 12px;
+}
+
+.project-result .footer-links .icon-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.project-result .footer-links .text-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.project-result .footer-links .link-text {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+/* Desktop: position hexes so text is hidden below card edge */
+@container project-card (min-width: 769px) {
+  .project-result {
+    /* Allow footer hexes to extend below card */
+    overflow: visible;
+  }
+  
+  .project-result .footer-links {
+    /* Position footer so hexes can hang below card */
+    margin-top: -20px;
+    overflow: visible;
+  }
+  
+  .project-result .footer-links .link-badge {
+    /* Push hexagon down so text portion is hidden below card */
+    top: 32px;
+  }
+  
+  .project-result .footer-links .link-badge:hover,
+  .project-result .footer-links .link-badge:focus-within {
+    background-color: var(--link-badge-bg-hover);
+    color: var(--link-badge-text-hover);
+    /* Slide hexagon up to reveal text */
+    top: 0;
+  }
+  
+  .project-result .footer-links .link-badge:hover .hex-visual-content,
+  .project-result .footer-links .link-badge:focus-within .hex-visual-content {
+    color: var(--link-badge-text-hover);
+  }
+}
+
+/* Badge styling within hex */
+.project-result .footer-links .link-badge .badge {
+  background: none;
+  color: inherit;
+}
+
+.project-result .footer-links .link-badge .badge .badge-content {
+  padding: 0;
+  background: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-result .footer-links .link-badge .badge .fa-icon {
+  font-size: 1.5rem;
+}
+
+/* Decorative border */
+.project-result .decorative-hex-border {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
   flex-direction: column;
   gap: 24px;
 }
 
-@media screen and (min-width: 40em){
-  .project-result .link-badge {
-    top: 76px;
-  }
-}
-
-@container project-result (width > 300px) {
-  .project-result {
+/* Container queries - fixed */
+@container project-card (width > 300px) {
+  .project-result h2.title {
     --title-size: 2.5rem;
-    --link-offset: 16px;
-    --links-max-width: 300px;
   }
 }
 
-@container project-result (width > 340px) {
-  .project-result {
+@container project-card (width > 340px) {
+  .project-result h2.title {
     --title-size: 3rem;
   }
 }
 
-@container project-result (width > 400px) {
-  .project-result {
-    --title-size: 4rem;
-    --links-max-width: calc(100% - 32px);
+@container project-card (width > 400px) {
+  .project-result h2.title {
+    --title-size: 3.5rem;
+  }
+  
+  .project-result .info-panel {
+    padding: 20px;
   }
 }
 
-@media screen and (min-width: 40em){
+/* Responsive adjustments */
+@media screen and (min-width: 40em) {
   .project-result .title {
     max-width: 100%;
   }
+  
+  .project-result .footer-links {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.project-result:focus-within {
+  outline: 2px solid var(--focus-shadow);
+  outline-offset: 2px;
 }

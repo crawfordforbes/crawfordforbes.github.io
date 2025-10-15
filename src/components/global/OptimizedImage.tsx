@@ -1,255 +1,92 @@
-import { useState, useRef, useEffect, memo } from 'react';
+import { useState } from 'react';
 import './styles/optimized-image.css';
 
-interface ImageSource {
-  src: string;
-  type?: string; // MIME type like 'image/webp'
-}
-
-interface OptimizedImageProps {
+interface SimpleImageProps {
   src: string;
   alt: string;
   className?: string;
   loading?: 'lazy' | 'eager';
-  sources?: ImageSource[];
-  sizes?: string;
-  fallbackSrc?: string;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
   priority?: boolean;
+  aspectRatio?: string;
+  fallbackSrc?: string;
 }
 
 /**
- * Optimized image component with responsive images, lazy loading, and modern formats
+ * Simplified image component with loading states and error handling
+ * Replaces the over-engineered OptimizedImage component
  */
-// Generate modern format sources for better optimization
-const generateModernSources = (baseSrc: string): ImageSource[] => {
-  const baseName = baseSrc.replace(/\.[^/.]+$/, ''); // Remove extension
-  const modernSources: ImageSource[] = [];
-
-  // AVIF (best compression, ~30-50% smaller than WebP)
-  modernSources.push({
-    src: `${baseName}.avif`,
-    type: 'image/avif'
-  });
-
-  // WebP (good compression, widely supported)
-  modernSources.push({
-    src: `${baseName}.webp`, 
-    type: 'image/webp'
-  });
-
-  return modernSources;
-};
-
-export const OptimizedImage = memo(({
+export default function SimpleImage({
   src,
   alt,
   className = '',
   loading = 'lazy',
-  sources = [],
-  sizes,
-  fallbackSrc,
-  placeholder = 'skeleton',
-  blurDataURL,
   objectFit = 'cover',
-  aspectRatio,
   priority = false,
-  onLoad,
-  onError
-}: OptimizedImageProps) => {
+  aspectRatio,
+  fallbackSrc
+}: SimpleImageProps) {
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isInView, setIsInView] = useState(priority); // Load immediately if priority
-  const imgRef = useRef<HTMLImageElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Generate modern format sources if none provided
-  const optimizedSources = sources.length > 0 ? sources : generateModernSources(src);
-
-  // Intersection Observer for lazy loading
-  useEffect(() => {
-    if (priority || loading === 'eager') {
-      setIsInView(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '50px' // Start loading 50px before entering viewport
-      }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [priority, loading]);
-
-  const handleLoad = () => {
-    setIsLoaded(true);
-    onLoad?.();
-  };
-
-  const handleError = () => {
-    setHasError(true);
-    onError?.();
-  };
-
-  // Generate srcSet from sources
-  const generateSrcSet = (sources: ImageSource[]) => {
-    return sources
-      .filter(source => !source.type || source.type === 'image/jpeg' || source.type === 'image/png')
-      .map(source => `${source.src}${source.width ? ` ${source.width}w` : ''}`)
-      .join(', ');
-  };
-
-  // Render placeholder
-  const renderPlaceholder = () => {
-    if (placeholder === 'blur' && blurDataURL) {
-      return (
-        <img
-          src={blurDataURL}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover filter blur-sm"
-          aria-hidden="true"
-        />
-      );
-    }
-
-    if (placeholder === 'skeleton') {
-      return (
-        <div 
-          className="skeleton-placeholder absolute inset-0 w-full h-full"
-          aria-hidden="true"
-        />
-      );
-    }
-
-    return placeholder;
-  };
-
+  
   const containerStyle: React.CSSProperties = {
     position: 'relative',
-    display: 'block',
-    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
     ...(aspectRatio && { aspectRatio })
   };
 
   const imageStyle: React.CSSProperties = {
+    width: '100%',
+    height: '100%',
     objectFit,
-    transition: 'opacity 0.3s ease',
-    opacity: isLoaded ? 1 : 0
+    opacity: isLoaded ? 1 : 0,
+    transition: 'opacity 0.3s ease'
+  };
+  const handleLoad = () => {
+    setIsLoaded(true);
+  };
+
+  const handleError = () => {
+    setHasError(true);
   };
 
   return (
-    <div 
-      ref={containerRef}
-      className={`optimized-image-container ${className}`}
-      style={containerStyle}
-    >
+    <div className={`image-container ${className}`} style={containerStyle}>
       {!isLoaded && !hasError && (
-        <div className="image-placeholder" aria-label="Loading image..." aria-busy="true">
-          {renderPlaceholder()}
+        <div className="image-loading" aria-hidden="true">
+          <div className="loading-skeleton" />
         </div>
       )}
       
-      {isInView && (
-        <picture>
-          {/* Modern format sources (WebP, AVIF) */}
-          {optimizedSources
-            .filter(source => source.type && source.type !== 'image/jpeg' && source.type !== 'image/png')
-            .map((source, index) => (
-              <source
-                key={index}
-                srcSet={source.src}
-                type={source.type}
-                media={source.media}
-                sizes={sizes}
-              />
-            ))}
-          
-          {/* Fallback sources (JPEG, PNG) */}
-          {optimizedSources.length > 0 && (
-            <source
-              srcSet={generateSrcSet(optimizedSources)}
-              sizes={sizes}
-            />
-          )}
-          
-          <img
-            ref={imgRef}
-            src={hasError && fallbackSrc ? fallbackSrc : src}
-            alt={alt}
-            className="w-full h-full"
-            style={imageStyle}
-            loading={loading}
-            onLoad={handleLoad}
-            onError={handleError}
-            decoding="async"
-            aria-hidden={!isLoaded}
-          />
-        </picture>
+      <img
+        src={hasError && fallbackSrc ? fallbackSrc : src}
+        alt={alt}
+        loading={priority ? 'eager' : loading}
+        style={imageStyle}
+        onLoad={handleLoad}
+        onError={handleError}
+        decoding="async"
+      />
+      
+      {hasError && !fallbackSrc && (
+        <div className="image-error" aria-hidden="true">
+          <span>Image failed to load</span>
+        </div>
       )}
     </div>
   );
-});
-
-export default OptimizedImage;
-
-// Helper function to create image sources for different formats and sizes
-export function createImageSources(
-  basePath: string,
-  sizes = [400, 800, 1200, 1600], // Default: covers mobile to desktop
-  formats = ['webp', 'jpeg']
-): ImageSource[] {
-  const sources: ImageSource[] = [];
-  
-  formats.forEach(format => {
-    sizes.forEach(size => {
-      const extension = format === 'webp' ? 'webp' : 'jpg';
-      sources.push({
-        src: `${basePath}-${size}w.${extension}`,
-        width: size,
-        type: `image/${format}`
-      });
-    });
-  });
-  
-  return sources;
 }
 
-// Preset size configurations for different use cases
-export const imageSizePresets = {
-  // For portfolio/project images (your main use case)
-  portfolio: [400, 800, 1200, 1600],
-  
-  // For smaller images like avatars, icons
-  thumbnails: [100, 200, 400],
-  
-  // For hero images that need extra large sizes
-  hero: [600, 1200, 1920, 2560],
-  
-  // For card/grid images
-  cards: [300, 600, 900, 1200],
-  
-  // Minimal set for performance
-  minimal: [400, 800, 1200]
+// Export for backward compatibility
+export const imageSizes = {
+  hero: '100vw',
+  card: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  thumbnail: '150px',
+  full: '100vw',
+  project: '(max-width: 40em) 100vw, (max-width: 64em) 80vw, 800px'
 } as const;
 
-// Helper for responsive image sizes attribute
-// Using your design system breakpoints: 40em, 48em, 64em, 90em, 120em
-export const imageSizes = {
-  hero: '(max-width: 40em) 100vw, (max-width: 64em) 90vw, (max-width: 90em) 80vw, 1200px',
-  card: '(max-width: 40em) 100vw, (max-width: 48em) 90vw, (max-width: 64em) 50vw, 400px',
-  thumbnail: '(max-width: 40em) 150px, (max-width: 48em) 180px, 200px',
-  full: '100vw',
-  project: '(max-width: 40em) 100vw, (max-width: 64em) 80vw, (max-width: 90em) 70vw, 800px'
-} as const;
+// Legacy export
+export { SimpleImage as OptimizedImage };

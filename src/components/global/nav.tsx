@@ -82,6 +82,7 @@ function Nav() {
           <Hex 
             hexClass="nav-toggle icon-bg" 
             content={isMenuOpen ? "toggle-open" : "toggle-close"} 
+            contentType="badge"
             hexWidth={64}
           />
         </button>

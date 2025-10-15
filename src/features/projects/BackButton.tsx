@@ -15,12 +15,14 @@ function BackButton({ onBack }: BackButtonProps) {
       <Hex 
         hexClass="back-button hex-button mobile" 
         content="more-projects"
+        contentType="badge"
         hexWidth={64} 
         onClick={onBack} 
       />
       <Hex 
         hexClass="back-button hex-button desktop" 
         content="more-projects"
+        contentType="badge"
         hexWidth={96} 
         onClick={onBack} 
       />
