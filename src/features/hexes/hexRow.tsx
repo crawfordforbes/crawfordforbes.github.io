@@ -1,4 +1,5 @@
-import Hex from "./HexSimple"
+import Hex from "@/features/hexes/Hex"
+
 import { hexData } from "@/data/hexes/hexes"
 import { rowData } from "@/data/hexes/rows"
 
@@ -25,8 +26,14 @@ if (!row) {
     <div className={`hex-row ${row}`}>
       {rowData && rowData[row] && rowData[row].hexes.map((hexObj, idx) => {
           const hexId = hexObj.id
-          let props = {...hexData[hexId]}.id ? {...hexData[hexId]} : {id: hexId, hexClass: hexId, type: 'display' as const};
-          props = { ...props, hexWidth: hexWidth !== 0 ? hexWidth : undefined, hexMargin: hexMargin || hexMargin === 0 ? hexMargin : undefined };
+          // Safely resolve hex definition from hexData (avoid spreading undefined)
+          const hexDef = hexData[hexId];
+          let props = hexDef && hexDef.id ? { ...hexDef } : { id: hexId, hexClass: hexId };
+          props = {
+            ...props,
+            hexWidth: hexWidth !== 0 ? hexWidth : undefined,
+            hexMargin: typeof hexMargin !== 'undefined' ? hexMargin : undefined,
+          };
           
           let maxHexes = hexObj.repeat || 1;
 
@@ -37,17 +44,18 @@ if (!row) {
 
           return repeatPlaceholderArray.map((id)=>{
             // Map old prop names to new unified prop structure
+            
             const unifiedProps = {
               ...props,
-              onClick: props.hexOnClick,
+              onClick: props.onClick,
               href: props.hexLink,
               tabIndex: props.noTabIndex ? -1 : undefined,
             }
-            
+
             // Remove old prop names
-            const { type, hexOnClick, hexLink, noTabIndex, ...cleanProps } = unifiedProps
-            
-            return(<Hex key={`${idx}_${id}`} {...cleanProps}/>)
+            const { type, onClick, hexLink, noTabIndex, ...cleanProps } = unifiedProps
+
+            return (<Hex key={`${idx}_${id}`} {...cleanProps} />)
           })
 
 

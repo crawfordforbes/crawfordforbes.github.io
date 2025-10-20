@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useParams, useSearchParams, useNavigate } from 'react-router'
+
 import { scrollToTarget } from '@/utils/site'
-import { shouldAutoScrollToProjects, isValidProjectId } from '../../../utils/projects'
+import { shouldAutoScrollToProjects, isValidProjectId } from '@/utils/projects'
 
 export function useProjectRouting(initialProjectId?: string) {
   const params = useParams()

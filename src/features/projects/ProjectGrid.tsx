@@ -1,7 +1,9 @@
 import { memo } from "react";
-import ProjectResult from "./projectResult";
-import Pagination from "./Pagination";
-import { useProjectPagination } from "./hooks";
+
+import ProjectResult from "@/features/projects/projectResult";
+import Pagination from "@/features/projects/Pagination";
+import { useProjectPagination } from "@/features/projects/hooks";
+
 import type { ProjectType } from "@/data/projects/projects";
 
 type ProjectGridProps = {

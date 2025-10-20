@@ -1,6 +1,7 @@
 import { memo } from "react";
-import Hex from "@/features/hexes/HexSimple";
 import { Link } from "react-router";
+
+import Hex from "@/features/hexes/Hex";
 
 type BackButtonProps = {
   onBack: () => void

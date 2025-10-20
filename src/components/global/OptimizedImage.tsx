@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import './styles/optimized-image.css';
 
 interface SimpleImageProps {

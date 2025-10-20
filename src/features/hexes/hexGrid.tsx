@@ -1,4 +1,5 @@
-import HexRow from "./hexRow"
+import HexRow from "@/features/hexes/hexRow"
+
 import { rowData } from "@/data/hexes/rows"
 import type { GridType }  from "@/data/hexes/grids"
 

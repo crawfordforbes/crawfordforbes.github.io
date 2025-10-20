@@ -2,8 +2,9 @@
  * Simplified image utilities
  */
 
-import type { ProjectType } from '@/data/projects/projects'
 import { imageData } from '@/data/global/images'
+
+import type { ProjectType } from '@/data/projects/projects'
 
 // Import hero images from new hero subfolder
 import heroDesktop from '@/assets/images/hero/hero-desktop.webp';
@@ -13,7 +14,7 @@ import heroFull from '@/assets/images/hero/hero-full.jpeg';
 
 // Project-specific image helper for new folder structure
 export function getProjectImageUrl(projectId: string, filename: string): string {
-  console.log("🔍 getProjectImageUrl called with:", { projectId, filename });
+
   if (filename === "fallback") {
     return imagePaths.hero.desktop;
   }
@@ -29,13 +30,11 @@ export function getProjectImageUrl(projectId: string, filename: string): string 
   
   // Check if filename is already a full path
   if (filename.startsWith('/src/assets/') || filename.startsWith('http')) {
-    console.log("⚠️ Filename already looks like a full path, returning as-is:", filename);
     return filename;
   }
   
   // FIXED: Build the path directly instead of calling getImageUrl again
   const fullPath = `/src/assets/images/projects/${projectId}/${filename}`;
-  console.log(`✅ getProjectImageUrl: "${projectId}/${filename}" -> "${fullPath}"`);
   return fullPath;
 }
 
@@ -54,7 +53,6 @@ export function getImageUrl(imagePath: string): string {
   // Use Vite's glob import approach - construct the path as a simple string
   // Vite will handle this at build time
   const fullPath = `/src/assets/images/${imagePath}`;
-  console.log(`getImageUrl: "${imagePath}" -> "${fullPath}"`);
   return fullPath;
 }
 

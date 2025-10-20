@@ -1,22 +1,24 @@
-import { getImageUrl, imagePaths, getProjectPrimaryImageUrl } from "@/utils/images";
+import { memo } from "react";
 
 import Badge from "@/components/global/badge";
-import { memo } from "react";
 import SimpleImage from "@/components/global/OptimizedImage";
 import { imageSizes } from "@/components/global/OptimizedImage";
+import HexGridLayout from "@/features/hexes/hexGridLayout";
+import Hex from "@/features/hexes/Hex";
+
+import { imageData } from "@/data/global/images";
+import { techData } from "@/data/projects/techs";
+import { cardBorder } from "@/data/hexes/layouts";
+import { roleData } from "@/data/projects/roles";
+
+import { getImageUrl, imagePaths, getProjectPrimaryImageUrl } from "@/utils/images";
 import { createAccessibleDescription } from "@/utils/ui";
 
 import type { ProjectType } from "@/data/projects/projects";
-import { imageData } from "@/data/global/images";
 
 import './styles/projectResult.css'
-import { techData } from "@/data/projects/techs";
 
-import HexGridLayout from "@/features/hexes/hexGridLayout";
-import { cardBorder } from "@/data/hexes/layouts";
 
-import Hex from "@/features/hexes/HexSimple";
-import { roleData } from "@/data/projects/roles";
 
 type ProjectResultProps = {
   project: ProjectType,

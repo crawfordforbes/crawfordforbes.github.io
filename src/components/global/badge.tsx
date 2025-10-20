@@ -3,10 +3,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faReact, faGithub, faGit, faLinkedin, faNodeJs } from "@fortawesome/free-brands-svg-icons";
 import { faBars, faCircle, faCircleXmark, faCode, faEnvelope, faFileArrowDown, faIcons, faPeopleArrows, faPeopleGroup, faPerson, faServer, faSpinner, faUpRightFromSquare, faXmark, faDatabase, faLock, faCubes, faChartLine } from "@fortawesome/free-solid-svg-icons"
 
-library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedin, faSpinner, faBars, faXmark, faCircle, faCircleXmark, faCode, faIcons, faPerson, faPeopleGroup, faPeopleArrows, faServer, faUpRightFromSquare, faDatabase, faLock, faCubes, faNodeJs, faChartLine)
-
 import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
+
 import './styles/badge.css'
+
+library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedin, faSpinner, faBars, faXmark, faCircle, faCircleXmark, faCode, faIcons, faPerson, faPeopleGroup, faPeopleArrows, faServer, faUpRightFromSquare, faDatabase, faLock, faCubes, faNodeJs, faChartLine)
 
 type BadgeProps = {
   iconClass?: [IconPrefix, IconName];

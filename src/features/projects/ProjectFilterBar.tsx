@@ -1,7 +1,9 @@
 import { memo } from "react";
-import Hex from "@/features/hexes/HexSimple";
-import ProjectFilter from "./projectFilter";
-import type { useProjectFilters } from "./hooks";
+
+import Hex from "@/features/hexes/Hex";
+import ProjectFilter from "@/features/projects/projectFilter";
+
+import type { useProjectFilters } from "@/features/projects/hooks";
 
 type ProjectFilterBarProps = {
   filters: ReturnType<typeof useProjectFilters>;
@@ -43,7 +45,7 @@ function ProjectFilterBar({ filters, ui, globalHoveredFilter, onFilterHover }: P
         hexClass="filter-toggle hex-button mobile icon-bg" 
         hexWidth={64} 
         onClick={ui.toggleMobileFilter}
-        content={ui.showMobileFilter ? 'toggle-open' : 'toggle-close'}
+        content={ui.showMobileFilter ? 'toggle-filter-open' : 'toggle-filter-close'}
         contentType="badge"
         ariaLabel={`${ui.showMobileFilter ? 'Hide' : 'Show'} project filters`}
       />
@@ -54,7 +56,6 @@ function ProjectFilterBar({ filters, ui, globalHoveredFilter, onFilterHover }: P
         selectedTechIds={filters.selectedTechIds}
         availableTechIds={filters.availableTechIds}
         selectTechFilterClick={filters.toggleTechFilter}
-        // CHANGE: Use global hover state instead of local
         hoveredFilters={globalHoveredFilter}
         highlightFilterHover={onFilterHover}
       />

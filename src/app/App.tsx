@@ -1,12 +1,15 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import './styles/index.css'
-import { MediaQueryContext } from '@/utils/context';
 import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
-import { useEffect, useState } from 'react';
+import Portfolio from '@/app/routes/portfolio';
+
+import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize } from '@/utils/site';
+
 import type { MediaSizes } from '@/types/layout';
-import Portfolio from './routes/portfolio';
+
+import './styles/index.css'
 
 function App() {
 

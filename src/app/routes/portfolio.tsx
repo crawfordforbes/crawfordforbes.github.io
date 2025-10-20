@@ -1,10 +1,10 @@
-import Nav from "../../components/global/nav"
-import HexHeader from "../../components/panels/hexHeader"
-import Hero from "../../components/panels/hero"
-import IntroPanel from "../../components/panels/introPanel"
-import ProjectIndex from "@/features/projects/projectIndex"
-import Footer from "../../components/panels/footer"
 import { ComponentErrorBoundary } from "@/components/global/ErrorBoundaryWrappers"
+import Nav from "@/components/global/Nav"
+import HexHeader from "@/components/panels/HexHeader"
+import Hero from "@/components/panels/Hero"
+import IntroPanel from "@/components/panels/IntroPanel"
+import ProjectIndex from "@/features/projects/ProjectIndex"
+import Footer from "@/components/panels/Footer"
 
 function Portfolio() {
 

@@ -1,6 +1,5 @@
 import Logo from "@/features/hexes/svg/logo"
-
-import { contactData } from "../global/contacts"
+import { badgeData } from "@/data/global/badges"
 
 import type { JSX } from "react"
 
@@ -13,11 +12,12 @@ export type HexesType = {
     hexStyle?: React.CSSProperties,
     content?: string | JSX.Element,
     contentType?: 'auto' | 'image' | 'badge' | 'visual',
-    hexOnClick?: () => void,
+    onClick?: () => void,
     hexWidth?: number,
     hexMargin?: number,
     noTabIndex?: boolean,
-    fullAreaContent?: boolean
+    fullAreaContent?: boolean,
+    contactId?: string
   }
 }
 
@@ -37,35 +37,17 @@ export const hexData:HexesType = {
     hexClass: "decorative-hex",
   },
   /* contacts */
-  "contacts-github-index": {
-    id: "contacts-github-index",
-    type: "display",
-    content: "github-index",
-    hexClass: "gradient-2-3 full-area",
-  },
   "contacts-email": {
     id: "contacts-email",
-    type: "display",
-    content: "email",
+    contactId: "email",
     hexClass: "gradient-2-3 full-area icon-bg",
-  },
-  "contacts-linked-in": {
-    id: "contacts-linked-in",
-    type: "link",
-    hexLink: contactData?.["linked-in"]?.link || "https://www.linkedin.com/in/crawfordforbes/",
-    content: "linked-in"
-  },
-  "contacts-resume": {
-    id: "contacts-resume",
-    type: "link",
-    hexLink: contactData?.["resume"]?.link || "/tbd",
-    content: "resume"
+    contentType: "badge",
   },
   /* nav */
   "nav-projects": {
     id: "nav-projects",
-    type: "display",
-    content: "projects-link",
     hexClass: "gradient-2-3 full-area icon-bg",
+    contentType: "badge",
+    contactId: "projects-link",
   },
 }

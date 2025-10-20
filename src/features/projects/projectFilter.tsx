@@ -1,5 +1,6 @@
-import type { RoleType } from "@/data/projects/roles"
 import Badge from "@/components/global/badge";
+
+import type { RoleType } from "@/data/projects/roles"
 
 import './styles/projectFilter.css'
 

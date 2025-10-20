@@ -1,5 +1,7 @@
 import { memo } from 'react'
+
 import type { UseProjectPaginationReturn } from './hooks/useProjectPagination'
+
 import './styles/pagination.css'
 
 type PaginationProps = {

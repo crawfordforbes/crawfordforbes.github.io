@@ -1,10 +1,12 @@
-import Hex from '@/features/hexes/HexSimple'
-import './styles/footer.css'
-import { contactData } from '@/data/global/contacts'
+import Hex from '@/features/hexes/Hex'
+import Badge from '@/components/global/badge'
+
+import { badgeData } from '@/data/global/badges';
 import { footerContent } from '@/data/content/footer'
-import Badge from '../global/badge'
 
 import { scrollToTarget } from '@/utils/site';
+
+import './styles/footer.css'
 
 function Footer() {
 
@@ -17,31 +19,14 @@ function Footer() {
 
   function renderBadges() {
     return navItems.map((item:string, idx:number) => {
-      // If the link is an internal link (starts with "/"), use scrollToElementOnClick
-      if(contactData?.[item] && contactData?.[item]?.link && contactData?.[item]?.link[0] === "#") {
-        return (
-          <li key={idx}>
-              <Badge 
-                iconClass={contactData?.[item]?.iconClass}
-                title={contactData?.[item]?.title}
-                badgeOnClick={() => {
-                  const link = contactData?.[item]?.link;
-                  if (typeof link === 'string') {
-                    scrollToElementOnClick(link.slice(1));
-                  }
-                }}
-                extraClass="pill secondary nav-badge"
-              />
-          </li>
-        )
-      }
       return (
         <li key={idx}>
           <Badge 
-            iconClass={contactData?.[item]?.iconClass}
-            title={contactData?.[item]?.title}
-            link={contactData?.[item]?.link}
+            iconClass={badgeData?.[item]?.iconClass}
+            title={badgeData?.[item]?.title}
+            link={badgeData?.[item]?.link}
             extraClass="pill secondary nav-badge"
+            badgeOnClick={badgeData?.[item]?.badgeOnClick}
           />
         </li>
       );
@@ -59,7 +44,7 @@ function Footer() {
             <Hex hexClass="footer-hex decorative" hexWidth={360}/>
             <Hex hexClass="footer-hex footer-text" hexWidth={360} contentType="visual" content={
               <div className="footer-content">
-                <h2 className="title">{contactData.name.title}</h2>
+                <h2 className="title">{badgeData.name.title}</h2>
                 <p className="description">{footerContent.description}</p>
                 <p className="copyright">© {new Date().getFullYear()} Crawford Forbes</p>
               </div>

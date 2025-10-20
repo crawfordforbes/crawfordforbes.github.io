@@ -1,5 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
-import './styles/errorBoundary.css'; // Fix case sensitivity
+
+import './styles/errorBoundary.css';
 
 interface ErrorBoundaryProps {
   children: ReactNode;

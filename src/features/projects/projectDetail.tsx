@@ -1,19 +1,17 @@
-import { getProjectImageUrl, imagePaths } from "@/utils/images";
-import { imageData } from "@/data/global/images";
-
-import Hex from "../hexes/HexSimple"
-import HexGridLayout from "@/features/hexes/hexGridLayout";
-import SimpleImage from "../../components/global/OptimizedImage";
-import { getProjectById, generateImageAlt } from "../../utils/projects";
-
-import { cardBorder } from "@/data/hexes/layouts";
-
-import Badge from "@/components/global/badge"
-import { techData } from "@/data/projects/techs";
-
+import { useParams } from "react-router";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-import { useParams } from "react-router";
+import Badge from "@/components/global/badge"
+import SimpleImage from "@/components/global/OptimizedImage";
+import Hex from "@/features/hexes/Hex"
+import HexGridLayout from "@/features/hexes/hexGridLayout";
+
+import { imageData } from "@/data/global/images";
+import { cardBorder } from "@/data/hexes/layouts";
+import { techData } from "@/data/projects/techs";
+
+import { getProjectById, generateImageAlt } from "@/utils/projects";
+import { getProjectImageUrl, imagePaths } from "@/utils/images";
 
 import './styles/projectDetail.css'
 import './styles/splide.min.css'
@@ -61,7 +59,7 @@ function ProjectDetail({
     })
     .filter((filename): filename is string => typeof filename === "string" && filename.length > 0) :
     ["fallback"];
-console.log(resolvedImageFilenames)
+
   function renderTechBadges() {
     return project?.techIds?.map((techId: string, idx: number) => {
       const tech = techData[techId]

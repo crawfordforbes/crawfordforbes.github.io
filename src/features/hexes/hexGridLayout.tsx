@@ -1,20 +1,17 @@
-import { useContext } from "react";
-import { MediaQueryContext } from "@/utils/context";
+import { useContext, useMemo, memo } from "react";
 
-import HexGrid from "./hexGrid";
+import HexGrid from "@/features/hexes/hexGrid";
+
 import type { LayoutsType } from "@/data/hexes/layouts"
 import { gridData } from "@/data/hexes/grids";
 
+import { MediaQueryContext } from "@/utils/context";
 
-import { useMemo } from "react";
-
-import { memo } from "react";
 type HexGridLayoutProps = {
   layouts: LayoutsType,
   hexWidth?: number,
   extraClass?: string,
 }
-
 
 function HexGridLayout({  
   layouts,
@@ -23,7 +20,6 @@ function HexGridLayout({
 }: HexGridLayoutProps) {
 
 const mediaQuery = useContext(MediaQueryContext);
-
 
   hexWidth = hexWidth ? hexWidth : 0;
 

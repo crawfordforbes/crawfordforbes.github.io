@@ -1,6 +1,6 @@
-import { introPanelContent } from "@/data/content/introPanel";
-
 import { useRef, useState, useEffect } from "react";
+
+import { introPanelContent } from "@/data/content/introPanel";
 
 import './styles/introPanel.css'
 

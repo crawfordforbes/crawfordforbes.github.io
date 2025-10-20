@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useProjectFilters, useProjectRouting } from "./hooks";
-import ProjectFilterBar from "./ProjectFilterBar";
-import ProjectGrid from "./ProjectGrid";
-import ProjectDetail from "./projectDetail";
-import BackButton from "./BackButton";
+
+import { useProjectFilters, useProjectRouting } from "@/features/projects/hooks";
+import ProjectFilterBar from "@/features/projects/ProjectFilterBar";
+import ProjectGrid from "@/features/projects/ProjectGrid";
+import ProjectDetail from "@/features/projects/projectDetail";
+import BackButton from "@/features/projects/BackButton";
+
 import './styles/projectIndex.css'
 
 type projectIndexProps = {

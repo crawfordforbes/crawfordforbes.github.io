@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
 import ErrorBoundary from './ErrorBoundary';
+
+import type { ReactNode } from 'react';
 
 interface AppErrorBoundaryProps {
   children: ReactNode;

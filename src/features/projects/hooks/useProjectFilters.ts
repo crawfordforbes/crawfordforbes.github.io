@@ -1,10 +1,11 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
+
 import { 
   getAllProjectsSorted, 
   filterProjects, 
   getFilterableRoles, 
   getFilterableTechs 
-} from '../../../utils/projects'
+} from '@/utils/projects'
 
 export function useProjectFilters(
   urlRoleFilters?: string[], 

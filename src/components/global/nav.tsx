@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 
-import './styles/nav.css'
-import Badge from './badge';
+import Badge from '@/components/global/badge';
+import Hex from '@/features/hexes/Hex';
 
-import Hex from '@/features/hexes/HexSimple';
-import { contactData } from '@/data/global/contacts';
+import { badgeData } from '@/data/global/badges';
+
 import { scrollToTarget } from '@/utils/site';
+
+import './styles/nav.css'
 
 function Nav() {
 
@@ -26,41 +28,23 @@ function Nav() {
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
-
-  const navItems = ['hire', 'projects-link', 'linked-in', 'github-index', 'resume'];
-
+  
   function scrollToElementOnClick(targetId: string) {
     setIsMenuOpen(false);
     scrollToTarget(targetId);
   }
-
+  
+  const navItems = ['hire', 'projects-link', 'linked-in', 'github-index', 'resume'];
 
   function renderBadges() {
     return navItems.map((item:string, idx:number) => {
-      // If the link is an internal link (starts with "/"), use scrollToElementOnClick
-      if(contactData?.[item] && contactData?.[item]?.link && contactData?.[item]?.link[0] === "#") {
-        return (
-          <li key={idx}>
-              <Badge 
-                iconClass={contactData?.[item]?.iconClass}
-                title={contactData?.[item]?.title}
-                badgeOnClick={() => {
-                  const link = contactData?.[item]?.link;
-                  if (typeof link === 'string') {
-                    scrollToElementOnClick(link.slice(1));
-                  }
-                }}
-                extraClass="pill secondary nav-badge"
-              />
-          </li>
-        )
-      }
       return (
         <li key={idx}>
           <Badge 
-            iconClass={contactData?.[item]?.iconClass}
-            title={contactData?.[item]?.title}
-            link={contactData?.[item]?.link}
+            iconClass={badgeData?.[item]?.iconClass}
+            title={badgeData?.[item]?.title}
+            link={badgeData?.[item]?.link}
+            badgeOnClick={badgeData?.[item]?.badgeOnClick}
             extraClass="pill secondary nav-badge"
           />
         </li>
@@ -98,9 +82,9 @@ function Nav() {
       >
         <div className="hex-content">
           <div className="locale" role="banner" aria-label="Site author information">
-            <div><h4>{contactData.fname.title} {contactData.lname.title}</h4></div>
-            <div><h4>{contactData.tagline1.title}</h4></div>
-            <div><h4>{contactData.locale.title}</h4></div>
+            <div><h4>{badgeData.fname.title} {badgeData.lname.title}</h4></div>
+            <div><h4>{badgeData.tagline1.title}</h4></div>
+            <div><h4>{badgeData.locale.title}</h4></div>
           </div>
           <nav role="navigation" aria-label="Primary navigation links">
             <ul className="nav-links" role="list">
