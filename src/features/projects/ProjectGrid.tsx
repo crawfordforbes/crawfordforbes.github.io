@@ -3,6 +3,7 @@ import { memo } from "react";
 import ProjectResult from "@/features/projects/ProjectResult";
 import Pagination from "@/features/projects/Pagination";
 import { useProjectPagination } from "@/features/projects/hooks";
+import { usePerformanceMonitor } from '@/utils/performance';
 
 import type { ProjectType } from "@/data/projects/projects";
 
@@ -15,7 +16,6 @@ type ProjectGridProps = {
   onTechToggle: (id: string) => void;
   hasError: boolean;
   onClearError: () => void;
-  // ADD: Global hover props
   globalHoveredFilter: string;
   onFilterHover: (filterId: string) => void;
 }
@@ -32,12 +32,15 @@ function ProjectGrid({
   onTechToggle,
   hasError,
   onClearError,
-  // ADD: Global hover props
   globalHoveredFilter,
   onFilterHover
 }: ProjectGridProps) {
   // Use pagination instead of virtualization
-  const pagination = useProjectPagination(projects, 6); // 3 projects per page
+  const pagination = useProjectPagination(projects, 6); // 6 projects per page
+
+  // Enable performance monitoring when ?perf=1 is in the URL
+  const perfEnabled = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('perf') === '1';
+  usePerformanceMonitor('ProjectGrid', perfEnabled);
 
   const renderProject = (project: ProjectType) => (
     <ProjectResult 

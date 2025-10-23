@@ -1,8 +1,8 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
-import Badge from "@/components/global/badge";
+import Badge from "@/components/global/Badge";
 import SimpleImage from "@/components/global/OptimizedImage";
-import HexGridLayout from "@/features/hexes/hexGridLayout";
+import HexGridLayout from "@/features/hexes/HexGridLayout";
 import Hex from "@/features/hexes/Hex";
 
 import { techData } from "@/data/projects/techs";
@@ -10,7 +10,7 @@ import { cardBorder } from "@/data/hexes/layouts";
 import { roleData } from "@/data/projects/roles";
 
 import { imagePaths, getProjectPrimaryImageUrl } from "@/utils/images";
-import { createAccessibleDescription } from "@/utils/ui";
+import { createAccessibleDescription } from "@/utils/site";
 
 import type { ProjectType } from "@/data/projects/projects";
 
@@ -40,8 +40,9 @@ function ProjectResult({
   hoveredFilters,
 }: ProjectResultProps) {
 
-  const renderTechBadges = () => {
-    return project?.techIds?.filter(techId => {return techData[techId]?.filterable ? techId : null}).slice(0,3).map((techId: string, idx: number) => {
+  // Memoize badge lists to avoid recreating arrays on every render
+  const techBadges = useMemo(() => {
+    return project?.techIds?.filter(techId => techData[techId]?.filterable).slice(0,3).map((techId: string, idx: number) => {
       const tech = techData[techId];
       if (!tech) return null;
 
@@ -49,7 +50,7 @@ function ProjectResult({
 
       return (
         <li 
-          key={idx} 
+          key={techId ?? idx} 
           onMouseEnter={() => highlightFilterHover(techId)}
           onMouseLeave={() => highlightFilterHover("")}
         >
@@ -62,9 +63,9 @@ function ProjectResult({
         </li>
       );
     });
-  };
+  }, [project?.techIds, selectedTechIds, hoveredFilters, selectTechFilterClick, highlightFilterHover]);
 
-  const renderRoleBadges = () => {
+  const roleBadges = useMemo(() => {
     return project?.roleIds?.map((roleId: string, idx: number) => {
       const role = roleData[roleId];
       if (!role) return null;
@@ -73,7 +74,7 @@ function ProjectResult({
 
       return (
         <li 
-          key={idx} 
+          key={roleId ?? idx} 
           onMouseEnter={() => highlightFilterHover(roleId)}
           onMouseLeave={() => highlightFilterHover("")}
         >
@@ -86,7 +87,7 @@ function ProjectResult({
         </li>
       );
     });
-  };
+  }, [project?.roleIds, selectedRoleIds, hoveredFilters, selectRoleFilterClick, highlightFilterHover]);
 
   const hasRoleIds = !!(project?.roleIds && project?.roleIds.length > 0);
   const hasTechIds = !!(project?.techIds && project?.techIds.length > 0);
@@ -123,7 +124,7 @@ function ProjectResult({
             <div className="techs-and-border">
               {hasTechIds && (
                 <div role="list" aria-label="Technologies used" className="techs badges-list">
-                  {renderTechBadges()}
+                  {techBadges}
                 </div> 
               )}
               <HexGridLayout layouts={cardBorder} extraClass="decorative-hex-border"/>
@@ -143,7 +144,7 @@ function ProjectResult({
 
           {hasRoleIds && (
             <div role="list" aria-label="Project roles" className="roles badges-list">
-              {renderRoleBadges()}
+              {roleBadges}
             </div> 
           )}
           
@@ -201,4 +202,25 @@ function ProjectResult({
   );
 }
 
-export default memo(ProjectResult);
+function areEqual(prev: ProjectResultProps, next: ProjectResultProps) {
+  // Always re-render if the project identity changed
+  if (prev.project.id !== next.project.id) return false;
+
+  // Re-render if hover target changed
+  if ((prev.hoveredFilters ?? '') !== (next.hoveredFilters ?? '')) return false;
+
+  // Re-render if selected filter sets changed length (cheap check)
+  if ((prev.selectedRoleIds?.length ?? 0) !== (next.selectedRoleIds?.length ?? 0)) return false;
+  if ((prev.selectedTechIds?.length ?? 0) !== (next.selectedTechIds?.length ?? 0)) return false;
+
+  // If callbacks changed (rare), re-render
+  if (prev.selectProjectClick !== next.selectProjectClick) return false;
+  if (prev.selectRoleFilterClick !== next.selectRoleFilterClick) return false;
+  if (prev.selectTechFilterClick !== next.selectTechFilterClick) return false;
+  if (prev.highlightFilterHover !== next.highlightFilterHover) return false;
+
+  // Otherwise assume stable and skip render
+  return true;
+}
+
+export default memo(ProjectResult, areEqual);

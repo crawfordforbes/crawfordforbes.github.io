@@ -1,4 +1,4 @@
-import Badge from "@/components/global/badge";
+import Badge from "@/components/global/Badge";
 
 import type { RoleType } from "@/data/projects/roles"
 

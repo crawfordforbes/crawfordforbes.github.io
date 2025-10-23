@@ -120,16 +120,6 @@
   transition: background-color var(--transition-rules);
 }
 
-  /* .project-detail .card-top .header-content .variable-height-hex .badge.pill .fa-icon,
-  .project-detail .card-top .header-content .variable-height-hex .title {
-    --title-size: .75rem;
-    font-size: var(--title-size);
-  }
-
-  .project-detail .card-top .header-content .variable-height-hex .badge.pill .badge-content {
-    padding: 4px 12px;
-  } */
-
 @media screen and (min-width: 48em){
   .project-detail {
     background: linear-gradient(180deg, var(--info-panel-bg-top-color) 10%, var(--info-panel-bg-bottom-color) 100%);

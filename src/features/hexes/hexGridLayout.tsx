@@ -39,15 +39,17 @@ const mediaQuery = useContext(MediaQueryContext);
     return null;
   }
 
+  const hexGridProps = useMemo(() => ({
+    grid,
+    shiftedUp: layout.shiftedUp,
+    hexWidth: layout.hexWidth ? layout.hexWidth : hexWidth,
+    hexMargin: typeof layout.hexMargin !== 'undefined' ? layout.hexMargin : 3,
+  }), [grid, layout, hexWidth]);
+
   // chooses which hex grid to display based on screen size
   return (
     <article className={`hex-grid-layout ${mediaQuery} ${extraClass ? extraClass : ""}`}>
-      {grid && layout && <HexGrid 
-        grid={grid} 
-        shiftedUp={layout.shiftedUp} 
-        hexWidth={layout.hexWidth ? layout.hexWidth : hexWidth}
-        hexMargin={layout.hexMargin || layout.hexMargin === 0 ? layout.hexMargin : 3}
-      />}
+      {grid && layout && <HexGrid {...hexGridProps} />}
     </article>
   )
 }

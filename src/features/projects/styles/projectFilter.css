@@ -42,9 +42,21 @@
   background-color: var(--project-filter-bg-hover-top);
 }
 
+.project-index .bottom .filter-button {
+  --focus-shadow: var(--project-filter-bg-hover-bottom);
+}
+
+.project-index .bottom .filter-button:focus {
+  background-color: var(--project-filter-bg-hover-bottom);
+}
+
 .project-index .filter-button:focus-visible {
   outline: 3px solid var(--focus-shadow);
   outline-offset: 3px;
+}
+
+.project-index .bottom .filter-button:focus-visible {
+  background-color: var(--project-filter-bg-hover-bottom);
 }
 
 /* High contrast mode support */

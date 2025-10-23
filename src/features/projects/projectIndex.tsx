@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { usePerformanceMonitor } from '@/utils/performance';
 
 import { useProjectFilters, useProjectRouting } from "@/features/projects/hooks";
 import ProjectFilterBar from "@/features/projects/ProjectFilterBar";
@@ -24,6 +25,10 @@ function ProjectIndex({
   // ADD: Global hover state management
   const [globalHoveredFilter, setGlobalHoveredFilter] = useState<string>("");
 
+  // Enable performance monitoring via query param: ?perf=1
+  const perfEnabled = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('perf') === '1';
+  usePerformanceMonitor('ProjectIndex', perfEnabled);
+
   // Project detail view
   if (routing.selectedProjectId) {
     return (
@@ -48,7 +53,6 @@ function ProjectIndex({
             showMobileFilter,
             toggleMobileFilter: () => setShowMobileFilter(!showMobileFilter)
           }}
-          // ADD: Pass global hover state
           globalHoveredFilter={globalHoveredFilter}
           onFilterHover={setGlobalHoveredFilter}
         />
@@ -62,7 +66,6 @@ function ProjectIndex({
           onTechToggle={filters.toggleTechFilter}
           hasError={routing.hasError}
           onClearError={routing.clearSelectedProject}
-          // ADD: Pass global hover state
           globalHoveredFilter={globalHoveredFilter}
           onFilterHover={setGlobalHoveredFilter}
         />

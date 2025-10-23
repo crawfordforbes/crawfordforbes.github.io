@@ -137,6 +137,5 @@
 .badge.disabled .badge-content .fa-icon,
 .badge.disabled .badge-content .fa-icon::after {
   opacity: .65;
-  pointer-events: none;
-  cursor: not-allowed;
+  cursor: default;
 }

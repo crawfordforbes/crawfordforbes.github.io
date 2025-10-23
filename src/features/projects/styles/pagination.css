@@ -43,6 +43,17 @@
   font-weight: bold;
 }
 
+.pagination .pagination-pages .pagination-btn:not(.active):hover .badge-content {
+  background-color: var(--badge-tertiary-bg-highlight);
+  color: var(--badge-tertiary-text-highlight);
+  cursor: pointer;
+}
+
+.pagination .pagination-pages .pagination-btn.active .badge-content {
+  opacity: .65;
+  cursor: default;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .pagination-controls {

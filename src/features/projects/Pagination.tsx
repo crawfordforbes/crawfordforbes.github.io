@@ -95,17 +95,13 @@ function Pagination({ pagination, className = '' }: PaginationProps) {
             typeof page === 'number' ? (
               <Badge
                 key={page}
-                iconClass={['fas', `${page}`]}
+                title={page.toString()}
                 badgeOnClick={page === currentPage ? undefined : () => goToPage(page)}
                 extraClass={`pill tertiary pagination-btn pagination-page ${page === currentPage ? 'active' : ''}`}
                 noTabIndex={page === currentPage}
-                onMouseEnter={() => {}}
-                onMouseLeave={() => {}}
               />
             ) : (
-              <Badge key={`ellipsis-${index}`} className="pagination-ellipsis pill tertiary" title="...">
-                {page}
-              </Badge>
+              <Badge key={`ellipsis-${index}`} extraClass="pagination-ellipsis pill tertiary" title={page} />
             )
           ))}
         </div>

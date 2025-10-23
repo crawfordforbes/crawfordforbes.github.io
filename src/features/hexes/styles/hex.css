@@ -22,6 +22,19 @@
   border: 0;
 }
 
+/* Layout sizing using CSS variables set on the element or row (default fallbacks provided) */
+.hex {
+  width: var(--hex-width, 122px);
+  min-width: var(--hex-width, 122px);
+  height: calc(var(--hex-width, 122px) * 1.1547);
+  margin: var(--hex-margin, 3px) var(--hex-margin, 3px) calc(var(--hex-margin, 3px) - var(--hex-width, 122px) * 0.2886 + 1px);
+}
+
+/* Offset even rows by half a hex + margin */
+.hex-row:nth-child(even) {
+  margin-left: calc(var(--hex-width, 122px) / 2 + var(--hex-margin, 3px));
+}
+
 .hex.with-bg {
   background-size: cover;
   background-position: center;

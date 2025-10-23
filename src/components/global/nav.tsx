@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
 
-import Badge from '@/components/global/badge';
+import Badge from '@/components/global/Badge';
 import Hex from '@/features/hexes/Hex';
 
 import { badgeData } from '@/data/global/badges';
-
-import { scrollToTarget } from '@/utils/site';
 
 import './styles/nav.css'
 
@@ -27,11 +25,6 @@ function Nav() {
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
-  }
-  
-  function scrollToElementOnClick(targetId: string) {
-    setIsMenuOpen(false);
-    scrollToTarget(targetId);
   }
   
   const navItems = ['hire', 'projects-link', 'linked-in', 'github-index', 'resume'];

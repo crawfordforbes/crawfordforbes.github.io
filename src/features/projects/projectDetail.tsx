@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-import Badge from "@/components/global/badge"
+import Badge from "@/components/global/Badge"
 import SimpleImage from "@/components/global/OptimizedImage";
 import Hex from "@/features/hexes/Hex"
-import HexGridLayout from "@/features/hexes/hexGridLayout";
+import HexGridLayout from "@/features/hexes/HexGridLayout";
 
 import { imageData } from "@/data/global/images";
 import { cardBorder } from "@/data/hexes/layouts";

@@ -54,16 +54,22 @@ export function useProjectRouting(initialProjectId?: string) {
   }, [navigate, searchParams])
 
   const updateFilters = useCallback((roleIds: string[], techIds: string[]) => {
-    const newParams = new URLSearchParams()
-    
+    // Start from existing params to preserve unknown keys (e.g. ?perf=1)
+    const currentParams = new URLSearchParams(searchParams)
+
+    // Remove existing roles/techs so we can set new values or remove them entirely
+    currentParams.delete('roles')
+    currentParams.delete('techs')
+
     if (roleIds.length > 0) {
-      newParams.set('roles', roleIds.join(','))
+      currentParams.set('roles', roleIds.join(','))
     }
     if (techIds.length > 0) {
-      newParams.set('techs', techIds.join(','))
+      currentParams.set('techs', techIds.join(','))
     }
-    
-    setSearchParams(newParams)
+
+    // Apply updated params (preserves other query keys)
+    setSearchParams(currentParams)
   }, [setSearchParams])
 
   return {

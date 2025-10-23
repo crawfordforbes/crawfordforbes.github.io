@@ -76,9 +76,6 @@ export function getProjectPrimaryImageUrl(project: ProjectType): string {
   return getProjectImageUrl(project.id, imageInfo.fileName);
 }
 
-// Legacy function name for compatibility  
-export const getImgUrl = getImageUrl;
-
 // Image path helpers for different categories
 export const imagePaths = {
   hero: {

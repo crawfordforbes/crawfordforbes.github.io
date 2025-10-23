@@ -1,4 +1,4 @@
-import HexGridLayout from "@/features/hexes/hexGridLayout";
+import HexGridLayout from "@/features/hexes/HexGridLayout";
 
 import { headerLayouts } from "@/data/hexes/layouts";
 
