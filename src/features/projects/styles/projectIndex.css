@@ -4,6 +4,7 @@
   position: relative;
   width: 100%;
   display: block; /* Ensure it's block container */
+  min-height: 788px; /* Minimum height to prevent layout shift when filter panel toggles */
 }
 
 .project-index .helper-results {
@@ -18,6 +19,7 @@
   color: var(--project-index-intro-text);
   border-radius: var(--border-radius);
   filter: var(--drop-shadow);
+  min-height: 84px; /* this keeps the filter toggle from colliding with results */
 }
 
 /* Grid layout for project cards */
@@ -25,9 +27,9 @@
 .project-index .helper-results .results {
   position: relative;
   padding: 0 0 32px 0;
-  display: grid !important; /* Force grid display */
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-template-rows: none !important; /* Override any inherited grid-rows */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-rows: none;
   gap: 16px;
   z-index: 0;
   width: 100%;
@@ -54,16 +56,7 @@
   position: relative;
 }
 
-.selected-project .back-button {
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  z-index: 2;
-}
 
-.selected-project .back-button.desktop {
-  display: none;
-}
 
 .project-index .intro-text p {
   margin: 0;
@@ -73,54 +66,22 @@
   font-size: 2rem;
 }
 
-.project-index .hex.icon-bg:hover .badge .badge-content .fa-icon {
-  font-size: 2.5rem;
-}
 
-/* Mobile - small cards */
-@media screen and (max-width: 39.9em){
-  .project-index .results {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
-}
-
-/* Tablet and up - better grid spacing */
-@media screen and (min-width: 40em){
-  .project-index .results,
-  .project-index .helper-results .results {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-    gap: 20px;
-  }
-
-  .project-index .intro-text {
-    margin: 0 0 24px 0;
-  }
-
-  .selected-project .back-button.mobile {
-    display: none;
-  }
-  
-  .selected-project .back-button.desktop {
-    display: block;
-  }
-}
 
 /* Desktop - larger cards */
 @media screen and (min-width: 64em){
-  .project-index .results,
-  .project-index .helper-results .results {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
-    gap: 24px;
+  .project-index {
+    --filter-offset: 16px;
+    display: flex;
   }
-}
-
-/* Large desktop - maximum 3 columns */
-@media screen and (min-width: 80em){
   .project-index .results,
   .project-index .helper-results .results {
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)) !important;
-    gap: 32px;
+    margin-left: var(--filter-offset);
+    width: calc(100% - var(--filter-offset));
+  }
+  .project-index .intro-text {
+    margin: 0 0 16px var(--filter-offset);
+    min-height: unset;
   }
 }
 

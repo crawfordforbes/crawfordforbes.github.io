@@ -2,12 +2,12 @@
   --icon-size: 1.5rem;
   --title-size: 1rem;
 
-  position: sticky;
-  top: 24px;
+  position: absolute;
+  top: 0;
   left: 0;
   z-index: 1;
   pointer-events: none;
-  height: 0;
+  height: 100%;
   filter: var(--drop-shadow);
 }
 
@@ -63,9 +63,21 @@
 /* mobile filter toggle button */
 .project-index .filter-toggle.hex {
   position: absolute;
-  top: -8px;
-  left: -16px;
+  top: 0;
+  left: 0;
   margin: 0;
+  background-color: var(--project-filter-toggle-bg);
+  color: var(--project-filter-toggle-text);
+  filter: var(--drop-shadow);
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+}
+
+.project-index .filter-toggle.hex:hover,
+.project-index .filter-toggle.hex:focus-within {
+  background-color: var(--project-filter-toggle-bg-hover);
+  color: var(--project-filter-toggle-text-hover);
+  cursor: pointer;
+  transition: background-color var(--transition-rules), color var(--transition-rules);
 }
 
 .project-index .filters.hide-mobile-filter .filter-wrapper {
@@ -128,7 +140,13 @@
   transition: background-color var(--transition-rules), color var(--transition-rules);
 }
 
-@media screen and (min-width: 40em){
+@media screen and (min-width: 64em){
+    .project-index .filters{
+      --title-size: 1.125rem;
+
+      position: sticky;
+      top: 24px;
+    }
   .project-index .filter-toggle {
     display: none;
   }
@@ -137,11 +155,5 @@
   .project-index .filters.hide-mobile-filter .filter-wrapper {
     top: var(--variable-height-hex-triangle-height);
     left: 0;
-  }
-}
-
-@media screen and (min-width: 64em){
-  .project-index .filters{
-    --title-size: 1.125rem;
   }
 }

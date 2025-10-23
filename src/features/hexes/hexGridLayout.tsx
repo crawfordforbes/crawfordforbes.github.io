@@ -1,6 +1,6 @@
 import { useContext, useMemo, memo } from "react";
 
-import HexGrid from "@/features/hexes/hexGrid";
+import HexGrid from "@/features/hexes/HexGrid";
 
 import type { LayoutsType } from "@/data/hexes/layouts"
 import { gridData } from "@/data/hexes/grids";

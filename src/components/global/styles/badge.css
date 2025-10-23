@@ -59,63 +59,84 @@
 
 /* colors */
 
-.badge.primary .badge-content {
-  background-color: var(--badge-primary-color-bg);
-  color: var(--badge-primary-color-text);
-  border: var(--badge-border-width) solid var(--badge-primary-color-border);
+.badge .badge-content,
+.badge.highlight .badge-content,
+.badge.highlight .badge-content .fa-icon {
+  transition: color var(--transition-rules);
 }
 
+.badge:has(a, button) .badge-content .fa-icon::after,
+.badge.highlight .badge-content .fa-icon::after,
+.badge:has(a, button):hover .badge-content .fa-icon::after,
+.badge.highlight .badge-content .fa-icon::after,
+.badge:has(a, button):focus .badge-content .fa-icon::after,
+.badge:has(a, button):focus-within .badge-content .fa-icon::after {
+  transition: background-color var(--transition-rules);
+}
+
+.badge.primary .badge-content {
+  background-color: var(--badge-primary-bg);
+  color: var(--badge-primary-text);
+  border: var(--badge-border-width) solid var(--badge-primary-border);
+}
+
+.badge.primary:has(a, button) .badge-content:hover :not(.title),
 .badge.primary.highlight .badge-content .fa-icon {
-  color: var(--badge-primary-color-text-highlight);
-  transition: color var(--transition-rules);
+  color: var(--badge-primary-text-highlight);
 }
 
 .badge.primary:has(a, button):hover .badge-content .fa-icon::after,
 .badge.primary.highlight .badge-content .fa-icon::after,
 .badge.primary:has(a, button):focus .badge-content .fa-icon::after,
 .badge.primary:has(a, button):focus-within .badge-content .fa-icon::after {
-  background-color: var(--badge-primary-color-bg-highlight);
-  transition: background-color var(--transition-rules);
+  background-color: var(--badge-primary-bg-highlight);
+  color: var(--badge-primary-text-highlight);
 }
 
 
 .badge.secondary .badge-content {
-  background-color: var(--badge-secondary-color-bg);
-  color: var(--badge-secondary-color-text);
-  border: var(--badge-border-width) solid var(--badge-secondary-color-border);
+  background-color: var(--badge-secondary-bg);
+  color: var(--badge-secondary-text);
+  border: var(--badge-border-width) solid var(--badge-secondary-border);
 }
 
+.badge.secondary:has(a, button) .badge-content:hover :not(.title),
 .badge.secondary.highlight .badge-content .fa-icon {
-  color: var(--badge-secondary-color-text-highlight);
-  transition: color var(--transition-rules);
+  color: var(--badge-secondary-text-highlight);
 }
 
 .badge.secondary:has(a, button):hover .badge-content .fa-icon::after,
 .badge.secondary.highlight .badge-content .fa-icon::after,
 .badge.secondary:has(a, button):focus .badge-content .fa-icon::after,
 .badge.secondary:has(a, button):focus-within .badge-content .fa-icon::after {
-  background-color: var(--badge-secondary-color-bg-highlight);
-  transition: background-color var(--transition-rules);
+  background-color: var(--badge-secondary-bg-highlight);
+  color: var(--badge-secondary-text-highlight);
 }
 
 .badge.tertiary .badge-content {
-  background-color: var(--badge-tertiary-color-bg);
-  color: var(--badge-tertiary-color-text);
-  border: var(--badge-border-width) solid var(--badge-tertiary-color-border);
+  background-color: var(--badge-tertiary-bg);
+  color: var(--badge-tertiary-text);
+  border: var(--badge-border-width) solid var(--badge-tertiary-border);
 }
 
+.badge.tertiary:has(a, button) .badge-content:hover :not(.title),
 .badge.tertiary.highlight .badge-content .fa-icon {
-  color: var(--badge-tertiary-color-text-highlight);
-  transition: color var(--transition-rules);
+  color: var(--badge-tertiary-text-highlight);
 }
 
 .badge.tertiary:has(a, button):hover .badge-content .fa-icon::after,
 .badge.tertiary.highlight .badge-content .fa-icon::after,
 .badge.tertiary:has(a, button):focus .badge-content .fa-icon::after,
 .badge.tertiary:has(a, button):focus-within .badge-content .fa-icon::after {
-  background-color: var(--badge-tertiary-color-bg-highlight);
-  transition: background-color var(--transition-rules);
+  background-color: var(--badge-tertiary-bg-highlight);
+  color: var(--badge-tertiary-text-highlight);
 }
 
-
-
+.badge.disabled,
+.badge.disabled .badge-content,
+.badge.disabled .badge-content .fa-icon,
+.badge.disabled .badge-content .fa-icon::after {
+  opacity: .65;
+  pointer-events: none;
+  cursor: not-allowed;
+}

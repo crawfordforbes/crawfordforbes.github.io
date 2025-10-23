@@ -1,8 +1,11 @@
 .hero {
-  --title-size: 4rem;
-  --subtitle-size: 1.75rem;
+  --title-size: clamp(3.25rem, 18vw, 6rem);
+  --subtitle-size: clamp(1.6rem, 7vw, 2.35rem);
   --content-padding: 8px;
   --content-top: 96px;
+  --content-offset: 0; /* adjust to make room for hexHeader */
+  --content-width: calc(100% - var(--content-offset));
+  --content-max-width: 600px;
 
   position: relative;
   width: 100vw;
@@ -47,6 +50,7 @@
   top: var(--content-top);
   right: 0;
   width: auto;
+  max-width: var(--content-width);
   padding: 0 var(--content-padding) var(--content-padding);
   text-align: right;
 }
@@ -71,14 +75,43 @@
 /* title and subtitle placement media queries */
 @media screen and (min-width: 27em){
   .hero {
-    --title-size: 5rem;
-    --subtitle-size: 2rem;
-    --content-top: 124px;
     --content-padding: 16px;
   }
 }
 
-@media screen and (min-width: 36em){
+@media screen and (min-width: 40em){
+  .hero {
+    --content-offset: 148px;
+    --content-top: 120px;
+    --title-size: 6rem;
+  }
+  .hero .hero-content {
+    max-width: var(--content-max-width); /* not using clamp here, easier to set the maxwidth */
+  }
+}
+
+@media screen and (min-width: 64em){
+  .hero {
+    --content-padding: 48px;
+    --content-top: 132px;
+    --content-offset: 440px;
+    --title-size: clamp(6rem, 9vw, 15rem);
+    --subtitle-size: clamp(1.6rem, 3.55vw, 5.525rem);
+  }
+  .hero .hero-content {
+    max-width: var(--content-width); /* back to clamp for larger screens */
+  }
+}
+
+@media screen and (min-width: 90em){
+  .hero {
+    --content-top: 160px;
+    --content-offset: 600px;
+  }
+}
+
+
+/* @media screen and (min-width: 36em){
   .hero {
     --title-size: 6rem;
     --subtitle-size: 2.25rem;
@@ -230,4 +263,4 @@
   .hero {
     --title-size: 28rem;
   }
-}
+} */

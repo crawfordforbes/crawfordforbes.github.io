@@ -95,12 +95,12 @@ export const badgeData: Record<string, BadgeRecord> = {
   'toggle-filter-close': {
     id: 'toggle-filter-close',
     iconClass: ['fas', 'bars'],
-    title: 'Show Filters'
+    title: 'Show Filters',
   },
   'more-projects': {
     id: 'more-projects',
     iconClass: ['fas', 'code'],
-    title: 'More Projects'
+    title: 'More Projects',
   }
 } as const;
 

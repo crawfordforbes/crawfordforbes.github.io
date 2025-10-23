@@ -10,38 +10,38 @@
   0%,
   100% {
     filter: 
-    drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--color-1)) 
-    drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--color-4)) 
-    drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--color-7)) 
-    drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--color-10));
+    drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--shade-1)) 
+    drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--shade-4)) 
+    drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--shade-7)) 
+    drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--shade-10));
   }
   50% {
     filter: 
-      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--color-3)) 
-      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--color-6)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--color-9)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--color-12));
+      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--shade-3)) 
+      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--shade-6)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--shade-9)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--shade-12));
   }
   75% {
     filter: 
-      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--color-5)) 
-      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--color-8)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--color-11)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--color-3));
+      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--shade-5)) 
+      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--shade-8)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--shade-11)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--shade-3));
   }
   87% {
     filter: 
-      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--color-7)) 
-      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--color-10)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--color-1)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--color-5));
+      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--shade-7)) 
+      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--shade-10)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--shade-1)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--shade-5));
   }
   94% {
     filter: 
-      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--color-9)) 
-      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--color-12)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--color-3)) 
-      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--color-7));
+      drop-shadow(var(--shadow-scale) var(--shadow-scale) var(--shade-9)) 
+      drop-shadow(var(--shadow-scale) var(--inverted-shadow-scale) var(--shade-12)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--shadow-scale) var(--shade-3)) 
+      drop-shadow(var(--inverted-shadow-scale) var(--inverted-shadow-scale) var(--shade-7));
   }
 }
 
@@ -70,17 +70,17 @@
   }
 }
 
-
 .to-from-colors .badge-content{
   background: var(--from-color);
   background: linear-gradient(var(--gradient-angle), var(--to-color) 50%, var(--from-color) 50%);
   background-size: 301% 100%;
   background-position: 100% 0; 
-  transition: background-position var(--transition-rules), color var(--transition-rules);
+  transition: background-position var(--transition-rules-slow), color var(--transition-rules-slow);
   color: var(--from-text);
 } 
 
 .to-from-colors:hover .badge-content{
   background-position: 0 0;
   color: var(--to-text);
+  transition: background-position var(--transition-rules-slow), color var(--transition-rules-slow);
 }

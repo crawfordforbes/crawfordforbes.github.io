@@ -14,17 +14,10 @@ function BackButton({ onBack }: BackButtonProps) {
   return (
     <Link to="/portfolio" role="button" className="back-link" aria-label="Back to Projects List" tabIndex={0}>
       <Hex 
-        hexClass="back-button hex-button mobile" 
+        hexClass="back-button hex-button icon-bg" 
         content="more-projects"
         contentType="badge"
-        hexWidth={64} 
-        onClick={onBack} 
-      />
-      <Hex 
-        hexClass="back-button hex-button desktop" 
-        content="more-projects"
-        contentType="badge"
-        hexWidth={96} 
+        hexWidth={80} 
         onClick={onBack} 
       />
     </Link>

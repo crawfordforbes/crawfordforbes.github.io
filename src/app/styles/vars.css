@@ -29,52 +29,54 @@
 
   --black: #120a03;
   --white: #fff;
+  --dark-gray: #211e1b;
 
-  --color-1: var(--orange);
-  --color-2: var(--red);
-  --color-3: var(--pink);
-  --color-4: var(--purple);
-  --color-5: var(--plum);
-  --color-6: var(--blue);
-  --color-7: var(--cyan);
-  --color-8: var(--teal);
-  --color-9: var(--green);
-  --color-10: var(--lime);
-  --color-11: var(--yellow);
-  --color-12: var(--tangerine);
+  --shade-1: var(--orange);
+  --shade-2: var(--red);
+  --shade-3: var(--pink);
+  --shade-4: var(--purple);
+  --shade-5: var(--plum);
+  --shade-6: var(--blue);
+  --shade-7: var(--cyan);
+  --shade-8: var(--teal);
+  --shade-9: var(--green);
+  --shade-10: var(--lime);
+  --shade-11: var(--yellow);
+  --shade-12: var(--tangerine);
 
   --color-bg: var(--beige);
 
   --color-dark-text: var(--black);
   --color-light-text: var(--white);
+  --color-gray-text: var(--dark-gray);
 
   --body-bg: var(--color-bg);
   --transparent: transparent;
 
   /* color rules refresh */
-  --primary-color: var(--color-8);
-  --primary-color-text: var(--color-dark-text);
-  --primary-color-contrast: var(--color-10);
-  --primary-color-text-contrast: var(--color-dark-text);
+  --primary-background: var(--teal);
+  --primary-text: var(--color-dark-text);
+  --primary-background-contrast: var(--lime);
+  --primary-text-contrast: var(--color-dark-text);
 
-  --secondary-color: var(--color-4);
-  --secondary-color-text: var(--color-light-text);
-  --secondary-color-contrast: var(--color-2);
-  --secondary-color-text-contrast: var(--color-dark-text);
+  --secondary-background: var(--plum);
+  --secondary-text: var(--color-light-text);
+  --secondary-background-contrast: var(--green);
+  --secondary-text-contrast: var(--color-gray-text);
 
-  --tertiary-color: var(--color-2);
-  --tertiary-color-text: var(--color-dark-text);
-  --tertiary-color-contrast: var(--color-9);
-  --tertiary-color-text-contrast: var(--color-dark-text);
+  --tertiary-background: var(--cyan);
+  --tertiary-text: var(--color-dark-text);
+  --tertiary-background-contrast: var(--blue);
+  --tertiary-text-contrast: var(--color-light-text);
 
-  --quaternary-color: var(--color-3);
-  --quaternary-color-text: var(--color-light-text);
-  --quaternary-color-contrast: var(--color-6);
-  --quaternary-color-text-contrast: var(--color-light-text);
+  --quaternary-background: var(--pink);
+  --quaternary-text: var(--color-light-text);
+  --quaternary-background-contrast: var(--cyan);
+  --quaternary-text-contrast: var(--color-dark-text);
 
   /* gradient stop points */
-  --color-1-of-2: 50%;
-  --color-2-of-2: 100%;
+  --stop-1-of-2: 50%;
+  --stop-2-of-2: 100%;
 
   --mobile-hex-width: 122px;
   --desktop-hex-width: 170px;
@@ -83,11 +85,12 @@
   /* utils */
   --hex-clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
   --transition-rules: .3s ease-out;
+  --transition-rules-slow: .5s ease-out;
   --border-radius: 8px;
   --drop-shadow: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
   --drop-shadow-top: drop-shadow(0px -2px 4px rgba(0, 0, 0, 0.2));
   --drop-shadow-bottom: drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.05)); /* color and y hack for variable height hex bottom shadow */
-  --focus-shadow: var(--primary-color-contrast);
+  --focus-shadow: var(--primary-background-contrast);
   
   /* titles */
   --overlay-title-color: var(--color-light-text);
@@ -97,46 +100,46 @@
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1); /* for textGlow animation shadows, set to 0 to turn off, but be sure to add some bg gradients in their place */
 
   /* animations */
-  --from-color: var(--quaternary-color);
-  --from-text: var(--quaternary-color-text);
-  --to-color: var(--quaternary-color-contrast);
-  --to-text: var(--quaternary-color-text-contrast);
+  --from-color: var(--quaternary-background);
+  --from-text: var(--quaternary-text);
+  --to-color: var(--quaternary-background-contrast);
+  --to-text: var(--quaternary-text-contrast);
   --gradient-angle: 30deg;
 
   /* badges */
   --badge-text-size: 0.875rem;
   --badge-border-width: 1px;
   
-  --badge-primary-color-bg: var(--primary-color-contrast);
-  --badge-primary-color-text: var(--primary-color-text-contrast);
-  --badge-primary-color-border: var(--black);
-  --badge-primary-color-bg-highlight: var(--primary-color);
-  --badge-primary-color-text-highlight: var(--primary-color-text);
-  --badge-primary-color-border-highlight: var(--badge-primary-color-border);
+  --badge-primary-bg: var(--primary-background-contrast);
+  --badge-primary-text: var(--primary-text-contrast);
+  --badge-primary-border: var(--black);
+  --badge-primary-bg-highlight: var(--primary-background);
+  --badge-primary-text-highlight: var(--primary-text);
+  --badge-primary-border-highlight: var(--badge-primary-border);
 
-  --badge-secondary-color-bg: var(--secondary-color);
-  --badge-secondary-color-text: var(--secondary-color-text);
-  --badge-secondary-color-border: var(--black);
-  --badge-secondary-color-bg-highlight: var(--secondary-color-contrast);
-  --badge-secondary-color-text-highlight: var(--secondary-color-text-contrast);
-  --badge-secondary-color-border-highlight: var(--badge-secondary-color-border);
+  --badge-secondary-bg: var(--secondary-background);
+  --badge-secondary-text: var(--secondary-text);
+  --badge-secondary-border: var(--black);
+  --badge-secondary-bg-highlight: var(--secondary-background-contrast);
+  --badge-secondary-text-highlight: var(--secondary-text-contrast);
+  --badge-secondary-border-highlight: var(--badge-secondary-border);
 
-  --badge-tertiary-color-bg: var(--tertiary-color);
-  --badge-tertiary-color-text: var(--tertiary-color-text);
-  --badge-tertiary-color-border: var(--black);
-  --badge-tertiary-color-bg-highlight: var(--tertiary-color-contrast);
-  --badge-tertiary-color-text-highlight: var(--tertiary-color-text-contrast);
-  --badge-tertiary-color-border-highlight: var(--badge-tertiary-color-border);
+  --badge-tertiary-bg: var(--tertiary-background);
+  --badge-tertiary-text: var(--tertiary-text);
+  --badge-tertiary-border: var(--black);
+  --badge-tertiary-bg-highlight: var(--tertiary-background-contrast);
+  --badge-tertiary-text-highlight: var(--tertiary-text-contrast);
+  --badge-tertiary-border-highlight: var(--badge-tertiary-border);
 
   /* link badges */
-  --link-badge-bg: var(--primary-color);
-  --link-badge-text: var(--primary-color-text);
-  --link-badge-bg-hover: var(--primary-color-contrast);
-  --link-badge-text-hover: var(--primary-color-text-contrast);
+  --link-badge-bg: var(--primary-background);
+  --link-badge-text: var(--primary-text);
+  --link-badge-bg-hover: var(--primary-background-contrast);
+  --link-badge-text-hover: var(--primary-text-contrast);
 
   /* hexes */
-  --default-hex-color: var(--color-dark-text);
-  --default-hex-color-hover: var(--color-light-text);
+  --default-hex-text: var(--color-dark-text);
+  --default-hex-text-hover: var(--color-light-text);
 
   /* variable height hex */
   --variable-height-hex-width: 160px;
@@ -145,75 +148,85 @@
   --variable-height-hex-width-desktop: 160px;
   --variable-height-hex-triangle-width-desktop: calc(var(--variable-height-hex-width-desktop) / 2);
   --variable-height-hex-triangle-height-desktop: calc(var(--variable-height-hex-width-desktop) * 0.2886 + 1px);
-  --variable-height-hex-top-color: var(--primary-color);
-  --variable-height-hex-bottom-color: var(--primary-color-contrast);
+  --variable-height-hex-top-color: var(--primary-background);
+  --variable-height-hex-bottom-color: var(--primary-background-contrast);
 
-  --variable-height-hex-top-color-detail: var(--color-7);
-  --variable-height-hex-bottom-color-detail: var(--color-8);
+  --variable-height-hex-top-color-detail: var(--quaternary-background-contrast);
+  --variable-height-hex-bottom-color-detail: var(--quaternary-background);
 
   /* logo */
-  --outer-hex: var(--color-4);
-  --middle-hex: var(--color-8);
-  --inner-hex: var(--color-10);
-  --logo-text-color: var(--white);
+  --outer-hex: var(--shade-6);
+  --middle-hex: var(--shade-7);
+  --inner-hex: var(--shade-9);
+  --logo-text: var(--white);
 
-  --outer-hex-hover: var(--color-6);
-  --middle-hex-hover: var(--color-7);
-  --inner-hex-hover: var(--color-9);
-  --logo-text-color-hover: var(--white);
+  --outer-hex-hover: var(--shade-4);
+  --middle-hex-hover: var(--shade-8);
+  --inner-hex-hover: var(--shade-10);
+  --logo-text-hover: var(--white);
 
   /* nav */
-  --nav-toggle-bg: var(--primary-color);
-  --nav-toggle-text: var(--primary-color-text);
-  --nav-toggle-bg-hover: var(--primary-color-contrast);
-  --nav-toggle-bg-text: var(--primary-color-contrast-text);
-  --nav-bg: var(--quaternary-color);
-  --nav-text: var(--quaternary-color-text);
+  --nav-toggle-bg: var(--primary-background);
+  --nav-toggle-text: var(--primary-text);
+  --nav-toggle-bg-hover: var(--primary-background-contrast);
+  --nav-toggle-text-hover: var(--primary-text-contrast);
+  --nav-icon-color: var(--color-light-text);
+  --nav-bg: var(--quaternary-background);
+  --nav-text: var(--quaternary-text);
+
+  /* hexHeader */
+  --hh-link-color: var(--color-light-text);
+  --hh-link-color-hover: var(--link-color);
+  --hh-icon-color: var(--color-dark-text);
+  --hh-icon-color-hover: var(--hh-icon-color);
 
   /* projects */
-  --project-index-intro-bg: var(--primary-color-contrast);
-  --project-index-intro-text: var(--primary-color-text-contrast);
+  --project-index-intro-bg: var(--primary-background-contrast);
+  --project-index-intro-text: var(--primary-text-contrast);
 
   /* project filter */
   --project-filter-toggle-width: 64px;
-  --project-filter-text: var(--primary-color-text);
-  --project-filter-text-contrast: var(--primary-color-text-contrast);
+  --project-filter-text: var(--primary-text);
+  --project-filter-text-contrast: var(--primary-text-contrast);
   --project-filter-bg-hover-top: var(--variable-height-hex-bottom-color);
-  --project-filter-text-hover-top: var(--primary-color-text-contrast);
+  --project-filter-text-hover-top: var(--primary-text-contrast);
   --project-filter-bg-hover-bottom: var(--variable-height-hex-top-color);
-  --project-filter-text-hover-bottom: var(--primary-color-text);
+  --project-filter-text-hover-bottom: var(--primary-text);
 
-  --project-filter-toggle-bg: var(--quaternary-color);
-  --project-filter-toggle-bg-hover: var(--quaternary-color-contrast);
-  --project-filter-toggle-text: var(--quaternary-color-text);
+  --project-filter-toggle-bg: var(--secondary-background);
+  --project-filter-toggle-bg-hover: var(--secondary-background-contrast);
+  --project-filter-toggle-text: var(--secondary-text);
+  --project-filter-toggle-text-hover: var(--secondary-text-contrast);
 
 
-  /* info panel */
-  --info-panel-bg-top-color: var(--primary-color);
-  --info-panel-bg-bottom-color: var(--primary-color-contrast);
-  --info-panel-text: var(--primary-color-text);
+  /* project results info panel */
+  --info-panel-bg-top-color: var(--primary-background);
+  --info-panel-bg-bottom-color: var(--primary-background-contrast);
+  --info-panel-text: var(--primary-text);
 
-  --link-badge-bg: var(--secondary-color);
-  --link-badge-text: var(--secondary-color-text);
-  --link-badge-bg-hover: var(--secondary-color-contrast);
-  --link-badge-text-hover: var(--secondary-color-text-contrast);
+  /* project result footer links */
+  --link-badge-bg: var(--tertiary-background);
+  --link-badge-text: var(--tertiary-text);
+  --link-badge-bg-hover: var(--tertiary-background-contrast);
+  --link-badge-text-hover: var(--tertiary-text-contrast);
 
   /* project detail */
-  --back-button-bg-top-color: var(--primary-color-contrast);
-  --back-button-bg-bottom-color: var(--primary-color);
-  --back-button-text: var(--primary-color-text);
+  --project-back-button-bg: var(--secondary-background);
+  --project-back-button-bg-hover: var(--secondary-background-contrast);
+  --project-back-button-text: var(--secondary-text);
+  --project-back-button-text-hover: var(--secondary-text-contrast);
 
   /* intro panel */
   --intro-panel-bg-top-color: #f7f5d3c2;
   --intro-panel-bg-bottom-color: var(--transparent);
-  --intro-panel-text: var(--secondary-color-text);
+  --intro-panel-text: var(--secondary-text);
 
   /* footer */
-  --footer-content-bg-top-color: var(--quaternary-color);
-  --footer-content-bg-bottom-color: var(--quaternary-color-contrast);
-  --footer-content-text: var(--quaternary-color-text);  
-  --footer-nav-bg-top-color: var(--tertiary-color);
-  --footer-nav-bg-bottom-color: var(--tertiary-color-contrast);
-  --footer-decorative-hex-color-odd: var(--primary-color);
-  --footer-decorative-hex-color-even: var(--primary-color-contrast);
+  --footer-content-bg-top-color: var(--quaternary-background);
+  --footer-content-bg-bottom-color: var(--quaternary-background-contrast);
+  --footer-content-text: var(--quaternary-text);  
+  --footer-nav-bg-top-color: var(--tertiary-background);
+  --footer-nav-bg-bottom-color: var(--tertiary-background-contrast);
+  --footer-decorative-hex-color-odd: var(--primary-background);
+  --footer-decorative-hex-color-even: var(--primary-background-contrast);
 }

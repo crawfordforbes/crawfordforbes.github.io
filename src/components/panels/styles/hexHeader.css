@@ -7,24 +7,33 @@
   top: 0;
   left: var(--left);
   transform: translateX(-50%);
-  height: 100%;
+  height: auto;
   width: var(--width);
   z-index: 2;
   pointer-events: none;
-  overflow: hidden;
-  contain: layout style paint;
+  overflow-y: visible;
+  overflow-x: hidden;
 }
 
 .hex-header .hex:has(a) {
   pointer-events: all;
-  color: var(--default-hex-color);
+  color: var(--hh-link-color);
   transition: color var(--transition-rules);
 }
 
 .hex-header .hex:has(a):hover {
   cursor: pointer;
-  color: var(--default-hex-color-hover);
+  color: var(--hh-link-color-hover);
   transition: color var(--transition-rules);
+}
+
+.hex-header .hex.icon-bg .badge .badge-content .fa-icon {
+  color: var(--hh-icon-color);
+}
+
+.hex-header .hex.icon-bg:hover .badge .badge-content .fa-icon {
+  color: var(--hh-icon-color-hover);
+  opacity: .4;
 }
 
 .hex-header .hex:not([class*="-body-bg"]) {
@@ -41,4 +50,16 @@
 
 .hex-header .hex *:focus-visible {
   outline-offset: -16px;
+}
+
+@media screen and (min-width: 40em){
+  .hex-header {
+    --header-offset: 24px;
+  }
+}
+
+@media screen and (min-width: 64em){
+  .hex-header {
+    --header-offset: 32px;
+  }
 }

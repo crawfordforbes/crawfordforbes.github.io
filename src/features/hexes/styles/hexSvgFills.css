@@ -1,18 +1,18 @@
 /* TODO refresh these */
 .hex {
-  --hex-top: var(--color-1);
-  --outer-wall-top-left: var(--color-6);
-  --outer-wall-top-right: var(--color-7);
-  --outer-wall-right: var(--color-8);
-  --outer-wall-bottom-right: var(--color-9);
-  --outer-wall-bottom-left: var(--color-8);
-  --outer-wall-left: var(--color-7);
-  --hex-wall-top-left: var(--color-11);
-  --hex-wall-top-right: var(--color-2);
-  --hex-wall-right: var(--color-3);
-  --hex-wall-bottom-right: var(--color-4);
-  --hex-wall-bottom-left: var(--color-3);
-  --hex-wall-left: var(--color-2);
+  --hex-top: var(--shade-1);
+  --outer-wall-top-left: var(--shade-6);
+  --outer-wall-top-right: var(--shade-7);
+  --outer-wall-right: var(--shade-8);
+  --outer-wall-bottom-right: var(--shade-9);
+  --outer-wall-bottom-left: var(--shade-8);
+  --outer-wall-left: var(--shade-7);
+  --hex-wall-top-left: var(--shade-11);
+  --hex-wall-top-right: var(--shade-2);
+  --hex-wall-right: var(--shade-3);
+  --hex-wall-bottom-right: var(--shade-4);
+  --hex-wall-bottom-left: var(--shade-3);
+  --hex-wall-left: var(--shade-2);
 
 }
 
@@ -88,12 +88,12 @@
   --shadow-scale: 1.75px;
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
 
-  fill: var(--logo-text-color);
+  fill: var(--logo-text);
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 7rem;
   transform: translateY(12px);
-  color: var(--logo-text-color);
+  color: var(--logo-text);
 
   animation: titleGlow 16s ease infinite;
 }
@@ -102,6 +102,6 @@
   --outer-hex: var(--outer-hex-hover);
   --middle-hex: var(--middle-hex-hover);
   --inner-hex: var(--inner-hex-hover);
-  --logo-text-color: var(--logo-text-color-hover);
+  --logo-text: var(--logo-text-hover);
   transition: fill var(--transition-rules), color var(--transition-rules);
 }

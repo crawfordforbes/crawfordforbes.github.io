@@ -46,7 +46,8 @@ export const projectData: Record<string, ProjectType> = {
     <article class='description-with-title'><h4 class='title'>${translations.result}</h4><p>A fast, expressive personal site that demonstrates both my technical versatility and my appreciation for thoughtful design. It continues to evolve alongside my skills and interests.</p></article>
     <article class='description-with-title'><h4 class='title'>${translations.behind}</h4><p>From the start, I knew I wanted hexagons to be a central design element — I’d been experimenting with hex-based mapping and loved the structured, grid-like aesthetic. My first version used large hexagonal project cards to echo that motif, but the layout quickly became cluttered and didn’t scale well with larger project sets. To improve readability and maintainability, I switched to rounded rectangular cards and introduced pill-shaped filters, which better balanced usability and visual interest.</p>
     <p>Color was another deliberate choice. After seeing many portfolio sites that felt overly corporate or subdued, I wanted something that stood out — vibrant gradients and bold accent tones that reflect creativity without overwhelming the content. The typography was chosen with the same principle in mind: clean, modern, and legible, complementing the playful geometry and color without competing for attention.</p></article>`,
-    // techIds: ["react", "vite"]
+    short_description: "My personal portfolio site, built with React and TypeScript to showcase my work and experiment with modern web development techniques.",
+    techIds: ["react", "nodejs", "typescript", "vite", "cssmodules"],
     dates: "2025 - Present"
   },
   "moneytree": {
@@ -62,5 +63,19 @@ export const projectData: Record<string, ProjectType> = {
     techIds: ["nodejs", "babel", "webpack", "react", "redux", "highcharts"],
     dates: "2016 - 2017",
   },
-  
+  "palm-springs": {
+    id: "palm-springs",
+    title: "Visit Palm Springs",
+    imageIds: [], // Temporary fallback until palm-springs images are added
+    roleIds: ["developer", "lead"],
+    descriptionHTML: `<article class='description-with-title'><h4 class='title'>${translations.summary}</h4><p>Visit Palm Springs partnered with Simpleview to create a vibrant new website that captured the city’s midcentury modern aesthetic while helping visitors easily explore local attractions, events, and amenities. As team lead, I guided both the technical and creative aspects of the project—balancing design ambition with development feasibility and timeline constraints.</p></article>
+    <article class='description-with-title'><h4 class='title'>${translations.challenge}</h4><p>The client wanted a site that celebrated Palm Springs’ distinctive style while remaining highly functional and maintainable within Simpleview’s modular system. They also had an extensive collection of legacy content and imagery hosted on disparate platforms, which required careful migration and reorganization to fit our infrastructure.</p></article>
+    <article class='description-with-title'><h4 class='title'>${translations.approach}</h4><p>I collaborated closely with the design and project management teams to ensure proposed layouts were technically achievable and within scope. For key custom features, like the parallax blog container that visually spotlights their stories and imagery, I worked with designers to refine the concept so it could be implemented efficiently.
+    <br>
+    On the technical side, I developed and oversaw several custom scripts to migrate content and media. One handled the movement of assets from AWS to our Cloudinary system, while another automated uploads from an FTP server to populate their media gallery—complete with supplied descriptions and organizational structure. I also supported junior developers on the team, ensuring consistent standards and smooth integration across multiple components.</p></article>
+    <article class='description-with-title'><h4 class='title'>${translations.result}</h4><p>The final site delivered an engaging, visually distinctive experience that captures Palm Springs’ personality while remaining performant and easy for the client to manage. By keeping the design ambitious but grounded in achievable scope, our team met deadlines without sacrificing polish or functionality.</p></article>`,
+    short_description: "Led development of a vibrant, midcentury-modern website for Visit Palm Springs, balancing ambitious design with technical feasibility and content migration.",
+    techIds: ["simpleview-cms", "cloudinary", "vanillajs", "vue"],
+    dates: "2024"
+  }
 }

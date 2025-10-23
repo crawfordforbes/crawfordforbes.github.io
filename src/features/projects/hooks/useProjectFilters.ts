@@ -1,79 +1,51 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, startTransition, useMemo } from 'react'
+import { getAllProjectsSorted, filterProjects } from '@/utils/projects'
+import type { ProjectType } from '@/data/projects/projects'
 
-import { 
-  getAllProjectsSorted, 
-  filterProjects, 
-  getFilterableRoles, 
-  getFilterableTechs 
-} from '@/utils/projects'
-
-export function useProjectFilters(
-  urlRoleFilters?: string[], 
-  urlTechFilters?: string[],
-  onFiltersChange?: (roleIds: string[], techIds: string[]) => void
-) {
-  const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>([])
-  const [selectedTechIds, setSelectedTechIds] = useState<string[]>([])
-
-  // Sync URL filters with local state (without triggering callbacks)
-  useEffect(() => {
-    if (urlRoleFilters && JSON.stringify(urlRoleFilters) !== JSON.stringify(selectedRoleIds)) {
-      setSelectedRoleIds(urlRoleFilters)
-    }
-  }, [urlRoleFilters]) // Intentionally excluding selectedRoleIds to avoid loops
-
-  useEffect(() => {
-    if (urlTechFilters && JSON.stringify(urlTechFilters) !== JSON.stringify(selectedTechIds)) {
-      setSelectedTechIds(urlTechFilters)
-    }
-  }, [urlTechFilters]) // Intentionally excluding selectedTechIds to avoid loops
-
-  const availableRoleIds = useMemo(() => getFilterableRoles(), [])
-  const availableTechIds = useMemo(() => getFilterableTechs(), [])
-  const sortedProjectsArray = useMemo(() => getAllProjectsSorted(), [])
-
-  const filteredProjects = useMemo(() => 
-    filterProjects(sortedProjectsArray, selectedRoleIds, selectedTechIds),
-    [selectedRoleIds, selectedTechIds, sortedProjectsArray]
-  )
+export function useProjectFilters(initialRoleIds: string[] = [], initialTechIds: string[] = [], onFiltersChange?: (roleIds: string[], techIds: string[]) => void) {
+  const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>(initialRoleIds)
+  const [selectedTechIds, setSelectedTechIds] = useState<string[]>(initialTechIds)
 
   const toggleRoleFilter = useCallback((filterId: string) => {
-    const newRoleIds = selectedRoleIds.includes(filterId) 
-      ? selectedRoleIds.filter(id => id !== filterId)
-      : [...selectedRoleIds, filterId]
-    
-    setSelectedRoleIds(newRoleIds)
-    onFiltersChange?.(newRoleIds, selectedTechIds)
-  }, [selectedRoleIds, selectedTechIds, onFiltersChange])
+    setSelectedRoleIds(prev => {
+      return prev.includes(filterId) ? prev.filter(id => id !== filterId) : [...prev, filterId]
+    })
+  }, [])
 
   const toggleTechFilter = useCallback((filterId: string) => {
-    const newTechIds = selectedTechIds.includes(filterId)
-      ? selectedTechIds.filter(id => id !== filterId) 
-      : [...selectedTechIds, filterId]
-    
-    setSelectedTechIds(newTechIds)
-    onFiltersChange?.(selectedRoleIds, newTechIds)
+    setSelectedTechIds(prev => {
+      return prev.includes(filterId) ? prev.filter(id => id !== filterId) : [...prev, filterId]
+    })
+  }, [])
+
+  // Sync URL / parent after local state stabilizes
+  useEffect(() => {
+    if (!onFiltersChange) return
+
+    if (typeof startTransition === 'function') {
+      startTransition(() => {
+        onFiltersChange(selectedRoleIds, selectedTechIds)
+      })
+    } else {
+      onFiltersChange(selectedRoleIds, selectedTechIds)
+    }
   }, [selectedRoleIds, selectedTechIds, onFiltersChange])
 
-  const clearAllFilters = useCallback(() => {
-    setSelectedRoleIds([])
-    setSelectedTechIds([])
-    onFiltersChange?.([], [])
-  }, [onFiltersChange])
+  // Derived project list for consumers (ProjectIndex / ProjectGrid expect this)
+  const allProjects = useMemo<ProjectType[]>(() => getAllProjectsSorted(), [])
+  const filteredProjects = useMemo<ProjectType[]>(() => {
+    return filterProjects(allProjects, selectedRoleIds, selectedTechIds)
+  }, [allProjects, selectedRoleIds, selectedTechIds])
 
   return {
-    // State
     selectedRoleIds,
     selectedTechIds,
-    availableRoleIds,
-    availableTechIds,
-    filteredProjects,
-    sortedProjectsArray,
-    
-    // Actions
     toggleRoleFilter,
     toggleTechFilter,
-    clearAllFilters,
+    setSelectedRoleIds,
+    setSelectedTechIds,
+    // ADDED: derived list consumed by ProjectIndex/ProjectGrid
+    filteredProjects,
   }
 }
 

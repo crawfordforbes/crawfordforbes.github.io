@@ -74,4 +74,28 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'chart-line'],
     filterable: false,
   },
-}
+  "typescript": {
+    id: "typescript",
+    title: "TypeScript",
+    iconClass: ['fas', 'code'],
+    filterable: true,
+  },
+  "vite": { 
+    id: "vite",
+    title: "Vite",
+    iconClass: ['fas', 'bolt'],
+    filterable: false,
+  },
+  "cssmodules": {
+    id: "cssmodules",
+    title: "CSS Modules",
+    iconClass: ['fas', 'code'],
+    filterable: false,
+  },
+  "vue": {
+    id: "vue",
+    title: "Vue.js",
+    iconClass: ['fab', 'vuejs'],
+    filterable: true,
+  },
+};

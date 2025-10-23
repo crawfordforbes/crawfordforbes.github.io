@@ -22,13 +22,14 @@ export const headerLayouts: LayoutsType  = {
     id: "tablet",
     grid: "header-tablet",
     shiftedUp: true,
-    hexWidth: 106
+    hexWidth: 90,
+    hexMargin: 3,
   },
   "desktop" : {
     id: "desktop",
     grid: "header-desktop",
     shiftedUp: true,
-    hexWidth: 122
+    hexWidth: 106
   },
   "large" : {
     id: "large",

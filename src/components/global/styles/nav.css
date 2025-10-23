@@ -3,6 +3,7 @@
   --nav-height: calc(var(--nav-width) * 1.1547);
   --shadow-width: 64px;
   --shadow-height: calc(var(--shadow-width) * 1.1547);
+  
   position: fixed;
   top: 0;
   right: 0;
@@ -24,19 +25,24 @@
 
 .nav-toggle {
   position: fixed;
-  top: 14px;
+  top: 8px;
   right: 83px;
   z-index: 2;
-  background-color: var(--nav-toggle-bg);
-  color: var(--nav-toggle-bg-text);
-  filter: var(--drop-shadow);
-  transition: background-color var(--transition-rules), color var(--transition-rules);
+  height: var(--shadow-height);
 }
 
-.nav-toggle:hover,
-.nav-toggle-button:focus-within .nav-toggle {
-  background-color: var(--nav-toggle-bg-hover);
+.nav-toggle-hex {
+  background-color: var(--nav-toggle-bg);
   color: var(--nav-toggle-text);
+  filter: var(--drop-shadow);
+  transition: background-color var(--transition-rules), color var(--transition-rules);
+  transform: translateY(-9px);
+}
+
+.nav-toggle:hover .nav-toggle-hex,
+.nav-toggle:focus-within .nav-toggle {
+  background-color: var(--nav-toggle-bg-hover);
+  color: var(--nav-toggle-text-hover);
   cursor: pointer;
   transition: background-color var(--transition-rules), color var(--transition-rules);
 }
@@ -45,8 +51,8 @@
   background-color: var(--nav-bg);
   color: var(--nav-text);
   position: fixed;
-  top: -358px;
-  right: 0;
+  top: -300px;
+  right: -344px;
   transition: top 0.5s ease, right 0.5s ease;
   width: var(--nav-width);
   min-width: var(--nav-width);
@@ -54,8 +60,8 @@
 }
 
 .nav-hex.open {
-  top: -161px;
-  right: 343px;
+  top: -102px;
+  right: -2px;
   transition: top 0.5s ease, right 0.5s ease;
 }
 
@@ -98,6 +104,7 @@
 
 .nav .hex.icon-bg .badge .badge-content .fa-icon {
   font-size: 2.5rem;
+  color: var(--nav-icon-color);
 }
 
 .nav .hex.icon-bg .title {
@@ -106,4 +113,5 @@
 
 .nav .hex.icon-bg:hover .badge .badge-content .fa-icon {
   font-size: 2.5rem;
+  opacity: .25;
 }

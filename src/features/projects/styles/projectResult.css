@@ -23,6 +23,7 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  z-index: 0;
 }
 
 .project-result .header-image {
@@ -51,22 +52,25 @@
   height: 100%;
   background: linear-gradient(
     var(--gradient-angle), 
-    var(--color-1) 16%, 
-    var(--color-3) 33%, 
-    var(--color-5) 50%, 
-    var(--color-7) 66%, 
-    var(--color-9) 83%, 
-    var(--color-11) 100%
+    var(--shade-5) 16%, 
+    var(--shade-3) 33%, 
+    var(--shade-1) 50%, 
+    var(--shade-11) 66%, 
+    var(--shade-9) 83%, 
+    var(--shade-7) 100%
   );
+  animation: gradientAngleSpin 24s ease infinite;
   opacity: 0;
-  transition: opacity var(--transition-rules);
+  filter: blur(0px);
+  transition: opacity var(--transition-rules-slow), filter var(--transition-rules-slow);
   pointer-events: none;
   z-index: 1;
-  animation: gradientAngleSpin 48s ease infinite;
 }
 
 .project-result:hover .inner::after {
-  opacity: 0.6;
+  opacity: .3;
+  filter: blur(40px);
+  transition: opacity var(--transition-rules-slow), filter var(--transition-rules-slow);
 }
 
 /* Image styling */
@@ -99,17 +103,18 @@
 }
 
 /* Title styling */
-.project-result h2.title {
+.project-result .title.primary {  
   --title-size: 2rem;
-  
+  --shadow-scale: .5px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   text-align: right;
   margin: 0;
-  font-size: var(--title-size);
   line-height: 1.1;
-  max-width: calc(100% - 56px);
   align-self: flex-end;
+  animation: titleGlow 16s ease infinite;
+  cursor: pointer;
 }
 
 .project-result .badge .badge-content {
@@ -120,7 +125,7 @@
 .project-result .badges-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
   justify-content: flex-end;
   margin: 0;
   padding: 0;
@@ -130,7 +135,7 @@
 /* Info panel - fixed layout */
 .project-result .info-panel {
   flex: 0 0 auto;
-  padding: 16px;
+  padding: 12px 16px;
   background: var(--info-panel-bg-top-color);
   background: linear-gradient(180deg, 
     var(--info-panel-bg-top-color) 10%, 
@@ -139,7 +144,7 @@
   color: var(--info-panel-text);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   position: relative;
 }
 
@@ -150,12 +155,10 @@
 /* Description */
 .project-result .description {
   margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 1.2rem;
+  line-height: 1.3;
   color: inherit;
 }
-
-/* Read more button */
 
 
 /* Footer links - hex badges in a row below the card */
@@ -163,27 +166,41 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  margin-top: 16px;
   padding: 0;
   z-index: 2;
+  margin-top: -16px;
 }
 
 .project-result .footer-links .link-badge {
   background-color: var(--link-badge-bg);
   color: var(--link-badge-text);
   position: relative;
-  /* Mobile: show fully by default */
-  top: 0;
+  top: 44px;
   transition: top var(--transition-rules), background-color var(--transition-rules), color var(--transition-rules);
   pointer-events: all;
 }
 
-.project-result .footer-links .link-badge .hex-visual-content {
-  color: var(--link-badge-text);
+.project-result .footer-links .link-badge:hover,
+.project-result .footer-links .link-badge:focus-within {
+  background-color: var(--link-badge-bg-hover);
+  color: var(--link-badge-text-hover);
+}
+
+.project-result .footer-links .link-badge .hex-text-content {
+  top: 16px;
+  transform: translate(-50%, 0);
+}
+
+.project-result .footer-links .link-badge .badge .badge-content {
+  color: inherit;
   transition: color var(--transition-rules);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .project-result .footer-links .link-badge a {
@@ -191,93 +208,6 @@
   z-index: 3;
   text-decoration: none;
   color: inherit;
-}
-
-/* Link content structure - icon and text are static, never move independently */
-.project-result .footer-links .link-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  gap: 8px;
-  padding: 16px 12px;
-}
-
-.project-result .footer-links .icon-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.project-result .footer-links .text-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.project-result .footer-links .link-text {
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 120px;
-}
-
-/* Desktop: position hexes so text is hidden below card edge */
-@container project-card (min-width: 769px) {
-  .project-result {
-    /* Allow footer hexes to extend below card */
-    overflow: visible;
-  }
-  
-  .project-result .footer-links {
-    /* Position footer so hexes can hang below card */
-    margin-top: -20px;
-    overflow: visible;
-  }
-  
-  .project-result .footer-links .link-badge {
-    /* Push hexagon down so text portion is hidden below card */
-    top: 32px;
-  }
-  
-  .project-result .footer-links .link-badge:hover,
-  .project-result .footer-links .link-badge:focus-within {
-    background-color: var(--link-badge-bg-hover);
-    color: var(--link-badge-text-hover);
-    /* Slide hexagon up to reveal text */
-    top: 0;
-  }
-  
-  .project-result .footer-links .link-badge:hover .hex-visual-content,
-  .project-result .footer-links .link-badge:focus-within .hex-visual-content {
-    color: var(--link-badge-text-hover);
-  }
-}
-
-/* Badge styling within hex */
-.project-result .footer-links .link-badge .badge {
-  background: none;
-  color: inherit;
-}
-
-.project-result .footer-links .link-badge .badge .badge-content {
-  padding: 0;
-  background: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-result .footer-links .link-badge .badge .fa-icon {
-  font-size: 1.5rem;
 }
 
 /* Decorative border */
@@ -292,22 +222,39 @@
   gap: 24px;
 }
 
+.project-result .decorative-hex-border .hex-row {
+  --gradient-height: 9px;
+  background: linear-gradient(to bottom, transparent var(--gradient-height), var(--info-panel-bg-top-color) var(--gradient-height))
+}
+
 /* Container queries - fixed */
-@container project-card (width > 300px) {
-  .project-result h2.title {
-    --title-size: 2.5rem;
+@container project-card (width > 320px) {
+  .project-result .title.primary {
+    --title-size: 2.375rem;
   }
 }
 
 @container project-card (width > 340px) {
-  .project-result h2.title {
-    --title-size: 3rem;
+  .project-result .title.primary {
+    --title-size: 2.5rem;
+  }
+}
+
+@container project-card (width > 360px) {
+  .project-result .title.primary {
+    --title-size: 2.625rem;
+  }
+}
+
+@container project-card (width > 380px) {
+  .project-result .title.primary {
+    --title-size: 2.75rem;
   }
 }
 
 @container project-card (width > 400px) {
-  .project-result h2.title {
-    --title-size: 3.5rem;
+  .project-result .title.primary {
+    --title-size: 2.875rem;
   }
   
   .project-result .info-panel {
@@ -315,15 +262,37 @@
   }
 }
 
-/* Responsive adjustments */
-@media screen and (min-width: 40em) {
-  .project-result .title {
-    max-width: 100%;
+@container project-card (width > 450px) {
+  .project-result .title.primary {
+    --title-size: 3rem;
   }
-  
-  .project-result .footer-links {
-    flex-direction: row;
-    justify-content: space-between;
+}
+
+@container project-card (width > 500px) {
+  .project-result .title.primary {
+    --title-size: 3.375rem;
+  }
+}
+
+@container project-card (width > 550px) {
+  .project-result .title.primary {
+    --title-size: 3.875rem;
+  }
+}
+
+@container project-card (width > 600px) {
+  .project-result .title.primary {
+    --title-size: 4.375rem;
+  }
+}
+
+
+@media (hover: hover) {
+  .project-result .footer-links .link-badge {
+    top: 70px;
+  }
+  .project-result .footer-links .link-badge:hover {
+    top: 30px;
   }
 }
 

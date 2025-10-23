@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
-import Portfolio from '@/app/routes/portfolio';
+import Portfolio from '@/app/routes/Portfolio';
 
 import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize } from '@/utils/site';
@@ -17,13 +17,13 @@ function App() {
   const screenSize = useScreenSize();
   function getScreenSize(): MediaSizes {
     const size: MediaSizes =
-      screenSize.width > 1920
+      screenSize.width > 1919
         ? "x-large"
-        : screenSize.width > 1440
+        : screenSize.width > 1439
         ? "large"
-        : screenSize.width > 1024
+        : screenSize.width > 1023
         ? "desktop"
-        : screenSize.width > 640
+        : screenSize.width > 639
         ? "tablet"
         : "mobile";
     return size;

@@ -11,22 +11,17 @@ import { cardBorder } from "@/data/hexes/layouts";
 import { techData } from "@/data/projects/techs";
 
 import { getProjectById, generateImageAlt } from "@/utils/projects";
-import { getProjectImageUrl, imagePaths } from "@/utils/images";
+import { getProjectImageUrl } from "@/utils/images";
 
 import './styles/projectDetail.css'
 import './styles/splide.min.css'
 
 type ProjectDetailProps = {
   id?: string;
-  navigation?: {
-    goToPrevious: () => string | null;
-    goToNext: () => string | null;
-  };
 }
 
 function ProjectDetail({
   id,
-  navigation,
 }: ProjectDetailProps) {
   let params = useParams()
   let thisProjectId: string = id ? id : params.projectId ? params.projectId : '';
@@ -83,7 +78,7 @@ function ProjectDetail({
         link={project.githubLink} 
         iconClass={['fab', 'github']} 
         title={"View on GitHub"} 
-        extraClass="pill secondary"
+        extraClass="pill tertiary"
       />
     </li>
   ) : null;
@@ -94,7 +89,7 @@ function ProjectDetail({
         link={project.externalLink} 
         iconClass={['fas', 'up-right-from-square']} 
         title={"Visit the Site"} 
-        extraClass="pill secondary"
+        extraClass="pill tertiary"
       />
     </li>
   ) : null;
@@ -143,7 +138,7 @@ function ProjectDetail({
             {project.dates && 
               <Badge 
                 title={project.dates} 
-                extraClass="pill secondary"
+                extraClass="pill primary"
               />
             }
             <h2 className="title primary overlay">{project.title}</h2>
@@ -165,6 +160,11 @@ function ProjectDetail({
         <HexGridLayout layouts={cardBorder} extraClass="decorative-hex-border"/>
       </header>
       <section className="info-panel">
+        {hasTechBadges &&
+          <ol className="badges-list mobile">
+            {renderTechBadges()}
+          </ol>
+        }
         {project.descriptionHTML && 
           <div className={`text-area text-area-gradient ${hasTechBadges ? 'with-tech-badges' : ''}`}>
             <div 
@@ -172,12 +172,6 @@ function ProjectDetail({
               dangerouslySetInnerHTML={{ __html: project.descriptionHTML}}
             ></div>
           </div>
-        }
-
-        {hasTechBadges &&
-          <ol className="badges-list mobile">
-            {renderTechBadges()}
-          </ol>
         }
       </section>
     </article>

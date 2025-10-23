@@ -39,7 +39,7 @@ export const rowData:RowsType = {
   },
   "header-mobile-7": {
     id: "header-mobile-7",
-    hexes: [{id:"gradient-10-body-bg"}, ]
+    hexes: [{id:"gradient-10-11"}, ]
   },
   /* tablet */
   "header-tablet-1": {
@@ -56,7 +56,7 @@ export const rowData:RowsType = {
   },
   "header-tablet-4": {
     id: "header-tablet-4",
-    hexes: [{id:"gradient-5-8", repeat: 2}, ]
+    hexes: [{id:"gradient-5-8", repeat: 1}, ]
   },
   "header-tablet-5": {
     id: "header-tablet-5",
@@ -68,7 +68,7 @@ export const rowData:RowsType = {
   },
   "header-tablet-7": {
     id: "header-tablet-7",
-    hexes: [{id:"gradient-10-body-bg", repeat: 1}, ]
+    hexes: [{id:"gradient-10-11", repeat: 1}, ]
   },
   /* desktop */
   "header-desktop-1": {
@@ -101,12 +101,12 @@ export const rowData:RowsType = {
   },
   "header-desktop-8": {
     id: "header-desktop-8",
-    hexes: [{id:"gradient-11-body-bg", repeat: 1}, ]
+    hexes: [{id:"gradient-11-12", repeat: 1}, ]
   },
   /* === */
   "header-desktop-9": {
     id: "header-desktop-9",
-    hexes: [{id:"gradient-11-body-bg", repeat: 2}, ]
+    hexes: [{id:"gradient-11-12", repeat: 2}, ]
   },
   "header-desktop-10": {
     id: "header-desktop-10",
@@ -136,9 +136,42 @@ export const rowData:RowsType = {
     id: "header-desktop-16",
     hexes: [{id:"gradient-1-2", repeat: 1}]
   },
+  /* === */
   "header-desktop-17": {
     id: "header-desktop-17",
-    hexes: [{id:"gradient-1-body-bg", repeat: 2}]
+    hexes: [{id:"gradient-1-2", repeat: 2}]
+  },
+  "header-desktop-18": {
+    id: "header-desktop-18",
+    hexes: [{id:"gradient-2-3", repeat: 1}]
+  },
+  "header-desktop-19": {
+    id: "header-desktop-19",
+    hexes: [{id:"gradient-3-4", repeat: 2}]
+  },
+  "header-desktop-20": {
+    id: "header-desktop-20",
+    hexes: [{id:"gradient-4-6", repeat: 1}]
+  },
+  "header-desktop-21": {
+    id: "header-desktop-21",
+    hexes: [{id:"gradient-4-6", repeat: 2}, ]
+  },
+  "header-desktop-22": {
+    id: "header-desktop-22",
+    hexes: [{id:"gradient-6-8", repeat: 1}, ]
+  },
+  "header-desktop-23": {
+    id: "header-desktop-23",
+    hexes: [{id:"gradient-8-10", repeat: 2}, ]
+  },
+  "header-desktop-24": {
+    id: "header-desktop-24",
+    hexes: [{id:"gradient-10-11", repeat: 1}, ]
+  },
+  "header-desktop-25": {
+    id: "header-desktop-25",
+    hexes: [{id:"gradient-11-12", repeat: 2}, ]
   },
     /* large */
   "header-large-1": {
@@ -183,12 +216,12 @@ export const rowData:RowsType = {
   },
   "header-large-11": {
     id: "header-large-11",
-    hexes: [{id:"gradient-11-body-bg", repeat: 2}, ]
+    hexes: [{id:"gradient-11-12", repeat: 2}, ]
   },
   /* === */
   "header-large-12": {
     id: "header-large-12",
-    hexes: [{id:"gradient-11-body-bg", repeat: 2}, ]
+    hexes: [{id:"gradient-11-12", repeat: 2}, ]
   },
   "header-large-13": {
     id: "header-large-13",
@@ -226,13 +259,13 @@ export const rowData:RowsType = {
     id: "header-large-21",
     hexes: [{id:"gradient-2-3", repeat: 2}]
   },
-    "header-large-22": {
+  "header-large-22": {
     id: "header-large-22",
     hexes: [{id:"gradient-1-2", repeat: 2}]
   },
-    "header-large-23": {
+  "header-large-23": {
     id: "header-large-23",
-    hexes: [{id:"gradient-1-body-bg", repeat: 2}]
+    hexes: [{id:"gradient-12-11", repeat: 2}]
   },
       /* x-large */
   "header-x-large-1": {
@@ -289,55 +322,51 @@ export const rowData:RowsType = {
   },
   "header-x-large-14": {
     id: "header-x-large-14",
-    hexes: [{id:"gradient-11-body-bg", repeat: 2}, ]
+    hexes: [{id:"gradient-11-12", repeat: 2}, ]
   },
   /* === */
-  "header-x-large-15": {
+    "header-x-large-15": {
     id: "header-x-large-15",
-    hexes: [{id:"gradient-11-body-bg", repeat: 2}, ]
+    hexes: [{id:"gradient-10-11", repeat: 2}, ]
   },
     "header-x-large-16": {
     id: "header-x-large-16",
-    hexes: [{id:"gradient-10-11", repeat: 2}, ]
+    hexes: [{id:"gradient-9-10", repeat: 2}, ]
   },
     "header-x-large-17": {
     id: "header-x-large-17",
-    hexes: [{id:"gradient-9-10", repeat: 2}, ]
+    hexes: [{id:"gradient-8-9", repeat: 2}, ]
   },
     "header-x-large-18": {
     id: "header-x-large-18",
-    hexes: [{id:"gradient-8-9", repeat: 2}, ]
+    hexes: [{id:"gradient-7-8", repeat: 2}, ]
   },
     "header-x-large-19": {
     id: "header-x-large-19",
-    hexes: [{id:"gradient-7-8", repeat: 2}, ]
+    hexes: [{id:"gradient-6-7", repeat: 2}, ]
   },
     "header-x-large-20": {
     id: "header-x-large-20",
-    hexes: [{id:"gradient-6-7", repeat: 2}, ]
+    hexes: [{id:"gradient-5-6", repeat: 2}, ]
   },
     "header-x-large-21": {
     id: "header-x-large-21",
-    hexes: [{id:"gradient-5-6", repeat: 2}, ]
+    hexes: [{id:"gradient-4-5", repeat: 2}, ]
   },
     "header-x-large-22": {
     id: "header-x-large-22",
-    hexes: [{id:"gradient-4-5", repeat: 2}, ]
+    hexes: [{id:"gradient-3-4", repeat: 2}]
   },
     "header-x-large-23": {
     id: "header-x-large-23",
-    hexes: [{id:"gradient-3-4", repeat: 2}]
+    hexes: [{id:"gradient-2-3", repeat: 2}]
   },
     "header-x-large-24": {
     id: "header-x-large-24",
-    hexes: [{id:"gradient-2-3", repeat: 2}]
+    hexes: [{id:"gradient-1-2", repeat: 2}]
   },
     "header-x-large-25": {
     id: "header-x-large-25",
-    hexes: [{id:"gradient-1-2", repeat: 2}]
-  },
-    "header-x-large-26": {
-    id: "header-x-large-26",
     hexes: [{id:"gradient-1-body-bg", repeat: 2}]
   },
 

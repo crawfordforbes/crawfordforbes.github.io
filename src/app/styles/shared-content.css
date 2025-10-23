@@ -23,7 +23,6 @@
   max-width: var(--content-max-width);
   margin: var(--content-margin);
   padding: var(--content-padding);
-  width: calc(100vw - 32px);
 }
 
 .text-area-gradient {
@@ -45,7 +44,7 @@
 }
 
 @media screen and (min-width: 64em) {
-  div:has(.hex-header) .content {
+  div:has(.has-hex-header) .content {
     --offset: 208px; /* 1.5 hexes and a 16px margin */
     margin: 0 16px 0 var(--offset);
     width: calc(100vw - var(--offset) - 32px);
@@ -58,13 +57,13 @@
 }
 
 @media screen and (min-width: 90em){
-  div:has(.hex-header) .content {
+  div:has(.has-hex-header) .content {
     --offset: 336px; /* 2.5 hexes and a 16px margin */
   }
 }
 
 @media screen and (min-width: 120em){
-  div:has(.hex-header) .content {
+  div:has(.has-hex-header) .content {
     --offset: auto; /* back to normal */
     margin: 0 var(--offset);
   }
@@ -170,27 +169,6 @@
   pointer-events: none;
 }
 
-.card-top .title.primary {
-  --title-size: 1.75rem;
-
-  text-align: right;
-  max-width: calc(100% - 56px);
-}
-
-.hex-button {
-  color: var(--project-filter-toggle-text);
-  background-color: var(--project-filter-toggle-bg);
-  transition: background-color var(--transition-rules);
-  cursor: pointer;
-  width: var(--project-filter-toggle-width);
-  pointer-events: all;
-}
-
-.hex-button:hover {
-  background-color: var(--project-filter-toggle-bg-hover);
-  transition: background-color var(--transition-rules);
-}
-
 /* badge wrapper styles */
 
 .badges-list {
@@ -279,28 +257,4 @@
     --variable-height-hex-triangle-width: var(--variable-height-hex-triangle-width-desktop);
     --variable-height-hex-triangle-height: var(--variable-height-hex-triangle-height-desktop);
   }
-}
-
-/* hexes */
-.hex.icon-bg .badge .badge-content .fa-icon {
-  font-size: 3rem;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
-  color: var(--white);
-  opacity: 0.25;
-  transition: color var(--transition-rules), font-size var(--transition-rules), opacity var(--transition-rules);
-}
-
-.hex.icon-bg .title {
-  color: var(--white);
-  font-size: 1.125rem;
-}
-
-.hex.icon-bg:hover .badge .badge-content .fa-icon {
-  font-size: 5rem;
-  color: var(--black);
-  opacity: 0.65;
-  transition: color var(--transition-rules), font-size var(--transition-rules), opacity var(--transition-rules);
 }

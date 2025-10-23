@@ -9,13 +9,13 @@ import Footer from "@/components/panels/Footer"
 function Portfolio() {
 
   return (
-    <div className="portfolio">
+    <div className="portfolio has-hex-header">
+      <ComponentErrorBoundary componentName="HexHeader">
+        <HexHeader />
+      </ComponentErrorBoundary>
       <header>
         <ComponentErrorBoundary componentName="Navigation">
           <Nav />
-        </ComponentErrorBoundary>
-        <ComponentErrorBoundary componentName="HexHeader">
-          <HexHeader />
         </ComponentErrorBoundary>
         <ComponentErrorBoundary componentName="Hero">
           <Hero />

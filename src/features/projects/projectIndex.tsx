@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useProjectFilters, useProjectRouting } from "@/features/projects/hooks";
 import ProjectFilterBar from "@/features/projects/ProjectFilterBar";
 import ProjectGrid from "@/features/projects/ProjectGrid";
-import ProjectDetail from "@/features/projects/projectDetail";
+import ProjectDetail from "@/features/projects/ProjectDetail";
 import BackButton from "@/features/projects/BackButton";
 
 import './styles/projectIndex.css'
@@ -24,15 +24,6 @@ function ProjectIndex({
   // ADD: Global hover state management
   const [globalHoveredFilter, setGlobalHoveredFilter] = useState<string>("");
 
-  // Simple navigation logic
-  const currentIndex = routing.selectedProjectId 
-    ? filters.filteredProjects.findIndex(p => p.id === routing.selectedProjectId)
-    : -1;
-  const navigation = {
-    goToPrevious: () => currentIndex > 0 ? filters.filteredProjects[currentIndex - 1]?.id || null : null,
-    goToNext: () => currentIndex < filters.filteredProjects.length - 1 ? filters.filteredProjects[currentIndex + 1]?.id || null : null
-  };
-
   // Project detail view
   if (routing.selectedProjectId) {
     return (
@@ -40,7 +31,7 @@ function ProjectIndex({
         <div className="project-detail-view">
           <div className="selected-project">
             <BackButton onBack={routing.clearSelectedProject} />
-            <ProjectDetail id={routing.selectedProjectId} navigation={navigation} />
+            <ProjectDetail id={routing.selectedProjectId} />
           </div>
         </div>
       </article>

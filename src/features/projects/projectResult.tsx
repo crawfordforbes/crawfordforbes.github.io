@@ -2,16 +2,14 @@ import { memo } from "react";
 
 import Badge from "@/components/global/badge";
 import SimpleImage from "@/components/global/OptimizedImage";
-import { imageSizes } from "@/components/global/OptimizedImage";
 import HexGridLayout from "@/features/hexes/hexGridLayout";
 import Hex from "@/features/hexes/Hex";
 
-import { imageData } from "@/data/global/images";
 import { techData } from "@/data/projects/techs";
 import { cardBorder } from "@/data/hexes/layouts";
 import { roleData } from "@/data/projects/roles";
 
-import { getImageUrl, imagePaths, getProjectPrimaryImageUrl } from "@/utils/images";
+import { imagePaths, getProjectPrimaryImageUrl } from "@/utils/images";
 import { createAccessibleDescription } from "@/utils/ui";
 
 import type { ProjectType } from "@/data/projects/projects";
@@ -93,6 +91,7 @@ function ProjectResult({
   const hasRoleIds = !!(project?.roleIds && project?.roleIds.length > 0);
   const hasTechIds = !!(project?.techIds && project?.techIds.length > 0);
   const hasLinks = !!(project?.githubLink || project?.externalLink);
+  const footerLinkHexWidth = 132
 
   return (
     <div className="project-result-container">
@@ -133,13 +132,15 @@ function ProjectResult({
             <h2 
               id={`project-title-${project.id}`}
               className="title primary"
+              onClick={()=> selectProjectClick(project.id)}
             >
               {project.title}
             </h2>
           </div>
         </header>
 
-        <section className={`info-panel ${hasLinks ? "has-footer-links" : ""}`}>
+        <div className={`info-panel ${hasLinks ? "has-footer-links" : ""}`}>
+
           {hasRoleIds && (
             <div role="list" aria-label="Project roles" className="roles badges-list">
               {renderRoleBadges()}
@@ -160,24 +161,41 @@ function ProjectResult({
             extraClass="to-from-colors pill read-more" 
             badgeOnClick={() => selectProjectClick(project.id)}
           />
-        </section>
 
-        {hasLinks && (
-          <footer className="footer-links" aria-label="External project links">
-            {project.githubLink && (
-              <a href={project.githubLink} className="link-badge" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-github" aria-hidden="true"></i>
-                See the Code
-              </a>
-            )}
-            {project.externalLink && (
-              <a href={project.externalLink} className="link-badge" target="_blank" rel="noopener noreferrer">
-                <i className="fas fa-external-link-alt" aria-hidden="true"></i>
-                Visit the Site
-              </a>
-            )}
-          </footer>
-        )}
+          {hasLinks && (
+            <footer className="footer-links" aria-label="External project links">
+              {project.githubLink && (
+                <Hex 
+                  hexClass="link-badge"
+                  hexWidth={footerLinkHexWidth}
+                  href={project.githubLink}
+                  content={
+                    <Badge 
+                      iconClass={['fab', 'github']} 
+                      title="See the Code"
+                    />
+                  }
+                />
+              )}
+              
+              {project.externalLink && (
+                <Hex 
+                  hexClass="link-badge"
+                  hexWidth={footerLinkHexWidth}
+                  href={project.externalLink}
+                  content={
+                    <Badge 
+                      iconClass={['fas', 'up-right-from-square']} 
+                      title="Visit the Site"
+                    />
+                  }
+                />
+              )}
+            </footer>
+          )}
+        </div>
+
+        
       </article>
     </div>
   );

@@ -31,16 +31,10 @@ function IntroPanel() {
   }, []);
 
   return (
-    <article className="intro-panel text-area-gradient" ref={containerRef}>
-      {introPanelContent.title && <h3 style={{ backgroundImage: `linear-gradient(${gradientAngle}deg, var(--color-1) 0%, var(--color-3) 20%, var(--color-2) 20%, var(--color-4) 30%, var(--color-3) 30%, var(--color-5) 35%, var(--color-4) 35%, var(--color-6) 40%, var(--color-5) 40%, var(--color-7) 45%, var(--color-6) 45%, var(--color-6) 50%, var(--color-5) 50%, var(--color-7) 55%, var(--color-6) 55%, var(--color-8) 60%, var(--color-7) 60%, var(--color-9) 65%, var(--color-8) 65%, var(--color-10) 70%, var(--color-9) 70%, var(--color-11) 80%, var(--color-10) 80%, var(--color-12) 100%)` }}>
+    <article className="intro-panel" ref={containerRef}>
+      {introPanelContent.title && <h3 style={{ backgroundImage: `linear-gradient(${gradientAngle}deg, var(--shade-1) 0%, var(--shade-3) 20%, var(--shade-2) 20%, var(--shade-4) 30%, var(--shade-3) 30%, var(--shade-5) 35%, var(--shade-4) 35%, var(--shade-6) 40%, var(--shade-5) 40%, var(--shade-7) 45%, var(--shade-6) 45%, var(--shade-6) 50%, var(--shade-5) 50%, var(--shade-7) 55%, var(--shade-6) 55%, var(--shade-8) 60%, var(--shade-7) 60%, var(--shade-9) 65%, var(--shade-8) 65%, var(--shade-10) 70%, var(--shade-9) 70%, var(--shade-11) 80%, var(--shade-10) 80%, var(--shade-12) 100%)` }}>
         {introPanelContent.title}
       </h3>}
-      {introPanelContent.descriptionHTML && 
-        <div 
-          className="description" 
-          dangerouslySetInnerHTML={{ __html: introPanelContent.descriptionHTML}}
-        ></div>
-      }
     </article>
 
   )

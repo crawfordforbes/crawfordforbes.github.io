@@ -6,7 +6,7 @@
   min-height: 200px;
   background: var(--color-bg);
   border-radius: var(--border-radius);
-  border: 2px solid var(--tertiary-color);
+  border: 2px solid var(--tertiary-background);
 }
 
 .error-boundary--app {
@@ -18,8 +18,8 @@
 
 .error-boundary--page {
   min-height: 60vh;
-  background: var(--primary-color-contrast);
-  border-color: var(--primary-color);
+  background: var(--primary-background-contrast);
+  border-color: var(--primary-background);
 }
 
 /* Error boundary container - should be invisible when no error */
@@ -83,20 +83,20 @@
 .error-boundary__title {
   font-family: var(--font-small-display);
   font-size: var(--title-size);
-  color: var(--tertiary-color);
+  color: var(--tertiary-background);
   margin-bottom: 12px;
 }
 
 .error-boundary--app .error-boundary__title {
-  color: var(--primary-color);
+  color: var(--primary-text);
 }
 
 .error-boundary--page .error-boundary__title {
-  color: var(--primary-color);
+  color: var(--primary-text);
 }
 
 .error-boundary--component .error-boundary__title {
-  color: var(--secondary-color);
+  color: var(--secondary-text);
 }
 
 .error-boundary__message {
@@ -111,9 +111,9 @@
   text-align: left;
   margin: 24px 0;
   padding: 16px;
-  background: var(--color-1);
+  background: var(--shade-1);
   border-radius: var(--border-radius);
-  border: 1px solid var(--color-3);
+  border: 1px solid var(--shade-3);
 }
 
 .error-boundary__details summary {
@@ -124,7 +124,7 @@
 }
 
 .error-boundary__details summary:hover {
-  color: var(--tertiary-color-contrast);
+  color: var(--tertiary-background-contrast);
 }
 
 .error-boundary__error {
@@ -170,23 +170,23 @@
 }
 
 .error-boundary__button--primary {
-  background: var(--tertiary-color);
-  color: var(--tertiary-color-text);
+  background: var(--tertiary-background);
+  color: var(--tertiary-text);
 }
 
 .error-boundary__button--primary:hover {
-  background: var(--tertiary-color-contrast);
-  color: var(--tertiary-color-text-contrast);
+  background: var(--tertiary-background-contrast);
+  color: var(--tertiary-text-contrast);
 }
 
 .error-boundary__button--secondary {
-  background: var(--quaternary-color);
-  color: var(--quaternary-color-text);
+  background: var(--quaternary-background);
+  color: var(--quaternary-text);
 }
 
 .error-boundary__button--secondary:hover {
-  background: var(--quaternary-color-contrast);
-  color: var(--quaternary-color-text-contrast);
+  background: var(--quaternary-background-contrast);
+  color: var(--quaternary-text-contrast);
 }
 
 /* Responsive design */

@@ -1,7 +1,8 @@
 .intro-panel {
   --title-size: 3rem;
   --y-offset: -180px;
-  --y-offset-margin: calc(var(--y-offset) + 16px);
+  --margin-bottom-offset: 16px;
+  --y-offset-margin: calc(var(--y-offset) + var(--margin-bottom-offset));
   position: relative;
   z-index: 1;
   margin-bottom: 32px;
@@ -14,7 +15,7 @@
   margin-bottom: var(--y-offset-margin);
   border-radius: var(--border-radius);
   padding: 16px;
-  background: var(--intro-panel-bg-top-color);
+  background: linear-gradient(var(--intro-panel-bg-top-color), var(--intro-panel-bg-bottom-color));
   color: var(--intro-panel-text);
 }
 
@@ -37,12 +38,14 @@
 @media screen and (min-width: 40em){
   .intro-panel {
     --title-size: 4rem;
-    margin-bottom: 48px;
+    --margin-bottom-offset: 24px;
   }
 }
 
 @media screen and (min-width: 64em){
   .intro-panel {
     --title-size: 5rem;
+    --margin-bottom-offset: 32px;
   }
+  
 }

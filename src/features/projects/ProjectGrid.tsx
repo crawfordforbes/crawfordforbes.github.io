@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import ProjectResult from "@/features/projects/projectResult";
+import ProjectResult from "@/features/projects/ProjectResult";
 import Pagination from "@/features/projects/Pagination";
 import { useProjectPagination } from "@/features/projects/hooks";
 
@@ -37,7 +37,7 @@ function ProjectGrid({
   onFilterHover
 }: ProjectGridProps) {
   // Use pagination instead of virtualization
-  const pagination = useProjectPagination(projects, 6); // 6 projects per page
+  const pagination = useProjectPagination(projects, 6); // 3 projects per page
 
   const renderProject = (project: ProjectType) => (
     <ProjectResult 

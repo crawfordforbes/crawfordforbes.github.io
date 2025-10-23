@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 export function useProjectPagination(
   items: readonly any[], 
@@ -40,7 +40,7 @@ export function useProjectPagination(
   }, [totalPages])
 
   // Reset to first page when items change (e.g., after filtering)
-  useMemo(() => {
+  useEffect(() => {
     setCurrentPage(1)
   }, [items.length])
 

@@ -3,6 +3,7 @@ import { memo } from 'react'
 import type { UseProjectPaginationReturn } from './hooks/useProjectPagination'
 
 import './styles/pagination.css'
+import Badge from '@/components/global/Badge'
 
 type PaginationProps = {
   pagination: UseProjectPaginationReturn
@@ -75,66 +76,56 @@ function Pagination({ pagination, className = '' }: PaginationProps) {
       </div>
       
       <div className="pagination-controls">
-        <button
-          onClick={goToFirstPage}
-          disabled={!hasPrevPage}
-          aria-label="Go to first page"
-          className="pagination-btn pagination-first"
-        >
-          ⟪
-        </button>
-        
-        <button
-          onClick={goToPrevPage}
-          disabled={!hasPrevPage}
-          aria-label="Go to previous page"
-          className="pagination-btn pagination-prev"
-        >
-          ‹ Previous
-        </button>
+        <Badge
+          iconClass={['fas', 'angle-double-left']}
+          badgeOnClick={hasPrevPage ? goToFirstPage : undefined}
+          extraClass={`pill primary pagination-btn pagination-first ${!hasPrevPage ? 'disabled' : ''}`}
+          noTabIndex={!hasPrevPage}
+        />
+
+        <Badge
+          iconClass={['fas', 'angle-left']}
+          badgeOnClick={hasPrevPage ? goToPrevPage : undefined}
+          extraClass={`pill secondary pagination-btn pagination-prev ${!hasPrevPage ? 'disabled' : ''}`}
+          noTabIndex={!hasPrevPage}
+        />
 
         <div className="pagination-pages">
           {getPageNumbers().map((page, index) => (
             typeof page === 'number' ? (
-              <button
+              <Badge
                 key={page}
-                onClick={() => goToPage(page)}
-                className={`pagination-btn pagination-page ${
-                  page === currentPage ? 'active' : ''
-                }`}
-                aria-label={`Go to page ${page}`}
-                aria-current={page === currentPage ? 'page' : undefined}
-              >
-                {page}
-              </button>
+                iconClass={['fas', `${page}`]}
+                badgeOnClick={page === currentPage ? undefined : () => goToPage(page)}
+                extraClass={`pill tertiary pagination-btn pagination-page ${page === currentPage ? 'active' : ''}`}
+                noTabIndex={page === currentPage}
+                onMouseEnter={() => {}}
+                onMouseLeave={() => {}}
+              />
             ) : (
-              <span key={`ellipsis-${index}`} className="pagination-ellipsis">
+              <Badge key={`ellipsis-${index}`} className="pagination-ellipsis pill tertiary" title="...">
                 {page}
-              </span>
+              </Badge>
             )
           ))}
         </div>
 
-        <button
-          onClick={goToNextPage}
-          disabled={!hasNextPage}
-          aria-label="Go to next page"
-          className="pagination-btn pagination-next"
-        >
-          Next ›
-        </button>
-        
-        <button
-          onClick={goToLastPage}
-          disabled={!hasNextPage}
-          aria-label="Go to last page"
-          className="pagination-btn pagination-last"
-        >
-          ⟫
-        </button>
+        <Badge
+          iconClass={['fas', 'angle-right']}
+          badgeOnClick={hasNextPage ? goToNextPage : undefined}
+          extraClass={`pill secondary pagination-btn pagination-next ${!hasNextPage ? 'disabled' : ''}`}
+          noTabIndex={!hasNextPage}
+        />
+
+        <Badge
+          iconClass={['fas', 'angle-double-right']}
+          badgeOnClick={hasNextPage ? goToLastPage : undefined}
+          extraClass={`pill primary pagination-btn pagination-last ${!hasNextPage ? 'disabled' : ''}`}
+          noTabIndex={!hasNextPage}
+        />
       </div>
     </nav>
   )
 }
-
+ 
 export default memo(Pagination)

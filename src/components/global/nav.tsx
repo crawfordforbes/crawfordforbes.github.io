@@ -56,7 +56,7 @@ function Nav() {
     <nav className="nav" aria-label="Main navigation">
       <div className="shadow">
         <button 
-          className="nav-toggle-button" 
+          className="nav-toggle" 
           onClick={toggleMenu} 
           aria-label={`${isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}`} 
           aria-expanded={isMenuOpen}
@@ -64,7 +64,7 @@ function Nav() {
           tabIndex={0}
         >
           <Hex 
-            hexClass="nav-toggle icon-bg" 
+            hexClass="nav-toggle-hex icon-bg" 
             content={isMenuOpen ? "toggle-open" : "toggle-close"} 
             contentType="badge"
             hexWidth={64}
