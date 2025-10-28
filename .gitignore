@@ -14,6 +14,9 @@ dist-ssr
 notes.txt
 content.txt
 docs
+public/images/projects-fallback.*
+# TODO REMOVE ME
+public 
 
 # Editor directories and files
 .vscode/*

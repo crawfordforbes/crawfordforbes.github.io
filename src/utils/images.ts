@@ -14,28 +14,51 @@ import heroFull from '@/assets/images/hero/hero-full.jpeg';
 
 // Project-specific image helper for new folder structure
 export function getProjectImageUrl(projectId: string, filename: string): string {
-
+  // Return hero fallback when requested
   if (filename === "fallback") {
-    return imagePaths.hero.desktop;
+    // Use the generated public fallback in /public/images (projects-fallback)
+    return `/images/projects-fallback`;
   }
+
   if (!filename) {
     console.error(`getProjectImageUrl: filename is "${filename}" for project "${projectId}"`);
     return imagePaths.hero.desktop;
   }
-  
+
   if (!projectId) {
     console.error(`getProjectImageUrl: projectId is "${projectId}" for filename "${filename}"`);
     return imagePaths.hero.desktop;
   }
-  
-  // Check if filename is already a full path
-  if (filename.startsWith('/src/assets/') || filename.startsWith('http')) {
+
+  // If caller already provides a public or absolute URL, return as-is
+  if (filename.startsWith('/images/') || filename.startsWith('http') || filename.startsWith('/src/assets/')) {
     return filename;
   }
-  
-  // FIXED: Build the path directly instead of calling getImageUrl again
-  const fullPath = `/src/assets/images/projects/${projectId}/${filename}`;
-  return fullPath;
+
+  // Normalize filename to a slug without extension and match the generator naming scheme
+  // e.g. filename 'sunshine-nights-primary.png' for project 'sunshine-nights' ->
+  // '/images/projects-sunshine-nights-sunshine-nights-primary'
+  const nameOnly = filename.split('/').pop() || filename;
+  const base = nameOnly.replace(/\.[^/.]+$/, '');
+
+  // simple slugify (lowercase, spaces -> -, remove unsafe chars)
+  const slug = String(base)
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-_]/g, '-')
+    .replace(/--+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const projectSlug = String(projectId)
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-_]/g, '-')
+    .replace(/--+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  return `/images/projects-${projectSlug}-${slug}`;
 }
 
 // Simple helper for getting image URLs
@@ -62,15 +85,15 @@ export function getProjectPrimaryImageUrl(project: ProjectType): string {
   const primaryImageId = project.imageIds?.[0];
   if (!primaryImageId) {
     console.warn(`No images found for project: ${project.id}`);
-    // Return hero image as fallback
-    return imagePaths.hero.desktop;
+    // Return the generated projects fallback (will be created by the images script)
+    return `/images/projects-fallback`;
   }
 
   const imageInfo = imageData[primaryImageId];
   if (!imageInfo) {
     console.warn(`Image not found for ID: ${primaryImageId}`);
-    // Return hero image as fallback
-    return imagePaths.hero.desktop;
+    // Return the generated projects fallback
+    return `/images/projects-fallback`;
   }
   
   return getProjectImageUrl(project.id, imageInfo.fileName);
