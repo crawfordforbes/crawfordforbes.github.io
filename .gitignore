@@ -17,6 +17,7 @@ docs
 public/images/projects-fallback.*
 # TODO REMOVE ME
 public 
+src/assets/images
 
 # Editor directories and files
 .vscode/*
