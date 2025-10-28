@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
 
 import Hex from "@/features/hexes/Hex"
+import type { HexProps } from '@/features/hexes/Hex'
 
 import { hexData } from "@/data/hexes/hexes"
 import { rowData } from "@/data/hexes/rows"
 
-type PrecomputedHexItem = Record<string, any> & { _key?: string }
+type PrecomputedHexItem = Partial<HexProps> & { _key?: string }
 
 type HexRowProps = {
   row?: string,
@@ -64,8 +65,8 @@ function HexRow({
   }), [hexWidth, hexMargin])
 
   const styleProps = useMemo(() => ({
-      style: { ...(inlineVars as object) } as React.CSSProperties,
-    }), [inlineVars])
+    style: { ...(inlineVars as object) } as React.CSSProperties,
+  }), [inlineVars])
 
   return (
     <div className={`hex-row ${row}`} {...styleProps}>
@@ -89,21 +90,20 @@ function HexRow({
           }
 
           return repeatPlaceholderArray.map((id)=>{
-            // Map old prop names to new unified prop structure
-            
-            const unifiedProps = {
-              ...props,
-              onClick: props.onClick,
-              href: props.hexLink,
-              tabIndex: props.noTabIndex ? -1 : undefined,
+            // Map old prop names to new unified prop structure and cast to Partial<HexProps>
+            const base = props as Partial<HexProps>
+            const unifiedProps: Partial<HexProps> = {
+              ...base,
+              onClick: base.onClick,
+              href: base.hexLink ?? base.href,
+              tabIndex: base.noTabIndex ? -1 : base.tabIndex,
             }
 
-            // Remove old prop names
-            const { type, onClick, hexLink, noTabIndex, ...cleanProps } = unifiedProps
+            // strip legacy keys if they exist (type, hexLink, noTabIndex)
+            const { type: _t, onClick: _oc, hexLink: _hl, noTabIndex: _nt, ...cleanProps } = unifiedProps
 
-            return (<Hex key={`${idx}_${id}`} {...cleanProps} />)
+            return (<Hex key={`${idx}_${id}`} {...(cleanProps as Partial<HexProps>)} />)
           })
-
 
       })}
     </div>

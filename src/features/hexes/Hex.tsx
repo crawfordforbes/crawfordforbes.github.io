@@ -13,19 +13,24 @@ import { useMemo, memo, useCallback } from "react"
  import './styles/hexColors.css'
  import './styles/hexSvgFills.css'
  
- type HexProps = {
-   contactId?: string,
-   hexClass?: string,
-   hexStyle?: React.CSSProperties,
-   content?: string | JSX.Element,
-   contentType?: 'auto' | 'image' | 'badge' | 'visual' | 'text',
-   hexWidth?: number,
-   hexMargin?: number,
-   onClick?: () => void,
-   href?: string,
-   ariaLabel?: string,
-   tabIndex?: number,
- }
+export type HexProps = {
+  id?: string,
+  contactId?: string,
+  type?: 'display' | 'button' | 'link',
+  hexClass?: string,
+  hexStyle?: React.CSSProperties,
+  content?: string | JSX.Element,
+  contentType?: 'auto' | 'image' | 'badge' | 'visual' | 'text',
+  hexWidth?: number,
+  hexMargin?: number,
+  onClick?: (() => void) | undefined,
+  href?: string,
+  hexLink?: string,
+  noTabIndex?: boolean,
+  fullAreaContent?: boolean,
+  ariaLabel?: string,
+  tabIndex?: number,
+}
  
  function Hex({  
    contactId,
@@ -222,7 +227,7 @@ import { useMemo, memo, useCallback } from "react"
  
    // Render as link
    if (isLink) {
-     const isExternalLink = href.startsWith('http') || href.startsWith('mailto:')
+     const isExternalLink = href?.startsWith('http') || href?.startsWith('mailto:')
      
      return (
        <a
