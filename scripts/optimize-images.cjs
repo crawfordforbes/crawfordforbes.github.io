@@ -5,7 +5,7 @@ const sharp = require('sharp');
 const SRC_DIR = path.join(__dirname, '..', 'src', 'assets', 'images');
 const OUT_DIR = path.join(__dirname, '..', 'public', 'images');
 const WIDTH = 655;
-const HEIGHT = 757;
+const HEIGHT = 491;
 const webpQuality = 75;
 const avifQuality = 50;
 const jpgQuality = 80;
@@ -31,6 +31,8 @@ function isImageFile(name) {
 // Directories to exclude from processing (e.g. hero is handled separately)
 const EXCLUDE_DIRS = new Set(['hero']);
 
+const upscaledImages = [];
+
 async function processFile(filePath, relDir = '') {
   const fileName = path.basename(filePath);
   const base = path.parse(fileName).name;
@@ -49,20 +51,75 @@ async function processFile(filePath, relDir = '') {
   const outWebp = path.join(OUT_DIR, `${slug}.webp`);
   const outJpg = path.join(OUT_DIR, `${slug}.jpg`);
 
+  // If outputs already exist and are newer than the source, skip re-processing
   try {
-    await sharp(filePath)
-      .resize(WIDTH, HEIGHT, { fit: 'cover' })
-      .avif({ quality: avifQuality })
+    const force = process.env.FORCE_IMAGES === 'true';
+    if (!force) {
+      const srcStat = fs.statSync(filePath);
+      const srcMtime = srcStat.mtimeMs || 0;
+      const avifExists = fs.existsSync(outAvif);
+      const webpExists = fs.existsSync(outWebp);
+      const jpgExists = fs.existsSync(outJpg);
+      if (avifExists && webpExists && jpgExists) {
+        const aStat = fs.statSync(outAvif);
+        const wStat = fs.statSync(outWebp);
+        const jStat = fs.statSync(outJpg);
+        const latestDest = Math.max(aStat.mtimeMs || 0, wStat.mtimeMs || 0, jStat.mtimeMs || 0);
+        if (latestDest >= srcMtime) {
+          // Destination already up-to-date; skip processing
+          console.log('Skipping up-to-date image:', slug);
+          return { slug, avif: `/images/${slug}.avif`, webp: `/images/${slug}.webp`, jpg: `/images/${slug}.jpg` };
+        }
+      }
+    }
+  } catch (e) {
+    // ignore any stat errors and proceed to regenerate
+  }
+
+  try {
+    // Read metadata to detect small sources and alpha
+    const metadata = await sharp(filePath).metadata();
+    const srcW = metadata.width || 0;
+    const srcH = metadata.height || 0;
+    const hasAlpha = !!metadata.hasAlpha;
+    const needsUpscale = srcW < WIDTH || srcH < HEIGHT;
+
+    if (needsUpscale) {
+      console.warn(`Upscaling small source: ${filePath} (${srcW}x${srcH}) → ${WIDTH}x${HEIGHT}`);
+      upscaledImages.push({ file: filePath, width: srcW, height: srcH, slug });
+    }
+
+    // Increase quality when upscaling to preserve fidelity
+    const localAvifQuality = needsUpscale ? Math.min(100, avifQuality + 20) : avifQuality;
+    const localWebpQuality = needsUpscale ? Math.min(100, webpQuality + 15) : webpQuality;
+    const localJpgQuality = needsUpscale ? Math.min(100, jpgQuality + 10) : jpgQuality;
+
+    const resizeOpts = { fit: 'cover', kernel: sharp.kernel.lanczos3 };
+
+    // Prepare a base pipeline. If the source has alpha, trim transparent borders first.
+    let basePipeline = sharp(filePath);
+    if (hasAlpha) {
+      // trim() removes borders that match the top-left pixel; helps remove transparent strips
+      basePipeline = basePipeline.trim();
+    }
+
+    // AVIF (preserve alpha if present)
+    await basePipeline.clone()
+      .resize(WIDTH, HEIGHT, resizeOpts)
+      .avif({ quality: localAvifQuality })
       .toFile(outAvif);
 
-    await sharp(filePath)
-      .resize(WIDTH, HEIGHT, { fit: 'cover' })
-      .webp({ quality: webpQuality })
+    // WebP (preserve alpha if present)
+    await basePipeline.clone()
+      .resize(WIDTH, HEIGHT, resizeOpts)
+      .webp({ quality: localWebpQuality })
       .toFile(outWebp);
 
-    await sharp(filePath)
-      .resize(WIDTH, HEIGHT, { fit: 'cover' })
-      .jpeg({ quality: jpgQuality, mozjpeg: true })
+    // JPEG: flatten to white background to avoid transparency artifacts
+    await basePipeline.clone()
+      .resize(WIDTH, HEIGHT, resizeOpts)
+      .flatten({ background: { r: 255, g: 255, b: 255 } })
+      .jpeg({ quality: localJpgQuality, mozjpeg: true })
       .toFile(outJpg);
 
     return { slug, avif: `/images/${slug}.avif`, webp: `/images/${slug}.webp`, jpg: `/images/${slug}.jpg` };
@@ -123,4 +180,11 @@ async function walkAndProcess(dir, relDir = '') {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
   console.log('Wrote manifest to', manifestPath);
   console.log('Done. Processed', processed.length, 'images');
+  if (upscaledImages && upscaledImages.length) {
+    console.log('\nUpscaled images summary:');
+    upscaledImages.forEach(i => {
+      console.log(`  - ${i.file} (${i.width}x${i.height}) → slug: ${i.slug}`);
+    });
+    console.log('\nTip: supply larger source images in src/assets/images/* to avoid upscaling artifacts.');
+  }
 })();

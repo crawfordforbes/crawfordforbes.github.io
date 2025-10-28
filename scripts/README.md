@@ -7,7 +7,7 @@ This folder contains a small image generation script used to build modern, singl
 ## What the script does
 
 - Walks `src/assets/images` recursively (except excluded folders).
-- For each image file it finds it generates three outputs at a fixed size (655×757):
+- For each image file it finds it generates three outputs at a fixed size (655×491):
   - AVIF (`.avif`)
   - WebP (`.webp`)
   - JPEG (`.jpg`, mozjpeg)

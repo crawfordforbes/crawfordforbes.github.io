@@ -23,7 +23,7 @@ export const projectData: Record<string, ProjectType> = {
   "sunshine-nights": {
     id: "sunshine-nights",
     title: "Sunshine Nights",
-    imageIds: ["sunshine-nights-primary", "sunshine-nights-secondary", "sunshine-nights-tertiary"],
+    imageIds: ["sun-desktop", "sun-mobile", "sun-press-page"],
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
     roleIds: ["developer", "designer", "solo"],

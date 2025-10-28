@@ -1,3 +1,11 @@
+.project-feature {
+  margin-top: 32px;
+}
+
+.project-feature:has(.project-detail-view) {
+  margin-top: 48px;
+}
+
 .project-index {
   --filter-transition: .3s ease-out;
 

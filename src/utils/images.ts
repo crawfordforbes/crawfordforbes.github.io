@@ -13,32 +13,32 @@ import heroMobile from '@/assets/images/hero/hero-mobile.webp';
 import heroFull from '@/assets/images/hero/hero-full.jpeg';
 
 // Project-specific image helper for new folder structure
-export function getProjectImageUrl(projectId: string, filename: string): string {
+export function getProjectImageUrl(projectId: string, fileId: string): string {
   // Return hero fallback when requested
-  if (filename === "fallback") {
+  if (fileId === "fallback") {
     // Use the generated public fallback in /public/images (projects-fallback)
     return `/images/projects-fallback`;
   }
 
-  if (!filename) {
-    console.error(`getProjectImageUrl: filename is "${filename}" for project "${projectId}"`);
+  if (!fileId) {
+    console.error(`getProjectImageUrl: fileId is "${fileId}" for project "${projectId}"`);
     return imagePaths.hero.desktop;
   }
 
   if (!projectId) {
-    console.error(`getProjectImageUrl: projectId is "${projectId}" for filename "${filename}"`);
+    console.error(`getProjectImageUrl: projectId is "${projectId}" for fileId "${fileId}"`);
     return imagePaths.hero.desktop;
   }
 
   // If caller already provides a public or absolute URL, return as-is
-  if (filename.startsWith('/images/') || filename.startsWith('http') || filename.startsWith('/src/assets/')) {
-    return filename;
+  if (fileId.startsWith('/images/') || fileId.startsWith('http') || fileId.startsWith('/src/assets/')) {
+    return fileId;
   }
 
-  // Normalize filename to a slug without extension and match the generator naming scheme
-  // e.g. filename 'sunshine-nights-primary.png' for project 'sunshine-nights' ->
+  // Normalize fileId to a slug without extension and match the generator naming scheme
+  // e.g. fileId 'sunshine-nights-primary.png' for project 'sunshine-nights' ->
   // '/images/projects-sunshine-nights-sunshine-nights-primary'
-  const nameOnly = filename.split('/').pop() || filename;
+  const nameOnly = fileId.split('/').pop() || fileId;
   const base = nameOnly.replace(/\.[^/.]+$/, '');
 
   // simple slugify (lowercase, spaces -> -, remove unsafe chars)
@@ -96,7 +96,7 @@ export function getProjectPrimaryImageUrl(project: ProjectType): string {
     return `/images/projects-fallback`;
   }
   
-  return getProjectImageUrl(project.id, imageInfo.fileName);
+  return getProjectImageUrl(project.id, imageInfo.id);
 }
 
 // Image path helpers for different categories

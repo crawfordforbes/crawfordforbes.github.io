@@ -42,17 +42,17 @@ function ProjectDetail({
 
   const detailImages = project.imageIds || [];
   
-  // Convert imageIds to filenames using imageData
-  const resolvedImageFilenames: string[] = detailImages && detailImages.length > 0 ? detailImages
+  // Convert imageIds to fileIds using imageData
+  const resolvedImageFileIds: string[] = detailImages && detailImages.length > 0 ? detailImages
     .map(imgId => {
       const imageInfo = imageData[imgId];
-      if (!imageInfo?.fileName) {
+      if (!imageInfo?.id) {
         console.warn(`No image data found for ID: ${imgId}`);
         return null;
       }
-      return imageInfo.fileName;
+      return imageInfo.id;
     })
-    .filter((filename): filename is string => typeof filename === "string" && filename.length > 0) :
+    .filter((fileId): fileId is string => typeof fileId === "string" && fileId.length > 0) :
     ["fallback"];
 
   function renderTechBadges() {
@@ -99,37 +99,23 @@ function ProjectDetail({
       <header className="card-top">
         <div className="image-slider-wrapper">
           <div className="header-image">
-            {/* Mobile slider - using SimpleImage components */}
-            <Splide aria-label={`${project.title} - Slider`} className="mobile image-slider" options={{ rewind: true, pagination: false }}>
-              {resolvedImageFilenames.map((filename, index) => {
+            <Splide aria-label={`${project.title} - Slider`} className="image-slider" options={{ rewind: true, pagination: false }}>
+              {resolvedImageFileIds.map((fileId, index) => {
                 const imageId = detailImages[index]; // Get the actual image ID
                 return (
                   <SplideSlide key={index}>
                     <SimpleImage
-                      src={getProjectImageUrl(project.id, filename)}
+                      src={getProjectImageUrl(project.id, fileId)}
                       alt={generateImageAlt(project.title, imageId)}
                       className="image"
                       priority={index === 0} // First image priority
                       aspectRatio="4/3"
                       objectFit="cover"
                     />
+                    <span className="caption">{generateImageAlt(project.title, imageId)}</span>
                   </SplideSlide>
                 )
               })}
-            </Splide>
-
-            {/* Desktop slider - using Hex components with proper image content */}
-            <Splide aria-label={`${project.title} - Slider`} className="desktop image-slider" options={{ rewind: true, pagination: false }}>
-              {resolvedImageFilenames.map((filename, index) => (
-                <SplideSlide key={index}>
-                  <Hex 
-                    hexClass="image desktop" 
-                    hexWidth={640} 
-                    contentType="image" 
-                    content={getProjectImageUrl(project.id, filename)}
-                  />
-                </SplideSlide>
-              ))}
             </Splide>
           </div>
         </div>
