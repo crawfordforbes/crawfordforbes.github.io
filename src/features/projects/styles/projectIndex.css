@@ -83,10 +83,18 @@
   .project-index .helper-results .results {
     margin-left: var(--filter-offset);
     width: calc(100% - var(--filter-offset));
+    grid-template-columns: 1fr 1fr;
   }
   .project-index .intro-text {
     margin: 0 0 16px var(--filter-offset);
     min-height: unset;
+  }
+}
+
+@media screen and (min-width: 1150px){
+  .project-index .results,
+  .project-index .helper-results .results {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
 }
 

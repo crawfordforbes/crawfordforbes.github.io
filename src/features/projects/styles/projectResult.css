@@ -165,7 +165,7 @@
 }
 
 .project-result .info-panel.has-footer-links {
-  padding-bottom: 0;
+  padding-bottom: 112px;
 }
 
 /* Description */
@@ -179,7 +179,9 @@
 
 /* Footer links - hex badges in a row below the card */
 .project-result .footer-links {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 16px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -187,7 +189,7 @@
   gap: 16px;
   padding: 0;
   z-index: 2;
-  margin-top: -16px;
+  width: calc(100% - 32px);
 }
 
 .project-result .footer-links .link-badge {

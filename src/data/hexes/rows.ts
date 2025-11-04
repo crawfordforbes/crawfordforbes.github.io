@@ -365,10 +365,6 @@ export const rowData:RowsType = {
     id: "header-x-large-24",
     hexes: [{id:"gradient-1-2", repeat: 2}]
   },
-    "header-x-large-25": {
-    id: "header-x-large-25",
-    hexes: [{id:"gradient-1-body-bg", repeat: 2}]
-  },
 
   /* card border */
   "card-border": {

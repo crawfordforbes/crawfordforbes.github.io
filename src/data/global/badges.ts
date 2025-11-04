@@ -66,7 +66,7 @@ export const badgeData: Record<string, BadgeRecord> = {
   "resume": {
     id: "resume",
     title: "Resume",
-    link: "/tbd",
+    link: "/downloads/Crawford-Forbes-Resume.pdf",
     iconClass: ['fas', 'file-arrow-down']
   },
   'projects-link': {

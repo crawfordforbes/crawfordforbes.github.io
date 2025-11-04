@@ -129,32 +129,37 @@
   --stop-color-2: var(--shade-11);
 }
 
+.hex.gradient-12-1 {
+  --stop-color-1: var(--shade-12);
+  --stop-color-2: var(--shade-1);
+}
+
 .hex.gradient-1-body-bg {
   --stop-1-of-2: 0%;
   --stop-2-of-2: 50%;
-  background: var(--body-bg);
-  background: linear-gradient(var(--gradient-angle), var(--shade-1) var(--stop-1-of-2), var(--body-bg) var(--stop-2-of-2));
+  --stop-color-1: var(--shade-1);
+  --stop-color-2: var(--body-bg);
 }
 
 .hex.gradient-10-body-bg {
   --stop-1-of-2: 0;
   --stop-2-of-2: 50%;
-  background: var(--shade-10);
-  background: linear-gradient(var(--gradient-angle), var(--shade-10) var(--stop-1-of-2), var(--body-bg) var(--stop-2-of-2));
+    --stop-color-1: var(--shade-10);
+  --stop-color-2: var(--body-bg);
 }
 
 .hex.gradient-11-body-bg {
   --stop-1-of-2: 0;
   --stop-2-of-2: 50%;
-  background: var(--shade-11);
-  background: linear-gradient(var(--gradient-angle), var(--shade-11) var(--stop-1-of-2), var(--body-bg) var(--stop-2-of-2));
+    --stop-color-1: var(--shade-11);
+  --stop-color-2: var(--body-bg);
 }
   
 .hex.gradient-12-body-bg {
   --stop-1-of-2: 0;
   --stop-2-of-2: 50%;
-  background: var(--shade-2);
-  background: linear-gradient(var(--gradient-angle), var(--shade-12) var(--stop-1-of-2), var(--body-bg) var(--stop-2-of-2));
+  --stop-color-1: var(--shade-12);
+  --stop-color-2: var(--body-bg);
 }
 
 .hex.body-bg {

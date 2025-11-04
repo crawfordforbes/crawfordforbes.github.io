@@ -163,39 +163,39 @@ function ProjectResult({
             badgeOnClick={() => selectProjectClick(project.id)}
           />
 
-          {hasLinks && (
-            <footer className="footer-links" aria-label="External project links">
-              {project.githubLink && (
-                <Hex 
-                  hexClass="link-badge"
-                  hexWidth={footerLinkHexWidth}
-                  href={project.githubLink}
-                  content={
-                    <Badge 
-                      iconClass={['fab', 'github']} 
-                      title="See the Code"
-                    />
-                  }
-                />
-              )}
-              
-              {project.externalLink && (
-                <Hex 
-                  hexClass="link-badge"
-                  hexWidth={footerLinkHexWidth}
-                  href={project.externalLink}
-                  content={
-                    <Badge 
-                      iconClass={['fas', 'up-right-from-square']} 
-                      title="Visit the Site"
-                    />
-                  }
-                />
-              )}
-            </footer>
-          )}
         </div>
 
+        {hasLinks && (
+          <footer className="footer-links" aria-label="External project links">
+            {project.githubLink && (
+              <Hex 
+                hexClass="link-badge"
+                hexWidth={footerLinkHexWidth}
+                href={project.githubLink}
+                content={
+                  <Badge 
+                    iconClass={['fab', 'github']} 
+                    title="See the Code"
+                  />
+                }
+              />
+            )}
+            
+            {project.externalLink && (
+              <Hex 
+                hexClass="link-badge"
+                hexWidth={footerLinkHexWidth}
+                href={project.externalLink}
+                content={
+                  <Badge 
+                    iconClass={['fas', 'up-right-from-square']} 
+                    title="Visit the Site"
+                  />
+                }
+              />
+            )}
+          </footer>
+        )}
         
       </article>
     </div>
