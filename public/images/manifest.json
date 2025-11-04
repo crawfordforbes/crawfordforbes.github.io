@@ -1,0 +1,261 @@
+{
+  "bellevue-header": {
+    "avif": "/images/bellevue-header.avif",
+    "webp": "/images/bellevue-header.webp",
+    "jpg": "/images/bellevue-header.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "bellevue-listings-detail": {
+    "avif": "/images/bellevue-listings-detail.avif",
+    "webp": "/images/bellevue-listings-detail.webp",
+    "jpg": "/images/bellevue-listings-detail.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "bellevue-listings-index": {
+    "avif": "/images/bellevue-listings-index.avif",
+    "webp": "/images/bellevue-listings-index.webp",
+    "jpg": "/images/bellevue-listings-index.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "bellevue-nav": {
+    "avif": "/images/bellevue-nav.avif",
+    "webp": "/images/bellevue-nav.webp",
+    "jpg": "/images/bellevue-nav.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "bellevue-vertical-scroller": {
+    "avif": "/images/bellevue-vertical-scroller.avif",
+    "webp": "/images/bellevue-vertical-scroller.webp",
+    "jpg": "/images/bellevue-vertical-scroller.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "crawford-forbes-header": {
+    "avif": "/images/crawford-forbes-header.avif",
+    "webp": "/images/crawford-forbes-header.webp",
+    "jpg": "/images/crawford-forbes-header.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "crawford-forbes-projects-detail": {
+    "avif": "/images/crawford-forbes-projects-detail.avif",
+    "webp": "/images/crawford-forbes-projects-detail.webp",
+    "jpg": "/images/crawford-forbes-projects-detail.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "crawford-forbes-projects-index": {
+    "avif": "/images/crawford-forbes-projects-index.avif",
+    "webp": "/images/crawford-forbes-projects-index.webp",
+    "jpg": "/images/crawford-forbes-projects-index.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "custom-widgets-chattanooga-navigation": {
+    "avif": "/images/custom-widgets-chattanooga-navigation.avif",
+    "webp": "/images/custom-widgets-chattanooga-navigation.webp",
+    "jpg": "/images/custom-widgets-chattanooga-navigation.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "custom-widgets-panama-map-slider": {
+    "avif": "/images/custom-widgets-panama-map-slider.avif",
+    "webp": "/images/custom-widgets-panama-map-slider.webp",
+    "jpg": "/images/custom-widgets-panama-map-slider.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "custom-widgets-virginia-map": {
+    "avif": "/images/custom-widgets-virginia-map.avif",
+    "webp": "/images/custom-widgets-virginia-map.webp",
+    "jpg": "/images/custom-widgets-virginia-map.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "fallback": {
+    "avif": "/images/fallback.avif",
+    "webp": "/images/fallback.webp",
+    "jpg": "/images/fallback.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-black-hills-intro": {
+    "avif": "/images/highlights-black-hills-intro.avif",
+    "webp": "/images/highlights-black-hills-intro.webp",
+    "jpg": "/images/highlights-black-hills-intro.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-cedar-city-mosaic": {
+    "avif": "/images/highlights-cedar-city-mosaic.avif",
+    "webp": "/images/highlights-cedar-city-mosaic.webp",
+    "jpg": "/images/highlights-cedar-city-mosaic.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-cooperstown-homepage": {
+    "avif": "/images/highlights-cooperstown-homepage.avif",
+    "webp": "/images/highlights-cooperstown-homepage.webp",
+    "jpg": "/images/highlights-cooperstown-homepage.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-glendale-header": {
+    "avif": "/images/highlights-glendale-header.avif",
+    "webp": "/images/highlights-glendale-header.webp",
+    "jpg": "/images/highlights-glendale-header.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-livco-blog-marquee": {
+    "avif": "/images/highlights-livco-blog-marquee.avif",
+    "webp": "/images/highlights-livco-blog-marquee.webp",
+    "jpg": "/images/highlights-livco-blog-marquee.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-sunshine-coast-featured-events": {
+    "avif": "/images/highlights-sunshine-coast-featured-events.avif",
+    "webp": "/images/highlights-sunshine-coast-featured-events.webp",
+    "jpg": "/images/highlights-sunshine-coast-featured-events.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-woodbury-events": {
+    "avif": "/images/highlights-woodbury-events.avif",
+    "webp": "/images/highlights-woodbury-events.webp",
+    "jpg": "/images/highlights-woodbury-events.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "highlights-wyoming-homepage": {
+    "avif": "/images/highlights-wyoming-homepage.avif",
+    "webp": "/images/highlights-wyoming-homepage.webp",
+    "jpg": "/images/highlights-wyoming-homepage.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "mack-map": {
+    "avif": "/images/mack-map.avif",
+    "webp": "/images/mack-map.webp",
+    "jpg": "/images/mack-map.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "mackinac-island-booking-detail": {
+    "avif": "/images/mackinac-island-booking-detail.avif",
+    "webp": "/images/mackinac-island-booking-detail.webp",
+    "jpg": "/images/mackinac-island-booking-detail.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "mackinac-island-booking-index": {
+    "avif": "/images/mackinac-island-booking-index.avif",
+    "webp": "/images/mackinac-island-booking-index.webp",
+    "jpg": "/images/mackinac-island-booking-index.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "mackinac-island-footer": {
+    "avif": "/images/mackinac-island-footer.avif",
+    "webp": "/images/mackinac-island-footer.webp",
+    "jpg": "/images/mackinac-island-footer.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "mackinac-island-homepage": {
+    "avif": "/images/mackinac-island-homepage.avif",
+    "webp": "/images/mackinac-island-homepage.webp",
+    "jpg": "/images/mackinac-island-homepage.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "mackinac-island-postal-slider": {
+    "avif": "/images/mackinac-island-postal-slider.avif",
+    "webp": "/images/mackinac-island-postal-slider.webp",
+    "jpg": "/images/mackinac-island-postal-slider.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "moneytree-history-filter-selection": {
+    "avif": "/images/moneytree-history-filter-selection.avif",
+    "webp": "/images/moneytree-history-filter-selection.webp",
+    "jpg": "/images/moneytree-history-filter-selection.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "moneytree-history-unfiltered": {
+    "avif": "/images/moneytree-history-unfiltered.avif",
+    "webp": "/images/moneytree-history-unfiltered.webp",
+    "jpg": "/images/moneytree-history-unfiltered.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "moneytree-pie-charts": {
+    "avif": "/images/moneytree-pie-charts.avif",
+    "webp": "/images/moneytree-pie-charts.webp",
+    "jpg": "/images/moneytree-pie-charts.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "palm-springs-hero": {
+    "avif": "/images/palm-springs-hero.avif",
+    "webp": "/images/palm-springs-hero.webp",
+    "jpg": "/images/palm-springs-hero.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "palm-springs-listings": {
+    "avif": "/images/palm-springs-listings.avif",
+    "webp": "/images/palm-springs-listings.webp",
+    "jpg": "/images/palm-springs-listings.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "palm-springs-media-gallery": {
+    "avif": "/images/palm-springs-media-gallery.avif",
+    "webp": "/images/palm-springs-media-gallery.webp",
+    "jpg": "/images/palm-springs-media-gallery.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "palm-springs-midcentury-modern-design": {
+    "avif": "/images/palm-springs-midcentury-modern-design.avif",
+    "webp": "/images/palm-springs-midcentury-modern-design.webp",
+    "jpg": "/images/palm-springs-midcentury-modern-design.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "palm-springs-scrolling-effect": {
+    "avif": "/images/palm-springs-scrolling-effect.avif",
+    "webp": "/images/palm-springs-scrolling-effect.webp",
+    "jpg": "/images/palm-springs-scrolling-effect.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "sunshine-nights-desktop": {
+    "avif": "/images/sunshine-nights-desktop.avif",
+    "webp": "/images/sunshine-nights-desktop.webp",
+    "jpg": "/images/sunshine-nights-desktop.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "sunshine-nights-mobile": {
+    "avif": "/images/sunshine-nights-mobile.avif",
+    "webp": "/images/sunshine-nights-mobile.webp",
+    "jpg": "/images/sunshine-nights-mobile.jpg",
+    "width": 655,
+    "height": 491
+  },
+  "sunshine-nights-press-page": {
+    "avif": "/images/sunshine-nights-press-page.avif",
+    "webp": "/images/sunshine-nights-press-page.webp",
+    "jpg": "/images/sunshine-nights-press-page.jpg",
+    "width": 655,
+    "height": 491
+  }
+}

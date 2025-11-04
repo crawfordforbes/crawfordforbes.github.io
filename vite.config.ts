@@ -24,7 +24,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Group React-related libraries
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router'],
           
           // Group FontAwesome icons separately (they tend to be large)
           'fontawesome': ['@fortawesome/fontawesome-svg-core', '@fortawesome/free-solid-svg-icons', '@fortawesome/free-brands-svg-icons'],
@@ -79,9 +79,9 @@ export default defineConfig({
   // Dependency optimization
   optimizeDeps: {
     include: [
-      'react',
-      'react-dom',
-      'react-router-dom',
+  'react',
+  'react-dom',
+  'react-router',
       '@fortawesome/fontawesome-svg-core',
       '@fortawesome/free-solid-svg-icons',
       '@fortawesome/free-brands-svg-icons',
