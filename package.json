@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "images:build": "node scripts/optimize-images.cjs",
+    "postinstall": "patch-package",
     "videos:build": "node scripts/transcode-videos.cjs",
     "build": "npm run images:build && tsc -b && vite build",
     "lint": "eslint .",
@@ -37,6 +38,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
-    "sharp": "^0.32.4"
+    "sharp": "^0.32.4",
+    "patch-package": "^6.5.0"
   }
 }

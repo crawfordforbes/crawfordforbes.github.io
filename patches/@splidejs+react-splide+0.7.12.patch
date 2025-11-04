@@ -1,0 +1,71 @@
+diff --git a/node_modules/@splidejs/react-splide/src/js/components/Splide/Splide.tsx b/node_modules/@splidejs/react-splide/src/js/components/Splide/Splide.tsx
+index 8263135..8d88ac7 100644
+--- a/node_modules/@splidejs/react-splide/src/js/components/Splide/Splide.tsx
++++ b/node_modules/@splidejs/react-splide/src/js/components/Splide/Splide.tsx
+@@ -1,7 +1,9 @@
+-import { Options, Splide as SplideCore } from '@splidejs/splide';
+-import React, { ReactNode } from 'react';
++import { Splide as SplideCore } from '@splidejs/splide';
++import type { Options } from '@splidejs/splide';
++import React from 'react';
++import type { ReactNode } from 'react';
+ import { EVENTS } from '../../constants/events';
+-import { SplideProps } from '../../types';
++import type { SplideProps } from '../../types';
+ import { classNames, isEqualDeep, isEqualShallow, merge } from '../../utils';
+ import { SplideTrack } from '../SplideTrack/SplideTrack';
+ 
+diff --git a/node_modules/@splidejs/react-splide/src/js/components/SplideSlide/SplideSlide.tsx b/node_modules/@splidejs/react-splide/src/js/components/SplideSlide/SplideSlide.tsx
+index 63d1451..ebd7b5f 100644
+--- a/node_modules/@splidejs/react-splide/src/js/components/SplideSlide/SplideSlide.tsx
++++ b/node_modules/@splidejs/react-splide/src/js/components/SplideSlide/SplideSlide.tsx
+@@ -1,13 +1,9 @@
+ import React from 'react';
+ import { classNames } from '../../utils';
+ 
++type LiProps = React.ComponentProps<'li'>;
+ 
+-/**
+- * The component for each slide element.
+- *
+- * @since 0.5.0
+- */
+-export const SplideSlide: React.FC<JSX.IntrinsicElements[ 'li' ]> = ( { children, className, ...props } ) => {
++export const SplideSlide: React.FC<LiProps> = ( { children, className, ...props } ) => {
+   return (
+     <li className={ classNames( 'splide__slide', className ) } { ...props }>
+       { children }
+diff --git a/node_modules/@splidejs/react-splide/src/js/components/SplideTrack/SplideTrack.tsx b/node_modules/@splidejs/react-splide/src/js/components/SplideTrack/SplideTrack.tsx
+index dedfcb4..0a39c6d 100644
+--- a/node_modules/@splidejs/react-splide/src/js/components/SplideTrack/SplideTrack.tsx
++++ b/node_modules/@splidejs/react-splide/src/js/components/SplideTrack/SplideTrack.tsx
+@@ -1,13 +1,9 @@
+ import React from 'react';
+ import { classNames } from '../../utils';
+ 
++type DivProps = React.ComponentProps<'div'>;
+ 
+-/**
+- * The component for the track element.
+- *
+- * @since 0.7.0
+- */
+-export const SplideTrack: React.FC<JSX.IntrinsicElements[ 'div' ]> = ( { children, className, ...props } ) => {
++export const SplideTrack: React.FC<DivProps> = ( { children, className, ...props } ) => {
+   return (
+     <div className={ classNames( 'splide__track', className ) } { ...props }>
+       <ul className="splide__list">
+diff --git a/node_modules/@splidejs/react-splide/tsconfig.json b/node_modules/@splidejs/react-splide/tsconfig.json
+index 426e013..a07afc8 100644
+--- a/node_modules/@splidejs/react-splide/tsconfig.json
++++ b/node_modules/@splidejs/react-splide/tsconfig.json
+@@ -14,7 +14,8 @@
+       "dom",
+       "es6"
+     ],
+-		"jsx": "react"
++    "jsx": "react",
++    "ignoreDeprecations": "6.0"
+   },
+   "include": [
+     "src/js/**/*.ts",
