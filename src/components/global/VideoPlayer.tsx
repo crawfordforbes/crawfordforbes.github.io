@@ -56,7 +56,7 @@ function VideoPlayer({
   const srcBase = src.replace(/\.(mp4|m4v|mov|webm|mkv|avi)(\?.*)?$/i, '');
 
   return (
-    <div className={`video-player ${className}`}>
+    <span className={`video-player ${className}`}>
       <video
         ref={videoRef}
         poster={poster}
@@ -76,7 +76,7 @@ function VideoPlayer({
         <source src={src} />
         Your browser does not support HTML5 video.
       </video>
-    </div>
+    </span>
   );
 }
 

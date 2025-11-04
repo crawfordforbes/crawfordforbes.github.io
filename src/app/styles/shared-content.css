@@ -260,6 +260,7 @@ a.skip-link:focus {
 
 /* caption */
 .caption {
+  display: block;
   font-size: 0.875rem;
   color: var(--caption-text);
   text-align: center;

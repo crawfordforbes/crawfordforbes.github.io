@@ -40,10 +40,10 @@ export const projectData: Record<string, ProjectType> = {
         <article className='description-with-title'>
           <h4 className='title'>{translations.summary}</h4>
           <p>
-            <div className="floating float-right asset-caption">
+            <span className="floating float-right asset-caption">
               <VideoPlayer src="/videos/sunshine-nights-navigation.mp4" poster="/videos/sunshine-nights-navigation.jpg"/>
               <Caption content="Users can quickly access information and find the band on their preferred social media." />
-            </div>
+            </span>
             Developed a responsive website and custom CMS for a touring band from New York City. Originally a feature-rich React app with media galleries and other content, it evolved into a lightweight JavaScript site as the band’s needs changed.
           </p>
         </article>
@@ -68,17 +68,17 @@ export const projectData: Record<string, ProjectType> = {
   "crawford-forbes": {
     id: "crawford-forbes",
     title: "Crawford Forbes Portfolio",
-    imageIds: [],
+    imageIds: ["crawford-forbes-header", "crawford-forbes-projects-index", "crawford-forbes-projects-detail"],
     roleIds: ["developer", "designer", "solo"],
     description: (
       <>
         <article className='description-with-title'>
           <h4 className='title'>{translations.summary}</h4>
           <p>
-            <div className="floating float-right asset-caption">
+            <span className="floating float-right asset-caption">
               <VideoPlayer src="/videos/crawford-forbes-site-scroll.mp4" poster="/videos/crawford-forbes-site-scroll.jpg"/>
               <Caption content="Vivid colors, dynamic layouts, and engaging interactions bring the portfolio to life." />
-            </div>
+            </span>
             An ongoing personal project to showcase my work, experiment with AI-driven tools, and refresh my React and TypeScript skills. This site is both a professional portfolio and a creative sandbox.</p>
         </article>
         <article className='description-with-title'>
@@ -90,10 +90,10 @@ export const projectData: Record<string, ProjectType> = {
           <p>Built with Vite, React, React Router, and TypeScript, following modern web development practices. Designed the UI myself, drawing on years of collaboration with award-winning designers and my growing design sensibility. Implemented responsive layouts, subtle animations, and accessible navigation.</p>
         </article>
         <div className="mosaic mosaic-2 asset-caption">
-                <VideoPlayer src="/videos/crawford-forbes-projects-index.mp4" poster="/video/crawford-forbes-projects-index.jpg"/>
-                <VideoPlayer src="/videos/crawford-forbes-projects-detail.mp4" poster="/video/crawford-forbes-projects-detail.jpg"/>
-              </div>
-              <Caption content="Hover effects, transitions, and dynamic content loading enhance the user experience." />
+          <VideoPlayer src="/videos/crawford-forbes-projects-index.mp4" poster="/video/crawford-forbes-projects-index.jpg"/>
+          <VideoPlayer src="/videos/crawford-forbes-projects-detail.mp4" poster="/video/crawford-forbes-projects-detail.jpg"/>
+        </div>
+        <Caption content="Hover effects, transitions, and dynamic content loading enhance the user experience." />
         <article className='description-with-title'>
           <h4 className='title'>{translations.result}</h4>
           <p>A fast, expressive personal site that demonstrates both my technical versatility and my appreciation for thoughtful design. It continues to evolve alongside my skills and interests.</p>
@@ -160,18 +160,18 @@ export const projectData: Record<string, ProjectType> = {
         <article className='description-with-title'>
           <h4 className='title'>{translations.approach}</h4>
           <p>
-            <div className="floating float-right asset-caption">
+            <span className="floating float-right asset-caption">
               <VideoPlayer src="/videos/palm-springs-scrolling-effect.mp4" poster="/videos/palm-springs-scrolling-effect.jpg"/>
               <Caption content="Visit Palm Springs' in-scope scrolling panel supports multiple data types" />
-            </div>
+            </span>
             I collaborated closely with the design and project management teams to ensure proposed layouts were technically achievable and within scope. For key custom features, like the <a href="https://www.visitpalmsprings.com/" target="_blank" rel="noopener noreferrer">parallax-like blog container</a> that visually spotlights their stories and imagery, I worked with designers to refine the concept so it could be implemented efficiently.
           </p>
           <br />
           <p>
-            <div className="floating float-left asset-caption">
+            <span className="floating float-left asset-caption">
               <VideoPlayer src="/videos/palm-springs-media-gallery.mp4" poster="/videos/palm-springs-media-gallery.jpg" />
               <Caption content="Visit Palm Springs' media galleries were imported with cleaned data and a client supplied organizational structure." />
-            </div>
+            </span>
             On the technical side, I developed and oversaw several custom scripts to migrate content and media. One handled the movement of assets into our Cloudinary system, while another automated uploads from an FTP server to populate their <a href="https://visitpalmsprings.com/media-gallery/" target="_blank" rel="noopener noreferrer">media gallery</a>, complete with supplied descriptions and organizational structure. I also supported junior developers on the team, ensuring consistent standards and smooth integration across multiple components.
           </p>
         </article>
@@ -200,7 +200,7 @@ export const projectData: Record<string, ProjectType> = {
         <article className='description-with-title'>
           <h4 className='title'>{translations.summary}</h4>
           <p>
-            <div className="floating float-right asset-caption">
+            <span className="floating float-right asset-caption">
               <SimpleImage
                 src="mackinac-island-booking-detail"
                 alt="Mackinac Island Booking Widget"
@@ -209,7 +209,7 @@ export const projectData: Record<string, ProjectType> = {
                 objectFit="cover"
               />
               <Caption content="Mackinac Island's booking widget allows users to easily get rates and make reservations" />
-            </div>
+            </span>
             <a href="https://www.mackinacisland.org" target="_blank" rel="noopener noreferrer">Mackinac Island Tourism Bureau’s new website</a> was a showcase of teamwork and technical coordination. As Team Lead, I guided the development process across multiple custom features — from data migration and custom homepage components to integrating a complex <a href="https://www.mackinacisland.org/stay/hotels/" target="_blank" rel="noopener noreferrer">hotel booking system</a> — all while maintaining smooth collaboration among developers, designers, and project managers.
           </p>
         </article>
@@ -220,21 +220,21 @@ export const projectData: Record<string, ProjectType> = {
         <article className='description-with-title'>
           <h4 className='title'>{translations.approach}</h4>
           <p>
-            <div className="floating float-left asset-caption">
+            <span className="floating float-left asset-caption">
               <VideoPlayer src="/videos/mackinac-island-postal-slider.mp4" poster="/videos/mackinac-island-postal-slider.jpg"/>
               <Caption content="This custom postal service themed slider showcases the island's unique attractions while staying within appropriate guidelines." />
-            </div>
+            </span>
             I collaborated with a teammate to plan and execute a custom import script that parsed and migrated their <a href="https://www.mackinacisland.org/blog/" target="_blank" rel="noopener noreferrer">blog posts</a> from a nonstandard CSV format into our CMS. On the front end, I worked closely with another developer to design and build the custom <a href="https://www.mackinacisland.org/" target="_blank" rel="noopener noreferrer">postal themed slider</a>, ensuring that performance and accessibility were maintained.
           </p>
           <p>
-            <div className="floating float-right asset-caption">
+            <span className="floating float-right asset-caption">
               <VideoPlayer src="/videos/mackinac-island-map.mp4" poster="/videos/mackinac-island-map.jpg"/>
               <Caption content="This interactive map allows users to explore Mackinac Island's attractions in a dynamic way." />
-            </div>
+            </span>
             For the <a href="https://www.mackinacisland.org/" target="_blank" rel="noopener noreferrer">interactive map</a>, I partnered with the design team to conceptualize how the visual and functional elements would sync, linking map markers to a callout slider for a fluid, guided exploration of the island’s points of interest. I then helped plan the technical approach and guided the developer who implemented it.
           </p>
           <p>
-            <div className="floating float-left asset-caption">
+            <span className="floating float-left asset-caption">
               <SimpleImage
                 src="mackinac-island-booking-index"
                 alt="Mackinac Island Booking Widget"
@@ -244,7 +244,7 @@ export const projectData: Record<string, ProjectType> = {
                 objectPosition="top"
               />
               <Caption content="Using the Book Direct engine, users can get average nightly rates for custom date ranges or go straight to a hotel's booking provider." />
-            </div>
+            </span>
             The most intricate task was extending our newly updated Listings widget to include a <a href="https://www.mackinacisland.org/stay/hotels/" target="_blank" rel="noopener noreferrer">hotel booking system powered by a third-party API</a>. This involved updating a large VueJS component suite — roughly two-dozen interdependent files — to fetch and display data like nightly rates, availability, and booking links. I optimized the system by refactoring API calls for efficiency and contributed a pull request to incorporate these improvements into our base client.
           </p>
         </article>

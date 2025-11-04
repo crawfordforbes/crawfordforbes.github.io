@@ -106,7 +106,7 @@ export const rowData:RowsType = {
   /* === */
   "header-desktop-9": {
     id: "header-desktop-9",
-    hexes: [{id:"gradient-11-12", repeat: 2}, ]
+    hexes: [{id:"gradient-11-12", repeat: 1}, ]
   },
   "header-desktop-10": {
     id: "header-desktop-10",
@@ -261,11 +261,11 @@ export const rowData:RowsType = {
   },
   "header-large-22": {
     id: "header-large-22",
-    hexes: [{id:"gradient-1-2", repeat: 2}]
+    hexes: [{id:"gradient-1-2", repeat: 1}]
   },
   "header-large-23": {
     id: "header-large-23",
-    hexes: [{id:"gradient-12-11", repeat: 2}]
+    hexes: [{id:"gradient-12-11", repeat: 1}]
   },
       /* x-large */
   "header-x-large-1": {
@@ -355,15 +355,15 @@ export const rowData:RowsType = {
   },
     "header-x-large-22": {
     id: "header-x-large-22",
-    hexes: [{id:"gradient-3-4", repeat: 2}]
+    hexes: [{id:"gradient-3-4", repeat: 1}]
   },
     "header-x-large-23": {
     id: "header-x-large-23",
-    hexes: [{id:"gradient-2-3", repeat: 2}]
+    hexes: [{id:"gradient-2-3", repeat: 1}]
   },
     "header-x-large-24": {
     id: "header-x-large-24",
-    hexes: [{id:"gradient-1-2", repeat: 2}]
+    hexes: [{id:"gradient-1-2", repeat: 1}]
   },
 
   /* card border */

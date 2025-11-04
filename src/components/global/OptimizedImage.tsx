@@ -92,11 +92,11 @@ export default function SimpleImage({
   const finalFallback = fallbackSrc ?? defaultProjectsFallback;
 
   return (
-    <div className={`image-container ${className}`} style={containerStyle}>
+    <span className={`image-container ${className}`} style={containerStyle}>
       {!isLoaded && !hasError && (
-        <div className="image-loading" aria-hidden="true">
-          <div className="loading-skeleton" />
-        </div>
+        <span className="image-loading" aria-hidden="true">
+          <span className="loading-skeleton" />
+        </span>
       )}
       
       <picture>
@@ -114,11 +114,11 @@ export default function SimpleImage({
       </picture>
       
       {hasError && !finalFallback && (
-        <div className="image-error" aria-hidden="true">
+        <span className="image-error" aria-hidden="true">
           <span>Image failed to load</span>
-        </div>
+        </span>
       )}
-    </div>
+    </span>
   );
 }
 

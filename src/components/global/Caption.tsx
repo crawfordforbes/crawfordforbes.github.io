@@ -5,9 +5,9 @@ type CaptionProps = {
 function Caption({ content }: CaptionProps) {
 
   return (
-    <div className="caption">
+    <span className="caption">
       {content}
-    </div>
+    </span>
   )
 }
 
