@@ -66,6 +66,7 @@ function ProjectDetail({
             iconClass={tech.iconClass}
             title={tech.title}
             extraClass="pill secondary"
+            link={tech.link}
           />
         </li>
       )
@@ -99,11 +100,31 @@ function ProjectDetail({
       <header className="card-top">
         <div className="image-slider-wrapper">
           <div className="header-image">
-            <Splide aria-label={`${project.title} - Slider`} className="image-slider" options={{ rewind: true, pagination: false }}>
-              {resolvedImageFileIds.map((fileId, index) => {
+            {resolvedImageFileIds.length > 1 &&
+              <Splide aria-label={`${project.title} - Slider`} className="image-slider" options={{ rewind: true, pagination: false }}>
+                {resolvedImageFileIds.map((fileId, index) => {
+                  const imageId = detailImages[index]; // Get the actual image ID
+                  return (
+                    <SplideSlide key={index}>
+                      <SimpleImage
+                        src={getProjectImageUrl(project.id, fileId)}
+                        alt={generateImageAlt(project.title, imageId)}
+                        className="image"
+                        priority={index === 0} // First image priority
+                        aspectRatio="4/3"
+                        objectFit="cover"
+                      />
+                      <span className="overlay-caption">{generateImageAlt(project.title, imageId)}</span>
+                    </SplideSlide>
+                  )
+                })}
+              </Splide>
+            }
+            {resolvedImageFileIds.length < 2 &&
+              resolvedImageFileIds.map((fileId, index) => {
                 const imageId = detailImages[index]; // Get the actual image ID
                 return (
-                  <SplideSlide key={index}>
+                 <div key={index}>
                     <SimpleImage
                       src={getProjectImageUrl(project.id, fileId)}
                       alt={generateImageAlt(project.title, imageId)}
@@ -112,11 +133,11 @@ function ProjectDetail({
                       aspectRatio="4/3"
                       objectFit="cover"
                     />
-                    <span className="caption">{generateImageAlt(project.title, imageId)}</span>
-                  </SplideSlide>
+                    <span className="overlay-caption">{generateImageAlt(project.title, imageId)}</span>
+                  </div>
                 )
-              })}
-            </Splide>
+              })
+            }
           </div>
         </div>
         <section className="header-content">   
@@ -151,14 +172,15 @@ function ProjectDetail({
             {renderTechBadges()}
           </ol>
         }
-        {project.descriptionHTML && 
+        {(project.description || project.descriptionHTML) && (
           <div className={`text-area text-area-gradient ${hasTechBadges ? 'with-tech-badges' : ''}`}>
-            <div 
-              className="description" 
-              dangerouslySetInnerHTML={{ __html: project.descriptionHTML}}
-            ></div>
+            {project.description ? (
+              <div className="description text-content">{project.description}</div>
+            ) : (
+              <div className="description text-content" dangerouslySetInnerHTML={{ __html: project.descriptionHTML || '' }} />
+            )}
           </div>
-        }
+        )}
       </section>
     </article>
   )

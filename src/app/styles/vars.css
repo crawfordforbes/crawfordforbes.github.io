@@ -50,6 +50,9 @@
   --color-light-text: var(--white);
   --color-gray-text: var(--dark-gray);
 
+  --text-content-link : var(--blue);
+  --text-content-link-highlight: var(--purple);
+
   --body-bg: var(--color-bg);
   --transparent: transparent;
 
@@ -145,7 +148,7 @@
   --variable-height-hex-width: 160px;
   --variable-height-hex-triangle-width: calc(var(--variable-height-hex-width) / 2);
   --variable-height-hex-triangle-height: calc(var(--variable-height-hex-width) * 0.2886 + 1px);
-  --variable-height-hex-width-desktop: 160px;
+  --variable-height-hex-width-desktop: 200px;
   --variable-height-hex-triangle-width-desktop: calc(var(--variable-height-hex-width-desktop) / 2);
   --variable-height-hex-triangle-height-desktop: calc(var(--variable-height-hex-width-desktop) * 0.2886 + 1px);
   --variable-height-hex-top-color: var(--primary-background);
@@ -179,6 +182,10 @@
   --hh-link-color-hover: var(--link-color);
   --hh-icon-color: var(--color-dark-text);
   --hh-icon-color-hover: var(--hh-icon-color);
+
+  /* captions */
+  --caption-background: var(--secondary-background);
+  --caption-text: var(--secondary-text);
 
   /* projects */
   --project-index-intro-bg: var(--primary-background-contrast);

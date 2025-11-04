@@ -42,7 +42,7 @@ function ProjectFilter({
   };
 
   return (
-    <div className="project-feature filter-container" role="region" aria-label="Project filtering options">
+    <div className="filter-container" role="region" aria-label="Project filtering options">
       <div className="variable-height-hex filter-wrapper">
         
         {/* Role Filters */}

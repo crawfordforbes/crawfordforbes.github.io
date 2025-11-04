@@ -1,5 +1,5 @@
 CHECK THE TODO IN .gitignore
-
+<!-- 1200x900 -->
 # Image generation script (optimize-images.cjs)
 
 This folder contains a small image generation script used to build modern, single-size images for the site. The script is intentionally simple and deterministic so generated image filenames can be used directly by the app.

@@ -77,7 +77,7 @@ function ProjectGrid({
       )}
       
       <div className="intro-text">
-        <p>Filter by role to see projects I led, contributed to, or built solo. Click a card for the case study.</p>
+        <p>Filter projects by my role or primary technologies used. Click a card for the case study.</p>
       </div>
       
       <ol className="results">

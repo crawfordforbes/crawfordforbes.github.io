@@ -53,19 +53,18 @@
   overflow: hidden;
 }
 
-.project-detail .caption {
+.project-detail .overlay-caption {
   text-align: center;
   font-size: 0.875rem;
-  color: var(--color-light-text);
+  color: var(--caption-text);
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background-color: var(--caption-background);
   padding: 4px 8px;
   width: max-content;
   border-radius: var(--border-radius);
-  opacity: .75;
 }
 
 .project-detail .card-top .header-content {
@@ -100,6 +99,7 @@
   --title-size: 2rem;
   font-size: var(--title-size);
   text-align: right;
+  line-height: 1;
 }
 
 .project-detail .info-panel {
@@ -147,10 +147,10 @@
     z-index: -1;
   }
 
-  .project-detail .caption {
+  .project-detail .overlay-caption {
     bottom: 0;
     left: 0;
-    border-radius: 0 var(--border-radius) 0 0;
+    border-radius: 0 var(--border-radius) 0 var(--border-radius);
     transform: none;
     padding: 8px;
   }
@@ -176,8 +176,8 @@
     justify-content: space-between;
     overflow: visible;
     border-radius: 0;
-    aspect-ratio: 8/3;
-    padding: 0 32px;
+    aspect-ratio: unset;
+    padding: 32px;
     gap: 16px;
   }
 
@@ -189,7 +189,7 @@
   .project-detail .card-top .header-content {
     position: relative;
     flex: 1 1 auto;
-    height: 100%;
+    height: fit-content;
     border-radius: var(--border-radius) 0 0 var(--border-radius);
     justify-content: center;
     padding: 16px 32px;
@@ -202,13 +202,17 @@
     --half-size: calc(((100vw - var(--offset)) / 2));
     --hex-width: clamp(320px, var(--half-size), 640px);
 
-    top: -32px;
+    top: 0;
     width: var(--hex-width);
     min-width: var(--hex-width);
   }
 
   .project-detail .card-top .header-image .image-slider {
     width: 100%;
+  }
+
+  .project-detail .card-top .header-image .image-container {
+    border-radius: var(--border-radius);
   }
 
   .project-detail .card-top .header-image .hex-visual-content {
@@ -246,7 +250,7 @@
     --variable-height-hex-top-color: var(--variable-height-hex-top-color-detail);
     --variable-height-hex-bottom-color: var(--variable-height-hex-bottom-color-detail);
     position: absolute;
-    top: calc(100% + 32px);
+    top: calc(100% + 96px);
     right: 0;
     height: auto;
 
@@ -258,14 +262,13 @@
   }
 
   .project-detail .text-area.with-tech-badges {
-    margin-right: 208px;
+    margin-right: calc(var(--variable-height-hex-width-desktop) + 48px);
   }
 
   .project-detail .info-panel {
     background: none;
     padding-top: 0;
   }
-
 }
 
 @media screen and (min-width: 48em){
@@ -321,6 +324,12 @@
 
 @container desktop-project-detail (width > 500px) {
   .project-detail .card-top .header-content .title.primary {
-    --title-size: 6rem;
+    --title-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 40em){
+  .project-detail .card-top .header-content .variable-height-hex .title {
+    --title-size: 1rem;
   }
 }

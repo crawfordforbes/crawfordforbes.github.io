@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "images:build": "node scripts/optimize-images.cjs",
+    "videos:build": "node scripts/transcode-videos.cjs",
     "build": "npm run images:build && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

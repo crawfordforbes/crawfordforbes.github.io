@@ -16,8 +16,8 @@ import heroFull from '@/assets/images/hero/hero-full.jpeg';
 export function getProjectImageUrl(projectId: string, fileId: string): string {
   // Return hero fallback when requested
   if (fileId === "fallback") {
-    // Use the generated public fallback in /public/images (projects-fallback)
-    return `/images/projects-fallback`;
+    // Use the generated public fallback in /public/images (fallback)
+    return `/images/fallback`;
   }
 
   if (!fileId) {
@@ -37,7 +37,7 @@ export function getProjectImageUrl(projectId: string, fileId: string): string {
 
   // Normalize fileId to a slug without extension and match the generator naming scheme
   // e.g. fileId 'sunshine-nights-primary.png' for project 'sunshine-nights' ->
-  // '/images/projects-sunshine-nights-sunshine-nights-primary'
+  // '/images/sunshine-nights-sunshine-nights-primary'
   const nameOnly = fileId.split('/').pop() || fileId;
   const base = nameOnly.replace(/\.[^/.]+$/, '');
 
@@ -58,7 +58,7 @@ export function getProjectImageUrl(projectId: string, fileId: string): string {
     .replace(/--+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-  return `/images/projects-${projectSlug}-${slug}`;
+  return `/images/${slug}`;
 }
 
 // Simple helper for getting image URLs
@@ -86,14 +86,14 @@ export function getProjectPrimaryImageUrl(project: ProjectType): string {
   if (!primaryImageId) {
     console.warn(`No images found for project: ${project.id}`);
     // Return the generated projects fallback (will be created by the images script)
-    return `/images/projects-fallback`;
+    return `/images/fallback`;
   }
 
   const imageInfo = imageData[primaryImageId];
   if (!imageInfo) {
     console.warn(`Image not found for ID: ${primaryImageId}`);
     // Return the generated projects fallback
-    return `/images/projects-fallback`;
+    return `/images/fallback`;
   }
   
   return getProjectImageUrl(project.id, imageInfo.id);

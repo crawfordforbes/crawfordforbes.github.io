@@ -51,7 +51,7 @@ function Footer() {
             <Hex hexClass="footer-hex decorative" {...commonProps} />
             <Hex hexClass="footer-hex decorative" {...commonProps} />
             <Hex hexClass="footer-hex footer-text" {...commonProps}  contentType="visual" content={
-              <div className="footer-content">
+              <div className="footer-content text-content">
                 <h2 className="title">{badgeData.name.title}</h2>
                 <p className="description">{footerContent.description}</p>
                 <p className="copyright">© {new Date().getFullYear()} Crawford Forbes</p>

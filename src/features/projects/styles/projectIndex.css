@@ -37,13 +37,10 @@
   padding: 0 0 32px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  grid-template-rows: none;
+  grid-template-rows: auto;
   gap: 16px;
   z-index: 0;
   width: 100%;
-  
-  /* Fix for equal height cards */
-  grid-auto-rows: 1fr;
 }
 
 .project-index .results li {

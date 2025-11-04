@@ -59,7 +59,7 @@
     var(--shade-9) 83%, 
     var(--shade-7) 100%
   );
-  animation: gradientAngleSpin 24s ease infinite;
+  animation: gradientAngleSpin 36s ease infinite;
   opacity: 0;
   filter: blur(0px);
   transition: opacity var(--transition-rules-slow), filter var(--transition-rules-slow);
@@ -68,9 +68,21 @@
 }
 
 .project-result:hover .inner::after {
-  opacity: .3;
+  opacity: .5;
   filter: blur(40px);
   transition: opacity var(--transition-rules-slow), filter var(--transition-rules-slow);
+}
+
+.project-result .card-top .inner::before {
+  background: var(--black);
+  opacity: .3;
+  z-index: 1;
+  transition: opacity var(--transition-rules-slow);
+}
+
+.project-result:hover .card-top .inner::before {
+  opacity: .15;
+  transition: opacity var(--transition-rules-slow);
 }
 
 /* Image styling */
@@ -78,7 +90,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  mix-blend-mode: hard-light;
+  /* mix-blend-mode: hard-light; */
   position: relative;
   z-index: 0;
 }
@@ -115,6 +127,10 @@
   align-self: flex-end;
   animation: titleGlow 16s ease infinite;
   cursor: pointer;
+}
+
+.project-result:hover .title.primary {
+  --shadow-scale: .75px;
 }
 
 .project-result .badge .badge-content {

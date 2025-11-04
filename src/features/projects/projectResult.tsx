@@ -156,7 +156,7 @@ function ProjectResult({
               {project.short_description}
             </p>
           )}
-          
+
           <Badge 
             title="Learn More"
             extraClass="to-from-colors pill read-more" 

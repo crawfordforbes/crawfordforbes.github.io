@@ -36,14 +36,14 @@ const upscaledImages = [];
 async function processFile(filePath, relDir = '') {
   const fileName = path.basename(filePath);
   const base = path.parse(fileName).name;
-  const relPrefix = relDir ? relDir.replace(/\\/g, '-').replace(/\//g, '-') + '-' : '';
-  const rawSlug = `${relPrefix}${base}`;
-  const slug = slugify(rawSlug);
+  // const relPrefix = relDir ? relDir.replace(/\\/g, '-').replace(/\//g, '-') + '-' : '';
+  // const rawSlug = `${relPrefix}${base}`;
+  const slug = slugify(base);
 
   // Log when we find a projects/fallback source so it's easy to spot
-  if (base === 'fallback' && relPrefix.toLowerCase().startsWith('projects')) {
-    console.log('Found project fallback source; generating slug:', slug);
-  }
+  // if (base === 'fallback' && relPrefix.toLowerCase().startsWith('projects')) {
+  //   console.log('Found project fallback source; generating slug:', slug);
+  // }
 
   ensureDir(OUT_DIR);
 
