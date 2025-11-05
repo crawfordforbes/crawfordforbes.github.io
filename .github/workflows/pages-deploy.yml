@@ -11,6 +11,10 @@ permissions:
   id-token: write
 
 jobs:
+  concurrency:
+    group: pages-deploy-${{ github.ref }}
+    cancel-in-progress: true
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +48,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
+          clean: true
+          commit_message: "chore(pages): deploy ${{ github.sha }}"
       - name: Verify site (HEAD)
         run: |
           echo "Waiting briefly for Pages to update...";
