@@ -18,9 +18,9 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          echo "Running patch-package to ensure patches are applied in CI"
-          npx patch-package || true
-          echo "List Splide types (if present)";
+          echo "Applying patches (fail if missing)..."
+          npx patch-package
+          echo "List Splide types (if present):";
           ls -la node_modules/@splidejs/react-splide/dist || true
       - name: Emit declaration files
         run: npm run types
@@ -31,6 +31,9 @@ jobs:
           npx -y tsc --version || true
       - name: Run type-only check (project refs)
         run: npx tsc -b --noEmit --pretty false
+      concurrency:
+        group: typecheck-${{ github.ref }}
+        cancel-in-progress: true
       - name: Cache dist/types (optional)
         if: false
         run: echo "No-op; keep for future caching improvements"
