@@ -41,9 +41,9 @@ const mediaQuery = useContext(MediaQueryContext);
 
   const hexGridProps = useMemo(() => ({
     grid,
-    shiftedUp: layout.shiftedUp,
-    hexWidth: layout.hexWidth ? layout.hexWidth : hexWidth,
-    hexMargin: typeof layout.hexMargin !== 'undefined' ? layout.hexMargin : 3,
+    shiftedUp: layout?.shiftedUp,
+    hexWidth: layout?.hexWidth ? layout?.hexWidth : hexWidth,
+    hexMargin: typeof layout?.hexMargin !== 'undefined' ? layout?.hexMargin : 3,
   }), [grid, layout, hexWidth]);
 
   // chooses which hex grid to display based on screen size

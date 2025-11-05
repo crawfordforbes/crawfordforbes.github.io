@@ -1,5 +1,4 @@
 import Logo from "@/features/hexes/svg/logo"
-import { badgeData } from "@/data/global/badges"
 
 import type { JSX } from "react"
 

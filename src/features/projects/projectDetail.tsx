@@ -3,7 +3,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 import Badge from "@/components/global/Badge"
 import SimpleImage from "@/components/global/OptimizedImage";
-import Hex from "@/features/hexes/Hex"
+
 import HexGridLayout from "@/features/hexes/HexGridLayout";
 
 import { imageData } from "@/data/global/images";

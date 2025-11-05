@@ -50,14 +50,6 @@ export function getProjectImageUrl(projectId: string, fileId: string): string {
     .replace(/--+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-  const projectSlug = String(projectId)
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-_]/g, '-')
-    .replace(/--+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
   return `/images/${slug}`;
 }
 

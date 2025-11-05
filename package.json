@@ -8,7 +8,8 @@
     "images:build": "node scripts/optimize-images.cjs",
     "postinstall": "patch-package",
     "videos:build": "node scripts/transcode-videos.cjs",
-    "build": "npm run images:build && tsc -b && vite build",
+    "types": "tsc -p tsconfig.declarations.json",
+    "build": "npm run images:build && npm run videos:build && npm run types && tsc -b --noEmit && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
