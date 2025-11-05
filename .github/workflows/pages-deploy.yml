@@ -21,8 +21,14 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm ci
-      - name: Build
-        run: npm run build
+      - name: Show public media (for debugging)
+        run: |
+          echo "Listing public/images (if present):";
+          ls -la public/images || true;
+          echo "Listing public/videos (if present):";
+          ls -la public/videos || true;
+      - name: Build (CI-safe)
+        run: npm run build:ci
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v1
         with:
