@@ -29,10 +29,10 @@ jobs:
           ls -la public/videos || true;
       - name: Build (CI-safe)
         run: npm run build:ci
-      - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./dist
+        - name: Show dist contents
+          run: |
+            echo "Listing dist (to be deployed):";
+            ls -la dist || true;
 
   deploy:
     needs: build
@@ -42,4 +42,9 @@ jobs:
       id-token: write
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        - uses: actions/checkout@v4
+        - name: Deploy to gh-pages branch
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./dist
