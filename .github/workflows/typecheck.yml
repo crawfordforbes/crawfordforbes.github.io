@@ -19,8 +19,13 @@ jobs:
         run: npm ci
       - name: Emit declaration files
         run: npm run types
+      - name: Show Node / npm / tsc versions
+        run: |
+          node --version
+          npm --version
+          npx -y tsc --version || true
       - name: Run type-only check (project refs)
-        run: npx tsc -b --noEmit
+        run: npx tsc -b --noEmit --pretty false
       - name: Cache dist/types (optional)
         if: false
         run: echo "No-op; keep for future caching improvements"
