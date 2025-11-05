@@ -32,7 +32,7 @@ jobs:
           npx patch-package
           echo "List Splide types (if present):";
           ls -la node_modules/@splidejs/react-splide/dist || true
-      - name: Debug: show environment and tsconfig
+      - name: Debug show environment and tsconfig
         run: |
           echo "=== Environment ==="
           echo "CWD: $(pwd)"
