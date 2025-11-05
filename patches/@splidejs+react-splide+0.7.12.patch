@@ -55,6 +55,17 @@ index dedfcb4..0a39c6d 100644
    return (
      <div className={ classNames( 'splide__track', className ) } { ...props }>
        <ul className="splide__list">
+diff --git a/node_modules/@splidejs/react-splide/src/js/index.ts b/node_modules/@splidejs/react-splide/src/js/index.ts
+index 59e4015..282e89a 100644
+--- a/node_modules/@splidejs/react-splide/src/js/index.ts
++++ b/node_modules/@splidejs/react-splide/src/js/index.ts
+@@ -1,3 +1,3 @@
+ export * from './components';
+ export * from './types';
+-export { Options } from '@splidejs/splide';
+\ No newline at end of file
++export type { Options } from '@splidejs/splide';
+\ No newline at end of file
 diff --git a/node_modules/@splidejs/react-splide/tsconfig.json b/node_modules/@splidejs/react-splide/tsconfig.json
 index 426e013..a07afc8 100644
 --- a/node_modules/@splidejs/react-splide/tsconfig.json
