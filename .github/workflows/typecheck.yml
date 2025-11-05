@@ -2,9 +2,10 @@ name: Typecheck and Emit Types
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    # only run full type emit/check on the protected branch
+    branches: [ master ]
+  # allow manual runs for diagnostics / local-mirroring when you want
+  workflow_dispatch: {}
 
 jobs:
   types:
@@ -32,6 +33,21 @@ jobs:
           npx patch-package
           echo "List Splide types (if present):";
           ls -la node_modules/@splidejs/react-splide/dist || true
+      - name: Debug: show environment and tsconfig
+        run: |
+          echo "=== Environment ==="
+          echo "CWD: $(pwd)"
+          node --version
+          npm --version
+          npx -y tsc --version || true
+          echo "\n=== tsconfig.declarations.json contents ==="
+          cat tsconfig.declarations.json || true
+          echo "\n=== Effective tsc config (showConfig) ==="
+          npx -y tsc -p tsconfig.declarations.json --showConfig || true
+          echo "\n=== Trace resolution for sample file (Portfolio.tsx) ==="
+          npx -y tsc -p tsconfig.declarations.json --traceResolution src/app/routes/Portfolio.tsx || true
+          echo "\n=== node_modules top-level listing ==="
+          ls -la node_modules | head -n 200 || true
       - name: Emit declaration files
         run: npm run types
       - name: Show Node / npm / tsc versions
