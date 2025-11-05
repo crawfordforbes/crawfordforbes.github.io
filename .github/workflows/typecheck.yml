@@ -16,7 +16,12 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          echo "Running patch-package to ensure patches are applied in CI"
+          npx patch-package || true
+          echo "List Splide types (if present)";
+          ls -la node_modules/@splidejs/react-splide/dist || true
       - name: Emit declaration files
         run: npm run types
       - name: Show Node / npm / tsc versions

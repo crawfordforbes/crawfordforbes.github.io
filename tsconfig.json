@@ -9,6 +9,9 @@
     "types": ["vite/client"],
     "paths": {
       "@/*": ["./src/*"]
+      ,
+      "@splidejs/react-splide": ["./node_modules/@splidejs/react-splide/dist/types/index.d.ts"],
+      "@splidejs/react-splide/*": ["./node_modules/@splidejs/react-splide/dist/types/*"]
     },
     "isolatedModules": true,
   }
