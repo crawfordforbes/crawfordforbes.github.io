@@ -44,23 +44,19 @@ jobs:
         run: |
           echo "Listing dist (to be deployed):";
           ls -la dist || true;
-
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          clean: true
-          commit_message: "chore(pages): deploy ${{ github.sha }}"
-      - name: Verify site (HEAD)
-        run: |
-          echo "Waiting briefly for Pages to update...";
-          sleep 5;
-          echo "HEAD request to site:";
-          curl -I https://crawfordforbes.github.io/ || true
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v3
