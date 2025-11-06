@@ -5,10 +5,10 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+  "baseUrl": ".",
     "types": ["vite/client"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*", "./src"]
       ,
       "@splidejs/react-splide": ["./node_modules/@splidejs/react-splide/dist/types/index.d.ts"],
       "@splidejs/react-splide/*": ["./node_modules/@splidejs/react-splide/dist/types/*"]
