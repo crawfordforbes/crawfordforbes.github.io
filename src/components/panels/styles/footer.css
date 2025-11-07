@@ -5,7 +5,7 @@
   height: 700px;
   position: relative;
   z-index: 2;
-  margin-top: 200px;
+  margin-top: 32px;
   background-color: var(--color-bg);
 }
 
@@ -117,5 +117,11 @@
 @media screen and (min-width: 500px) {
   .footer .title {
     --title-size: 2rem;
+  } 
+}
+
+@media screen and (min-width: 64em) {
+  .footer {
+    margin-top: 200px;
   } 
 }

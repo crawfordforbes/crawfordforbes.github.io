@@ -4,6 +4,7 @@ import type { UseProjectPaginationReturn } from './hooks/useProjectPagination'
 
 import './styles/pagination.css'
 import Badge from '@/components/global/Badge'
+import { scrollToTarget } from '@/utils/site'
 
 type PaginationProps = {
   pagination: UseProjectPaginationReturn
@@ -26,12 +27,28 @@ function Pagination({ pagination, className = '' }: PaginationProps) {
     goToLastPage,
   } = pagination
 
-  if (totalPages <= 1) return null
+  // Helper to call page action then scroll to projects
+  const withScroll = (fn?: () => void) => {
+    if (!fn) return undefined
+    return () => {
+      fn()
+      // ensure we scroll to the projects container after navigation
+      scrollToTarget('projects')
+    }
+  }
+
+  // Always render the pagination UI but disable controls when there's only one page
 
   // Generate page numbers to show
   const getPageNumbers = () => {
     const pages: (number | string)[] = []
     const maxVisiblePages = 5
+
+    if (totalPages <= 0) {
+      // no pages, still show page 1 as disabled
+      pages.push(1)
+      return pages
+    }
 
     if (totalPages <= maxVisiblePages) {
       // Show all pages if we have 5 or fewer
@@ -78,14 +95,14 @@ function Pagination({ pagination, className = '' }: PaginationProps) {
       <div className="pagination-controls">
         <Badge
           iconClass={['fas', 'angle-double-left']}
-          badgeOnClick={hasPrevPage ? goToFirstPage : undefined}
+          badgeOnClick={hasPrevPage ? withScroll(goToFirstPage) : undefined}
           extraClass={`pill primary pagination-btn pagination-first ${!hasPrevPage ? 'disabled' : ''}`}
           noTabIndex={!hasPrevPage}
         />
 
         <Badge
           iconClass={['fas', 'angle-left']}
-          badgeOnClick={hasPrevPage ? goToPrevPage : undefined}
+          badgeOnClick={hasPrevPage ? withScroll(goToPrevPage) : undefined}
           extraClass={`pill secondary pagination-btn pagination-prev ${!hasPrevPage ? 'disabled' : ''}`}
           noTabIndex={!hasPrevPage}
         />
@@ -96,7 +113,7 @@ function Pagination({ pagination, className = '' }: PaginationProps) {
               <Badge
                 key={page}
                 title={page.toString()}
-                badgeOnClick={page === currentPage ? undefined : () => goToPage(page)}
+                badgeOnClick={page === currentPage ? undefined : withScroll(() => goToPage(page))}
                 extraClass={`pill tertiary pagination-btn pagination-page ${page === currentPage ? 'active' : ''}`}
                 noTabIndex={page === currentPage}
               />
@@ -108,14 +125,14 @@ function Pagination({ pagination, className = '' }: PaginationProps) {
 
         <Badge
           iconClass={['fas', 'angle-right']}
-          badgeOnClick={hasNextPage ? goToNextPage : undefined}
+          badgeOnClick={hasNextPage ? withScroll(goToNextPage) : undefined}
           extraClass={`pill secondary pagination-btn pagination-next ${!hasNextPage ? 'disabled' : ''}`}
           noTabIndex={!hasNextPage}
         />
 
         <Badge
           iconClass={['fas', 'angle-double-right']}
-          badgeOnClick={hasNextPage ? goToLastPage : undefined}
+          badgeOnClick={hasNextPage ? withScroll(goToLastPage) : undefined}
           extraClass={`pill primary pagination-btn pagination-last ${!hasNextPage ? 'disabled' : ''}`}
           noTabIndex={!hasNextPage}
         />

@@ -18,16 +18,16 @@
 .project-index .helper-results {
   width: 100%;
   display: block;
+  /* Reserve space so pagination doesn't overlap when results shrink */
+  padding-bottom: 72px;
 }
 
-.project-index .intro-text {
-  margin: 0 0 8px 80px;
-  padding: 8px 16px;
-  background-color: var(--project-index-intro-bg);
-  color: var(--project-index-intro-text);
-  border-radius: var(--border-radius);
-  filter: var(--drop-shadow);
-  min-height: 84px; /* this keeps the filter toggle from colliding with results */
+.project-index .pagination-cont {
+  margin: 16px auto;
+}
+
+.project-index .pagination-cont.desktop {
+  display: none;
 }
 
 /* Grid layout for project cards */
@@ -41,6 +41,26 @@
   gap: 16px;
   z-index: 0;
   width: 100%;
+}
+
+/* Fade transition for results when content changes (used with JS to toggle .fade) */
+.project-index .results {
+  transition: opacity 320ms ease;
+  opacity: 1;
+}
+.project-index .results.fade {
+  opacity: 0; /* hide during height transition */
+  pointer-events: none;
+}
+
+.project-index .results .result-item {
+  transition: transform 320ms ease, opacity 320ms ease;
+  will-change: transform, opacity;
+  opacity: 1;
+}
+.project-index .results.fade .result-item {
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 .project-index .results li {
@@ -61,12 +81,6 @@
   position: relative;
 }
 
-
-
-.project-index .intro-text p {
-  margin: 0;
-}
-
 .project-index .hex.icon-bg .badge .badge-content .fa-icon {
   font-size: 2rem;
 }
@@ -85,9 +99,17 @@
     width: calc(100% - var(--filter-offset));
     grid-template-columns: 1fr 1fr;
   }
-  .project-index .intro-text {
-    margin: 0 0 16px var(--filter-offset);
+  .project-index .pagination-cont {
+    margin: 0 0 0 var(--filter-offset);
     min-height: unset;
+  }
+
+  .project-index .pagination-cont.mobile {
+    display: none;
+  }
+
+  .project-index .pagination-cont.desktop {
+    display: block;
   }
 }
 

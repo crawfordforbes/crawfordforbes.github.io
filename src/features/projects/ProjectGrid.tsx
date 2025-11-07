@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { memo, useRef, useEffect, useState } from "react";
+import type { MutableRefObject } from "react";
 
 import ProjectResult from "@/features/projects/ProjectResult";
 import Pagination from "@/features/projects/Pagination";
@@ -42,6 +43,45 @@ function ProjectGrid({
   const perfEnabled = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('perf') === '1';
   usePerformanceMonitor('ProjectGrid', perfEnabled);
 
+  const [isFading, setIsFading] = useState(false)
+  const prevIdsRef = useRef<string[]>([])
+  const fadeTimerRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    // clear any existing timer at the start to avoid races
+    if (fadeTimerRef.current) {
+      clearTimeout(fadeTimerRef.current)
+      fadeTimerRef.current = null
+    }
+
+    const ids = pagination.currentItems.map((p) => p.id)
+    const prev = prevIdsRef.current
+    const changed = prev.length && (prev.length !== ids.length || prev.some((v, i) => v !== ids[i]))
+
+    if (!changed) {
+      // no structural change -> ensure fade is off and update prev snapshot
+      prevIdsRef.current = ids
+      setIsFading(false)
+      return
+    }
+
+    // Items changed -> enable fade, schedule clearing
+    prevIdsRef.current = ids
+    setIsFading(true)
+    fadeTimerRef.current = window.setTimeout(() => {
+      setIsFading(false)
+      fadeTimerRef.current = null
+    }, 3000)
+
+    return () => {
+      if (fadeTimerRef.current) {
+        clearTimeout(fadeTimerRef.current)
+        fadeTimerRef.current = null
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pagination.currentItems])
+
   const renderProject = (project: ProjectType) => (
     <ProjectResult 
       project={project}
@@ -76,19 +116,21 @@ function ProjectGrid({
         </div>
       )}
       
-      <div className="intro-text">
-        <p>Filter projects by my role or primary technologies used. Click a card for the case study.</p>
+      <div className="pagination-cont desktop">
+        <Pagination pagination={pagination} />
       </div>
-      
-      <ol className="results">
+      <ol className={`results ${isFading ? 'fade' : ''}`}>
         {pagination.currentItems.map((project) => (
-          <li key={project.id}>
+          <li key={project.id} className="result-item">
             {renderProject(project)}
           </li>
         ))}
       </ol>
+      <div className="pagination-cont mobile">
+        <Pagination pagination={pagination} />
+      </div>
 
-      <Pagination pagination={pagination} />
+      
     </div>
   )
 }
