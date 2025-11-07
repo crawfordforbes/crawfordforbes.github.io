@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router';
-
 import { scrollToTarget } from '@/utils/site';
 
 import type { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';

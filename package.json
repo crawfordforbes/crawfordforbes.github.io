@@ -9,8 +9,8 @@
     "postinstall": "patch-package",
     "videos:build": "node scripts/transcode-videos.cjs",
     "types": "tsc -p tsconfig.declarations.json",
-  "build": "npm run images:build && npm run videos:build && npm run types && tsc -b --noEmit && vite build",
-  "build:ci": "vite build",
+    "build": "npm run images:build && npm run videos:build && npm run types && tsc -b --noEmit && vite build",
+    "build:ci": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

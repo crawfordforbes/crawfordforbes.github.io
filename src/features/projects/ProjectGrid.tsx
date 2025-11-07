@@ -1,5 +1,4 @@
 import { memo, useRef, useEffect, useState } from "react";
-import type { MutableRefObject } from "react";
 
 import ProjectResult from "@/features/projects/ProjectResult";
 import Pagination from "@/features/projects/Pagination";
