@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
 
 import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
-import Portfolio from '@/app/routes/Portfolio';
+import Projects from '@/app/routes/Projects';
 
 import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize } from '@/utils/site';
@@ -39,36 +39,61 @@ function App() {
   return (
     <MediaQueryContext value={mediaSize}>
       <BrowserRouter>
+        <RouterEventListener />
         <Routes>
           {/* Home page */}
           <Route path="/" element={
             <PageErrorBoundary pageName="Home">
-              <Portfolio />
+              <Projects />
             </PageErrorBoundary>
           } />
           
-          {/* Portfolio routes */}
-          <Route path="/portfolio" element={
-            <PageErrorBoundary pageName="Portfolio">
-              <Portfolio />
+          {/* Projects routes */}
+          <Route path="/projects" element={
+            <PageErrorBoundary pageName="Projects">
+              <Projects />
             </PageErrorBoundary>
           } />
-          <Route path="/portfolio/:projectId" element={
+          <Route path="/projects/:projectId" element={
             <PageErrorBoundary pageName="Project Detail">
-              <Portfolio />
+              <Projects />
             </PageErrorBoundary>
           } />
           
           {/* Fallback for any unmatched routes */}
           <Route path="*" element={
             <PageErrorBoundary pageName="404">
-              <Portfolio />
+              <Projects />
             </PageErrorBoundary>
           } />
         </Routes>
       </BrowserRouter>
     </MediaQueryContext>
   );
+}
+
+function RouterEventListener() {
+  // useNavigate must be used inside a Router; placing this component inside BrowserRouter makes it available
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = (evt: Event) => {
+      try {
+        const detail = (evt as CustomEvent)?.detail || (evt as any).detail;
+        if (detail && detail.targetUrl) {
+          navigate(detail.targetUrl);
+        }
+      } catch (e) {
+        // swallow errors - this listener is a convenience for non-React callers
+        // console.warn('RouterEventListener error', e);
+      }
+    };
+
+    window.addEventListener('app:navigate', handler as EventListener);
+    return () => window.removeEventListener('app:navigate', handler as EventListener);
+  }, [navigate]);
+
+  return null;
 }
 
 export default App

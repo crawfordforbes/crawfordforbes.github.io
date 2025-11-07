@@ -7,4 +7,4 @@ Disallow: /node_modules/
 Disallow: /src/
 
 # Point to sitemap
-Sitemap: https://crawfordforbes.github.io/crawfordforbes/sitemap.xml
+Sitemap: https://crawfordforbes.github.io/sitemap.xml

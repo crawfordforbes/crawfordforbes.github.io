@@ -12,7 +12,7 @@ type BackButtonProps = {
  */
 function BackButton({ onBack }: BackButtonProps) {
   return (
-    <Link to="/portfolio" role="button" className="back-link" aria-label="Back to Projects List" tabIndex={0}>
+    <Link to="/projects" role="button" className="back-link" aria-label="Back to Projects List" tabIndex={0}>
       <Hex 
         hexClass="back-button hex-button icon-bg" 
         content="more-projects"

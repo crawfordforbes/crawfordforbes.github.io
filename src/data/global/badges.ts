@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router';
+
 import { scrollToTarget } from '@/utils/site';
 
 import type { IconPrefix, IconName } from '@fortawesome/fontawesome-svg-core';
@@ -73,7 +75,7 @@ export const badgeData: Record<string, BadgeRecord> = {
     id: 'projects-link',
     iconClass: ['fas', 'code'],
     title: 'Projects',
-    badgeOnClick: () => { scrollToTarget("projects"); }
+    badgeOnClick: () => { scrollToTarget("projects", 800, "/projects/");}
   },
 
   // Utils / UI badges

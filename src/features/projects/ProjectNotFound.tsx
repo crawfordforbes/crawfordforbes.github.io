@@ -3,25 +3,25 @@ import { Link } from 'react-router'
 import './styles/ProjectNotFound.css'
 
 type ProjectNotFoundProps = {
-  onBackToPortfolio?: () => void
+  onBackToProjects?: () => void
 }
 
-function ProjectNotFound({ onBackToPortfolio }: ProjectNotFoundProps) {
+function ProjectNotFound({ onBackToProjects }: ProjectNotFoundProps) {
   return (
     <div className="project-not-found">
       <h2>Project Not Found</h2>
       <p>Sorry, the project you're looking for doesn't exist or may have been removed.</p>
       
       <div className="actions">
-        {onBackToPortfolio ? (
+        {onBackToProjects ? (
           <button 
-            onClick={onBackToPortfolio}
+            onClick={onBackToProjects}
             className="btn primary"
           >
-            ← Back to Portfolio
+            ← Back to Projects
           </button>
         ) : (
-          <Link to="/portfolio" className="btn primary">
+          <Link to="/projects" className="btn primary">
             ← View All Projects
           </Link>
         )}

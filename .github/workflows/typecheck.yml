@@ -43,9 +43,9 @@ jobs:
           cat tsconfig.declarations.json || true
           echo "\n=== Effective tsc config (showConfig) ==="
           npx -y tsc -p tsconfig.declarations.json --showConfig || true
-          echo "\n=== Trace resolution for sample file (Portfolio.tsx) ==="
+          echo "\n=== Trace resolution for sample file (Projects.tsx) ==="
           # Use the repository script to perform a project-aware trace (tsc CLI cannot mix -p and files).
-          node scripts/trace-resolution.cjs src/app/routes/Portfolio.tsx tsconfig.declarations.json || true
+          node scripts/trace-resolution.cjs src/app/routes/Projects.tsx tsconfig.declarations.json || true
           echo "\n=== node_modules top-level listing ==="
           ls -la node_modules | head -n 200 || true
       - name: Emit declaration files

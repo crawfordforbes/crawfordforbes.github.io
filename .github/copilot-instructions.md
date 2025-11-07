@@ -7,7 +7,7 @@ Keep this short and actionable (20-50 lines). Reference concrete files.
 
 Quick context
 - Tech: React + TypeScript + Vite. Entry: `src/app/Main.tsx` -> `src/app/App.tsx`.
-- Routing: Uses `react-router` (see `src/app/App.tsx`). Single-page portfolio with routes under `/portfolio`.
+- Routing: Uses `react-router` (see `src/app/App.tsx`). Single-page portfolio with routes under `/projects`.
 - Data: canonical project data lives in `src/data/projects/*` and is consumed by `src/features/projects` (hooks + UI).
 
 Primary goals for small PRs

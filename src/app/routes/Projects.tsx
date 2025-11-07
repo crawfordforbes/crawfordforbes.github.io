@@ -6,7 +6,7 @@ import IntroPanel from "@/components/panels/IntroPanel"
 import ProjectIndex from "@/features/projects/ProjectIndex"
 import Footer from "@/components/panels/Footer"
 
-function Portfolio() {
+function Projects() {
 
   return (
     <div className="portfolio has-hex-header">
@@ -36,4 +36,4 @@ function Portfolio() {
   )
 }
 
-export default Portfolio
+export default Projects

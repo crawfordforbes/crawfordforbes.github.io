@@ -31,8 +31,8 @@ export function useProjectRouting(initialProjectId?: string) {
       if (isValidProjectId(urlProjectId)) {
         setSelectedProjectId(urlProjectId)
       } else {
-        // Invalid project ID - redirect to portfolio with 404 indication
-        navigate('/portfolio?error=project-not-found', { replace: true })
+        // Invalid project ID - redirect to projects with 404 indication
+        navigate('/projects?error=project-not-found', { replace: true })
       }
     } else {
       setSelectedProjectId(undefined)
@@ -41,16 +41,16 @@ export function useProjectRouting(initialProjectId?: string) {
 
   const selectProject = useCallback((projectId: string) => {
     if (isValidProjectId(projectId)) {
-      navigate(`/portfolio/${projectId}`)
+      navigate(`/projects/${projectId}`)
     }
   }, [navigate])
 
   const clearSelectedProject = useCallback(() => {
-    // Return to portfolio list, preserving current filters but removing error
+    // Return to projects list, preserving current filters but removing error
     const currentParams = new URLSearchParams(searchParams)
     currentParams.delete('error') // Remove error parameter
     const cleanSearch = currentParams.toString()
-    navigate(`/portfolio${cleanSearch ? `?${cleanSearch}` : ''}`)
+    navigate(`/projects${cleanSearch ? `?${cleanSearch}` : ''}`)
   }, [navigate, searchParams])
 
   const updateFilters = useCallback((roleIds: string[], techIds: string[]) => {
