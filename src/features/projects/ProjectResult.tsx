@@ -123,9 +123,9 @@ function ProjectResult({
           <div className="header-content">
             <div className="techs-and-border">
               {hasTechIds && (
-                <div role="list" aria-label="Technologies used" className="techs badges-list">
+                <ol role="list" aria-label="Technologies used" className="techs badges-list">
                   {techBadges}
-                </div> 
+                </ol> 
               )}
               <HexGridLayout layouts={cardBorder} extraClass="decorative-hex-border"/>
             </div>
@@ -143,9 +143,9 @@ function ProjectResult({
         <div className={`info-panel ${hasLinks ? "has-footer-links" : ""}`}>
 
           {hasRoleIds && (
-            <div role="list" aria-label="Project roles" className="roles badges-list">
+            <ol role="list" aria-label="Project roles" className="roles badges-list">
               {roleBadges}
-            </div> 
+            </ol> 
           )}
           
           {project.short_description && (

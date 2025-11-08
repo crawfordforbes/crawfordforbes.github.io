@@ -34,7 +34,7 @@ function Hero() {
       </div>
       <section className="hero-content overlay">
         <h1 className="title">{badgeData.fname.title} {badgeData.lname.title}</h1>
-        <h3 className="subtitle">{badgeData.tagline1.title}<br/>{badgeData.tagline2.title}</h3>
+        <h2 className="subtitle">{badgeData.tagline1.title}<br/>{badgeData.tagline2.title}</h2>
       </section>
     </article>
   )

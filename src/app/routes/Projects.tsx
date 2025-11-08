@@ -21,7 +21,7 @@ function Projects() {
           <Hero />
         </ComponentErrorBoundary>
       </header>
-      <main className="content" id="main-content" tabIndex={-1}>
+      <main className="content" id="main-content">
         <ComponentErrorBoundary componentName="IntroPanel">
           <IntroPanel />
         </ComponentErrorBoundary>
