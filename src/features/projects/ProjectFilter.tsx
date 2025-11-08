@@ -49,7 +49,7 @@ function ProjectFilter({
         {/* Role Filters */}
         <fieldset>
           <legend className="title" id="role-filter-heading">Role</legend>
-          <ol 
+          <ul 
             className="filter-list" 
             role="group" 
             aria-labelledby="role-filter-heading"
@@ -83,13 +83,13 @@ function ProjectFilter({
                 </li>
               )
             })}
-          </ol>
+          </ul>
         </fieldset>
 
         {/* Technology Filters */}
         <fieldset>
           <legend className="title" id="tech-filter-heading">Technology</legend>
-          <ol 
+          <ul 
             className="filter-list"
             role="group" 
             aria-labelledby="tech-filter-heading"
@@ -123,7 +123,7 @@ function ProjectFilter({
                 </li>
               )
             })}
-          </ol>
+          </ul>
         </fieldset>
 
       </div>

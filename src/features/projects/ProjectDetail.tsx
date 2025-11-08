@@ -151,16 +151,16 @@ function ProjectDetail({
             <h2 className="title primary overlay">{project.title}</h2>
           </div>
           {hasLinks && 
-            <ol className="badges-list links">
+            <ul className="badges-list links">
               {ghBadge}
               {externalLinkBadge}
-            </ol>
+            </ul>
           }
           {hasTechBadges &&
             <div className="variable-height-hex desktop">
-              <ol className="badges-list">
+              <ul className="badges-list">
                 {renderTechBadges()}
-              </ol>
+              </ul>
             </div>
           }
         </section>
@@ -168,9 +168,9 @@ function ProjectDetail({
       </header>
       <section className="info-panel">
         {hasTechBadges &&
-          <ol className="badges-list mobile">
+          <ul className="badges-list mobile">
             {renderTechBadges()}
-          </ol>
+          </ul>
         }
         {(project.description || project.descriptionHTML) && (
           <div className={`text-area text-area-gradient ${hasTechBadges ? 'with-tech-badges' : ''}`}>

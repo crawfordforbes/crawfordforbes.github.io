@@ -67,9 +67,9 @@ function Footer() {
             <Hex hexClass="footer-hex decorative" {...commonProps} />
             <Hex hexClass="footer-hex footer-links" {...commonProps}  content={
               <div className="footer-text">
-                <ol className="nav-links">
+                <ul className="nav-links">
                   {renderBadges()}
-                </ol>
+                </ul>
               </div>
             } />
             <Hex hexClass="footer-hex decorative" {...commonProps} />
