@@ -1,12 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import legacy from '@vitejs/plugin-legacy'
 import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
   base: '/', // Replace 'crawfordforbes' with your actual repository name
   plugins: [
-    react()
+    react(),
+    // Generate a legacy bundle for older browsers (including older Safari)
+    legacy({
+      targets: ['defaults', 'not IE 11', 'safari >= 13'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+    })
   ],
   resolve: {
     alias: {
@@ -64,8 +70,8 @@ export default defineConfig({
     // Increase chunk size warning limit (default is 500kb)
     chunkSizeWarningLimit: 1000,
     
-    // Target modern browsers for smaller bundles
-    target: 'esnext'
+    // Target modern browsers for smaller bundles; legacy plugin provides older bundle
+    target: 'es2018'
   },
   
   // Development server optimizations
