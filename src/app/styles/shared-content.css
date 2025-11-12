@@ -44,7 +44,7 @@ a.skip-link:focus {
 }
 
 @media screen and (min-width: 64em) {
-  div:has(.has-hex-header) .content {
+  .has-hex-header .content {
     --offset: 208px; /* 1.5 hexes and a 16px margin */
     margin: 0 16px 0 var(--offset);
     width: calc(100vw - var(--offset) - 32px);
@@ -57,13 +57,13 @@ a.skip-link:focus {
 }
 
 @media screen and (min-width: 90em){
-  div:has(.has-hex-header) .content {
+  .has-hex-header .content {
     --offset: 336px; /* 2.5 hexes and a 16px margin */
   }
 }
 
 @media screen and (min-width: 120em){
-  div:has(.has-hex-header) .content {
+  .has-hex-header .content {
     --offset: auto; /* back to normal */
     margin: 0 var(--offset);
   }
