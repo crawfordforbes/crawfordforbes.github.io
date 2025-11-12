@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Redirecting…</title>
+    <script>
+      // SPA fallback for GitHub Pages: fetch /index.html and replace the document
+      (function () {
+        var wantedPath = location.pathname + location.search + location.hash;
+        // Try to fetch the real index and hydrate it in place so the client router
+        // receives the original path.
+        fetch('/index.html').then(function (r) {
+          return r.text();
+        }).then(function (html) {
+          try {
+            document.open();
+            document.write(html);
+            // Replace the current history entry with the originally requested path
+            history.replaceState({}, '', wantedPath);
+            document.close();
+          } catch (e) {
+            // If document.write fails, fall back to a basic redirect
+            location.replace('/');
+          }
+        }).catch(function () {
+          // If fetch fails (offline or permissions), show a simple fallback
+          document.body.innerHTML = '<p>Unable to load the site. <a href="/">Go home</a></p>';
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting… <a href="/">Go home</a></p>
+  </body>
+</html>
