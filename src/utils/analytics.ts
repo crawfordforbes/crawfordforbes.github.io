@@ -3,98 +3,131 @@
  * Simple Google Analytics 4 tracking without bloat
  */
 
-interface SimpleAnalyticsConfig {
-  gaId?: string;
-  enableInDevelopment?: boolean;
+// Type declarations for gtag
+declare global {
+  interface Window {
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
+  }
 }
 
-class SimpleAnalytics {
-  private gaId?: string;
-  private enabled = false;
+// Config
+const GA_ID = 'G-6EJ8FEHZ90';
+const ENABLE_IN_DEV = true;
 
-  constructor(config: SimpleAnalyticsConfig = {}) {
-    this.gaId = config.gaId;
-    this.enabled = !!(config.gaId && (import.meta.env.PROD || config.enableInDevelopment));
+// State
+let enabled = !!(GA_ID && (import.meta.env.PROD || ENABLE_IN_DEV));
+let initialized = false;
+const eventQueue: Array<() => void> = [];
+
+// Initialization
+export async function initialize(): Promise<void> {
+  if (!enabled || !GA_ID) {
+    console.info('📊 Analytics disabled');
+    return;
   }
 
-  async initialize(): Promise<void> {
-    if (!this.enabled || !this.gaId) {
-      console.info('📊 Analytics disabled');
-      return;
+  try {
+    // Initialize dataLayer and gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag(...args: any[]) {
+      window.dataLayer!.push(args);
     }
+    window.gtag = gtag;
 
-    try {
-      // Load GA script
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${this.gaId}`;
-      document.head.appendChild(script);
+    gtag('js', new Date());
+    gtag('config', GA_ID, {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      send_page_view: false // Manual page view tracking for SPA
+    });
 
-      // Initialize gtag
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).gtag = function() {
-        (window as any).dataLayer.push(arguments);
-      };
+    // Load GA script asynchronously
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    script.onload = () => {
+      initialized = true;
+      console.info('✅ Analytics script loaded, flushing queued events');
+      // Flush queued events
+      while (eventQueue.length > 0) {
+        const fn = eventQueue.shift();
+        fn?.();
+      }
+    };
+    script.onerror = () => {
+      console.warn('⚠️ Analytics script failed to load');
+      enabled = false;
+      eventQueue.length = 0; // Clear queue
+    };
+    document.head.appendChild(script);
 
-      const gtag = (window as any).gtag;
-      gtag('js', new Date());
-      gtag('config', this.gaId, {
-        anonymize_ip: true,
-        allow_google_signals: false
-      });
-
-      console.info('✅ Analytics initialized');
-    } catch (error) {
-      console.error('❌ Analytics initialization failed:', error);
-    }
+    console.info('✅ Analytics initialized (script loading...)');
+  } catch (error) {
+    console.error('❌ Analytics initialization failed:', error);
+    enabled = false;
   }
+}
 
-  trackPageView(path?: string): void {
-    if (!this.enabled || !this.gaId) return;
+// Track page view
+export function trackPageView(path?: string): void {
+  if (!enabled || !window.gtag) return;
 
-    const gtag = (window as any).gtag;
-    if (gtag) {
-      gtag('config', this.gaId, {
-        page_path: path || window.location.pathname
-      });
-    }
-  }
+  window.gtag('event', 'page_view', {
+    page_path: path || window.location.pathname
+  });
+}
 
-  trackEvent(action: string, category: string = 'general', label?: string): void {
-    if (!this.enabled) return;
+// Track generic event
+export function trackEvent(action: string, category: string = 'general', label?: string): void {
+  if (!enabled) return;
 
-    const gtag = (window as any).gtag;
-    if (gtag) {
-      gtag('event', action, {
+  console.log(`📊 Tracking event: action=${action}, category=${category}, label=${label}`);
+
+  const sendEvent = () => {
+    if (window.gtag) {
+      console.log('🔍 gtag exists, calling with:', { action, category, label });
+      window.gtag('event', action, {
         event_category: category,
-        event_label: label
+        event_label: label,
       });
+      console.log('✅ Event sent to GA');
+      console.log('🔍 Check Network tab for requests to www.google-analytics.com/g/collect or /collect');
     }
-  }
+  };
 
-  trackError(error: Error, category: string = 'javascript_error'): void {
-    if (!this.enabled) return;
-
-    this.trackEvent('error', category, error.message);
+  // If gtag is ready, send immediately; otherwise queue it
+  if (initialized && window.gtag) {
+    sendEvent();
+  } else {
+    console.log('⏳ Queueing event (gtag not ready yet)');
+    eventQueue.push(sendEvent);
   }
 }
 
-// Simple instance - no complex configuration needed
-export const analytics = new SimpleAnalytics({
-  gaId: 'G-6EJ8FEHZ90', // Move config inline since it's just one value
-  enableInDevelopment: false
-});
+// Track click
+export function trackClick(element: string, category?: string): void {
+  trackEvent('click', category || 'engagement', element);
+}
 
-// Simple exports
-export const trackPageView = (path?: string) => analytics.trackPageView(path);
-export const trackEvent = (action: string, category?: string, label?: string) => 
-  analytics.trackEvent(action, category, label);
-export const trackClick = (element: string, category?: string) => 
-  analytics.trackEvent('click', category || 'engagement', element);
-export const trackError = (error: Error, category?: string) => 
-  analytics.trackError(error, category);
-export const trackPerformance = (name: string, value: number) => 
-  analytics.trackEvent('performance_metric', 'performance', `${name}: ${Math.round(value)}`);
+// Track error
+export function trackError(error: Error, category: string = 'javascript_error'): void {
+  if (!enabled) return;
+  trackEvent('error', category, error.message);
+}
+
+// Track performance metric
+export function trackPerformance(name: string, value: number): void {
+  trackEvent('performance_metric', 'performance', `${name}: ${Math.round(value)}`);
+}
+
+// Legacy export for backwards compatibility
+export const analytics = {
+  initialize,
+  trackPageView,
+  trackEvent,
+  trackError
+};
 
 // Development helper
 if (import.meta.env.DEV) {

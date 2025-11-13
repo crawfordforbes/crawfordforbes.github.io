@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 
+// Layout types
+export const mediaSizes = ["mobile", "tablet", "desktop", "large", "x-large"] as const;
+export type MediaSizes = typeof mediaSizes[number];
+
 export const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState({
     width: window.innerWidth,

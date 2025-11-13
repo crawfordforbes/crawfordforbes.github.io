@@ -11,6 +11,7 @@ import { roleData } from "@/data/projects/roles";
 
 import { imagePaths, getProjectPrimaryImageUrl } from "@/utils/images";
 import { createAccessibleDescription } from "@/utils/site";
+import { trackEvent } from "@/utils/analytics";
 
 import type { ProjectType } from "@/data/projects/projects";
 
@@ -106,7 +107,10 @@ function ProjectResult({
           <div className="header-image">
             <button 
               className="inner" 
-              onClick={() => selectProjectClick(project.id)}
+              onClick={() => {
+                trackEvent('project_click', 'projects', project.title);
+                selectProjectClick(project.id);
+              }}
               aria-label={`View details for ${project.title} project${project.short_description ? ': ' + createAccessibleDescription(project.short_description, 80) : ''}`}
               type="button"
             >
@@ -133,7 +137,10 @@ function ProjectResult({
             <h2 
               id={`project-title-${project.id}`}
               className="title primary"
-              onClick={()=> selectProjectClick(project.id)}
+              onClick={() => {
+                trackEvent('project_click', 'projects', project.title);
+                selectProjectClick(project.id);
+              }}
             >
               {project.title}
             </h2>
@@ -160,7 +167,10 @@ function ProjectResult({
           <Badge 
             title="Learn More"
             extraClass="to-from-colors pill read-more" 
-            badgeOnClick={() => selectProjectClick(project.id)}
+            badgeOnClick={() => {
+              trackEvent('project_click', 'projects', project.title);
+              selectProjectClick(project.id)}
+            }
           />
 
         </div>

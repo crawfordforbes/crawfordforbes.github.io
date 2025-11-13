@@ -7,7 +7,7 @@ import Projects from '@/app/routes/Projects';
 import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize } from '@/utils/site';
 
-import type { MediaSizes } from '@/types/layout';
+import type { MediaSizes } from '@/utils/site';
 
 import './styles/index.css'
 
