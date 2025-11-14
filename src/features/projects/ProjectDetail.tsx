@@ -43,7 +43,10 @@ function ProjectDetail({
   const detailImages = project.imageIds || [];
   
   // Convert imageIds to fileIds using imageData
+  // Limit to 5 images on mobile/tablet to prevent memory crashes
+  const maxImages = typeof window !== 'undefined' && window.innerWidth < 1024 ? 5 : 999;
   const resolvedImageFileIds: string[] = detailImages && detailImages.length > 0 ? detailImages
+    .slice(0, maxImages)
     .map(imgId => {
       const imageInfo = imageData[imgId];
       if (!imageInfo?.id) {
@@ -101,7 +104,7 @@ function ProjectDetail({
         <div className="image-slider-wrapper">
           <div className="header-image">
             {resolvedImageFileIds.length > 1 &&
-              <Splide aria-label={`${project.title} - Slider`} className="image-slider" options={{ rewind: true, pagination: false }}>
+              <Splide aria-label={`${project.title} - Slider`} className="image-slider" options={{ rewind: true, pagination: false, lazyLoad: 'nearby', preloadPages: 1 }}>
                 {resolvedImageFileIds.map((fileId, index) => {
                   const imageId = detailImages[index]; // Get the actual image ID
                   return (
@@ -111,6 +114,7 @@ function ProjectDetail({
                         alt={generateImageAlt(project.title, imageId)}
                         className="image"
                         priority={index === 0} // First image priority
+                        loading={index === 0 ? 'eager' : 'lazy'}
                         aspectRatio="4/3"
                         objectFit="cover"
                       />

@@ -11,11 +11,8 @@ import { analytics } from '@/utils/analytics'
 // Initialize performance monitoring in development
 initPerformanceMonitoring()
 
-// Initialize analytics (simplified implementation)
-analytics.initialize().then(() => {
-  // Track initial page view
-  analytics.trackPageView();
-});
+// Initialize analytics
+analytics.initialize()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
