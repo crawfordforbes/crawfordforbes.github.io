@@ -13,7 +13,7 @@ function TextPanel({textPanelId, toggleReadMore = false}: TextPanelProps) {
   const content = textPanelContent[textPanelId];
   
   if (!content.description) {
-    return <></>;
+    return null;
   }
 
   const handleToggle = () => {

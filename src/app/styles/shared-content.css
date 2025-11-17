@@ -19,7 +19,7 @@ a.skip-link:focus {
   position: relative;
 }
 
-.content {
+.content, .constrained-content {
   max-width: var(--content-max-width);
   margin: var(--content-margin);
   padding: var(--content-padding);
@@ -391,7 +391,10 @@ a.skip-link:focus {
 
   text-align: center;
   color: var(--body-color-contrast);
+}
 
+.text-content .section-description {
+  text-align: center;
 }
 
 @media screen and (min-width: 40em){

@@ -15,13 +15,15 @@
   overflow-x: hidden;
 }
 
-.hex-header .hex:has(a) {
+.hex-header .hex:has(a),
+.hex-header .hex:has(button) {
   pointer-events: all;
   color: var(--hh-link-color);
   transition: color var(--transition-rules);
 }
 
-.hex-header .hex:has(a):hover {
+.hex-header .hex:has(a):hover,
+.hex-header .hex:has(button):hover {
   cursor: pointer;
   color: var(--hh-link-color-hover);
   transition: color var(--transition-rules);

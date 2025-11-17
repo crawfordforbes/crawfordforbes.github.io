@@ -21,6 +21,12 @@ export const textPanelContent: Record<string, TextPanelContent> = {
   },
   "projects-title": {
     "id": "projects-title",
-    "description": `<h3 class='section-title'>Selected Projects</h3>`
+    "description": `<h3 class='section-title'>Selected Projects</h3>
+    <p class='section-description'>A few highlights of the work I’m most proud of. Click on a technology or role to filter.</p>`
+  },
+  "favorites-title": {
+    "id": "favorites-title",
+    "description": `<h3 class='section-title'>Selected Technologies</h3>
+    <p class='section-description'>A curated list of frameworks, libraries, and tools I trust.</p>`
   }
 }

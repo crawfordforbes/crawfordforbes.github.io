@@ -6,6 +6,7 @@ export type TechType = {
   iconClass?: [IconPrefix, IconName];
   filterable?: boolean;
   link?: string;
+  favorite?: boolean;
 }
 
 export const techData: Record<string, TechType> = {
@@ -15,6 +16,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'gem'],
     filterable: true,
     link: "https://www.ruby-lang.org/",
+    favorite: true,
   },
   "sinatra": {
     id: "sinatra",
@@ -22,6 +24,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'server'],
     filterable: false,
     link: "https://sinatrarb.com/",
+    favorite: true,
   },
   "active-record": {
     id: "active-record",
@@ -50,6 +53,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'react'],
     filterable: true,
     link: "https://react.dev/",
+    favorite: true,
   },
   "vanilla-js": {
     id: "vanilla-js",
@@ -57,6 +61,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'code'],
     filterable: true,
     link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    favorite: true,
   },
   "webpack": {
     id: "webpack",
@@ -71,6 +76,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'node-js'],
     filterable: true,
     link: "https://nodejs.org/",
+    favorite: true,
   },
   "babel": {
     id: "babel",
@@ -85,6 +91,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'code'],
     filterable: false,
     link: "https://redux.js.org/",
+    favorite: true,
   },
   "highcharts": {
     id: "highcharts",
@@ -99,6 +106,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'code'],
     filterable: false,
     link: "https://www.typescriptlang.org/",
+    favorite: true,
   },
   "vite": { 
     id: "vite",
@@ -106,6 +114,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'bolt'],
     filterable: false,
     link: "https://vite.dev/",
+    favorite: true,
   },
   "vue": {
     id: "vue",
@@ -113,6 +122,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'vuejs'],
     filterable: true,
     link: "https://vuejs.org/",
+    favorite: true,
   },
   "splide": {
     id: "splide",
@@ -134,6 +144,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'cloud-arrow-up'],
     filterable: false,
     link: "https://cloudinary.com/",
+    favorite: true,
   },
   "simpleview-cms": {
     id: "simpleview-cms",
@@ -141,6 +152,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'server'],
     filterable: false,
     link: "https://www.simpleviewinc.com/products/simpleview-cms/",
+    favorite: true,
   },
   "cheerio": {
     id: "cheerio",
@@ -169,6 +181,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'database'],
     filterable: false,
     link: "https://www.mongodb.com/",
+    favorite: true,
   },
   "glide": {
     id: "glide",
@@ -190,6 +203,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'digital-ocean'],
     filterable: false,
     link: "https://www.digitalocean.com/",
+    favorite: true,
   },
   "react-router": {
     id: "react-router",
@@ -197,6 +211,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'map-location-dot'],
     filterable: false,
     link: "https://reactrouter.com/",
+    favorite: true,
   },  
   "sheet-js": {
     id: "sheet-js",
@@ -232,6 +247,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'git'],
     filterable: false,
     link: "https://git-scm.com/",
+    favorite: true,
   },
   "github": {
     id: "github",
@@ -239,6 +255,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'github'],
     filterable: false,
     link: "https://github.com/",
+    favorite: true,
   },
   "svn": {
     id: "svn",
@@ -260,6 +277,7 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fab', 'figma'],
     filterable: false,
     link: "https://www.figma.com/",
+    favorite: true,
   },
   "adobe-xd": {
     id: "adobe-xd",
@@ -274,5 +292,21 @@ export const techData: Record<string, TechType> = {
     iconClass: ['fas', 'image-portrait'],
     filterable: false,
     link: "https://www.adobe.com/products/photoshop.html",
+  },
+  "css": {
+    id: "css",
+    title: "CSS",
+    iconClass: ['fab', 'css'],
+    filterable: false,
+    link: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+    favorite: true,
+  },
+  "html": {
+    id: "html",
+    title: "HTML",
+    iconClass: ['fab', 'html5'],
+    filterable: false,
+    link: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+    favorite: true,
   }
 };

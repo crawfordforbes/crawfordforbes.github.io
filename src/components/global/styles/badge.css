@@ -132,6 +132,25 @@
   color: var(--badge-tertiary-text-highlight);
 }
 
+.badge.quaternary .badge-content {
+  background-color: var(--badge-quaternary-bg);
+  color: var(--badge-quaternary-text);
+  border: var(--badge-border-width) solid var(--badge-quaternary-border);
+}
+
+.badge.quaternary:has(a, button) .badge-content:hover :not(.title),
+.badge.quaternary.highlight .badge-content .fa-icon {
+  color: var(--badge-quaternary-text-highlight);
+}
+
+.badge.quaternary:has(a, button):hover .badge-content .fa-icon::after,
+.badge.quaternary.highlight .badge-content .fa-icon::after,
+.badge.quaternary:has(a, button):focus .badge-content .fa-icon::after,
+.badge.quaternary:has(a, button):focus-within .badge-content .fa-icon::after {
+  background-color: var(--badge-quaternary-bg-highlight);
+  color: var(--badge-quaternary-text-highlight);
+}
+
 .badge.disabled,
 .badge.disabled .badge-content,
 .badge.disabled .badge-content .fa-icon,

@@ -136,6 +136,13 @@
   --badge-tertiary-text-highlight: var(--tertiary-text-contrast);
   --badge-tertiary-border-highlight: var(--badge-tertiary-border);
 
+  --badge-quaternary-bg: var(--quaternary-background);
+  --badge-quaternary-text: var(--quaternary-text);
+  --badge-quaternary-border: var(--black);
+  --badge-quaternary-bg-highlight: var(--quaternary-background-contrast);
+  --badge-quaternary-text-highlight: var(--quaternary-text-contrast);
+  --badge-quaternary-border-highlight: var(--badge-quaternary-border);
+
   /* link badges */
   --link-badge-bg: var(--primary-background);
   --link-badge-text: var(--primary-text);

@@ -1,6 +1,6 @@
 .footer {
   --hex-content-width: calc(100vw * 208 / 360);
-  --gradient-height: 400px;
+  --gradient-height: 40px;
   --gradient-top: calc(var(--gradient-height) * -0.5);
   height: 700px;
   position: relative;
@@ -122,6 +122,7 @@
 
 @media screen and (min-width: 64em) {
   .footer {
+    --gradient-height: 400px;
     margin-top: 200px;
   } 
 }

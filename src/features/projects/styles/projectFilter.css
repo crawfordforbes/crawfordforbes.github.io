@@ -157,13 +157,21 @@
   transition: background-color var(--transition-rules), color var(--transition-rules);
 }
 
-@media screen and (min-width: 64em){
-    .project-index .filters{
-      --title-size: 1.125rem;
+@media screen and (min-width: 40em){
+  .project-index .filters.hide-mobile-filter .filter-wrapper {
+    left: -112px;
+  }
+}
 
-      position: sticky;
-      top: 24px;
-    }
+@media screen and (min-width: 64em){
+  .project-index .filters{
+    --title-size: 1.125rem;
+
+    position: sticky;
+    top: 24px;
+    margin-bottom: 236px;
+  }
+
   .project-index .filter-toggle {
     display: none;
   }

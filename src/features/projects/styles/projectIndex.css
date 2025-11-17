@@ -1,7 +1,3 @@
-.project-feature {
-  margin-top: 32px;
-}
-
 .project-feature:has(.project-detail-view) {
   margin-top: 48px;
 }
@@ -19,7 +15,7 @@
   width: 100%;
   display: block;
   /* Reserve space so pagination doesn't overlap when results shrink */
-  padding-bottom: 72px;
+  padding-bottom: 36px;
 }
 
 .project-index .pagination-cont {

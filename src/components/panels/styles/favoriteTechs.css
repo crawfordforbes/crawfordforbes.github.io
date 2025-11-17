@@ -1,0 +1,29 @@
+/* .favorite-techs {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+} */
+
+.favorite-techs .tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (min-width: 40em){
+  .favorite-techs .tech-list {
+    padding: 0 32px;
+  }
+}
+
+
+@media screen and (min-width: 64em){
+  .favorite-techs .tech-list {
+    padding: 0 64px;
+  }
+}

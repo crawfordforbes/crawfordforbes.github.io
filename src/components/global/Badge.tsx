@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faReact, faGithub, faGit, faLinkedin, faNodeJs, faVuejs, faFontAwesome, faDigitalOcean, faFigma, faLess } from "@fortawesome/free-brands-svg-icons";
+import { faReact, faGithub, faGit, faLinkedin, faNodeJs, faVuejs, faFontAwesome, faDigitalOcean, faFigma, faLess, faCss, faHtml5 } from "@fortawesome/free-brands-svg-icons";
 import { faBars, faCircle, faCircleXmark, faCode, faEnvelope, faFileArrowDown, faIcons, faPeopleArrows, faPeopleGroup, faPerson, faServer, faSpinner, faUpRightFromSquare, faXmark, faDatabase, faLock, faCube, faChartLine, faBolt, faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, faImages, faCloudArrowUp, faC, faGem, faBook, faHatWizard, faMapLocationDot, faCodeCompare, faImagePortrait, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
 import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
 
 import './styles/badge.css'
 
-library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedin, faSpinner, faBars, faXmark, faCircle, faCircleXmark, faCode, faIcons, faPerson, faPeopleGroup, faPeopleArrows, faServer, faUpRightFromSquare, faDatabase, faLock, faCube, faNodeJs, faChartLine, faBolt, faVuejs, faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, faImages, faFontAwesome, faCloudArrowUp, faC, faGem, faBook, faHatWizard, faDigitalOcean, faMapLocationDot, faCodeCompare, faFigma, faImagePortrait, faLess, faAngleUp, faAngleDown)
+library.add(faReact, faGithub, faGit, faEnvelope, faFileArrowDown, faLinkedin, faSpinner, faBars, faXmark, faCircle, faCircleXmark, faCode, faIcons, faPerson, faPeopleGroup, faPeopleArrows, faServer, faUpRightFromSquare, faDatabase, faLock, faCube, faNodeJs, faChartLine, faBolt, faVuejs, faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, faImages, faFontAwesome, faCloudArrowUp, faC, faGem, faBook, faHatWizard, faDigitalOcean, faMapLocationDot, faCodeCompare, faFigma, faImagePortrait, faLess, faAngleUp, faAngleDown, faCss, faHtml5)
 
 type BadgeProps = {
   iconClass?: [IconPrefix, IconName];

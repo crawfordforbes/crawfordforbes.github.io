@@ -7,7 +7,7 @@
 .expandable-container {
   max-height: 1000px; /* Large enough for expanded content */
   overflow: hidden;
-  transition: max-height var(--transition-rules);
+  transition: max-height var(--transition-rules-slow);
 }
 
 /* Hidden state - show only ~3 lines */
@@ -15,7 +15,7 @@
   max-height: 150px; /* Adjust based on your line-height */
   overflow: hidden;
   position: relative;
-  transition: max-height var(--transition-rules);
+  transition: max-height var(--transition-rules-slow);
 }
 
 /* Fade-out gradient when hidden */
@@ -39,7 +39,6 @@
 
 .read-more-btn {
   cursor: pointer;
-  transition: transform 0.2s ease;
   margin-bottom: 32px;
 }
 
