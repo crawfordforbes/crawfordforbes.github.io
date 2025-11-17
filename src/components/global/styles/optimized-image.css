@@ -12,7 +12,6 @@
   height: 100%;
   display: block;
   transform: translateZ(0); /* GPU acceleration */
-  will-change: opacity;
 }
 
 /* Loading placeholder */

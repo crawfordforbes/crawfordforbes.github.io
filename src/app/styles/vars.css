@@ -54,6 +54,8 @@
   --text-content-link-highlight: var(--purple);
 
   --body-bg: var(--color-bg);
+  --body-color: var(--color-dark-text);
+  --body-color-contrast: var(--color-light-text);
   --transparent: transparent;
 
   /* color rules refresh */
@@ -226,7 +228,7 @@
   /* intro panel */
   --intro-panel-bg-top-color: #f7f5d3c2;
   --intro-panel-bg-bottom-color: var(--transparent);
-  --intro-panel-text: var(--secondary-text);
+  --intro-panel-text: var(--color-dark-text);
 
   /* footer */
   --footer-content-bg-top-color: var(--quaternary-background);

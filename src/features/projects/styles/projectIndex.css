@@ -55,7 +55,6 @@
 
 .project-index .results .result-item {
   transition: transform 320ms ease, opacity 320ms ease;
-  will-change: transform, opacity;
   opacity: 1;
 }
 .project-index .results.fade .result-item {

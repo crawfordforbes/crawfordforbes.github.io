@@ -1,0 +1,58 @@
+/* Text panel container */
+.text-panel {
+  position: relative;
+}
+
+/* Expandable content container */
+.expandable-container {
+  max-height: 1000px; /* Large enough for expanded content */
+  overflow: hidden;
+  transition: max-height var(--transition-rules);
+}
+
+/* Hidden state - show only ~3 lines */
+.expandable-container.hidden {
+  max-height: 150px; /* Adjust based on your line-height */
+  overflow: hidden;
+  position: relative;
+  transition: max-height var(--transition-rules);
+}
+
+/* Fade-out gradient when hidden */
+.expandable-container.hidden::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: linear-gradient(to bottom, transparent, var(--body-bg));
+  pointer-events: none;
+}
+
+/* Read more button wrapper */
+.read-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.read-more-btn {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 64em){
+  .expandable-container.hidden {
+    max-height: 1000px; /* Adjust based on your line-height */
+  }
+
+  .read-more-wrapper {
+    display: none;
+  }
+
+  .expandable-container.hidden::after {
+    display: none;
+  }
+}

@@ -3,6 +3,7 @@ import Nav from "@/components/global/Nav"
 import HexHeader from "@/components/panels/HexHeader"
 import Hero from "@/components/panels/Hero"
 import IntroPanel from "@/components/panels/IntroPanel"
+import TextPanel from "@/components/panels/TextPanel"
 import ProjectIndex from "@/features/projects/ProjectIndex"
 import Footer from "@/components/panels/Footer"
 
@@ -24,6 +25,12 @@ function Projects() {
       <main className="content" id="main-content">
         <ComponentErrorBoundary componentName="IntroPanel">
           <IntroPanel />
+        </ComponentErrorBoundary>
+        <ComponentErrorBoundary componentName="TextPanel">
+          <TextPanel textPanelId="about-me" toggleReadMore={true} />
+        </ComponentErrorBoundary>
+        <ComponentErrorBoundary componentName="TextPanel">
+          <TextPanel textPanelId="projects-title" />
         </ComponentErrorBoundary>
         <ComponentErrorBoundary componentName="ProjectIndex">
           <ProjectIndex />

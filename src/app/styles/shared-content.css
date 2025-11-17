@@ -381,6 +381,19 @@ a.skip-link:focus {
   line-height: 1.5;
 }
 
+.text-content .section-title {
+  font-size: clamp(2rem, 8vw, 8rem);
+
+  --shadow-scale: .75px;
+  --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
+  line-height: 1.2;
+  animation: titleGlow 32s ease infinite;
+
+  text-align: center;
+  color: var(--body-color-contrast);
+
+}
+
 @media screen and (min-width: 40em){
   .text-content ul {
     margin-left: 24px;
