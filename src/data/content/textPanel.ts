@@ -3,7 +3,7 @@ type TextPanelContent = {
   description: string;
 };
 
-export const textPanelContent: TextPanelContent = {
+export const textPanelContent: Record<string, TextPanelContent> = {
   "about-me": {
     "id": "about-me",
     "description":`
