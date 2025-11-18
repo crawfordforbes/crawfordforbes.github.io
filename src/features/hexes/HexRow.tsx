@@ -72,7 +72,7 @@ function HexRow({
 
   return (
     <div className={`hex-row ${row}`} {...styleProps}>
-      {rowData && rowData[row] && rowData[row].hexes.map((hexObj, idx) => {
+      {rowData && rowData[row] && rowData[row].hexes.map((hexObj) => {
           const hexId = hexObj.id
           // Safely resolve hex definition from hexData (avoid spreading undefined)
           const hexDef = hexData[hexId];
@@ -91,7 +91,7 @@ function HexRow({
             repeatPlaceholderArray.push(i+"")
           }
 
-          return repeatPlaceholderArray.map((id)=>{
+          return repeatPlaceholderArray.map((idx)=>{
             // Map old prop names to new unified prop structure and cast to Partial<HexProps>
             const base = props as Partial<HexProps>
             const unifiedProps: Partial<HexProps> = {
@@ -103,8 +103,8 @@ function HexRow({
 
             // strip legacy keys if they exist (type, hexLink, noTabIndex)
             const { type: _t, onClick: _oc, hexLink: _hl, noTabIndex: _nt, ...cleanProps } = unifiedProps
-
-            return (<Hex key={`${idx}_${id}`} {...(cleanProps as Partial<HexProps>)} />)
+            const stableKey = `${hexObj.id}-repeat-${idx}`;
+            return (<Hex key={stableKey} {...(cleanProps as Partial<HexProps>)} />)
           })
 
       })}

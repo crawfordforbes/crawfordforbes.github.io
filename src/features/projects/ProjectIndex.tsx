@@ -28,7 +28,7 @@ function ProjectIndex({
   const [globalHoveredFilter, setGlobalHoveredFilter] = useState<string>("");
 
   // Enable performance monitoring via query param: ?perf=1
-  const perfEnabled = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('perf') === '1';
+  const perfEnabled = new URLSearchParams(window.location.search).get('perf') === '1';
   usePerformanceMonitor('ProjectIndex', perfEnabled);
 
   // Project detail view

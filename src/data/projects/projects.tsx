@@ -34,7 +34,7 @@ export const projectData: Record<string, ProjectType> = {
     imageIds: ["sunshine-nights-desktop", "sunshine-nights-press-page"],
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
-    roleIds: ["developer", "designer", "solo"],
+    roleIds: ["developer", "solo"],
     description: (
       <>
         <article className='description-with-title'>
