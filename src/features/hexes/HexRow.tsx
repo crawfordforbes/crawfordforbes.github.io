@@ -1,3 +1,5 @@
+import { logger } from '@/utils/logger';
+
 import { useMemo } from 'react'
 
 import Hex from "@/features/hexes/Hex"
@@ -46,7 +48,7 @@ function HexRow({
   // Backwards-compatible fallback: construct items from rowData/hexData
   if (!row) {
     if (import.meta.env.DEV) {
-      console.warn(`HexRow: Missing row data. Expected row identifier but received: ${row}`);
+      logger.warn(`HexRow: Missing row data. Expected row identifier but received: ${row}`);
     }
     return null;
   }

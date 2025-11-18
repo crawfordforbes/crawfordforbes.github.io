@@ -1,3 +1,5 @@
+import { logger } from './logger';
+
 /**
  * Simplified image utilities
  */
@@ -21,12 +23,12 @@ export function getProjectImageUrl(projectId: string, fileId: string): string {
   }
 
   if (!fileId) {
-    console.error(`getProjectImageUrl: fileId is "${fileId}" for project "${projectId}"`);
+    logger.error(`getProjectImageUrl: fileId is "${fileId}" for project "${projectId}"`);
     return imagePaths.hero.desktop;
   }
 
   if (!projectId) {
-    console.error(`getProjectImageUrl: projectId is "${projectId}" for fileId "${fileId}"`);
+    logger.error(`getProjectImageUrl: projectId is "${projectId}" for fileId "${fileId}"`);
     return imagePaths.hero.desktop;
   }
 
@@ -61,7 +63,7 @@ export function getImageUrl(imagePath: string): string {
   }
   
   if (!imagePath || imagePath === 'undefined') {
-    console.error(`getImageUrl: imagePath is "${imagePath}"`);
+    logger.error(`getImageUrl: imagePath is "${imagePath}"`);
     return imagePaths.hero.desktop;
   }
 
@@ -76,14 +78,14 @@ export function getProjectPrimaryImageUrl(project: ProjectType): string {
   // Get the first image from imageIds array
   const primaryImageId = project.imageIds?.[0];
   if (!primaryImageId) {
-    console.warn(`No images found for project: ${project.id}`);
+    logger.warn(`No images found for project: ${project.id}`);
     // Return the generated projects fallback (will be created by the images script)
     return `/images/fallback`;
   }
 
   const imageInfo = imageData[primaryImageId];
   if (!imageInfo) {
-    console.warn(`Image not found for ID: ${primaryImageId}`);
+    logger.warn(`Image not found for ID: ${primaryImageId}`);
     // Return the generated projects fallback
     return `/images/fallback`;
   }

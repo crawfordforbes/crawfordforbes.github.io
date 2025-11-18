@@ -1,3 +1,5 @@
+import { logger } from '@/utils/logger';
+
 import HexRow from "@/features/hexes/HexRow"
 
 import { rowData } from "@/data/hexes/rows"
@@ -21,7 +23,7 @@ function HexGrid({
 }: HexGridProps) {
 if (!grid) {
   if (import.meta.env.DEV) {
-    console.warn(`HexGrid: Missing grid data. Expected grid object but received: ${grid}`);
+    logger.warn(`HexGrid: Missing grid data. Expected grid object but received: ${grid}`);
   }
   return null;
 }

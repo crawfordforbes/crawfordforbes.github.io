@@ -5,6 +5,8 @@
 
 /* TODO review this file more */
 
+import { logger } from './logger';
+
 export interface SiteConfig {
   analytics: {
     googleAnalyticsId?: string;
@@ -70,11 +72,11 @@ export class AnalyticsManager {
 
     // Skip in development unless explicitly enabled
     if (import.meta.env.DEV && !this.config.enableInDevelopment) {
-      console.info('📊 Analytics disabled in development mode');
+      logger.info('📊 Analytics disabled in development mode');
       return;
     }
 
-    console.info('📊 Initializing analytics...');
+    logger.info('📊 Initializing analytics...');
 
     try {
       // Initialize Google Analytics
@@ -96,9 +98,9 @@ export class AnalyticsManager {
       this.processEventQueue();
 
       this.isInitialized = true;
-      console.info('✅ Analytics initialized successfully');
+      logger.info('✅ Analytics initialized successfully');
     } catch (error) {
-      console.error('❌ Failed to initialize analytics:', error);
+      logger.error('❌ Failed to initialize analytics:', error);
     }
   }
 
@@ -141,7 +143,7 @@ export class AnalyticsManager {
           });
 
           this.isGALoaded = true;
-          console.info('✅ Google Analytics loaded');
+          logger.info('✅ Google Analytics loaded');
           resolve();
         };
         script.onerror = reject;
@@ -172,9 +174,9 @@ export class AnalyticsManager {
       script.src = `https://www.googletagmanager.com/gtm.js?id=${this.config.gtmId}`;
       document.head.appendChild(script);
 
-      console.info('✅ Google Tag Manager loaded');
+      logger.info('✅ Google Tag Manager loaded');
     } catch (error) {
-      console.error('❌ Failed to load GTM:', error);
+      logger.error('❌ Failed to load GTM:', error);
     }
   }
 
@@ -185,7 +187,7 @@ export class AnalyticsManager {
   private async initializeSentry(): Promise<void> {
     if (!this.config.sentryDsn) return;
 
-    console.info('📊 Sentry error tracking is disabled (not installed)');
+    logger.info('📊 Sentry error tracking is disabled (not installed)');
     
     /* Uncomment this section when you want to add Sentry:
     
@@ -211,9 +213,9 @@ export class AnalyticsManager {
         }
       });
 
-      console.info('✅ Sentry error tracking initialized');
+      logger.info('✅ Sentry error tracking initialized');
     } catch (error) {
-      console.warn('⚠️ Sentry initialization failed:', error);
+      logger.warn('⚠️ Sentry initialization failed:', error);
     }
     */
   }
@@ -247,7 +249,7 @@ export class AnalyticsManager {
       }
     });
 
-    console.debug('📊 Page view tracked:', pagePath);
+    logger.debug('📊 Page view tracked:', pagePath);
   }
 
   /**
@@ -282,9 +284,9 @@ export class AnalyticsManager {
         });
       }
 
-      console.debug('📊 Event tracked:', event);
+      logger.debug('📊 Event tracked:', event);
     } catch (error) {
-      console.error('❌ Failed to track event:', error);
+      logger.error('❌ Failed to track event:', error);
     }
   }
 
@@ -337,7 +339,7 @@ export class AnalyticsManager {
       }
     });
 
-    console.error('📊 Error tracked:', error);
+    logger.error('📊 Error tracked:', error);
   }
 
   /**
@@ -359,9 +361,9 @@ export class AnalyticsManager {
         }
       }
 
-      console.debug('📊 User properties set:', properties);
+      logger.debug('📊 User properties set:', properties);
     } catch (error) {
-      console.error('❌ Failed to set user properties:', error);
+      logger.error('❌ Failed to set user properties:', error);
     }
   }
 

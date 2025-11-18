@@ -1,3 +1,5 @@
+import { logger } from '@/utils/logger';
+
 import { useContext, useMemo, memo } from "react";
 
 import HexGrid from "@/features/hexes/HexGrid";
@@ -34,7 +36,7 @@ const mediaQuery = useContext(MediaQueryContext);
 
   if(!grid) {
     if (import.meta.env.DEV) {
-      console.warn(`HexGridLayout: Grid not found for layout "${layout?.grid}". Check if the grid is properly registered in gridData.`);
+      logger.warn(`HexGridLayout: Grid not found for layout "${layout?.grid}". Check if the grid is properly registered in gridData.`);
     }
     return null;
   }

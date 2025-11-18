@@ -1,3 +1,5 @@
+import { logger } from '@/utils/logger';
+
 import { useParams } from "react-router";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
@@ -50,7 +52,7 @@ function ProjectDetail({
     .map(imgId => {
       const imageInfo = imageData[imgId];
       if (!imageInfo?.id) {
-        console.warn(`No image data found for ID: ${imgId}`);
+        logger.warn(`No image data found for ID: ${imgId}`);
         return null;
       }
       return imageInfo.id;

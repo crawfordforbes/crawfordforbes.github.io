@@ -1,3 +1,5 @@
+import { logger } from './logger';
+
 import { useEffect, useRef } from 'react';
 
 type PerformanceMetrics = {
@@ -25,7 +27,7 @@ export function usePerformanceMonitor(componentName: string, enabled = false) {
     if (renderTime > 16) { // More than one frame at 60fps
       // Keep the emoji for visibility, but avoid noisy logs in DEV by
       // allowing developers to enable the hook explicitly.
-      console.warn(`🐌 Slow render detected in ${componentName}: ${renderTime.toFixed(2)}ms`);
+      logger.warn(`🐌 Slow render detected in ${componentName}: ${renderTime.toFixed(2)}ms`);
     }
 
     // Store metrics for analysis
@@ -45,13 +47,13 @@ export function usePerformanceMonitor(componentName: string, enabled = false) {
         const result = fn();
         const end = performance.now();
         if (enabled) {
-          console.log(`⏱️ ${componentName} - ${label}: ${(end - start).toFixed(2)}ms`);
+          logger.debug(`⏱️ ${componentName} - ${label}: ${(end - start).toFixed(2)}ms`);
         }
         return result;
       } catch (err) {
         const end = performance.now();
         if (enabled) {
-          console.log(`⏱️ ${componentName} - ${label} (error): ${(end - start).toFixed(2)}ms`);
+          logger.debug(`⏱️ ${componentName} - ${label} (error): ${(end - start).toFixed(2)}ms`);
         }
         throw err;
       }
@@ -78,7 +80,7 @@ export function initPerformanceMonitoring() {
         const metrics = (window as any).__PERFORMANCE_METRICS__ as PerformanceMetrics[];
         if (metrics.length > 0) {
           const avgRenderTime = metrics.reduce((sum, m) => sum + m.renderTime, 0) / metrics.length;
-          console.log(`📊 Performance Summary - Avg render time: ${avgRenderTime.toFixed(2)}ms`);
+          logger.debug(`📊 Performance Summary - Avg render time: ${avgRenderTime.toFixed(2)}ms`);
 
           // Clear metrics
           (window as any).__PERFORMANCE_METRICS__ = [];
