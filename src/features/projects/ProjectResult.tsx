@@ -50,7 +50,7 @@ function ProjectResult({
 
       return (
         <li 
-          key={techId ?? idx} 
+          key={techId} 
           onMouseEnter={() => highlightFilterHover(techId)}
           onMouseLeave={() => highlightFilterHover("")}
         >
@@ -74,7 +74,7 @@ function ProjectResult({
 
       return (
         <li 
-          key={roleId ?? idx} 
+          key={roleId} 
           onMouseEnter={() => highlightFilterHover(roleId)}
           onMouseLeave={() => highlightFilterHover("")}
         >

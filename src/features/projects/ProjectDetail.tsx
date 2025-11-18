@@ -66,7 +66,7 @@ function ProjectDetail({
       if (!tech) return null
 
       return (
-        <li key={idx}>
+        <li key={techId}>
           <Badge 
             iconClass={tech.iconClass}
             title={tech.title}
@@ -110,7 +110,7 @@ function ProjectDetail({
                 {resolvedImageFileIds.map((fileId, index) => {
                   const imageId = detailImages[index]; // Get the actual image ID
                   return (
-                    <SplideSlide key={index}>
+                    <SplideSlide key={project.id}>
                       <SimpleImage
                         src={getProjectImageUrl(project.id, fileId)}
                         alt={generateImageAlt(project.title, imageId)}
@@ -130,7 +130,7 @@ function ProjectDetail({
               resolvedImageFileIds.map((fileId, index) => {
                 const imageId = detailImages[index]; // Get the actual image ID
                 return (
-                 <div key={index}>
+                 <div key={project.id}>
                     <SimpleImage
                       src={getProjectImageUrl(project.id, fileId)}
                       alt={generateImageAlt(project.title, imageId)}

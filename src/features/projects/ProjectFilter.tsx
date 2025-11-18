@@ -61,7 +61,7 @@ function ProjectFilter({
               
               return (
                 <li 
-                  key={idx} 
+                  key={roleId.id} 
                   className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
                   onMouseEnter={() => handleMouseEnter(roleId.id)}
                   onMouseLeave={() => handleMouseLeave()}
@@ -101,7 +101,7 @@ function ProjectFilter({
               
               return (
                 <li 
-                  key={idx} 
+                  key={techId.id} 
                   className={`filter-item ${selected ? 'selected' : ''} ${placement}`}
                   onMouseEnter={() => handleMouseEnter(techId.id)}
                   onMouseLeave={() => handleMouseLeave()}
