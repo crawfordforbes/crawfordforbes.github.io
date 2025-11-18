@@ -12,7 +12,6 @@ import type { ProjectType } from '@/data/projects/projects'
 import heroDesktop from '@/assets/images/hero/hero-desktop.webp';
 import heroTablet from '@/assets/images/hero/hero-tablet.webp';
 import heroMobile from '@/assets/images/hero/hero-mobile.webp';
-import heroFull from '@/assets/images/hero/hero-full.jpeg';
 
 // Project-specific image helper for new folder structure
 export function getProjectImageUrl(projectId: string, fileId: string): string {
@@ -98,7 +97,6 @@ export const imagePaths = {
   hero: {
     desktop: heroDesktop,
     tablet: heroTablet,
-    mobile: heroMobile,
-    full: heroFull
+    mobile: heroMobile
   }
 } as const;

@@ -116,7 +116,7 @@ function ProjectResult({
               <SimpleImage
                 src={getProjectPrimaryImageUrl(project)} 
                 alt={`${project.title} project preview`}
-                fallbackSrc={imagePaths.hero.full}
+                fallbackSrc={imagePaths.hero.mobile}
                 className="image"
                 objectFit="cover"
               />

@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { usePerformanceMonitor } from '@/utils/performance';
 
 import { useProjectFilters, useProjectRouting } from "@/features/projects/hooks";
 import ProjectFilterBar from "@/features/projects/ProjectFilterBar";
 import ProjectGrid from "@/features/projects/ProjectGrid";
-import ProjectDetail from "@/features/projects/ProjectDetail";
 import BackButton from "@/features/projects/BackButton";
+
+// Lazy load ProjectDetail - includes heavy Splide carousel library
+const ProjectDetail = lazy(() => import("@/features/projects/ProjectDetail"));
 
 import './styles/projectIndex.css'
 
@@ -36,7 +38,13 @@ function ProjectIndex({
         <div className="project-detail-view">
           <div className="selected-project">
             <BackButton onBack={routing.clearSelectedProject} />
-            <ProjectDetail id={routing.selectedProjectId} />
+            <Suspense fallback={
+              <div className="loading-detail" style={{ padding: '2rem', textAlign: 'center' }}>
+                <p>Loading project details...</p>
+              </div>
+            }>
+              <ProjectDetail id={routing.selectedProjectId} />
+            </Suspense>
           </div>
         </div>
       </article>
