@@ -7,26 +7,38 @@ import './styles/introPanel.css'
 function IntroPanel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [gradientAngle, setGradientAngle] = useState(0);
-
+  const rafIdRef = useRef<number>(0);
 
   useEffect(() => {
-    interface MouseMoveEvent extends MouseEvent {}
-
-    const handleMouseMove = (event: MouseMoveEvent) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = event.clientX - centerX;
-      const deltaY = event.clientY - centerY;
-      const rad = Math.atan2(deltaY, deltaX);
-      const deg = rad * 180 / Math.PI;
-      setGradientAngle(deg);
+    const handleMouseMove = (event: MouseEvent) => {
+      // Skip if animation frame already scheduled
+      if (rafIdRef.current) return;
+      
+      rafIdRef.current = requestAnimationFrame(() => {
+        if (!containerRef.current) {
+          rafIdRef.current = 0;
+          return;
+        }
+        
+        const rect = containerRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = event.clientX - centerX;
+        const deltaY = event.clientY - centerY;
+        const rad = Math.atan2(deltaY, deltaX);
+        const deg = rad * 180 / Math.PI;
+        setGradientAngle(deg);
+        
+        rafIdRef.current = 0;
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, []);
 
