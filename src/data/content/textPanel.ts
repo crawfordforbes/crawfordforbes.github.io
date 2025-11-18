@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
+
 type TextPanelContent = {
   id: string;
-  description: string;
+  description: ReactNode;
 };
 
 export const textPanelContent: Record<string, TextPanelContent> = {

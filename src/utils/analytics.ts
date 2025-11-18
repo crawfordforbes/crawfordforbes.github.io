@@ -48,6 +48,14 @@ export interface AnalyticsConfig {
  * Analytics Manager
  * Handles Google Analytics, GTM, and custom event tracking
  */
+
+declare global {
+  interface Window {
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export class AnalyticsManager {
   private config: AnalyticsConfig;
   private isInitialized = false;
@@ -118,9 +126,9 @@ export class AnalyticsManager {
         script.src = `https://www.googletagmanager.com/gtag/js?id=${this.config.gaId}`;
         script.onload = () => {
           // Initialize gtag
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).gtag = function() {
-            (window as any).dataLayer.push(arguments);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(...args: any[]) {
+            window.dataLayer?.push(args);
           };
 
           const gtag = (window as any).gtag;

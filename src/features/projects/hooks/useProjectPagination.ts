@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 
-export function useProjectPagination(
-  items: readonly any[], 
+export function useProjectPagination<T>(
+  items: readonly T[], 
   itemsPerPage: number = 6
 ) {
   const [currentPage, setCurrentPage] = useState(1)
@@ -10,7 +10,7 @@ export function useProjectPagination(
   const totalPages = Math.ceil(items.length / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const currentItems = items.slice(startIndex, endIndex)
+  const currentItems: readonly T[] = items.slice(startIndex, endIndex);
 
   // Navigation functions
   const goToPage = useCallback((page: number) => {
