@@ -1,10 +1,18 @@
-import { useState, useCallback, useEffect, startTransition, useMemo } from 'react'
+import { useState, useCallback, useEffect, useRef, startTransition, useMemo } from 'react'
 import { getAllProjectsSorted, filterProjects } from '@/utils/projects'
 import type { ProjectType } from '@/data/projects/projects'
 
 export function useProjectFilters(initialRoleIds: string[] = [], initialTechIds: string[] = [], onFiltersChange?: (roleIds: string[], techIds: string[]) => void) {
   const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>(initialRoleIds)
   const [selectedTechIds, setSelectedTechIds] = useState<string[]>(initialTechIds)
+  
+  // Use ref to avoid adding callback to useEffect dependencies
+  const onFiltersChangeRef = useRef(onFiltersChange)
+  
+  // Keep ref updated with latest callback
+  useEffect(() => {
+    onFiltersChangeRef.current = onFiltersChange
+  }, [onFiltersChange])
 
   const toggleRoleFilter = useCallback((filterId: string) => {
     setSelectedRoleIds(prev => {
@@ -20,16 +28,16 @@ export function useProjectFilters(initialRoleIds: string[] = [], initialTechIds:
 
   // Sync URL / parent after local state stabilizes
   useEffect(() => {
-    if (!onFiltersChange) return
+    if (!onFiltersChangeRef.current) return
 
     if (typeof startTransition === 'function') {
       startTransition(() => {
-        onFiltersChange(selectedRoleIds, selectedTechIds)
+        onFiltersChangeRef.current!(selectedRoleIds, selectedTechIds)
       })
     } else {
-      onFiltersChange(selectedRoleIds, selectedTechIds)
+      onFiltersChangeRef.current(selectedRoleIds, selectedTechIds)
     }
-  }, [selectedRoleIds, selectedTechIds, onFiltersChange])
+  }, [selectedRoleIds, selectedTechIds])
 
   // Derived project list for consumers (ProjectIndex / ProjectGrid expect this)
   const allProjects = useMemo<ProjectType[]>(() => getAllProjectsSorted(), [])
@@ -44,7 +52,6 @@ export function useProjectFilters(initialRoleIds: string[] = [], initialTechIds:
     toggleTechFilter,
     setSelectedRoleIds,
     setSelectedTechIds,
-    // ADDED: derived list consumed by ProjectIndex/ProjectGrid
     filteredProjects,
   }
 }
