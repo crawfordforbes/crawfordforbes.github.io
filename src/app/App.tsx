@@ -84,8 +84,9 @@ function RouterEventListener() {
           navigate(detail.targetUrl);
         }
       } catch (e) {
-        // swallow errors - this listener is a convenience for non-React callers
-        // console.warn('RouterEventListener error', e);
+        console.error('RouterEventListener: Navigation failed', e);
+        // Could track to analytics if needed
+        // Analytics.trackError(e as Error, { context: 'RouterEventListener' });
       }
     };
 
