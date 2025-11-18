@@ -61,7 +61,7 @@ function ProjectDetail({
     ["fallback"];
 
   function renderTechBadges() {
-    return project?.techIds?.map((techId: string, idx: number) => {
+    return project?.techIds?.map((techId: string) => {
       const tech = techData[techId]
       if (!tech) return null
 

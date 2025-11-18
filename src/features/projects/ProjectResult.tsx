@@ -42,7 +42,7 @@ function ProjectResult({
 
   // Memoize badge lists to avoid recreating arrays on every render
   const techBadges = useMemo(() => {
-    return project?.techIds?.filter(techId => techData[techId]?.filterable).slice(0,3).map((techId: string, idx: number) => {
+    return project?.techIds?.filter(techId => techData[techId]?.filterable).slice(0,3).map((techId: string) => {
       const tech = techData[techId];
       if (!tech) return null;
 
@@ -66,7 +66,7 @@ function ProjectResult({
   }, [project?.techIds, selectedTechIds, hoveredFilters, selectTechFilterClick, highlightFilterHover]);
 
   const roleBadges = useMemo(() => {
-    return project?.roleIds?.map((roleId: string, idx: number) => {
+    return project?.roleIds?.map((roleId: string) => {
       const role = roleData[roleId];
       if (!role) return null;
 
