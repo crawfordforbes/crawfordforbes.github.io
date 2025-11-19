@@ -21,6 +21,7 @@ function Hero() {
             className="image"
             loading="eager"
             decoding="async"
+            fetchPriority="high"
           />
         </picture>
       </div>

@@ -14,7 +14,7 @@
   font-family: 'Red Hat Text';
   font-style: normal;
   font-weight: 500;
-  src: url('../../assets/fonts/red-hat-text-v18-latin-500.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/fonts/red-hat-text-v18-latin-500.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* red-hat-text-600 - latin */
@@ -32,7 +32,7 @@
   font-family: 'Red Hat Text';
   font-style: normal;
   font-weight: 700;
-  src: url('../../assets/fonts/red-hat-text-v18-latin-700.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/fonts/red-hat-text-v18-latin-700.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* oxanium-600 - latin */
@@ -41,5 +41,5 @@
   font-family: 'Oxanium';
   font-style: normal;
   font-weight: 600;
-  src: url('../../assets/fonts/oxanium-v21-latin-600.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/fonts/oxanium-v21-latin-600.woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

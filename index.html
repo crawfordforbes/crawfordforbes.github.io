@@ -72,11 +72,13 @@
     <!-- Preload critical fonts -->
     <link rel="preload" href="/fonts/red-hat-text-v18-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/bakbak-one-v10-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/oxanium-v21-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     
     <!-- Preload hero image for faster LCP - using imagesrcset for Firefox compatibility -->
     <link rel="preload" as="image" 
           imagesrcset="/images/hero/hero-mobile.webp 767w, /images/hero/hero-tablet.webp 1199w, /images/hero/hero-desktop.webp 1920w"
           imagesizes="100vw"
+          fetchpriority="high"
           type="image/webp" />
     
     <!-- JSON-LD Structured Data for Rich Snippets -->
