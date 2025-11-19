@@ -10,7 +10,8 @@ export default defineConfig({
     react(),
     // Generate a legacy bundle for older browsers (including older Safari)
     legacy({
-      targets: ['defaults', 'not IE 11', 'safari >= 13'],
+      targets: ['safari 13-14'],
+      modernPolyfills: true,
       additionalLegacyPolyfills: ['regenerator-runtime/runtime']
     })
   ],
