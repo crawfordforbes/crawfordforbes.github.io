@@ -22,6 +22,7 @@ const ASSET_EXTENSIONS = {
   css: ['.css'],
   images: ['.png', '.jpg', '.jpeg', '.webp', '.avif', '.svg', '.gif'],
   fonts: ['.woff', '.woff2', '.ttf', '.eot'],
+  videos: ['.mp4', '.webm'],
   other: []
 };
 
@@ -38,6 +39,10 @@ const THRESHOLDS = {
   images: {
     large: 1024 * 1024,   // 1MB
     medium: 500 * 1024,   // 500KB
+  },
+  videos: {
+    large: 5 * 1024 * 1024,    // 5MB per video
+    medium: 2 * 1024 * 1024,   // 2MB per video
   }
 };
 
@@ -66,12 +71,12 @@ class BundleAnalyzer {
   }
 
   async scanDirectory(dir, relativePath = '') {
-    const items = fs.readdirSync(dir);
+    const items = await fs.promises.readdir(dir);
 
     for (const item of items) {
       const fullPath = path.join(dir, item);
       const itemRelativePath = path.join(relativePath, item);
-      const stats = fs.statSync(fullPath);
+      const stats = await fs.promises.stat(fullPath);
 
       if (stats.isDirectory()) {
         await this.scanDirectory(fullPath, itemRelativePath);
@@ -98,6 +103,7 @@ class BundleAnalyzer {
       css: { files: [], totalSize: 0 },
       images: { files: [], totalSize: 0 },
       fonts: { files: [], totalSize: 0 },
+      videos: { files: [], totalSize: 0 },
       other: { files: [], totalSize: 0 }
     };
 
@@ -122,7 +128,7 @@ class BundleAnalyzer {
   }
 
   generateRecommendations() {
-    const { js, css, images } = this.results.summary;
+    const { js, css, images, videos } = this.results.summary;
 
     // JavaScript recommendations
     js.files.forEach(file => {
@@ -158,6 +164,30 @@ class BundleAnalyzer {
         });
       }
     });
+
+    // Video recommendations
+    if (videos && videos.files.length > 0) {
+      videos.files.forEach(file => {
+        if (file.size > THRESHOLDS.videos.large) {
+          this.results.recommendations.push({
+            type: 'error',
+            message: `Very large video: ${file.name} (${file.sizeFormatted}). Increase CRF or reduce resolution.`
+          });
+        } else if (file.size > THRESHOLDS.videos.medium) {
+          this.results.recommendations.push({
+            type: 'warning',
+            message: `Large video: ${file.name} (${file.sizeFormatted}). Consider further compression.`
+          });
+        }
+      });
+
+      if (videos.totalSize > 50 * 1024 * 1024) {
+        this.results.recommendations.push({
+          type: 'error',
+          message: `Total video size is ${this.formatSize(videos.totalSize)}. Consider lazy loading videos or hosting externally.`
+        });
+      }
+    }
 
     // General recommendations
     if (this.results.totalSize > 5 * 1024 * 1024) {

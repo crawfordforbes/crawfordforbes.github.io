@@ -61,7 +61,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.google-analytics.com https://api.github.com https://*.sentry.io; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.google-analytics.com https://api.github.com https://*.sentry.io; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" />
     
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="//github.com" />
@@ -73,10 +73,11 @@
     <link rel="preload" href="/fonts/red-hat-text-v18-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/bakbak-one-v10-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     
-    <!-- Preload hero image for faster LCP -->
-    <link rel="preload" as="image" href="/assets/hero-mobile.webp" media="(max-width: 767px)" type="image/webp" />
-    <link rel="preload" as="image" href="/assets/hero-tablet.webp" media="(min-width: 768px) and (max-width: 1199px)" type="image/webp" />
-    <link rel="preload" as="image" href="/assets/hero-desktop.webp" media="(min-width: 1200px)" type="image/webp" />
+    <!-- Preload hero image for faster LCP - using imagesrcset for Firefox compatibility -->
+    <link rel="preload" as="image" 
+          imagesrcset="/images/hero/hero-mobile.webp 767w, /images/hero/hero-tablet.webp 1199w, /images/hero/hero-desktop.webp 1920w"
+          imagesizes="100vw"
+          type="image/webp" />
     
     <!-- JSON-LD Structured Data for Rich Snippets -->
     <script type="application/ld+json">

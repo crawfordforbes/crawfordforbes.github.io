@@ -12,7 +12,7 @@ import { analytics } from '@/utils/analytics'
 initPerformanceMonitoring()
 
 // Initialize analytics
-analytics.initialize()
+setTimeout(() => analytics.initialize(), 0);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

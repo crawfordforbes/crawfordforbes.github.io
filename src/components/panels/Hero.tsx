@@ -1,9 +1,10 @@
 import { badgeData } from '@/data/global/badges';
 import { generateImageAlt } from '@/utils/projects'
 
-import heroDesktop from '@/assets/images/hero/hero-desktop.webp';
-import heroTablet from '@/assets/images/hero/hero-tablet.webp';
-import heroMobile from '@/assets/images/hero/hero-mobile.webp';
+// Hero images served from public folder
+const heroDesktop = '/images/hero/hero-desktop.webp';
+const heroTablet = '/images/hero/hero-tablet.webp';
+const heroMobile = '/images/hero/hero-mobile.webp';
 
 import './styles/hero.css'
 

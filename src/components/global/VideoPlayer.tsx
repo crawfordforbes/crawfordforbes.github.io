@@ -65,7 +65,7 @@ function VideoPlayer({
         loop={loop}
         controls={showControls}
         playsInline={playsInline}
-        preload={autoplay ? "auto" : "metadata"}
+        preload={autoplay ? "metadata" : "none"}
         style={{ width: "100%", height: "100%", display: "block" }}
       >
         {/* Try modern webm first, then mp4 fallback. If caller passed an exact src with extension,

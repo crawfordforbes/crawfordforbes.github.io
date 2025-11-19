@@ -9,9 +9,10 @@ import { imageData } from '@/data/global/images'
 import type { ProjectType } from '@/data/projects/projects'
 
 // Import hero images from new hero subfolder
-import heroDesktop from '@/assets/images/hero/hero-desktop.webp';
-import heroTablet from '@/assets/images/hero/hero-tablet.webp';
-import heroMobile from '@/assets/images/hero/hero-mobile.webp';
+// Hero images now served from public folder (unhashed for preload)
+const heroDesktop = '/images/hero/hero-desktop.webp';
+const heroTablet = '/images/hero/hero-tablet.webp';
+const heroMobile = '/images/hero/hero-mobile.webp';
 
 // Project-specific image helper for new folder structure
 export function getProjectImageUrl(projectId: string, fileId: string): string {

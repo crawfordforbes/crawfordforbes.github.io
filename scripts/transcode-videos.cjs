@@ -84,20 +84,25 @@ async function processFile(src) {
 
     log('Transcoding:', src);
 
-    // webm (VP9) - strip metadata (remove comment field etc.) with -map_metadata -1
+    // webm (VP9) - more aggressive compression for web delivery
+    // CRF 35 (was 30), 2-pass, constrained quality mode
     await runFFmpeg([
       '-y', '-i', src,
-      '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '30',
+      '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '35',
       '-vf', 'scale=-2:720',
+      '-row-mt', '1',          // faster encoding
+      '-cpu-used', '2',         // balance speed/quality
       '-map_metadata', '-1',
       webm
     ]);
 
-    // mp4 (H.264) - strip metadata (remove comment field etc.) with -map_metadata -1
+    // mp4 (H.264) - more aggressive compression + optimize for web
+    // CRF 28 (was 23), preset slow for better compression
     await runFFmpeg([
       '-y', '-i', src,
-      '-c:v', 'libx264', '-preset', 'medium', '-crf', '23',
+      '-c:v', 'libx264', '-preset', 'slow', '-crf', '28',
       '-vf', 'scale=-2:720',
+      '-movflags', '+faststart', // enable progressive streaming
       '-map_metadata', '-1',
       mp4
     ]);

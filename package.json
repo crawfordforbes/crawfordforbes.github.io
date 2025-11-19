@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "images:build": "node scripts/optimize-images.cjs",
+    "hero:optimize": "node scripts/optimize-hero-images.cjs",
+    "hero:replace": "powershell -Command \"cd src/assets/images/hero; Get-ChildItem *.new.webp | ForEach-Object { $newName = $_.Name -replace '.new.webp', '.webp'; Remove-Item $newName -ErrorAction SilentlyContinue; Rename-Item $_.Name $newName; Write-Host \\\"Renamed $($_.Name) -> $newName\\\" }\"",
     "postinstall": "patch-package",
     "videos:build": "node scripts/transcode-videos.cjs",
     "types": "tsc -p tsconfig.declarations.json",
-    "build": "npm run images:build && npm run videos:build && npm run types && tsc -b --noEmit && vite build",
+    "build": "npm run types && tsc -b --noEmit && vite build",
+    "build:full": "npm run images:build && npm run videos:build && npm run build",
+    "analyze": "node scripts/analyze-bundle.js",
     "build:ci": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
