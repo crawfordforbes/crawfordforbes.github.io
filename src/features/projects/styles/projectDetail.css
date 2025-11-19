@@ -55,14 +55,14 @@
 
 .project-detail .overlay-caption {
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--caption-text);
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--caption-background);
-  padding: 4px 8px;
+  padding: 8px 16px;
   width: max-content;
   border-radius: var(--border-radius);
 }
@@ -83,7 +83,7 @@
   pointer-events: all;
 }
 
-.project-detail .card-top .header-content .title {
+.project-detail .card-top .header-content .title:not(.primary) {
   --title-size: .75rem;
 }
 
@@ -95,11 +95,18 @@
   --radius : 24px; 
 }
 
-.project-detail .card-top .header-content .title.primary {
-  --title-size: 2rem;
+.project-detail .title.primary {
   font-size: var(--title-size);
-  text-align: right;
+  text-align: left;
   line-height: 1;
+}
+
+.project-detail .title.primary.mobile {
+  --title-size: clamp(1.6rem, 15vw, 4rem);
+}
+
+.project-detail .card-top .header-content .title.desktop {
+  display: none;
 }
 
 .project-detail .info-panel {
@@ -145,6 +152,10 @@
     overflow: hidden;
     bottom: auto;
     z-index: -1;
+  }
+
+  .project-detail .card-top .header-content .title.primary {
+    display: block;
   }
 
   .project-detail .overlay-caption {

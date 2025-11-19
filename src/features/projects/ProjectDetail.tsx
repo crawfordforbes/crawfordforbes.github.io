@@ -79,7 +79,7 @@ function ProjectDetail({
   }
 
   const ghBadge = project.githubLink ? (
-    <li>
+    <li key="gh">
       <Badge 
         link={project.githubLink} 
         iconClass={['fab', 'github']} 
@@ -90,7 +90,7 @@ function ProjectDetail({
   ) : null;
 
   const externalLinkBadge = project.externalLink ? (
-    <li>
+    <li key="external">
       <Badge 
         link={project.externalLink} 
         iconClass={['fas', 'up-right-from-square']} 
@@ -154,7 +154,7 @@ function ProjectDetail({
                 extraClass="pill primary"
               />
             }
-            <h2 className="title primary overlay">{project.title}</h2>
+            <h2 className="title primary overlay desktop">{project.title}</h2>
           </div>
           {hasLinks && 
             <ul className="badges-list links">
@@ -173,11 +173,7 @@ function ProjectDetail({
         <HexGridLayout layouts={cardBorder} extraClass="decorative-hex-border"/>
       </header>
       <section className="info-panel">
-        {hasTechBadges &&
-          <ul className="badges-list mobile">
-            {renderTechBadges()}
-          </ul>
-        }
+        <h2 className="title primary overlay mobile">{project.title}</h2>
         {(project.description || project.descriptionHTML) && (
           <div className={`text-area text-area-gradient ${hasTechBadges ? 'with-tech-badges' : ''}`}>
             {project.description ? (
@@ -187,6 +183,11 @@ function ProjectDetail({
             )}
           </div>
         )}
+        {hasTechBadges &&
+          <ul className="badges-list mobile">
+            {renderTechBadges()}
+          </ul>
+        }
       </section>
     </article>
   )

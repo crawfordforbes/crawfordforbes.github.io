@@ -111,7 +111,7 @@ export const projectData: Record<string, ProjectType> = {
   },
   "moneytree": {
     id: "moneytree",
-    title: "MoneyTree",
+    title: "MoneyTree Explorer",
     imageIds: ["moneytree-history-filter-selection", "moneytree-history-unfiltered", "moneytree-pie-charts"],
     roleIds: ["developer", "contributor"],
     description: (
@@ -133,7 +133,7 @@ export const projectData: Record<string, ProjectType> = {
           <p>Delivered a highly customizable, secure analytics platform that became a key part of PwC’s MoneyTree reporting suite. The app showcased both the depth of PwC’s data and the clarity of its visual storytelling.</p>
         </article>
         <article>
-          <p>Moneytree is no longer available online, and its github repository is private.</p>
+          <p>MoneyTree Explorer is no longer available online, and its github repository is private.</p>
       </article>
       </>
     ),
@@ -322,7 +322,7 @@ export const projectData: Record<string, ProjectType> = {
   },
   "bellevue": {
     id: "bellevue",
-    title: "Visit Bellevue Convention & Visitors Bureau",
+    title: "Visit Bellevue CVB",
     imageIds: ["bellevue-header", "bellevue-nav", "bellevue-listings-index", "bellevue-listings-detail"],
     externalLink: "https://www.visitbellevuewa.com/",
     roleIds: ["developer", "contributor"],
