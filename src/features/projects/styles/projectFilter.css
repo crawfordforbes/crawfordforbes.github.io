@@ -3,7 +3,7 @@
   --title-size: 1rem;
 
   position: absolute;
-  top: 0;
+  top: -32px;
   left: 0;
   z-index: 1;
   pointer-events: none;
@@ -159,7 +159,7 @@
 
 @media screen and (min-width: 40em){
   .project-index .filters.hide-mobile-filter .filter-wrapper {
-    left: -112px;
+    left: -192px;
   }
 }
 

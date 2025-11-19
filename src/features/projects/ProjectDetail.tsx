@@ -184,9 +184,12 @@ function ProjectDetail({
           </div>
         )}
         {hasTechBadges &&
-          <ul className="badges-list mobile">
-            {renderTechBadges()}
-          </ul>
+          (<>
+            <h4 className="tech-stack-title mobile">Project Tech Stack</h4>
+            <ul className="badges-list mobile">
+              {renderTechBadges()}
+            </ul>
+          </>)
         }
       </section>
     </article>
