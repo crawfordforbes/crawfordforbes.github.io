@@ -17,6 +17,7 @@ export type ProjectType = {
     short_description?: string;
     techIds?: string[];
     dates?: string;
+    featured?: boolean;
 }
 
 const translations = {
@@ -70,6 +71,7 @@ export const projectData: Record<string, ProjectType> = {
     title: "Crawford Forbes Portfolio",
     imageIds: ["crawford-forbes-header", "crawford-forbes-projects-index", "crawford-forbes-projects-detail"],
     roleIds: ["developer", "designer", "solo"],
+    featured: true,
     description: (
       <>
         <article className='description-with-title'>
@@ -147,6 +149,7 @@ export const projectData: Record<string, ProjectType> = {
     imageIds: ["palm-springs-hero", "palm-springs-listings", "palm-springs-media-gallery", "palm-springs-midcentury-modern-design"],
     externalLink: "https://www.visitpalmsprings.com/",
     roleIds: ["developer", "lead", "contributor"],
+    featured: true,
     description: (
       <>
         <article className='description-with-title'>
@@ -195,6 +198,7 @@ export const projectData: Record<string, ProjectType> = {
     imageIds: ["mackinac-island-homepage", "mackinac-island-booking-index", "mackinac-island-booking-detail", "mackinac-island-footer", "mackinac-island-postal-slider"],
     externalLink: "https://www.mackinacisland.org",
     roleIds: ["developer", "lead", "contributor"],
+    featured: true,
     description: (
       <>
         <article className='description-with-title'>

@@ -133,6 +133,23 @@
   --shadow-scale: .75px;
 }
 
+.project-result .featured-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.project-result .featured-wrapper .featured-flag .title,
+.project-result .featured-wrapper .featured-flag .fa-icon {
+  --title-size: .75rem;
+  font-size: var(--title-size);
+}
+
+.project-result .featured-wrapper .badge.pill .badge-content:has(:not(.fa-icon)) {
+  padding: 4px 8px;
+}
+
 .project-result .badge .badge-content {
   pointer-events: all;
 }

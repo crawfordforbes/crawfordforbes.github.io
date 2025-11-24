@@ -21,9 +21,14 @@ export function isValidProjectId(id: unknown): id is string {
 
 // ===== CORE PROJECT FUNCTIONS =====
 export function getAllProjectsSorted(): ProjectType[] {
-  return Object.values(projectData).sort((a: ProjectType, b: ProjectType) => 
-    a.title.localeCompare(b.title)
-  )
+  return Object.values(projectData).sort((a: ProjectType, b: ProjectType) => {
+    // First, sort by featured (featured projects first)
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    
+    // If both have same featured status, sort alphabetically by title
+    return a.title.localeCompare(b.title);
+  });
 }
 
 export function getProjectById(id: string | undefined | null): ProjectType | null {

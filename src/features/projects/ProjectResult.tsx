@@ -132,17 +132,26 @@ function ProjectResult({
               )}
               <HexGridLayout layouts={cardBorder} extraClass="decorative-hex-border"/>
             </div>
-            
-            <h2 
-              id={`project-title-${project.id}`}
-              className="title primary"
-              onClick={() => {
+            <div className="featured-wrapper">
+              {project.featured && 
+                  <Badge 
+                    iconClass={['fas', 'star']}
+                    title="Featured"
+                    extraClass="pill quaternary featured-flag"
+                  />
+                }
+              <h2 
+                id={`project-title-${project.id}`}
+                className="title primary"
+                onClick={() => {
+                  
+                  selectProjectClick(project.id);
+                }}
+              >
                 
-                selectProjectClick(project.id);
-              }}
-            >
-              {project.title}
-            </h2>
+                {project.title}
+              </h2>
+            </div>
           </div>
         </header>
 
