@@ -1,6 +1,7 @@
 import { logger } from '@/utils/logger';
 
 import { useParams } from "react-router";
+import { useEffect } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 import Badge from "@/components/global/Badge"
@@ -14,6 +15,7 @@ import { techData } from "@/data/projects/techs";
 
 import { getProjectById, generateImageAlt } from "@/utils/projects";
 import { getProjectImageUrl } from "@/utils/images";
+import { trackEvent } from "@/utils/analytics";
 
 import './styles/projectDetail.css'
 import './styles/splide.min.css'
@@ -38,6 +40,19 @@ function ProjectDetail({
       </div>
     );
   }
+
+  // Track project view
+  useEffect(() => {
+    trackEvent({
+      action: 'project_view',
+      category: 'engagement',
+      label: project.title,
+      customParameters: {
+        project_id: project.id,
+        project_title: project.title
+      }
+    });
+  }, [project.id, project.title]);
 
   const hasLinks = project.githubLink || project.externalLink;
   const hasTechBadges = !!(project.techIds && project.techIds.length > 0);
@@ -110,7 +125,7 @@ function ProjectDetail({
                 {resolvedImageFileIds.map((fileId, index) => {
                   const imageId = detailImages[index]; // Get the actual image ID
                   return (
-                    <SplideSlide key={project.id}>
+                    <SplideSlide key={project.id+imageId}>
                       <SimpleImage
                         src={getProjectImageUrl(project.id, fileId)}
                         alt={generateImageAlt(project.title, imageId)}

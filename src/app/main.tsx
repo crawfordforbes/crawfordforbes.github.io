@@ -11,8 +11,8 @@ import { analytics } from '@/utils/analytics'
 // Initialize performance monitoring in development
 initPerformanceMonitoring()
 
-// Initialize analytics
-setTimeout(() => analytics.initialize(), 0);
+// Initialize analytics immediately (before render)
+analytics.initialize();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

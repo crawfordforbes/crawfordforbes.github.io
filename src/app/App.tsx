@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+import { BrowserRouter, Route, Routes, useNavigate, useLocation } from "react-router";
 
 import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
 import Projects from '@/app/routes/Projects';
@@ -8,7 +8,7 @@ import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize } from '@/utils/site';
 
 import type { MediaSizes } from '@/utils/site';
-import { trackError } from '@/utils/analytics';
+import { trackError, trackPageView } from '@/utils/analytics';
 
 import './styles/index.css'
 
@@ -76,6 +76,12 @@ function App() {
 function RouterEventListener() {
   // useNavigate must be used inside a Router; placing this component inside BrowserRouter makes it available
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Track page views on route changes
+  useEffect(() => {
+    trackPageView(location.pathname, document.title);
+  }, [location]);
 
   useEffect(() => {
     const handler = (evt: Event) => {

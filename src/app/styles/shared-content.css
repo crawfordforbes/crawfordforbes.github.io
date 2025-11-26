@@ -397,6 +397,16 @@ a.skip-link:focus {
   text-align: center;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 @media screen and (min-width: 40em){
   .text-content ul {
     margin-left: 24px;

@@ -3,8 +3,6 @@
  * Comprehensive tracking setup for Google Analytics, error monitoring, and custom events
  */
 
-/* TODO review this file more */
-
 import { logger } from './logger';
 
 export interface SiteConfig {
@@ -44,11 +42,6 @@ export interface AnalyticsConfig {
   enableErrorTracking?: boolean;
 }
 
-/**
- * Analytics Manager
- * Handles Google Analytics, GTM, and custom event tracking
- */
-
 declare global {
   interface Window {
     dataLayer?: any[];
@@ -61,122 +54,139 @@ export class AnalyticsManager {
   private isInitialized = false;
   private isGALoaded = false;
   private eventQueue: AnalyticsEvent[] = [];
+  private initPromise: Promise<void> | null = null;
 
   constructor(config: AnalyticsConfig = {}) {
     this.config = {
-      enableInDevelopment: false,
       enableUserTracking: true,
       enablePerformanceTracking: true,
       enableErrorTracking: true,
+      enableInDevelopment: false,
       ...config
     };
+
+    logger.debug('📊 Analytics config:', this.config);
   }
 
   /**
    * Initialize analytics services
    */
   async initialize(): Promise<void> {
-    if (this.isInitialized) return;
+    if (this.initPromise) return this.initPromise;
+    
+    if (this.isInitialized) {
+      logger.debug('📊 Analytics already initialized');
+      return Promise.resolve();
+    }
 
-    // Skip in development unless explicitly enabled
     if (import.meta.env.DEV && !this.config.enableInDevelopment) {
       logger.info('📊 Analytics disabled in development mode');
-      return;
+      logger.info('📊 Set enableInDevelopment: true to test analytics locally');
+      return Promise.resolve();
     }
 
     logger.info('📊 Initializing analytics...');
 
-    try {
-      // Initialize Google Analytics
-      if (this.config.gaId) {
-        await this.initializeGoogleAnalytics();
+    this.initPromise = (async () => {
+      try {
+        if (this.config.gaId) {
+          await this.initializeGoogleAnalytics();
+        } else {
+          logger.warn('⚠️ No GA ID provided');
+        }
+
+        if (this.config.gtmId) {
+          this.initializeGTM();
+        }
+
+        if (this.config.enableErrorTracking && this.config.sentryDsn) {
+          await this.initializeSentry();
+        }
+
+        this.isInitialized = true;
+        this.processEventQueue();
+        logger.info('✅ Analytics initialized successfully');
+      } catch (error) {
+        logger.error('❌ Failed to initialize analytics:', error);
+        this.isInitialized = true;
       }
+    })();
 
-      // Initialize Google Tag Manager
-      if (this.config.gtmId) {
-        this.initializeGTM();
-      }
-
-      // Initialize error tracking
-      if (this.config.enableErrorTracking && this.config.sentryDsn) {
-        await this.initializeSentry();
-      }
-
-      // Process queued events
-      this.processEventQueue();
-
-      this.isInitialized = true;
-      logger.info('✅ Analytics initialized successfully');
-    } catch (error) {
-      logger.error('❌ Failed to initialize analytics:', error);
-    }
+    return this.initPromise;
   }
 
-  /**
-   * Initialize Google Analytics 4
-   */
   private async initializeGoogleAnalytics(): Promise<void> {
     if (!this.config.gaId) return;
 
+    logger.debug('📊 Loading Google Analytics script...');
+
     return new Promise((resolve, reject) => {
       try {
-        // Load GA script
+        if (window.gtag) {
+          logger.debug('📊 Google Analytics already loaded');
+          this.isGALoaded = true;
+          resolve();
+          return;
+        }
+
         const script = document.createElement('script');
         script.async = true;
         script.src = `https://www.googletagmanager.com/gtag/js?id=${this.config.gaId}`;
+        
         script.onload = () => {
-          // Initialize gtag
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function(...args: any[]) {
-            window.dataLayer?.push(args);
-          };
-
-          const gtag = (window as any).gtag;
-          
-          gtag('js', new Date());
-          gtag('config', this.config.gaId, {
-            // Enhanced measurement
-            enhanced_measurements: true,
-            // Privacy settings
-            anonymize_ip: true,
-            allow_google_signals: false,
-            allow_ad_personalization_signals: false,
-            // Custom settings
-            page_title: document.title,
-            page_location: window.location.href,
-            custom_map: {
-              custom_dimension_1: 'user_type',
-              custom_dimension_2: 'content_group'
+          // Wait for gtag.js to define gtag in window
+          setTimeout(() => {
+            if (!window.gtag) {
+              // Fallback if gtag wasn't defined by script
+              window.dataLayer = window.dataLayer || [];
+              window.gtag = function gtag() {
+                window.dataLayer?.push(arguments);
+              };
             }
-          });
 
-          this.isGALoaded = true;
-          logger.info('✅ Google Analytics loaded');
-          resolve();
+            const gtag = window.gtag;
+            
+            logger.debug('📊 Configuring GA with ID:', this.config.gaId);
+            
+            gtag('js', new Date());
+            gtag('config', this.config.gaId!, {
+              send_page_view: false, // We'll send manually
+              debug_mode: true,
+              anonymize_ip: true,
+              allow_google_signals: false,
+              allow_ad_personalization_signals: false
+            });
+
+            this.isGALoaded = true;
+            logger.info('✅ Google Analytics loaded and configured');
+            logger.debug('📊 dataLayer length:', window.dataLayer?.length);
+            resolve();
+          }, 100); // Small delay to let gtag.js initialize
         };
-        script.onerror = reject;
+        
+        script.onerror = (error) => {
+          logger.error('❌ Failed to load GA script:', error);
+          reject(error);
+        };
+        
         document.head.appendChild(script);
       } catch (error) {
+        logger.error('❌ Error in GA initialization:', error);
         reject(error);
       }
     });
   }
 
-  /**
-   * Initialize Google Tag Manager
-   */
   private initializeGTM(): void {
     if (!this.config.gtmId) return;
 
     try {
-      // GTM initialization
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
         'gtm.start': new Date().getTime(),
         event: 'gtm.js'
       });
 
-      // Load GTM script
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtm.js?id=${this.config.gtmId}`;
@@ -188,65 +198,41 @@ export class AnalyticsManager {
     }
   }
 
-  /**
-   * Initialize Sentry for error tracking
-   * Currently disabled - uncomment and install @sentry/browser to enable
-   */
   private async initializeSentry(): Promise<void> {
     if (!this.config.sentryDsn) return;
-
     logger.info('📊 Sentry error tracking is disabled (not installed)');
-    
-    /* Uncomment this section when you want to add Sentry:
-    
-    try {
-      // Install @sentry/browser first: npm install @sentry/browser
-      const sentryModule = await import('@sentry/browser');
-      const Sentry = sentryModule.default || sentryModule;
-      
-      Sentry.init({
-        dsn: this.config.sentryDsn,
-        environment: import.meta.env.MODE,
-        release: import.meta.env.VITE_APP_VERSION || '1.0.0',
-        integrations: [
-          new Sentry.BrowserTracing(),
-        ],
-        tracesSampleRate: import.meta.env.PROD ? 0.1 : 1.0,
-        beforeSend(event: any) => {
-          // Filter out development errors in production
-          if (import.meta.env.PROD && event.level === 'warning') {
-            return null;
-          }
-          return event;
-        }
-      });
-
-      logger.info('✅ Sentry error tracking initialized');
-    } catch (error) {
-      logger.warn('⚠️ Sentry initialization failed:', error);
-    }
-    */
   }
 
-  /**
-   * Track page view
-   */
   trackPageView(path?: string, title?: string): void {
-    if (!this.isInitialized && !import.meta.env.DEV) {
-      return;
-    }
-
     const pagePath = path || window.location.pathname;
     const pageTitle = title || document.title;
 
-    if (this.isGALoaded && (window as any).gtag) {
-      (window as any).gtag('config', this.config.gaId, {
+    logger.info('📊 Tracking page view:', { pagePath, pageTitle, isInitialized: this.isInitialized, isGALoaded: this.isGALoaded });
+
+    if (!this.isInitialized) {
+      logger.warn('⚠️ Analytics not initialized, queueing page view');
+      this.eventQueue.push({
+        action: 'page_view',
+        category: 'navigation',
+        label: pagePath,
+        customParameters: {
+          page_title: pageTitle,
+          page_location: window.location.href
+        }
+      });
+      return;
+    }
+
+    if (this.isGALoaded && window.gtag) {
+      window.gtag('config', this.config.gaId!, {
         page_path: pagePath,
         page_title: pageTitle,
       });
+      logger.info('✅ GA page view sent:', pagePath);
+    } else {
+      logger.warn('⚠️ GA not loaded, cannot track page view');
     }
 
-    // Custom page view tracking
     this.trackEvent({
       action: 'page_view',
       category: 'navigation',
@@ -256,33 +242,32 @@ export class AnalyticsManager {
         page_location: window.location.href
       }
     });
-
-    logger.debug('📊 Page view tracked:', pagePath);
   }
 
-  /**
-   * Track custom event
-   */
   trackEvent(event: AnalyticsEvent): void {
-    if (!this.isInitialized && !import.meta.env.DEV) {
+    logger.info('📊 Tracking event:', event.action, { isInitialized: this.isInitialized, isGALoaded: this.isGALoaded });
+
+    if (!this.isInitialized) {
+      logger.warn('⚠️ Analytics not initialized, queueing event:', event.action);
       this.eventQueue.push(event);
       return;
     }
 
     try {
-      // Google Analytics 4 event tracking
-      if (this.isGALoaded && (window as any).gtag) {
-        (window as any).gtag('event', event.action, {
+      if (this.isGALoaded && window.gtag) {
+        window.gtag('event', event.action, {
           event_category: event.category,
           event_label: event.label,
           value: event.value,
           ...event.customParameters
         });
+        logger.info('✅ GA event sent:', event.action);
+      } else {
+        logger.warn('⚠️ GA not loaded, cannot track event');
       }
 
-      // GTM data layer push
-      if ((window as any).dataLayer) {
-        (window as any).dataLayer.push({
+      if (window.dataLayer) {
+        window.dataLayer.push({
           event: 'custom_event',
           event_action: event.action,
           event_category: event.category,
@@ -290,17 +275,13 @@ export class AnalyticsManager {
           event_value: event.value,
           ...event.customParameters
         });
+        logger.debug('✅ GTM event pushed:', event.action);
       }
-
-      logger.debug('📊 Event tracked:', event);
     } catch (error) {
       logger.error('❌ Failed to track event:', error);
     }
   }
 
-  /**
-   * Track user interaction
-   */
   trackInteraction(element: string, action: string, details?: Record<string, any>): void {
     this.trackEvent({
       action: action,
@@ -310,9 +291,6 @@ export class AnalyticsManager {
     });
   }
 
-  /**
-   * Track performance metrics
-   */
   trackPerformance(metric: string, value: number, category = 'performance'): void {
     if (!this.config.enablePerformanceTracking) return;
 
@@ -329,9 +307,6 @@ export class AnalyticsManager {
     });
   }
 
-  /**
-   * Track errors
-   */
   trackError(error: Error, context?: string): void {
     if (!this.config.enableErrorTracking) return;
 
@@ -350,20 +325,17 @@ export class AnalyticsManager {
     logger.error('📊 Error tracked:', error);
   }
 
-  /**
-   * Set user properties
-   */
   setUserProperties(properties: UserProperties): void {
     if (!this.config.enableUserTracking) return;
 
     try {
-      if (this.isGALoaded && (window as any).gtag) {
-        (window as any).gtag('config', this.config.gaId, {
+      if (this.isGALoaded && window.gtag) {
+        window.gtag('config', this.config.gaId!, {
           custom_map: properties.custom_map
         });
 
         if (properties.user_id) {
-          (window as any).gtag('config', this.config.gaId, {
+          window.gtag('config', this.config.gaId!, {
             user_id: properties.user_id
           });
         }
@@ -375,10 +347,11 @@ export class AnalyticsManager {
     }
   }
 
-  /**
-   * Process queued events
-   */
   private processEventQueue(): void {
+    if (this.eventQueue.length === 0) return;
+
+    logger.info(`📊 Processing ${this.eventQueue.length} queued events`);
+    
     while (this.eventQueue.length > 0) {
       const event = this.eventQueue.shift();
       if (event) {
@@ -387,9 +360,6 @@ export class AnalyticsManager {
     }
   }
 
-  /**
-   * Get connection type for performance analysis
-   */
   private getConnectionType(): string {
     if ('connection' in navigator) {
       return (navigator as any).connection?.effectiveType || 'unknown';
@@ -397,38 +367,24 @@ export class AnalyticsManager {
     return 'unknown';
   }
 
-  /**
-   * Get analytics configuration for debugging
-   */
   getConfig(): AnalyticsConfig {
     return { ...this.config };
   }
 
-  /**
-   * Check if analytics is ready
-   */
   isReady(): boolean {
-    return this.isInitialized;
+    return this.isInitialized && this.isGALoaded;
   }
 }
 
-/**
- * Ready-to-use analytics instance
- * Configure with your actual tracking IDs when ready
- */
 export const analytics = new AnalyticsManager({
   gaId: siteConfig.analytics.googleAnalyticsId,
   gtmId: siteConfig.analytics.gtmId,
-  // sentryDsn: 'your-sentry-dsn-here', // Uncomment when ready
-  enableInDevelopment: false, // Set to true for testing
+  enableInDevelopment: true,
   enableUserTracking: true,
   enablePerformanceTracking: true,
   enableErrorTracking: true
 });
 
-/**
- * Convenience functions for common tracking scenarios
- */
 export const trackPageView = (path?: string, title?: string) => analytics.trackPageView(path, title);
 export const trackEvent = (event: AnalyticsEvent) => analytics.trackEvent(event);
 export const trackClick = (element: string, details?: Record<string, any>) => 
@@ -436,9 +392,30 @@ export const trackClick = (element: string, details?: Record<string, any>) =>
 export const trackError = (error: Error, context?: string) => analytics.trackError(error, context);
 export const trackPerformance = (metric: string, value: number) => analytics.trackPerformance(metric, value);
 
-/**
- * Hook into global error handling for automatic error tracking
- */
+export function trackProjectView(projectId: string) {
+  trackEvent({
+    action: 'project_view',
+    category: 'projects',
+    label: projectId,
+    customParameters: {
+      project_id: projectId,
+      timestamp: Date.now()
+    }
+  });
+}
+
+export function trackFilterUsage(filterType: string, filterValue: string) {
+  trackEvent({
+    action: 'filter_applied',
+    category: 'filters',
+    label: `${filterType}:${filterValue}`,
+    customParameters: {
+      filter_type: filterType,
+      filter_value: filterValue
+    }
+  });
+}
+
 if (typeof window !== 'undefined') {
   window.addEventListener('error', (event) => {
     analytics.trackError(new Error(event.message), `${event.filename}:${event.lineno}`);
