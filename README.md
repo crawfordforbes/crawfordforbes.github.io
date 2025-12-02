@@ -1,117 +1,123 @@
 # Crawford Forbes — Portfolio
 
-This repository contains my professional portfolio site, built to not only showcase my work but to serve as a demonstration of modern web development practices and production-ready code quality.
+This repository contains my professional portfolio site, a production‑minded single page application that demonstrates modern front‑end engineering, performance work, and practical media pipelines.
 
-**Live Site:** [crawfordforbes.com](https://crawfordforbes.com)
+Live site: https://crawfordforbes.com
 
-## Overview
+## At a glance
 
-This is a fully custom-built single-page application that highlights projects I've worked on, featuring interactive filters, dynamic routing, and optimized media delivery. The site itself is a demonstration of the technical skills and attention to detail that I bring to every project.
+- Built with React + TypeScript and Vite for fast iteration and small bundles
+- Focused on front‑end performance, accessibility, and pragmatic full‑stack tooling
+- Includes automated image and video optimization pipelines, analytics, and CI/CD
+
+---
 
 ## Technical Stack
 
-- **React 19** with TypeScript for type-safe component development
-- **Vite 7** for fast builds and optimal bundling
-- **React Router 7** with client-side routing and SPA fallback for GitHub Pages
-- **CSS Custom Properties** for scalable, maintainable styling with theme support
-- **Sharp** for automated image optimization (AVIF/WebP/JPG with fallbacks)
-- **GitHub Actions** for CI/CD and automated deployments to GitHub Pages
+- React 19 + TypeScript
+- Vite (SWC) for builds and dev server
+- React Router for client routing
+- Sharp for image processing; FFmpeg (scripts) for video transcoding
+- GitHub Actions for CI/CD and GitHub Pages deployment
 
-## Key Features
+## Key Capabilities
 
-- **Dynamic Project Filtering** — Filter projects by role, technology, or category with real-time updates and URL persistence
-- **Optimized Asset Pipeline** — Automated image transcoding and format selection (modern formats with graceful fallbacks)
-- **Responsive Design** — Mobile-first approach with breakpoint-specific layouts and performance tuning
-- **Accessibility** — ARIA-compliant navigation, skip links, keyboard support, and semantic HTML
-- **Legacy Browser Support** — Polyfills and transpiled bundles for Safari 13+ via Vite legacy plugin
-- **SEO & Metadata** — Open Graph, Twitter Cards, JSON-LD structured data, and sitemap
-- **Performance Monitoring** — Web Vitals tracking and Core Web Vitals optimization
+- Dynamic project filtering with URL persistence
+- Responsive, accessible UI with keyboard support and semantic markup
+- Automated asset pipeline producing AVIF/WebP/JPEG variants and WebM/MP4 video outputs
+- Performance-led improvements: bundle splitting, asset optimization, and LCP tuning
+- Observability: GA4 integration (analytics), error hooks ready for Sentry
+- Security: Content Security Policy (CSP) configured and reviewed
 
-## Architecture
-
-The codebase follows a feature-based structure with centralized data management:
+## Repo structure
 
 ```
 src/
 ├── app/              # App entry, routing, global styles
-├── components/       # Reusable UI components (Nav, Footer, OptimizedImage, etc.)
-├── features/         # Feature modules (projects, hexes) with hooks and styles
-├── data/             # Centralized project data, tech/role taxonomies, content
-└── utils/            # Shared utilities (analytics, performance, images, site helpers)
+├── components/       # Reusable UI components
+├── features/         # Feature modules (projects, hexes)
+├── data/             # Canonical project + content data
+└── utils/            # Utilities (analytics, performance, images)
 ```
-
-- **Data-driven UI:** All project metadata lives in `src/data/projects/projects.ts` and is consumed by hooks in `src/features/projects/hooks/`.
-- **Optimized Images:** The build pipeline generates responsive image sets via `scripts/optimize-images.cjs`, producing AVIF, WebP, and JPEG with a manifest for runtime selection.
-- **Custom Routing:** Client-side navigation with `react-router` and a GitHub Pages–compatible SPA fallback (`public/404.html`).
 
 ## Development
 
 ### Prerequisites
-- Node.js 20.19+ or 22.12+
+
+- Node.js 20.x or 22.x
 - npm 10+
 
-### Local Setup
-```bash
+### Common commands
+
+```powershell
 # Install dependencies
 npm install
 
-# Start dev server with HMR
+# Dev server with HMR
 npm run dev
 
-# Build for production
+# Build (types + Vite build)
 npm run build
+
+# Full build (assets + transcode + build)
+npm run build:full
 
 # Preview production build locally
 npm run preview
+
+# Image optimization (Sharp pipeline)
+npm run images:build
+
+# Hero image optimization (separate helper)
+npm run hero:optimize
+
+# Video transcoding (FFmpeg pipeline)
+npm run videos:build
+
+# Bundle analyzer
+npm run analyze
 ```
 
-### Scripts
-- `npm run dev` — Start Vite dev server
-- `npm run build` — Run full production build (images, videos, types, Vite bundle)
-- `npm run preview` — Serve the production build locally
-- `npm run images:build` — Optimize and transcode images (Sharp pipeline)
-- `npm run videos:build` — Transcode video assets
-- `npm run types` — Generate TypeScript declarations
+Notes:
+- `build` runs the type checks and Vite build.
+- `build:full` runs image + video pipelines and then the standard build (use for CI or when assets changed).
+
+## Asset & Media Optimization
+
+- Images: `scripts/optimize-images.cjs` (AVIF/WebP/JPEG outputs). The site serves responsive `<picture>` sources via `OptimizedImage`.
+- Hero images: `scripts/optimize-hero-images.cjs` for one‑off/hero-specific compressions.
+- Videos: `scripts/transcode-videos.cjs` produces WebM + MP4 variants with tuned CRF settings for small bundle impact.
+- Use `npm run analyze` after a build to inspect the `dist/` composition and spot regressions.
+
+See `docs/IMAGE_OPTIMIZATION.md` and `docs/VIDEO_PIPELINE.md` for details and recommended quality settings.
+
+## Analytics & Debugging
+
+- Google Analytics 4 is integrated in `src/utils/analytics.ts`. For local testing the file exposes an `enableInDevelopment` flag — ensure it is `false` in production builds.
+- Use GA DebugView (or the browser console) to verify events. The app queues events until analytics finishes initializing to avoid dropped hits during app boot.
 
 ## Build & Deployment
 
-The site is deployed via GitHub Actions on every push to `master`:
+- CI: GitHub Actions runs type checks and builds on push to `master`.
+- Deployment: Artifacts are published to GitHub Pages; `404.html` includes an SPA fallback for deep links.
+- Recommended preview flow:
 
-1. **CI Workflow** (`.github/workflows/typecheck.yml`) — Runs TypeScript checks and diagnostics
-2. **Deploy Workflow** (`.github/workflows/deploy-pages.yml`) — Builds the site and uploads artifacts to GitHub Pages
+```powershell
+npm run build:full    # if you changed images/videos
+npm run preview
+```
 
-The production build includes:
-- Minified and code-split JS/CSS bundles
-- Legacy transpiled bundles for older browsers
-- Optimized images (AVIF/WebP/JPG) and videos (webm/mp4)
-- SPA fallback `404.html` for deep links
+## Accessibility & Quality
 
-## Asset Optimization
-
-### Images
-- Source images in `src/assets/images/` are processed by `scripts/optimize-images.cjs` during build.
-- Outputs: AVIF (smallest), WebP (widely supported), JPEG (fallback) — served via `<picture>` elements in `OptimizedImage` component.
-- Manifest (`public/images/manifest.json`) maps slugs to generated assets.
-
-### Videos
-- Source videos in `src/assets/images/projects/` are transcoded to webm + mp4 by `scripts/transcode-videos.cjs`.
-- Runtime fallback: attempts webm, falls back to mp4 on error.
-
-See `docs/IMAGE_OPTIMIZATION.md` for detailed documentation.
-
-## Browser Compatibility
-
-- **Modern browsers:** Native ES modules, AVIF/WebP, CSS custom properties
-- **Safari 13+:** Legacy bundles via `@vitejs/plugin-legacy`, polyfills for IntersectionObserver and smooth scroll
-- **SPA routing:** Works on GitHub Pages via `404.html` SPA fallback for deep links
+- The site targets WCAG best practices (semantic HTML, focus management, skip links). Run a quick axe or Lighthouse accessibility pass before major demos.
 
 ## Contributing
 
-This is a personal portfolio site, but if you notice bugs or have suggestions, feel free to open an issue. Pull requests for bug fixes are welcome.
+This is primarily a personal portfolio. Bug reports and small improvements are welcome via issues or PRs.
 
 ## License
 
-This project is open source for educational and demonstration purposes. All project content and designs are © Crawford Forbes. Code is available under the MIT License.
+Code is MIT licensed. All design/content © Crawford Forbes.
 
 ---
 

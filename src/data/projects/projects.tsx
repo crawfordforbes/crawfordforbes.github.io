@@ -175,7 +175,7 @@ export const projectData: Record<string, ProjectType> = {
               <VideoPlayer src="/videos/palm-springs-media-gallery.mp4" poster="/videos/palm-springs-media-gallery.jpg" />
               <Caption content="Visit Palm Springs' media galleries were imported with cleaned data and a client supplied organizational structure." />
             </span>
-            On the technical side, I developed and oversaw several custom scripts to migrate content and media. One handled the movement of assets into our Cloudinary system, while another automated uploads from an FTP server to populate their <a href="https://visitpalmsprings.com/media-gallery/" target="_blank" rel="noopener noreferrer">media gallery</a>, complete with supplied descriptions and organizational structure. I also supported junior developers on the team, ensuring consistent standards and smooth integration across multiple components.
+            On the technical side, I developed and oversaw several custom scripts to migrate content and media. One handled the movement of assets into our Cloudinary system, while another automated uploads from an FTP server to populate their <a href="https://visitpalmsprings.com/media-gallery/" target="_blank" rel="noopener noreferrer">media gallery</a>, complete with supplied descriptions and organizational structure. I also supported individual collaborators on the team, ensuring consistent standards and smooth integration across multiple components.
           </p>
         </article>
         <article className='description-with-title'>

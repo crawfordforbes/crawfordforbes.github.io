@@ -379,7 +379,7 @@ export class AnalyticsManager {
 export const analytics = new AnalyticsManager({
   gaId: siteConfig.analytics.googleAnalyticsId,
   gtmId: siteConfig.analytics.gtmId,
-  enableInDevelopment: true,
+  enableInDevelopment: false,
   enableUserTracking: true,
   enablePerformanceTracking: true,
   enableErrorTracking: true
