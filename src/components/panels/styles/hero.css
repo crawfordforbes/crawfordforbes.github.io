@@ -5,7 +5,6 @@
   --content-top: 96px;
   --content-offset: 0; /* adjust to make room for hexHeader */
   --content-width: calc(100% - var(--content-offset));
-  --content-max-width: 600px;
 
   position: relative;
   width: 100vw;
@@ -82,11 +81,8 @@
 @media screen and (min-width: 40em){
   .hero {
     --content-offset: 148px;
-    --content-top: 120px;
-    --title-size: 6rem;
-  }
-  .hero .hero-content {
-    max-width: var(--content-max-width); /* not using clamp here, easier to set the maxwidth */
+    --content-top: 128px;
+    --title-size: clamp(3.8rem, 9vw, 6rem);
   }
 }
 
@@ -94,9 +90,9 @@
   .hero {
     --content-padding: 48px;
     --content-top: 132px;
-    --content-offset: 440px;
-    --title-size: clamp(6rem, 9vw, 15rem);
-    --subtitle-size: clamp(1.6rem, 3.55vw, 5.525rem);
+    --content-offset: 232px;
+    --title-size: clamp(5.5rem, 8vw, 12rem);
+    --subtitle-size: clamp(1.6rem, 5vw, 5.525rem);
   }
   .hero .hero-content {
     max-width: var(--content-width); /* back to clamp for larger screens */
@@ -106,7 +102,7 @@
 @media screen and (min-width: 90em){
   .hero {
     --content-top: 160px;
-    --content-offset: 600px;
+    --content-offset: 350px;
   }
 }
 

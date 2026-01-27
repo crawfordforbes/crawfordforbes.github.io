@@ -116,6 +116,7 @@ export const projectData: Record<string, ProjectType> = {
     title: "MoneyTree Explorer",
     imageIds: ["moneytree-history-filter-selection", "moneytree-history-unfiltered", "moneytree-pie-charts"],
     roleIds: ["developer", "contributor"],
+    featured: true,
     description: (
       <>
         <article className='description-with-title'>

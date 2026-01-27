@@ -4,5 +4,5 @@ type IntroPanelContent = {
 };
 
 export const introPanelContent: IntroPanelContent = {
-  title: "I build polished, data-driven web apps and lead teams from concept to production.",
+  title: "Building polished, data-driven web apps with a focus on performance and accessibility.",
 }

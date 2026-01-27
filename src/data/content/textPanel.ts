@@ -9,16 +9,11 @@ export const textPanelContent: Record<string, TextPanelContent> = {
   "about-me": {
     "id": "about-me",
     "description":`
-      <p>I'm a front-end–focused developer who bridges the gap between ambitious design and pragmatic engineering. With 10 years experience building secure SPAs, producing full-fledged marketing websites, and managing high-functioning teams, I turn complex requirements into polished, maintainable web applications.</p>
+      <p>I'm a UI Engineer who bridges the gap between ambitious design and pragmatic engineering. With a decade of experience building enterprise SPAs and high-volume platforms, I turn complex requirements into maintainable code.</p>
 
-      <p>I work closely with designers and PMs to balance creative vision with technical feasibility, breaking big ideas into clear steps and shipping steadily. My priorities: on-time and in-scope delivery, cultivating a strong team, and producing maintainable code.</p>
+      <p>At Simpleview, I spent seven years shaping the core architecture of tourism sites for global destinations and leading dev teams to ship ~30 projects annually. I’m at my best when I’m hands-on with code, mentoring developers, and collaborating with designers to solve interesting problems.</p>
 
-      <p>At Simpleview, I spent seven years building tourism websites for destinations like Visit Palm Springs and Mackinac Island. As a Team Lead, I guided developers, shaped architecture decisions, and streamlined our processes while shipping ~30 sites a year.</p>
-
-      <p>I'm looking for a role where I can grow as a technical lead while staying hands-on with code. Ideal fit: a product-focused team tackling interesting problems, where I can mentor developers and contribute to architecture decisions.</p>
-
-      <p>When I'm not coding, I'm usually writing experimental music, building game prototypes, or building Lego with my kids.</p>
-
+      <p>I’m looking for a role where I can remain deeply hands-on with code while contributing to high-level architecture. My ideal fit is a product-focused team where I can solve complex technical problems, mentor developers, and translate creative vision into high-performance production reality.</p>
     `
   },
   "projects-title": {
