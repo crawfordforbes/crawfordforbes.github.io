@@ -43,6 +43,10 @@
 }
 
 /* Fixed gradient overlay */
+
+.project-result.loading .inner::after {
+  animation: none;
+}
 .project-result .inner::after {
   content: "";
   position: absolute;

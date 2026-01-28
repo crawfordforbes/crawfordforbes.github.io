@@ -38,6 +38,10 @@
   opacity: .4;
 }
 
+.hex-header.loading .hex:not([class*="-body-bg"]) {
+  animation: none;
+}
+
 .hex-header .hex:not([class*="-body-bg"]) {
   animation: gradientAngleSpin 198s ease infinite;
 }

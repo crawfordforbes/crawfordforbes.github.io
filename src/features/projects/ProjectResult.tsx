@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 
 import Badge from "@/components/global/Badge";
 import SimpleImage from "@/components/global/OptimizedImage";
@@ -40,7 +40,22 @@ function ProjectResult({
   hoveredFilters,
 }: ProjectResultProps) {
 
-  // Memoize badge lists to avoid recreating arrays on every render
+  // once loaded, remove the loading class
+  useEffect(() => {
+    const projectResult = document.querySelector('.project-result.loading');
+    if (!projectResult) return;
+
+    const enableAnimations = () => {
+      projectResult.classList.remove('loading');
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(enableAnimations);
+    } else {
+      setTimeout(enableAnimations, 0);
+    }
+
+  }, []);
   const techBadges = useMemo(() => {
     return project?.techIds?.filter(techId => techData[techId]?.filterable).slice(0,3).map((techId: string) => {
       const tech = techData[techId];
@@ -97,7 +112,7 @@ function ProjectResult({
   return (
     <div className="project-result-container">
       <article 
-        className="card project-feature project-result"
+        className="card project-feature project-result loading"
         role="article"
         aria-labelledby={`project-title-${project.id}`}
         aria-describedby={project.short_description ? `project-desc-${project.id}` : undefined}
