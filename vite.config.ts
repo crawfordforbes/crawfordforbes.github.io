@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import legacy from '@vitejs/plugin-legacy'
 import path from 'path'
 
 // https://vite.dev/config/
@@ -8,12 +7,6 @@ export default defineConfig({
   base: '/', // Replace 'crawfordforbes' with your actual repository name
   plugins: [
     react(),
-    // Generate a legacy bundle for older browsers (including older Safari)
-    legacy({
-      targets: ['safari 13-14'],
-      modernPolyfills: true,
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-    })
   ],
   resolve: {
     alias: {
@@ -29,15 +22,10 @@ export default defineConfig({
     // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Group React-related libraries
-          'react-vendor': ['react', 'react-dom', 'react-router'],
-          
-          // Group FontAwesome icons separately (they tend to be large)
-          'fontawesome': ['@fortawesome/fontawesome-svg-core', '@fortawesome/free-solid-svg-icons', '@fortawesome/free-brands-svg-icons'],
-          
-          // Group utility libraries
-          'utils': ['@splidejs/react-splide']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
         },
         
         // Optimize asset naming for better caching
@@ -69,10 +57,10 @@ export default defineConfig({
     minify: 'esbuild', // Using esbuild for faster builds
     
     // Increase chunk size warning limit (default is 500kb)
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     
     // Target modern browsers for smaller bundles; legacy plugin provides older bundle
-    target: 'es2018'
+    target: 'es2022'
   },
   
   // Development server optimizations
@@ -81,19 +69,6 @@ export default defineConfig({
     hmr: {
       overlay: true
     }
-  },
-  
-  // Dependency optimization
-  optimizeDeps: {
-    include: [
-  'react',
-  'react-dom',
-  'react-router',
-      '@fortawesome/fontawesome-svg-core',
-      '@fortawesome/free-solid-svg-icons',
-      '@fortawesome/free-brands-svg-icons',
-      '@splidejs/react-splide'
-    ]
   },
   
   // Preview server config (for production preview)
