@@ -47,8 +47,16 @@ export default defineConfig({
     },
     minify: 'esbuild', // Using esbuild for faster builds
     
-    // Increase chunk size warning limit (default is 500kb)
-    chunkSizeWarningLimit: 500,
+    // Chunk size warning limit set to 650kb (vs default 500kb).
+    // The main chunk (~604kb uncompressed, ~210kb gzipped) contains the projects
+    // data file (src/data/projects/projects.tsx) with extensive JSX-based descriptions,
+    // VideoPlayer, SimpleImage, and Caption components. Since this is a single-page
+    // portfolio where all routes render the same Projects component, there's no
+    // opportunity for effective route-based code splitting. Dynamic imports of
+    // individual project descriptions would reduce bundle size but would hurt UX
+    // (slower project detail loads). The gzipped size is acceptable for a modern
+    // SPA with rich media content.
+    chunkSizeWarningLimit: 650,
     // Target modern browsers for smaller bundles; legacy plugin provides older bundle
     target: 'es2022'
   },
