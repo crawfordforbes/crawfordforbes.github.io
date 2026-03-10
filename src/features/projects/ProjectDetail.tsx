@@ -15,7 +15,6 @@ import { techData } from "@/data/projects/techs";
 
 import { getProjectById, generateImageAlt } from "@/utils/projects";
 import { getProjectImageUrl } from "@/utils/images";
-import { trackEvent } from "@/utils/analytics";
 
 import './styles/projectDetail.css'
 import './styles/splide.min.css'
@@ -43,15 +42,14 @@ function ProjectDetail({
 
   // Track project view
   useEffect(() => {
-    trackEvent({
-      action: 'project_view',
-      category: 'engagement',
-      label: project.title,
-      customParameters: {
+    if (window.gtag) {
+      window.gtag('event', 'project_view', {
+        event_category: 'engagement',
+        event_label: project.title,
         project_id: project.id,
-        project_title: project.title
-      }
-    });
+        project_title: project.title,
+      });
+    }
   }, [project.id, project.title]);
 
   const hasLinks = project.githubLink || project.externalLink;

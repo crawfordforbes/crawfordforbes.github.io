@@ -45,12 +45,7 @@ export const logger = {
    */
   error: (...args: any[]) => {
     console.error(...args);
-    // Optional: Send to analytics in production
-    if (!isDev && args[0] instanceof Error) {
-      import('@/utils/analytics').then(({ trackError }) => {
-        trackError(args[0] as Error);
-      });
-    }
+
   },
 
   /**

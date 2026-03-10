@@ -6,13 +6,13 @@ import App from './App'
 import { AppErrorBoundary } from '@/components/global/ErrorBoundaryWrappers'
 
 import { initPerformanceMonitoring } from '@/utils/performance'
-import { analytics } from '@/utils/analytics'
+import { initialize } from '@/utils/analytics'
 
 // Initialize performance monitoring in development
 initPerformanceMonitoring()
 
 // Initialize analytics immediately (before render)
-analytics.initialize();
+initialize();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
