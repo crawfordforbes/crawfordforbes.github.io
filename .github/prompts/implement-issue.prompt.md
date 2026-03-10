@@ -1,7 +1,10 @@
 ---
 agent: agent
 description: Fetch a GitHub issue, plan the implementation, get approval, then branch, patch, and commit
+tools: [read, edit, search, web, todo]
 ---
+
+## Step 0 — Get the issue number
 
 Ask the user: **"What is the GitHub issue number?"**
 
@@ -11,11 +14,8 @@ Then follow these steps in order. Do not skip ahead.
 
 ## Step 1 — Fetch the issue
 
-Run:
-```gh issue view <number> --json number,title,body,labels```
-
-
-If the `gh` CLI is not authenticated or the command fails, ask the user to paste the issue body directly.
+- Fetch issue details from https://github.com/crawfordforbes/crawfordforbes.github.io/issues/{issue} (via GitHub API).
+- Extract the issue title, description, acceptance criteria, and affected files.
 
 ---
 
