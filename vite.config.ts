@@ -2,9 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 
-// https://vite.dev/config/
 export default defineConfig({
-  base: '/', // Replace 'crawfordforbes' with your actual repository name
+  base: '/',
   plugins: [
     react(),
   ],
@@ -13,13 +12,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  
-  // Performance optimizations
   build: {
     // Generate source maps for production debugging (disabled for better performance)
     sourcemap: false,
-    
-    // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -27,8 +22,6 @@ export default defineConfig({
             return 'vendor'
           }
         },
-        
-        // Optimize asset naming for better caching
         chunkFileNames: (chunkInfo) => {
           const facadeModuleId = chunkInfo.facadeModuleId 
             ? chunkInfo.facadeModuleId.split('/').pop() 
@@ -52,20 +45,14 @@ export default defineConfig({
         }
       }
     },
-    
-    // Optimize for smaller bundle size
     minify: 'esbuild', // Using esbuild for faster builds
     
     // Increase chunk size warning limit (default is 500kb)
     chunkSizeWarningLimit: 500,
-    
     // Target modern browsers for smaller bundles; legacy plugin provides older bundle
     target: 'es2022'
   },
-  
-  // Development server optimizations
   server: {
-    // Optimize dependency pre-bundling
     hmr: {
       overlay: true
     }
