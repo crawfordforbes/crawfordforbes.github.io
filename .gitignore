@@ -13,7 +13,7 @@ dist-ssr
 *.local
 notes.txt
 content.txt
-docs
+archive
 src/assets/images/projects
 
 # Editor directories and files
