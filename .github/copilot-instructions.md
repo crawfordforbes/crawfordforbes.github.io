@@ -1,8 +1,3 @@
-<!-- .github/copilot-instructions.md
-Guidance for AI coding assistants working on this repository.
-Keep this short and actionable (20-50 lines). Reference concrete files.
--->
-
 # Copilot / AI assistant instructions — crawfordforbes
 
 Quick context
@@ -22,7 +17,7 @@ Build / run / debug (explicit)
 
 Project-specific conventions and patterns
 - Alias `@` points to `src/` (see `vite.config.ts` and `tsconfig.json`). Use `@/...` imports.
-- Centralized plain data objects under `src/data/...` (e.g. `src/data/projects/projects.ts`) — prefer editing those instead of ad-hoc JSON files.
+- Centralized plain data objects under `src/data/...` (e.g. `src/data/projects/projects.tsx`) — prefer editing those instead of ad-hoc JSON files.
 - Features expose hooks under `src/features/<feature>/hooks` (e.g. `src/features/projects/hooks`). Use these hooks rather than duplicating routing/filter logic.
 - Error boundaries: `src/components/global/ErrorBoundary.tsx` and wrappers in `ErrorBoundaryWrappers.tsx` — prefer adding errors to those wrappers for page vs component level.
 - Images: use `src/components/global/OptimizedImage.tsx` (exports `OptimizedImage` alias). Provide `alt` text using `utils/projects.generateImageAlt` where appropriate.
@@ -36,6 +31,12 @@ Coding style & priorities
 - Keep changes typed (TypeScript). Prefer minimal changes to public/multi-file APIs.
 - Keep CSS modular and small — styles live alongside components under `src/components/.../styles` or `src/features/.../styles`.
 - Avoid adding global runtime config or secrets. Analytics ID is in repo; do not externalize it without owner consent.
+
+What to avoid
+- Do not add `useMemo`/`useCallback` without a measured reason.
+- Do not add try/catch fallback chains for simple DOM/browser operations.
+- Do not add placeholder stubs (unimplemented trackers, feature flags set to `false`, etc.).
+- `analytics.ts` is intentionally minimal — do not expand it.
 
 Examples of concrete edits an AI may perform
 - Fix a missing `alt` by calling `generateImageAlt(project.title, imageId)` in `ProjectResult`.
