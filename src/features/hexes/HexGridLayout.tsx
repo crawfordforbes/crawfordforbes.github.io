@@ -56,5 +56,4 @@ const mediaQuery = useContext(MediaQueryContext);
   )
 }
 
-// export default HexGridLayout
 export default memo(HexGridLayout);
