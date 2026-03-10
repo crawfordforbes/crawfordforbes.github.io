@@ -4,7 +4,7 @@ This repository contains my professional portfolio site, a production‑minded s
 
 ### Architectural Note: 
 This codebase is currently being used to test the limits of AI-driven scaffolding and Agentic workflows. As part of this experiment, you may encounter instances of "speculative complexity" (e.g., redundant abstraction layers or over-engineered utility patterns) introduced during the automated build phase.
-I am currently in a refactoring cycle to prune these experimental patterns back to a minimalist, "YAGNI-compliant" production state.
+I am currently in a refactoring cycle to prune these experimental patterns back to a minimalist production state.
 
 Live site: https://crawfordforbes.com
 
