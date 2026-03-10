@@ -5,7 +5,7 @@ import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
 import Projects from '@/app/routes/Projects';
 
 import { MediaQueryContext } from '@/utils/context';
-import { useScreenSize } from '@/utils/site';
+import { useScreenSize, getScreenSize } from '@/utils/site';
 
 import type { MediaSizes } from '@/utils/site';
 import { trackPageView } from '@/utils/analytics';
@@ -16,25 +16,10 @@ function App() {
 
     // a media query used to determine hexlayouts and hexWidths.
   const screenSize = useScreenSize();
-  function getScreenSize(): MediaSizes {
-    const size: MediaSizes =
-      screenSize.width > 1919
-        ? "x-large"
-        : screenSize.width > 1439
-        ? "large"
-        : screenSize.width > 1023
-        ? "desktop"
-        : screenSize.width > 639
-        ? "tablet"
-        : "mobile";
-    return size;
-  }
-
-  const [mediaSize, setMediaSize] = useState<MediaSizes>(getScreenSize());
+  const [mediaSize, setMediaSize] = useState<MediaSizes>(getScreenSize(screenSize.width));
 
   useEffect(() => {
-    setMediaSize(getScreenSize())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setMediaSize(getScreenSize(screenSize.width))
   }, [screenSize.width]);
 
   return (
