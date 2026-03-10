@@ -69,11 +69,10 @@ function RouterEventListener() {
   }, [location]);
 
   useEffect(() => {
-    const handler = (evt: Event) => {
+    const handler = (evt: CustomEvent<{ targetUrl: string }>) => {
       try {
-        const detail = (evt as CustomEvent)?.detail || (evt as any).detail;
-        if (detail && detail.targetUrl) {
-          navigate(detail.targetUrl);
+        if (evt.detail && evt.detail.targetUrl) {
+          navigate(evt.detail.targetUrl);
         }
       } catch (e) {
         console.error('RouterEventListener: Navigation failed', e);
