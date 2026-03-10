@@ -8,7 +8,7 @@ import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize } from '@/utils/site';
 
 import type { MediaSizes } from '@/utils/site';
-import { trackError, trackPageView } from '@/utils/analytics';
+import { trackPageView } from '@/utils/analytics';
 
 import './styles/index.css'
 
@@ -92,7 +92,6 @@ function RouterEventListener() {
         }
       } catch (e) {
         console.error('RouterEventListener: Navigation failed', e);
-        trackError(e as Error, 'RouterEventListener');
       }
     };
 
