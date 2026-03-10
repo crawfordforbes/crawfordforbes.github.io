@@ -23,8 +23,10 @@ try {
   smoothscrollPolyfill();
 } catch (e) {
   // Swallow; we don't want polyfill initialization to break app startup
-  // eslint-disable-next-line no-console
-  console.debug('smoothscroll polyfill failed to initialize', e);
+  if (import.meta.env.DEV) {
+    // eslint-disable-next-line no-console
+    console.debug('smoothscroll polyfill failed to initialize', e);
+  }
 }
 
 // NOTE: Do not import fetch or ResizeObserver polyfills here per request.

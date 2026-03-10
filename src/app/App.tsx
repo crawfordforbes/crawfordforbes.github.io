@@ -7,7 +7,7 @@ import Projects from '@/app/routes/Projects';
 import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize, getScreenSize } from '@/utils/site';
 
-import type { MediaSizes } from '@/utils/site';
+import type { MediaSizes } from '@/types/layout';
 import { trackPageView } from '@/utils/analytics';
 
 import './styles/index.css'
@@ -75,7 +75,9 @@ function RouterEventListener() {
           navigate(evt.detail.targetUrl);
         }
       } catch (e) {
-        console.error('RouterEventListener: Navigation failed', e);
+        if (import.meta.env.DEV) {
+          console.error('RouterEventListener: Navigation failed', e);
+        }
       }
     };
 
