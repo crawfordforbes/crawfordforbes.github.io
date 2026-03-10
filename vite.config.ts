@@ -57,7 +57,7 @@ export default defineConfig({
     // (slower project detail loads). The gzipped size is acceptable for a modern
     // SPA with rich media content.
     chunkSizeWarningLimit: 650,
-    // Target modern browsers for smaller bundles; legacy plugin provides older bundle
+    // Target modern browsers for smaller bundles
     target: 'es2022'
   },
   server: {
