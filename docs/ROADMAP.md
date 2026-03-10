@@ -1,6 +1,4 @@
-# Roadmap — crawfordforbes
-
-This site is both a portfolio and part of the portfolio — engineers will read the code. The goal of this roadmap is to bring the codebase up to a standard I'd be comfortable putting in front of a hiring manager: clean, honest, no AI scaffolding left behind.
+# Roadmap — crawfordforbes Refactoring
 
 ---
 
