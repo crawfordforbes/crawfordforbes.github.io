@@ -13,8 +13,8 @@ export default defineConfig({
     },
   },
   build: {
-    // Generate source maps for production debugging (disabled for better performance)
-    sourcemap: false,
+    // Generate hidden source maps for production debugging (maps not served inline)
+    sourcemap: 'hidden',
     rollupOptions: {
       output: {
         manualChunks(id) {
