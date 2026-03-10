@@ -14,16 +14,12 @@ function slugify(input: string) {
 function deriveSlugFromSrc(src: string) {
   if (!src) return '';
   // If the caller provides a public path like /images/foo.jpg, extract base
-  try {
-    const url = new URL(src, 'http://example.com');
-    const pathname = url.pathname;
-    const name = pathname.split('/').pop() || pathname;
-    return slugify(name.replace(/\.[^/.]+$/, ''));
-  } catch {
-    // fallback for plain filenames
-    const name = src.split('/').pop() || src;
-    return slugify(name.replace(/\.[^/.]+$/, ''));
-  }
+  const url = src.startsWith('http')
+    ? new URL(src)
+    : new URL(src, 'http://example.com');
+  const pathname = url.pathname;
+  const name = pathname.split('/').pop() || pathname;
+  return slugify(name.replace(/\.[^/.]+$/, ''));
 }
 
 interface SimpleImageProps {
