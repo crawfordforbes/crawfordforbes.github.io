@@ -54,7 +54,7 @@ export type HexProps = {
     : ''
 
   // Stable className so parent renders don't re-create string
-  const classes = useMemo(() => `hex ${hexClass} ${contentClass}`.trim(), [hexClass, contentClass])
+  const classes = `hex ${hexClass} ${contentClass}`.trim()
  
    // Stable keyboard handler
    const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
@@ -116,19 +116,19 @@ export type HexProps = {
    // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [contentType, content, contactId, hexWidth])
  
-  // Final memoized content
-  const hexContent = useMemo(() => (
+  // Content node
+  const hexContent = (
     <>
       {contentNode}
     </>
-  ), [contentNode])
+  )
  
    // Common props for all element types (stable identity)
   // Inline CSS vars for layout (moved from per-hex <style> into CSS variables)
-  const inlineVars: React.CSSProperties = useMemo(() => ({
+  const inlineVars: React.CSSProperties = {
     ['--hex-width' as any]: `${hexWidth}px`,
     ['--hex-margin' as any]: `${hexMargin}px`,
-  }), [hexWidth, hexMargin])
+  }
 
   const commonProps = useMemo(() => ({
     className: classes,
