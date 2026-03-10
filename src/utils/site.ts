@@ -30,86 +30,19 @@ export const useScreenSize = () => {
 };
 
 export const scrollToTarget = (targetId: string, time: number = 800, targetUrl?: string, navigate?: (url: string) => void) => {
-  const targetElement = document.getElementById(targetId);
+  // Update URL via the provided navigate callback if given
+  if (targetUrl && typeof navigate === 'function') {
+    navigate(targetUrl);
+  }
 
+  const targetElement = document.getElementById(targetId);
   if (!targetElement) {
     console.error(`Element with ID '${targetId}' not found`);
-    // If navigation requested but element missing, still update URL via router or history
-    if (targetUrl) {
-      if (typeof navigate === 'function') {
-        navigate(targetUrl);
-      } else {
-        // update history and notify any React router listeners via an event
-        try {
-          if (window.location.pathname !== targetUrl) {
-            window.history.pushState({}, '', targetUrl);
-          }
-        } catch (e) {
-          console.warn('Failed to update URL via history.pushState', e);
-        }
-
-        try {
-          const ev = new CustomEvent('app:navigate', { detail: { targetUrl } });
-          window.dispatchEvent(ev);
-        } catch (e) {
-          // CustomEvent may not be constructable in some older environments
-          // fallback to creating a plain event and attaching detail
-          const ev: any = document.createEvent('Event');
-          ev.initEvent('app:navigate', true, true);
-          ev.detail = { targetUrl };
-          window.dispatchEvent(ev);
-        }
-      }
-    }
     return;
   }
 
-  // Optionally update the URL first (router preferred)
-  if (targetUrl) {
-    if (typeof navigate === 'function') {
-      // Let react-router handle the navigation so app routing state stays consistent
-      try {
-        navigate(targetUrl);
-      } catch (e) {
-        console.warn('navigate() threw an error, falling back to history.pushState', e);
-        if (window.location.pathname !== targetUrl) {
-          window.history.pushState({}, '', targetUrl);
-        }
-
-        // Inform any listeners
-        try {
-          const ev = new CustomEvent('app:navigate', { detail: { targetUrl } });
-          window.dispatchEvent(ev);
-        } catch (e) {
-          const ev: any = document.createEvent('Event');
-          ev.initEvent('app:navigate', true, true);
-          ev.detail = { targetUrl };
-          window.dispatchEvent(ev);
-        }
-      }
-    } else {
-      try {
-        if (window.location.pathname !== targetUrl) {
-          window.history.pushState({}, '', targetUrl);
-        }
-      } catch (e) {
-        console.warn('Failed to update URL via history.pushState', e);
-      }
-
-      try {
-        const ev = new CustomEvent('app:navigate', { detail: { targetUrl } });
-        window.dispatchEvent(ev);
-      } catch (e) {
-        const ev: any = document.createEvent('Event');
-        ev.initEvent('app:navigate', true, true);
-        ev.detail = { targetUrl };
-        window.dispatchEvent(ev);
-      }
-    }
-  }
-
   // Get the target position, accounting for any fixed headers
-  const headerOffset = 80; // Adjust this based on your nav height
+  const headerOffset = 80;
   const targetY = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
   let start: number | null = null;
@@ -124,7 +57,6 @@ export const scrollToTarget = (targetId: string, time: number = 800, targetUrl?:
     if (progress < time) {
       window.requestAnimationFrame(step);
     } else if (targetElement !== null) {
-      // Only focus after scrolling is complete, and only if it won't cause issues
       const tag = targetElement.tagName;
       if (targetElement.getAttribute('tabindex') !== null || tag === 'BUTTON' || tag === 'A') {
         (targetElement as HTMLElement).focus();
