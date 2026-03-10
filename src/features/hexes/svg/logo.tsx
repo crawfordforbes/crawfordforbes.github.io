@@ -1,44 +1,6 @@
-import { printAllHexSVGs } from '@/utils/hex-SVG-coords-converter';
-import html2canvas from 'html2canvas';
-import { useRef } from 'react';
 const Logo = () => {
-  const makingLogo = false // set to true to show the download button
-
-  if (makingLogo) {printAllHexSVGs();};
-  interface ExportComponentAsImageParams {
-    element: HTMLElement;
-    imageFileName: string;
-  }
-  
-  const exportComponentAsImage = async (
-    element: ExportComponentAsImageParams['element'],
-    imageFileName: ExportComponentAsImageParams['imageFileName']
-  ): Promise<void> => {
-    const canvas: HTMLCanvasElement = await html2canvas(element);
-    const image: string = canvas.toDataURL('image/png', 1.0); // 1.0 for maximum quality
-    
-    // Create a link element to trigger download
-    const link: HTMLAnchorElement = document.createElement('a');
-    link.href = image;
-    link.download = `${imageFileName}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-  
-  const componentRef = useRef(null);
-  
-  const handleDownload = () => {
-    if (componentRef.current) {
-      exportComponentAsImage(componentRef.current, 'my_component_image');
-    }
-  };
-  
   return (
-    <div className="logo-wrapper" ref={makingLogo ? componentRef : null}>
-      {makingLogo && <div className="fixed">
-        <button onClick={handleDownload} className="download-logo-button" aria-label="Download logo as PNG image" title="Download logo as PNG image">⬇️</button>
-      </div>}
+    <div className="logo-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg"
         width="160"
         height="185.6"
