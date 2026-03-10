@@ -41,12 +41,12 @@ const mediaQuery = useContext(MediaQueryContext);
     return null;
   }
 
-  const hexGridProps = useMemo(() => ({
+  const hexGridProps = {
     grid,
     shiftedUp: layout?.shiftedUp,
     hexWidth: layout?.hexWidth ? layout?.hexWidth : hexWidth,
     hexMargin: typeof layout?.hexMargin !== 'undefined' ? layout?.hexMargin : 3,
-  }), [grid, layout, hexWidth]);
+  };
 
   // chooses which hex grid to display based on screen size
   return (
