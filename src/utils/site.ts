@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 
-// Layout types
-export const mediaSizes = ["mobile", "tablet", "desktop", "large", "x-large"] as const;
-export type MediaSizes = typeof mediaSizes[number];
+import type { MediaSizes } from '@/types/layout';
+
+// Breakpoint constants for responsive design
+const BREAKPOINT_LARGE_DESKTOP = 1920;
+const BREAKPOINT_DESKTOP = 1440;
+const BREAKPOINT_TABLET = 1024;
+const BREAKPOINT_MOBILE = 640;
 
 export const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState({
@@ -84,13 +88,13 @@ export function createAccessibleDescription(text: string, maxLength: number = 15
 
 export function getScreenSize(width: number): MediaSizes {
   const size: MediaSizes =
-    width > 1919
+    width >= BREAKPOINT_LARGE_DESKTOP
       ? "x-large"
-      : width > 1439
+      : width >= BREAKPOINT_DESKTOP
       ? "large"
-      : width > 1023
+      : width >= BREAKPOINT_TABLET
       ? "desktop"
-      : width > 639
+      : width >= BREAKPOINT_MOBILE
       ? "tablet"
       : "mobile";
   return size;

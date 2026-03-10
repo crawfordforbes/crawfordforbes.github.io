@@ -14,7 +14,12 @@ initPerformanceMonitoring()
 // Initialize analytics immediately (before render)
 initialize();
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element with id="root" not found in DOM');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <AppErrorBoundary>
       <App />
