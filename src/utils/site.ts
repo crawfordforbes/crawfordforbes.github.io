@@ -81,3 +81,17 @@ export function createAccessibleDescription(text: string, maxLength: number = 15
     ? truncated.substring(0, lastSpace)
     : truncated;
 }
+
+export function getScreenSize(width: number): MediaSizes {
+  const size: MediaSizes =
+    width > 1919
+      ? "x-large"
+      : width > 1439
+      ? "large"
+      : width > 1023
+      ? "desktop"
+      : width > 639
+      ? "tablet"
+      : "mobile";
+  return size;
+}
