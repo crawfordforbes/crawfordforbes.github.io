@@ -25,5 +25,10 @@ export const textPanelContent: Record<string, TextPanelContent> = {
     "id": "favorites-title",
     "description": `<h3 class='section-title'>Selected Technologies</h3>
     <p class='section-description'>A curated list of frameworks, libraries, and tools I trust.</p>`
+  },
+  "not-found-title": {
+    "id": "not-found-title",
+    "description": `<h3 class='section-title'>404 - Page Not Found</h3>
+    <p class='section-description'>Sorry, the page you're looking for doesn't exist.</p>`
   }
 }
