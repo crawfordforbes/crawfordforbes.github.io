@@ -59,6 +59,12 @@ function App() {
   );
 }
 
+/**
+ * RouterEventListener must be a separate component because React Router hooks
+ * (useNavigate, useLocation) can only be called within a Router context.
+ * By placing this component inside <BrowserRouter>, we ensure these hooks have
+ * access to the routing context while keeping App free from router logic.
+ */
 function RouterEventListener() {
   // useNavigate must be used inside a Router; placing this component inside BrowserRouter makes it available
   const navigate = useNavigate();
