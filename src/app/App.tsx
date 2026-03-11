@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useNavigate, useLocation } from "react-ro
 
 import { PageErrorBoundary } from '@/components/global/ErrorBoundaryWrappers';
 import Projects from '@/app/routes/Projects';
+import NotFound from '@/app/routes/NotFound';
 
 import { MediaQueryContext } from '@/utils/context';
 import { useScreenSize, getScreenSize } from '@/utils/site';
@@ -49,7 +50,7 @@ function App() {
           {/* Fallback for any unmatched routes */}
           <Route path="*" element={
             <PageErrorBoundary pageName="404">
-              <Projects />
+              <NotFound />
             </PageErrorBoundary>
           } />
         </Routes>
