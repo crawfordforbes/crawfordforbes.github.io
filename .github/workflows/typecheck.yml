@@ -55,6 +55,8 @@ jobs:
           node --version
           npm --version
           npx -y tsc --version || true
+      - name: Run lint
+        run: npm run lint
       - name: Run type-only check (project refs)
         run: npx tsc -b --noEmit --pretty false
       - name: Cache dist/types (optional)
