@@ -3,9 +3,6 @@ name: Cleanup Task
 about: A scoped cleanup item tracked against the roadmap
 ---
 
-## Phase
-<!-- e.g. Phase 1 — Dead Code & Stub Removal -->
-
 ## Title
 <!-- a short title to be used on github.com. It should start with [*phase number*.issue-number], e.g. "[1.0] Tracking Code Cleanup" -->
 

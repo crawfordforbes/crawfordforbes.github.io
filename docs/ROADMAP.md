@@ -94,12 +94,68 @@ The hexes feature is a core visual element and worth keeping. The implementation
 
 ---
 
+## Phase 7 — Testing Foundation
+
+**Goal**: Add a test layer.
+
+### Setup
+- Install `vitest`, `@vitest/coverage-v8`, `@testing-library/react`, `@testing-library/user-event`, `jsdom` as dev dependencies
+- Add `vitest` config block to `vite.config.ts` (`environment: 'jsdom'`, `globals: true`, `setupFiles`)
+- Add `test` and `test:coverage` scripts to `package.json`
+
+### Tests to write (highest signal-to-noise)
+
+**Utility functions** — `src/utils/projects.ts`
+- `isValidProjectId` returns `true` for a known project ID, `false` for an unknown string and non-string values
+- `generateImageAlt` returns a well-formed string from known inputs; handles empty `imageId`
+- Filter utilities: tag filtering returns only matching projects; empty filter returns all
+
+**Hook: `useProjectFilters`** — `src/features/projects/hooks/useProjectFilters.ts`
+- Default state has no selected tags
+- Selecting a tag updates filter state
+- Clearing tags resets state
+
+**Hook: `useProjectRouting`** — `src/features/projects/hooks/useProjectRouting.ts`
+- Valid project ID in URL sets `selectedProjectId`
+- Invalid project ID navigates to `/projects?error=project-not-found`
+
+**Component smoke tests**
+- `ErrorBoundary` renders children normally; renders fallback UI when a child throws
+- `OptimizedImage` renders an `<img>` with the provided `alt` and `src`; renders fallback `src` on error
+- `App` mounts without throwing
+
+### Notes
+- Wrap `RouterProvider` + `MemoryRouter` as needed for hook tests
+- No need for 100% coverage — prioritise the core routing and data logic that interviewers will ask about
+
+---
+
+## Phase 8 — CI Quality Gates
+
+**Goal**: Make automated quality enforcement visible in the GitHub Actions history.
+
+- Add an ESLint step to `.github/workflows/typecheck.yml` — ESLint currently runs locally only; add `npm run lint` so lint failures block the check
+- Add a test step to `.github/workflows/deploy-pages.yml` — run `npm test -- --run` before the build step so a failing test blocks deployment
+- Add a bundle-size gate — after `npm run build`, assert the main chunk stays under a documented threshold; catches accidental large imports before they reach production
+- Remove CI/CD from the Out of Scope list below (addressed by this phase)
+
+---
+
+## Phase 9 — `prefers-reduced-motion` Accessibility
+
+**Goal**: Ensure users who have requested reduced motion in their OS settings are not exposed to distracting animations. This is a WCAG 2.1 AA success criterion (2.3.3).
+
+- Audit all CSS files under `src/` for `transition`, `animation`, and `transform` declarations
+- For every transition/animation, add a complementary `@media (prefers-reduced-motion: reduce)` block that removes or replaces the motion with a simple opacity fade
+- Key areas expected to need updates: nav menu open/close slide, hex hover effects, project carousel slide transitions
+- Add a test in Phase 7's suite asserting the nav renders correctly when the `prefers-reduced-motion` media query is active (use `window.matchMedia` mock in vitest)
+
+---
+
 ## Out of Scope
 
 The following are known but intentionally deferred:
 
 - New features
-- CI/CD pipeline / GitHub Actions
-- Lighthouse CI / performance budgets in CI
 - Git LFS for binary assets
 - Docs folder reorganization
