@@ -42,3 +42,13 @@
   transform: scale(0.98);
   transition: transform 0.1s ease;
 }
+
+/* Reduced-motion: disable wrapper hover/active transforms */
+@media (prefers-reduced-motion: reduce) {
+  .hex-wrapper:hover .hex,
+  .hex-wrapper:active .hex {
+    transform: none !important;
+    transition-property: none !important;
+    will-change: auto !important;
+  }
+}

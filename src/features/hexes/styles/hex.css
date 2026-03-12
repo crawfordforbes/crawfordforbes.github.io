@@ -160,3 +160,26 @@
     padding-bottom:calc((var(--desktop-hex-width) * (49 / 44)) / 2);
   }
 }
+
+/* Reduced-motion: disable hover scale and transitions on hex elements */
+@media (prefers-reduced-motion: reduce) {
+  .hex,
+  .hex *,
+  .hex .hex-text-content,
+  .hex.icon-bg .badge .badge-content .fa-icon,
+  .hex.icon-bg .title,
+  .hex.icon-bg:hover .badge .badge-content .fa-icon {
+    transition-property: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .hex.icon-bg .badge .badge-content .fa-icon,
+  .hex.icon-bg:hover .badge .badge-content .fa-icon {
+    font-size: inherit !important;
+    opacity: .25 !important;
+  }
+
+  /* Keep text centering transforms intact; only disable animated transforms
+     (hover/scale) elsewhere. Do not override translation used for centering. */
+}
