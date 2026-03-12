@@ -72,6 +72,18 @@
   will-change: filter;
 }
 
+/* Reduced-motion: disable title glow animation and provide a static text-shadow */
+@media (prefers-reduced-motion: reduce) {
+  .hero .title,
+  .hero .subtitle {
+    animation: none !important;
+    animation-play-state: paused !important;
+    transition-property: none !important;
+    text-shadow: var(--shade-4) 1px 1px, var(--shade-4) -1px -1px, var(--shade-4) -1px 1px, var(--shade-4) 1px -1px;
+    filter: none !important;
+  }
+}
+
 /* todo: do this smarter with clamp() */
 /* title and subtitle placement media queries */
 @media screen and (min-width: 27em){
@@ -105,6 +117,17 @@
   .hero {
     --content-top: 160px;
     --content-offset: 350px;
+  }
+}
+
+/* Reduced-motion: disable title glow animations in hero */
+@media (prefers-reduced-motion: reduce) {
+  .hero .title,
+  .hero .subtitle {
+    animation: none !important;
+    animation-play-state: paused !important;
+    transition-property: none !important;
+    will-change: auto !important;
   }
 }
 
