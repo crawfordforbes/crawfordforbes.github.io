@@ -20,8 +20,8 @@ function Hero() {
         />
       </div>
       <section className="hero-content overlay">
-        <h1 className="title">{badgeData.fname.title} {badgeData.lname.title}</h1>
-        <h2 className="subtitle">{badgeData.tagline1.title}<br/>{badgeData.tagline2.title}</h2>
+        <h1 className="title glow-title" data-text={`${badgeData.fname.title} ${badgeData.lname.title}`}>{badgeData.fname.title} {badgeData.lname.title}</h1>
+        <h2 className="subtitle glow-title" data-text={`${badgeData.tagline1.title} ${badgeData.tagline2.title}`}>{badgeData.tagline1.title}<br/>{badgeData.tagline2.title}</h2>
       </section>
     </article>
   )

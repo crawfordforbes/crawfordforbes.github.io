@@ -43,7 +43,20 @@
 }
 
 .hex-header .hex:not([class*="-body-bg"]) {
+  position: relative;
+  overflow: hidden;
+}
+
+.hex-header .hex:not([class*="-body-bg"])::before {
+  content: "";
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   animation: gradientAngleSpin 198s ease infinite;
+  will-change: background;
+  transform: translateZ(0);
+  position: absolute;
 }
 
 .hex-header .hex[class*="-body-bg"] {
