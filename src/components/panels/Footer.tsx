@@ -12,9 +12,9 @@ function Footer() {
   const navItems = ['hire', 'github-index', 'projects-link', 'linked-in',  'resume'];
   const hexWidth = 360;
   const hexMargin = 3
-  const inlineVars: React.CSSProperties = useMemo(() => ({
-    ['--hex-width' as any]: `${hexWidth}px`,
-    ['--hex-margin' as any]: `${hexMargin}px`,
+  const inlineVars = useMemo<Record<string, string>>(() => ({
+    '--hex-width': `${hexWidth}px`,
+    '--hex-margin': `${hexMargin}px`,
   }), [hexWidth, hexMargin])
 
   function renderBadges() {
@@ -33,12 +33,12 @@ function Footer() {
     });
   }
   const commonProps = useMemo(() => ({
-    style: { ...(inlineVars as object) } as React.CSSProperties,
+    style: inlineVars as React.CSSProperties,
     hexWidth: hexWidth
   }), [hexWidth, inlineVars])
 
   const commonRowProps = useMemo(() => ({
-    style: { ...(inlineVars as object) } as React.CSSProperties,
+    style: inlineVars as React.CSSProperties,
   }), [inlineVars])
 
   return (

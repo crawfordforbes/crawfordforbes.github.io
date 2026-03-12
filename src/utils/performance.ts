@@ -2,6 +2,13 @@ import { logger } from './logger';
 
 import { useEffect, useRef } from 'react';
 
+declare global {
+  interface Window {
+    __PERFORMANCE_METRICS__?: Array<PerformanceMetrics & { timestamp: number }>;
+    __PERF_SUMMARY_INTERVAL_ID__?: number;
+  }
+}
+
 type PerformanceMetrics = {
   renderTime: number;
   componentName: string;
@@ -31,12 +38,13 @@ export function usePerformanceMonitor(componentName: string, enabled = false) {
     }
 
     // Store metrics for analysis
-    if (typeof window !== 'undefined' && (window as any).__PERFORMANCE_METRICS__) {
-      (window as any).__PERFORMANCE_METRICS__.push({
+    if (typeof window !== 'undefined') {
+      window.__PERFORMANCE_METRICS__ = window.__PERFORMANCE_METRICS__ ?? [];
+      window.__PERFORMANCE_METRICS__.push({
         renderTime,
         componentName,
         timestamp: Date.now()
-      } as PerformanceMetrics);
+      });
     }
   }, [componentName, enabled]);
 
@@ -66,28 +74,28 @@ export function usePerformanceMonitor(componentName: string, enabled = false) {
  */
 export function initPerformanceMonitoring() {
   if (typeof window !== 'undefined') {
-    (window as any).__PERFORMANCE_METRICS__ = [];
+    window.__PERFORMANCE_METRICS__ = [];
 
     // Log performance summary every 10 seconds in development
     if (import.meta.env.DEV) {
       // Avoid creating duplicate intervals (HMR / re-run protection)
-      const existingId = (window as any).__PERF_SUMMARY_INTERVAL_ID__;
+      const existingId = window.__PERF_SUMMARY_INTERVAL_ID__;
       if (existingId) {
         clearInterval(existingId);
       }
 
-      const id = setInterval(() => {
-        const metrics = (window as any).__PERFORMANCE_METRICS__ as PerformanceMetrics[];
+      const id = window.setInterval(() => {
+        const metrics = window.__PERFORMANCE_METRICS__ ?? [];
         if (metrics.length > 0) {
           const avgRenderTime = metrics.reduce((sum, m) => sum + m.renderTime, 0) / metrics.length;
           logger.debug(`📊 Performance Summary - Avg render time: ${avgRenderTime.toFixed(2)}ms`);
 
           // Clear metrics
-          (window as any).__PERFORMANCE_METRICS__ = [];
+          window.__PERFORMANCE_METRICS__ = [];
         }
       }, 10000);
 
-      (window as any).__PERF_SUMMARY_INTERVAL_ID__ = id;
+      window.__PERF_SUMMARY_INTERVAL_ID__ = id as unknown as number;
     }
   }
 }

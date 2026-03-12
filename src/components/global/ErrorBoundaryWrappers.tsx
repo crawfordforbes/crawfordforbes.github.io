@@ -88,9 +88,4 @@ export const ComponentErrorBoundary = ({
 };
 
 // Hook for manually triggering errors (useful for testing)
-export const useErrorHandler = () => {
-  return (error: Error) => {
-    // This will be caught by the nearest error boundary
-    throw error;
-  };
-};
+// (hook moved to src/components/global/useErrorHandler.ts)

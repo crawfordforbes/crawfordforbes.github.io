@@ -24,7 +24,7 @@ import Hex from "@/features/hexes/Hex"
 import type { HexProps } from '@/features/hexes/Hex'
 
 import { hexData } from "@/data/hexes/hexes"
-import { rowData } from "@/data/hexes/rows"
+import { rowData, type RowHexType } from "@/data/hexes/rows"
 
 type PrecomputedHexItem = Partial<HexProps> & { _key?: string }
 
@@ -42,21 +42,24 @@ function HexRow({
   hexMargin,
   hexItems,
 }: HexRowProps) {
+  // Compute derived sizing and CSS vars up-front (hooks must run deterministically)
+  const first = (Array.isArray(hexItems) && hexItems.length > 0) ? hexItems[0] : {} as Partial<HexProps>
+  const derivedHexWidth = typeof hexWidth !== 'undefined' && hexWidth !== null ? hexWidth : (typeof first.hexWidth === 'number' ? first.hexWidth : 122)
+  const derivedHexMargin = typeof hexMargin !== 'undefined' && hexMargin !== null ? hexMargin : (typeof first.hexMargin === 'number' ? first.hexMargin : 3)
+
+  const inlineVars = useMemo<Record<string, string>>(() => ({
+    '--hex-width': `${derivedHexWidth}px`,
+    '--hex-margin': `${derivedHexMargin}px`,
+  }), [derivedHexWidth, derivedHexMargin])
+
+  const styleProps = useMemo(() => ({
+    style: inlineVars as React.CSSProperties,
+  }), [inlineVars])
+
   // Mode 1: If precomputed hex items are provided, render them directly (preferred path)
   if (Array.isArray(hexItems) && hexItems.length > 0) {
-    // Derive row-level CSS variables from explicit props or from the first item's sizing
-    const first = hexItems[0] || {}
-    const derivedHexWidth = typeof hexWidth !== 'undefined' && hexWidth !== null ? hexWidth : (typeof first.hexWidth === 'number' ? first.hexWidth : 122)
-    const derivedHexMargin = typeof hexMargin !== 'undefined' && hexMargin !== null ? hexMargin : (typeof first.hexMargin === 'number' ? first.hexMargin : 3)
-
-    // Set CSS custom properties so CSS-based layout calculations can use these values
-    const rowVars: React.CSSProperties = {
-      ['--hex-width' as any]: `${derivedHexWidth}px`,
-      ['--hex-margin' as any]: `${derivedHexMargin}px`,
-    }
-
     return (
-      <div className={`hex-row ${row ?? ''}`} style={rowVars}>
+      <div className={`hex-row ${row ?? ''}`} {...styleProps}>
         {hexItems.map((item, i) => (
           <Hex key={item._key ?? `${i}`} {...item} />
         ))}
@@ -72,61 +75,52 @@ function HexRow({
     return null;
   }
 
-  if (!hexWidth) {
-    hexWidth = 122;
-  }
-
-  if (!hexMargin) {
-    hexMargin = 3;
-  }
-
-  // Set CSS custom properties for hex sizing (used by CSS layout logic)
-  const inlineVars: React.CSSProperties = useMemo(() => ({
-    ['--hex-width' as any]: `${hexWidth}px`,
-    ['--hex-margin' as any]: `${hexMargin}px`,
-  }), [hexWidth, hexMargin])
-
-  const styleProps = useMemo(() => ({
-    style: { ...(inlineVars as object) } as React.CSSProperties,
-  }), [inlineVars])
+  const safeHexWidth = typeof hexWidth !== 'undefined' ? hexWidth : 122
+  const safeHexMargin = typeof hexMargin !== 'undefined' ? hexMargin : 3
 
   return (
     <div className={`hex-row ${row}`} {...styleProps}>
-      {rowData && rowData[row] && rowData[row].hexes.map((hexObj) => {
+      {rowData && rowData[row] && rowData[row].hexes.flatMap((hexObj: RowHexType) => {
           const hexId = hexObj.id
           // Safely resolve hex definition from hexData (avoid spreading undefined)
           const hexDef = hexData[hexId];
           // Fall back to a minimal definition using hexId if not found in hexData
-          let props = hexDef && hexDef.id ? { ...hexDef } : { id: hexId, hexClass: hexId };
-            
-          props = {
-            ...props,
-            hexWidth: hexWidth !== 0 ? hexWidth : undefined,
-            hexMargin: typeof hexMargin !== 'undefined' ? hexMargin : undefined,
-          };
-          
-          // Handle hex repetition: rowData can specify a repeat count for a single hex definition
-          let maxHexes = hexObj.repeat || 1;
+          const baseProps = hexDef && hexDef.id ? { ...hexDef } : { id: hexId, hexClass: hexId };
+          const props = {
+            ...baseProps,
+            hexWidth: safeHexWidth !== 0 ? safeHexWidth : undefined,
+            hexMargin: typeof safeHexMargin !== 'undefined' ? safeHexMargin : undefined,
+          } as Partial<HexProps>;
 
-          let repeatPlaceholderArray = []
-          for(let i = 0; i < maxHexes; i++) {
-            repeatPlaceholderArray.push(i+"")
-          }
-
-          return repeatPlaceholderArray.map((idx)=>{
+          const maxHexes = hexObj.repeat || 1;
+          return Array.from({ length: maxHexes }, (_, i) => {
             // Bridge legacy prop names (hexLink, noTabIndex) to new Hex component props
-            const base = props as Partial<HexProps>
             const unifiedProps: Partial<HexProps> = {
-              ...base,
-              onClick: base.onClick,
-              href: base.hexLink ?? base.href,
-              tabIndex: base.noTabIndex ? -1 : base.tabIndex,
+              ...props,
+              onClick: props.onClick,
+              href: props.hexLink ?? props.href,
+              tabIndex: props.noTabIndex ? -1 : props.tabIndex,
             }
 
-            // Remove legacy keys to avoid passing unsupported props to Hex component
-            const { type: _t, onClick: _oc, hexLink: _hl, noTabIndex: _nt, ...cleanProps } = unifiedProps
-            const stableKey = `${hexObj.id}-repeat-${idx}`;
-            return (<Hex key={stableKey} {...(cleanProps as Partial<HexProps>)} />)
+            // Build a clean props object with only the allowed Hex props
+            const cleanProps: Partial<HexProps> = {
+              id: unifiedProps.id,
+              contactId: unifiedProps.contactId,
+              hexClass: unifiedProps.hexClass,
+              hexStyle: unifiedProps.hexStyle,
+              content: unifiedProps.content,
+              contentType: unifiedProps.contentType,
+              hexWidth: unifiedProps.hexWidth,
+              hexMargin: unifiedProps.hexMargin,
+              onClick: unifiedProps.onClick,
+              href: unifiedProps.href,
+              fullAreaContent: unifiedProps.fullAreaContent,
+              ariaLabel: unifiedProps.ariaLabel,
+              tabIndex: unifiedProps.tabIndex,
+            }
+
+            const stableKey = `${hexObj.id}-repeat-${i}`;
+            return (<Hex key={stableKey} {...cleanProps} />)
           })
 
       })}

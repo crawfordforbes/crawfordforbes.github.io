@@ -78,7 +78,6 @@ function ProjectGrid({
         fadeTimerRef.current = null
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination.currentItems])
 
   const renderProject = (project: ProjectType) => (

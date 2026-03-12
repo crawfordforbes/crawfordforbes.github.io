@@ -26,22 +26,14 @@ type ProjectDetailProps = {
 function ProjectDetail({
   id,
 }: ProjectDetailProps) {
-  let params = useParams()
-  let thisProjectId: string = id ? id : params.projectId ? params.projectId : '';
-  
-  const project = getProjectById(thisProjectId);
-  
-  if (!project) {
-    return (
-      <div className="project-detail-container">
-        <h2>Project Not Found</h2>
-        <p>Sorry, the project you are looking for does not exist.</p>
-      </div>
-    );
-  }
+  const params = useParams()
+  const thisProjectId: string = id ? id : params.projectId ? params.projectId : '';
 
-  // Track project view
+  const project = getProjectById(thisProjectId);
+
+  // Track project view (hook runs unconditionally; guard inside effect)
   useEffect(() => {
+    if (!project) return;
     if (window.gtag) {
       window.gtag('event', 'project_view', {
         event_category: 'engagement',
@@ -50,7 +42,16 @@ function ProjectDetail({
         project_title: project.title,
       });
     }
-  }, [project.id, project.title]);
+  }, [project]);
+
+  if (!project) {
+    return (
+      <div className="project-detail-container">
+        <h2>Project Not Found</h2>
+        <p>Sorry, the project you are looking for does not exist.</p>
+      </div>
+    );
+  }
 
   const hasLinks = project.githubLink || project.externalLink;
   const hasTechBadges = !!(project.techIds && project.techIds.length > 0);

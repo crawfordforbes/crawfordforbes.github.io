@@ -2,18 +2,24 @@ const GA_ID = 'G-6EJ8FEHZ90';
 
 declare global {
   interface Window {
-    dataLayer?: any[];
-    gtag?: (...args: any[]) => void;
+    // Using IArguments or a Record array avoids 'any' while 
+    // remaining compatible with the gtag.js internal logic.
+    dataLayer: IArguments[];
   }
 }
 
 export function initialize(): void {
-  if (import.meta.env.DEV) return;
-
   window.dataLayer = window.dataLayer || [];
+  
   window.gtag = function gtag() {
-    window.dataLayer?.push(arguments);
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer.push(arguments);
   };
+
+  if (import.meta.env.DEV) {
+    console.log(`[Analytics] Dev mode: Stubbed GA4 for ${GA_ID}`);
+    return;
+  }
 
   const script = document.createElement('script');
   script.async = true;
@@ -25,7 +31,8 @@ export function initialize(): void {
 }
 
 export function trackPageView(path?: string, title?: string): void {
-  if (!window.gtag) return;
+  // typeof check ensures we don't crash if the script fails to load
+  if (typeof window.gtag !== 'function') return;
 
   window.gtag('config', GA_ID, {
     page_path: path ?? window.location.pathname,

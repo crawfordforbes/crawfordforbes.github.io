@@ -70,7 +70,7 @@ export function useProjectRouting(initialProjectId?: string) {
 
     // Apply updated params (preserves other query keys)
     setSearchParams(currentParams)
-  }, [setSearchParams])
+  }, [setSearchParams, searchParams])
 
   return {
     // State

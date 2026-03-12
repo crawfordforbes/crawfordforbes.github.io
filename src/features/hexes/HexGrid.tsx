@@ -1,8 +1,6 @@
-import { logger } from '@/utils/logger';
-
 import HexRow from "@/features/hexes/HexRow"
 
-import { rowData } from "@/data/hexes/rows"
+import { rowData, type RowHexType } from "@/data/hexes/rows"
 import { hexData } from "@/data/hexes/hexes"
 import type { HexProps } from '@/features/hexes/Hex'
 import { useMemo } from 'react'
@@ -21,16 +19,11 @@ function HexGrid({
   hexWidth,
   hexMargin
 }: HexGridProps) {
-if (!grid) {
-  if (import.meta.env.DEV) {
-    logger.warn(`HexGrid: Missing grid data. Expected grid object but received: ${grid}`);
-  }
-  return null;
-}
-  // breaks out each hex grid's rows
   // Precompute rows with memo to avoid recreating arrays/objects each render
   const rowsToRender = useMemo(() => {
-    const out: Array<{ rowId: string; items: any[] }> = []
+    if (!grid) return [] as Array<{ rowId: string; items: Array<Partial<HexProps> & { _key?: string }> }>;
+
+    const out: Array<{ rowId: string; items: Array<Partial<HexProps> & { _key?: string }> }> = []
     grid.rows.forEach((rowObj) => {
       const rowId = rowObj.id
       const rowDef = rowData[rowId]
@@ -38,22 +31,21 @@ if (!grid) {
 
       for (let r = 0; r < repeat; r++) {
         // Build hex items for this row instance
-        const items = (rowDef?.hexes || []).flatMap((hexObj: any, idx: number) => {
+        const items = (rowDef?.hexes || []).flatMap((hexObj: RowHexType, idx: number) => {
           const hexId = hexObj.id
           const hexDef = hexData[hexId]
-            // Start from the canonical hex definition (from data) or a minimal fallback.
-            // Treat it as Partial<HexProps> so we can safely map data-driven fields.
-            const base = (hexDef && hexDef.id ? { ...hexDef } : { id: hexId, hexClass: hexId }) as Partial<HexProps>
+          // Start from the canonical hex definition (from data) or a minimal fallback.
+          const base = (hexDef && hexDef.id ? { ...hexDef } : { id: hexId, hexClass: hexId }) as Partial<HexProps>
 
-            // unify props into the shape Hex expects.
-            const unified: Partial<HexProps> & { _key?: string } = {
-              ...base,
-              hexWidth: hexWidth !== 0 ? hexWidth : undefined,
-              hexMargin: typeof hexMargin !== 'undefined' ? hexMargin : undefined,
-              onClick: base.onClick,
-              href: base.hexLink ?? base.href,
-              tabIndex: base.noTabIndex ? -1 : base.tabIndex,
-            }
+          // unify props into the shape Hex expects.
+          const unified: Partial<HexProps> & { _key?: string } = {
+            ...base,
+            hexWidth: hexWidth !== 0 ? hexWidth : undefined,
+            hexMargin: typeof hexMargin !== 'undefined' ? hexMargin : undefined,
+            onClick: base.onClick,
+            href: base.hexLink ?? base.href,
+            tabIndex: base.noTabIndex ? -1 : base.tabIndex,
+          }
 
           const max = hexObj.repeat || 1
           return new Array(max).fill(0).map((_, repeatIdx) => ({ ...unified, _key: `${rowId}_${idx}_${repeatIdx}` }))
