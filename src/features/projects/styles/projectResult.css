@@ -64,6 +64,7 @@
     var(--shade-7) 100%
   );
   animation: gradientAngleSpin 36s ease infinite;
+  animation-play-state: paused;
   opacity: 0;
   filter: blur(0px);
   transition: opacity var(--transition-rules-slow), filter var(--transition-rules-slow);
@@ -72,6 +73,8 @@
 }
 
 .project-result:hover .inner::after {
+  animation-play-state: running;
+  will-change: background;
   opacity: .5;
   filter: blur(40px);
   transition: opacity var(--transition-rules-slow), filter var(--transition-rules-slow);
@@ -130,6 +133,7 @@
   line-height: 1.1;
   align-self: flex-end;
   animation: titleGlow 16s ease infinite;
+  will-change: filter;
   cursor: pointer;
 }
 

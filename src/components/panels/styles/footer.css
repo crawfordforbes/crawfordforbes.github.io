@@ -108,6 +108,7 @@
   --title-size: 1.625rem;
 
   animation: titleGlow 16s ease infinite;
+  will-change: filter;
 }
 
 .footer .description,

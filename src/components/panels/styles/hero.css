@@ -60,6 +60,7 @@
 
   line-height: .9;
   animation: titleGlow 16s ease infinite;
+  will-change: filter;
 }
 
 .hero .subtitle {
@@ -68,6 +69,7 @@
 
   line-height: 1.2;
   animation: titleGlow 32s ease infinite;
+  will-change: filter;
 }
 
 /* todo: do this smarter with clamp() */

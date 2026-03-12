@@ -96,6 +96,7 @@
   color: var(--logo-text);
 
   animation: titleGlow 16s ease infinite;
+  will-change: filter;
 }
 
 .hex.logo:hover * {

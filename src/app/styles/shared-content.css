@@ -87,6 +87,7 @@ a.skip-link:focus {
 .subtitle.overlay {
   color: var(--overlay-title-color);
   animation: titleGlow 32s ease infinite;
+  will-change: filter;
 }
 
 .copyright {
@@ -388,6 +389,7 @@ a.skip-link:focus {
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
   line-height: 1.2;
   animation: titleGlow 32s ease infinite;
+  will-change: filter;
 
   text-align: center;
   color: var(--body-color-contrast);
