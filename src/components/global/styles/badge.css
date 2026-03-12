@@ -158,3 +158,8 @@
   opacity: .65;
   cursor: default;
 }
+
+.badge span.title {
+  font-family: var(--font-small-display);
+  font-weight: 600;
+}
