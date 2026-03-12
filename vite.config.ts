@@ -20,8 +20,11 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor'
-          }
+          // Group React together
+          if (id.includes('react')) return 'vendor-react';
+          // Group everything else separately
+          return 'vendor-libs';
+        }
         },
         chunkFileNames: (chunkInfo) => {
           const facadeModuleId = chunkInfo.facadeModuleId 
@@ -46,20 +49,14 @@ export default defineConfig({
         }
       }
     },
-    minify: 'esbuild', // Using esbuild for faster builds
-    
-    // Chunk size warning limit set to 650kb (vs default 500kb).
-    // The main chunk (~604kb uncompressed, ~210kb gzipped) contains the projects
-    // data file (src/data/projects/projects.tsx) with extensive JSX-based descriptions,
-    // VideoPlayer, SimpleImage, and Caption components. Since this is a single-page
-    // portfolio where all routes render the same Projects component, there's no
-    // opportunity for effective route-based code splitting. Dynamic imports of
-    // individual project descriptions would reduce bundle size but would hurt UX
-    // (slower project detail loads). The gzipped size is acceptable for a modern
-    // SPA with rich media content.
-    chunkSizeWarningLimit: 650,
-    // Target modern browsers for smaller bundles
-    target: 'es2022'
+    minify: 'terser', // Using terser for better compression
+    terserOptions: {
+      compress: {
+        drop_console: true, // Clean up the main thread by removing logs
+      },
+    },
+    chunkSizeWarningLimit: 500,
+    target: 'esnext'
   },
   server: {
     hmr: {
