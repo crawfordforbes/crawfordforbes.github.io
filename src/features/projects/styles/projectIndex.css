@@ -163,3 +163,18 @@
     flex-direction: column;
   }
 }
+
+/* Reduced-motion: disable transforms and fade transitions for results */
+@media (prefers-reduced-motion: reduce) {
+  .project-index .results,
+  .project-index .results .result-item {
+    transition-property: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .project-index .results.fade {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}

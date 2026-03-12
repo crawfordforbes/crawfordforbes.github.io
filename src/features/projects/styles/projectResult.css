@@ -342,3 +342,23 @@
   outline: 2px solid var(--focus-shadow);
   outline-offset: 2px;
 }
+
+/* Reduced-motion: disable animated overlays and footer-badge transitions */
+@media (prefers-reduced-motion: reduce) {
+  .project-result .inner::after,
+  .project-result .card-top .inner::before {
+    animation: none !important;
+    animation-play-state: paused !important;
+    transition-property: none !important;
+    will-change: auto !important;
+    /* keep a sensible visible state */
+    opacity: .5 !important;
+    filter: none !important;
+  }
+
+  .project-result .footer-links .link-badge,
+  .project-result .footer-links .link-badge .badge .badge-content {
+    transition-property: none !important;
+    top: 44px !important;
+  }
+}

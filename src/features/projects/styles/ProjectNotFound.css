@@ -46,3 +46,13 @@
   background-color: var(--color-primary-dark, #0056b3);
   transform: translateY(-1px);
 }
+
+/* Reduced-motion: disable button hover transform/transition */
+@media (prefers-reduced-motion: reduce) {
+  .project-not-found .btn,
+  .project-not-found .btn.primary,
+  .project-not-found .btn.primary:hover {
+    transition-property: none !important;
+    transform: none !important;
+  }
+}

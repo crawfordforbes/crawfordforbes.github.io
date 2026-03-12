@@ -182,3 +182,15 @@
     left: 0;
   }
 }
+
+/* Reduced-motion: remove left/hover transitions for filter UI */
+@media (prefers-reduced-motion: reduce) {
+  .project-index .filter-toggle.hex,
+  .project-index .filters.hide-mobile-filter .filter-wrapper,
+  .project-index .filter-wrapper,
+  .project-index .filter-button,
+  .project-index .filter-item,
+  .project-index .filter-item.bottom {
+    transition-property: none !important;
+  }
+}
