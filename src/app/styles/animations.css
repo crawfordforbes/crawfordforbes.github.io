@@ -84,3 +84,49 @@
   color: var(--to-text);
   transition: background-position var(--transition-rules-slow), color var(--transition-rules-slow);
 }
+
+/* Reduced-motion explicit overrides for animations and gradient spins
+   Components will still have a global reduced-motion reset, but these
+   explicit rules ensure key animations used site-wide are disabled and
+   provide a readable text-shadow fallback for titles. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --gradient-angle: 60deg;
+  }
+
+  /* Disable core keyframe-driven animations */
+  /* Only target elements known to use keyframe animations from the audit */
+  .overlay .title,
+  .title.overlay,
+  .hero .title,
+  .hero .subtitle,
+  .hex.logo .logo-text,
+  .loading-skeleton,
+  .to-from-colors .badge-content,
+  .hex-header .hex:not([class*="-body-bg"])::before,
+  .project-result .inner::after {
+    animation: none !important;
+    animation-play-state: paused !important;
+    animation-name: none !important;
+    transition-duration: 0.01ms !important;
+    transition-property: none !important;
+    will-change: auto !important;
+    filter: none !important;
+  }
+
+  /* Title fallback using a static text-shadow (applies only where titleGlow was used) */
+  .overlay .title,
+  .title.overlay,
+  .hero .title,
+  .hero .subtitle,
+  .hex.logo .logo-text {
+    text-shadow: var(--shade-4) 1px 1px, var(--shade-4) -1px -1px, var(--shade-4) -1px 1px, var(--shade-4) 1px -1px;
+    filter: none !important;
+  }
+
+  /* Ensure loading skeletons don't animate */
+  .loading-skeleton {
+    animation: none !important;
+    background-position: 0 0 !important;
+  }
+}

@@ -57,7 +57,12 @@ textarea:focus {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-play-state: paused !important;
+    animation-name: none !important;
     transition-duration: 0.01ms !important;
+    transition-property: none !important;
+    scroll-behavior: auto !important;
+    will-change: auto !important;
   }
 }
 
