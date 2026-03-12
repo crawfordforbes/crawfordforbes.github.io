@@ -53,9 +53,6 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  animation: gradientAngleSpin 198s ease infinite;
-  will-change: background;
-  transform: translateZ(0);
   position: absolute;
 }
 
@@ -74,6 +71,10 @@
 @media screen and (min-width: 40em){
   .hex-header {
     --header-offset: 24px;
+  }
+  .hex-header .hex:not([class*="-body-bg"])::before {
+    animation: gradientAngleSpin 198s ease infinite;
+    transform: translateZ(0);
   }
 }
 
