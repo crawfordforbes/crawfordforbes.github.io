@@ -106,3 +106,22 @@
   --logo-text: var(--logo-text-hover);
   transition: fill var(--transition-rules), color var(--transition-rules);
 }
+
+/* Reduced-motion: disable titleGlow and fill transitions for logo SVGs */
+@media (prefers-reduced-motion: reduce) {
+  .hex.logo * {
+    transition-property: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .hex.logo .logo-text {
+    animation: none !important;
+    text-shadow: var(--shade-4) 1px 1px, var(--shade-4) -1px -1px, var(--shade-4) -1px 1px, var(--shade-4) 1px -1px;
+    filter: none !important;
+  }
+
+  .hex.logo:hover * {
+    transition-property: none !important;
+  }
+}
