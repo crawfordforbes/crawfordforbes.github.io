@@ -82,3 +82,11 @@
 .image-container[style*="aspect-ratio"] {
   width: 100%;
 }
+
+/* Reduced-motion: disable loading skeleton animation */
+@media (prefers-reduced-motion: reduce) {
+  .loading-skeleton {
+    animation: none !important;
+    background-position: 0 0 !important;
+  }
+}

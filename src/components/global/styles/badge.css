@@ -163,3 +163,16 @@
   font-family: var(--font-small-display);
   font-weight: 600;
 }
+
+/* Reduced-motion: disable badge color/background transitions */
+@media (prefers-reduced-motion: reduce) {
+  .badge .badge-content,
+  .badge.highlight .badge-content,
+  .badge.highlight .badge-content .fa-icon,
+  .badge:has(a, button) .badge-content .fa-icon::after,
+  .badge:has(a, button):hover .badge-content .fa-icon::after,
+  .badge:has(a, button):focus .badge-content .fa-icon::after,
+  .badge:has(a, button):focus-within .badge-content .fa-icon::after {
+    transition-property: none !important;
+  }
+}

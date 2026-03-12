@@ -216,3 +216,14 @@
     width: 100%;
   }
 }
+
+/* Reduced-motion: disable hover transforms and transitions for error boundary buttons */
+@media (prefers-reduced-motion: reduce) {
+  .error-boundary__button,
+  .error-boundary__button:hover,
+  .error-boundary__button:focus {
+    transition-property: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
