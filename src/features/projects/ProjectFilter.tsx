@@ -51,8 +51,6 @@ function ProjectFilter({
           <legend className="title" id="role-filter-heading">Role</legend>
           <ul 
             className="filter-list" 
-            role="group" 
-            aria-labelledby="role-filter-heading"
             aria-describedby="filter-status"
           >
             {availableRoleIds && availableRoleIds.map((roleId, idx) => {
@@ -91,8 +89,6 @@ function ProjectFilter({
           <legend className="title" id="tech-filter-heading">Technology</legend>
           <ul 
             className="filter-list"
-            role="group" 
-            aria-labelledby="tech-filter-heading"
             aria-describedby="filter-status"
           >
             {availableTechIds && availableTechIds.map((techId, idx) => {

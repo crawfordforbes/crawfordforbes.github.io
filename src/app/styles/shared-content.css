@@ -388,8 +388,7 @@ a.skip-link:focus {
   --shadow-scale: .75px;
   --inverted-shadow-scale: calc(var(--shadow-scale) * -1);
   line-height: 1.2;
-  animation: titleGlow 32s ease infinite;
-  will-change: filter;
+  text-shadow: var(--shade-4) 1px 1px,var(--shade-4) -1px -1px,var(--shade-4) -1px 1px,var(--shade-4) 1px -1px;
 
   text-align: center;
   color: var(--body-color-contrast);

@@ -30,7 +30,7 @@ const Badge = ({
   const content = (
     <>
       {iconClass && <span className="fa-icon"><FontAwesomeIcon icon={iconClass} /></span>}
-      {title && <h4 className="title">{title}</h4>}
+      {title && <span className="title">{title}</span>}
     </>
   );
 
