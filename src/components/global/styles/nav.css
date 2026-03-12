@@ -80,6 +80,21 @@
   padding: 16px;
 }
 
+/* Reduced-motion: disable nav open/hover transitions */
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle-hex,
+  .nav-hex,
+  .nav-toggle,
+  .nav .nav-links {
+    transition-property: none !important;
+    will-change: auto !important;
+  }
+
+  /* Keep `.nav-hex` positions as defined so the `.open` class can
+     toggle them instantly; only disable transitions to make the change
+     non-animated. */
+}
+
 .nav .locale {
   position: absolute;
   top: 32px;
