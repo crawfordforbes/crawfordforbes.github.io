@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { ComponentErrorBoundary } from "@/components/global/ErrorBoundaryWrappers"
 import Nav from "@/components/global/Nav"
 import HexHeader from "@/components/panels/HexHeader"
@@ -5,8 +6,9 @@ import Hero from "@/components/panels/Hero"
 import IntroPanel from "@/components/panels/IntroPanel"
 import TextPanel from "@/components/panels/TextPanel"
 import FavoriteTechs from "@/components/panels/FavoriteTechs"
-import ProjectIndex from "@/features/projects/ProjectIndex"
 import Footer from "@/components/panels/Footer"
+
+const ProjectIndex = lazy(() => import("@/features/projects/ProjectIndex"))
 
 function Projects() {
 
@@ -35,7 +37,9 @@ function Projects() {
           <TextPanel textPanelId="projects-title" />
         </ComponentErrorBoundary>
         <ComponentErrorBoundary componentName="ProjectIndex">
-          <ProjectIndex />
+          <Suspense fallback={null}>
+            <ProjectIndex />
+          </Suspense>
         </ComponentErrorBoundary>
       </main>
       <footer>

@@ -70,9 +70,6 @@
     <link rel="dns-prefetch" href="//www.google-analytics.com" />
     
     <!-- Preload critical fonts -->
-    <link rel="preload" href="/fonts/red-hat-text-v18-latin-500.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/red-hat-text-v18-latin-600.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/red-hat-text-v18-latin-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/bakbak-one-v10-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/oxanium-v21-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     
@@ -82,6 +79,8 @@
           imagesizes="100vw"
           fetchpriority="high"
           type="image/avif" />
+
+    <link rel="modulepreload" href="/src/app/main.tsx" />
     
     <!-- JSON-LD Structured Data for Rich Snippets -->
     <script type="application/ld+json">
