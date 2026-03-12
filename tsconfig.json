@@ -5,11 +5,11 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-  "baseUrl": ".",
-  "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "moduleResolution": "bundler",
     "strict": true,
     "skipLibCheck": true,
-    "types": ["vite/client"],
+    "types": ["gtag.js", "vite/client"],
     "paths": {
       "@/*": ["./src/*", "./src"]
       ,

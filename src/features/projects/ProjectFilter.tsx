@@ -57,7 +57,7 @@ function ProjectFilter({
           >
             {availableRoleIds && availableRoleIds.map((roleId, idx) => {
               const selected = selectedRoleIds.some((id) => id === roleId.id) || (hoveredFilters && hoveredFilters === roleId.id)
-              let placement = idx < (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
+              const placement = idx < (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
               
               return (
                 <li 
@@ -97,7 +97,7 @@ function ProjectFilter({
           >
             {availableTechIds && availableTechIds.map((techId, idx) => {
               const selected = selectedTechIds.some((id) => id === techId.id) || (hoveredFilters && hoveredFilters === techId.id)
-              let placement = idx + availableRoleIds.length < (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
+              const placement = idx + availableRoleIds.length < (availableRoleIds.length + availableTechIds.length) / 2 ? "top" : "bottom";
               
               return (
                 <li 

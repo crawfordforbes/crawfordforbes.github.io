@@ -12,7 +12,7 @@ export const logger = {
    * Debug logging - only in development
    * Use for detailed troubleshooting information
    */
-  debug: (...args: any[]) => {
+  debug: (...args: Parameters<typeof console.debug>): void => {
     if (isDev) {
       console.debug(...args);
     }
@@ -22,7 +22,7 @@ export const logger = {
    * Info logging - only in development
    * Use for general informational messages
    */
-  info: (...args: any[]) => {
+  info: (...args: Parameters<typeof console.info>): void => {
     if (isDev) {
       console.info(...args);
     }
@@ -32,7 +32,7 @@ export const logger = {
    * Warning logging - only in development
    * Use for non-critical issues that should be addressed
    */
-  warn: (...args: any[]) => {
+  warn: (...args: Parameters<typeof console.warn>): void => {
     if (isDev) {
       console.warn(...args);
     }
@@ -43,15 +43,14 @@ export const logger = {
    * Use for critical errors that need attention
    * Consider also tracking to analytics in production
    */
-  error: (...args: any[]) => {
+  error: (...args: Parameters<typeof console.error>): void => {
     console.error(...args);
-
   },
 
   /**
    * Conditional logging based on level
    */
-  log: (level: LogLevel, ...args: any[]) => {
+  log: (level: LogLevel, ...args: Parameters<typeof console.log>): void => {
     switch (level) {
       case 'debug':
         logger.debug(...args);

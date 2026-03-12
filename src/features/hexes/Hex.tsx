@@ -112,9 +112,8 @@ export type HexProps = {
        return <div className="hex-visual-content">{content}</div>
      }
  
-     return <div className="hex-text-content">{content}</div>
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [contentType, content, contactId, hexWidth])
+    return <div className="hex-text-content">{content}</div>
+    }, [contentType, content, contactId, hexWidth])
  
   // Content node
   const hexContent = (
@@ -123,16 +122,16 @@ export type HexProps = {
     </>
   )
  
-   // Common props for all element types (stable identity)
+  // Common props for all element types (stable identity)
   // Inline CSS vars for layout (moved from per-hex <style> into CSS variables)
-  const inlineVars: React.CSSProperties = {
-    ['--hex-width' as any]: `${hexWidth}px`,
-    ['--hex-margin' as any]: `${hexMargin}px`,
-  }
+  const inlineVars = useMemo<Record<string, string>>(() => ({
+    '--hex-width': `${hexWidth}px`,
+    '--hex-margin': `${hexMargin}px`,
+  }), [hexWidth, hexMargin])
 
   const commonProps = useMemo(() => ({
     className: classes,
-    style: { ...(hexStyle as object), ...(inlineVars as object) } as React.CSSProperties,
+    style: { ...(hexStyle ?? {}), ...(inlineVars as React.CSSProperties) } as React.CSSProperties,
     'aria-label': ariaLabel,
     tabIndex,
     onKeyDown: handleKeyDown
