@@ -75,3 +75,38 @@
   }
   
 }
+
+/* Reduced-motion: keep intro gradient but fix angle and disable transitions */
+@media (prefers-reduced-motion: reduce) {
+  .intro-panel h3 {
+    transition: none !important;
+    background-image: linear-gradient(
+      60deg,
+      var(--shade-1) 0%,
+      var(--shade-3) 20%,
+      var(--shade-2) 20%,
+      var(--shade-4) 30%,
+      var(--shade-3) 30%,
+      var(--shade-5) 35%,
+      var(--shade-4) 35%,
+      var(--shade-6) 40%,
+      var(--shade-5) 40%,
+      var(--shade-7) 45%,
+      var(--shade-6) 45%,
+      var(--shade-8) 50%,
+      var(--shade-8) 50%,
+      var(--shade-6) 55%,
+      var(--shade-7) 55%,
+      var(--shade-5) 60%,
+      var(--shade-6) 60%,
+      var(--shade-4) 65%,
+      var(--shade-5) 65%,
+      var(--shade-3) 70%,
+      var(--shade-4) 70%,
+      var(--shade-2) 80%,
+      var(--shade-3) 80%,
+      var(--shade-1) 100%
+    );
+    will-change: auto !important;
+  }
+}

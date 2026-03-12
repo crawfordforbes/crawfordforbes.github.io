@@ -83,3 +83,13 @@
     --header-offset: 32px;
   }
 }
+
+/* Reduced-motion: disable gradient spin applied to header decorative ::before */
+@media (prefers-reduced-motion: reduce) {
+  .hex-header .hex:not([class*="-body-bg"])::before {
+    animation: none !important;
+    animation-play-state: paused !important;
+    transition-property: none !important;
+    will-change: auto !important;
+  }
+}
