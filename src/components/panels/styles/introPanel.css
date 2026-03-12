@@ -46,19 +46,19 @@
     var(--shade-5) 40%,
     var(--shade-7) 45%,
     var(--shade-6) 45%,
-    var(--shade-6) 50%,
-    var(--shade-5) 50%,
-    var(--shade-7) 55%,
+    var(--shade-8) 50%,
+    var(--shade-8) 50%,
     var(--shade-6) 55%,
-    var(--shade-8) 60%,
-    var(--shade-7) 60%,
-    var(--shade-9) 65%,
-    var(--shade-8) 65%,
-    var(--shade-10) 70%,
-    var(--shade-9) 70%,
-    var(--shade-11) 80%,
-    var(--shade-10) 80%,
-    var(--shade-12) 100%);
+    var(--shade-7) 55%,
+    var(--shade-5) 60%,
+    var(--shade-6) 60%,
+    var(--shade-4) 65%,
+    var(--shade-5) 65%,
+    var(--shade-3) 70%,
+    var(--shade-4) 70%,
+    var(--shade-2) 80%,
+    var(--shade-3) 80%,
+    var(--shade-1) 100%);
 }
 
 @media screen and (min-width: 40em){

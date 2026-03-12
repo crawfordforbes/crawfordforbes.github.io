@@ -132,9 +132,8 @@
   margin: 0;
   line-height: 1.1;
   align-self: flex-end;
-  animation: titleGlow 16s ease infinite;
-  will-change: filter;
   cursor: pointer;
+  text-shadow: var(--shade-4) 1px 1px, var(--shade-4) -1px -1px, var(--shade-4) -1px 1px, var(--shade-4) 1px -1px;
 }
 
 .project-result:hover .title.primary {
