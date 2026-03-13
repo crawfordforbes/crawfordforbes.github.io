@@ -9,6 +9,7 @@
   width: 100%;
   display: block; /* Ensure it's block container */
   min-height: 788px; /* Minimum height to prevent layout shift when filter panel toggles */
+  padding-bottom: 128px;
 }
 
 .project-index .helper-results {

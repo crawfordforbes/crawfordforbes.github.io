@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-import Hex from '@/features/hexes/Hex'
 import Badge from '@/components/global/Badge'
 
 import { badgeData } from '@/data/global/badges';
@@ -9,13 +7,7 @@ import './styles/footer.css'
 
 function Footer() {
 
-  const navItems = ['hire', 'github-index', 'projects-link', 'linked-in',  'resume'];
-  const hexWidth = 360;
-  const hexMargin = 3
-  const inlineVars = useMemo<Record<string, string>>(() => ({
-    '--hex-width': `${hexWidth}px`,
-    '--hex-margin': `${hexMargin}px`,
-  }), [hexWidth, hexMargin])
+  const navItems = ['github-index', 'linked-in', 'resume', 'hire',  'projects-link'];
 
   function renderBadges() {
     return navItems.map((item:string, idx:number) => {
@@ -25,70 +17,27 @@ function Footer() {
             iconClass={badgeData?.[item]?.iconClass}
             title={badgeData?.[item]?.title}
             link={badgeData?.[item]?.link}
-            extraClass="pill secondary nav-badge"
+            extraClass="pill quaternary nav-badge"
             badgeOnClick={badgeData?.[item]?.badgeOnClick}
           />
         </li>
       );
     });
   }
-  const commonProps = useMemo(() => ({
-    style: inlineVars as React.CSSProperties,
-    hexWidth: hexWidth
-  }), [hexWidth, inlineVars])
-
-  const commonRowProps = useMemo(() => ({
-    style: inlineVars as React.CSSProperties,
-  }), [inlineVars])
 
   return (
     <footer className="footer">
-      <div className="footer-hex-wrapper">
-        <div className="hex-grid">
-          <div className="hex-row" {...commonRowProps}>
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex footer-text" {...commonProps}  contentType="visual" content={
-              <div className="footer-content text-content">
-                <h2 className="title">{badgeData.name.title}</h2>
-                <p className="description">{footerContent.description}</p>
-                <p className="copyright">© {new Date().getFullYear()} Crawford Forbes</p>
-              </div>
-            } />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-          </div>
-          <div className="hex-row" {...commonRowProps}>
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex footer-links" {...commonProps}  content={
-              <div className="footer-text">
-                <ul className="nav-links">
-                  {renderBadges()}
-                </ul>
-              </div>
-            } />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-          </div>
-          <div className="hex-row" {...commonRowProps}>
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-            <Hex hexClass="footer-hex decorative" {...commonProps} />
-          </div>
-        </div>
+
+      <div className="footer-content text-content">
+        <h2 className="title">{badgeData.name.title}</h2>
+        <p className="description">{footerContent.description}</p>
+        <p className="copyright">© {new Date().getFullYear()} Crawford Forbes</p>
       </div>
+
+      <ul className="nav-links">
+        {renderBadges()}
+      </ul>
+            
     </footer>
   )
 }
