@@ -8,17 +8,30 @@ export type RoleType = {
 }
 
 export const roleData: Record<string, RoleType> = {
+  "lead": {
+    id: "lead",
+    title: "Lead",
+    iconClass: ['fas', 'people-arrows'],
+    filterable: true,
+  },
+  "architect": {
+    id: "architect",
+    title: "Architect",
+    iconClass: ['fas', 'code'],
+    filterable: true,
+  },
+
   "developer": {
     id: "developer",
     title: "Developer",
     iconClass: ['fas', 'code'],
-    filterable: true,
+    filterable: false,
   },
   "designer": {
     id: "designer",
     title: "Designer",
     iconClass: ['fas', 'icons'],
-    filterable: true,
+    filterable: false,
   },
   "solo": {
     id: "solo",
@@ -28,14 +41,9 @@ export const roleData: Record<string, RoleType> = {
   },
   "contributor": {
     id: "contributor",
-    title: "Contributor",
+    title: "Collaborative",
     iconClass: ['fas', 'people-group'],
     filterable: true,
   },
-  "lead": {
-    id: "lead",
-    title: "Lead",
-    iconClass: ['fas', 'people-arrows'],
-    filterable: true,
-  }
+
 }

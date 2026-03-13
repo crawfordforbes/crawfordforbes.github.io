@@ -238,12 +238,9 @@
   --intro-panel-text: var(--color-dark-text);
 
   /* footer */
-  --footer-content-bg-top-color: var(--plum);
-  --footer-content-bg-middle-color: var(--plum);
-  --footer-content-bg-bottom-color: var(--teal);
+  --footer-content-bg-top-color: var(--secondary-background);
+  --footer-content-bg-bottom-color: var(--primary-background);
   --footer-content-text: var(--secondary-text);  
-  --footer-nav-bg-top-color: var(--tertiary-background);
-  --footer-nav-bg-bottom-color: var(--tertiary-background-contrast);
-  --footer-decorative-hex-color-odd: var(--primary-background);
-  --footer-decorative-hex-color-even: var(--primary-background-contrast);
+  --footer-copyright-text: var(--primary-text);
+  --footer-decorative-hex-bg: var(--primary-background-contrast);
 }

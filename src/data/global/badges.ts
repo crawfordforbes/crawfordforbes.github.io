@@ -28,11 +28,11 @@ export const badgeData: Record<string, BadgeRecord> = {
   },
   "tagline1": {
     id: "tagline1",
-    title: "Code + Architecture"
+    title: "Systems + Strategy"
   },
   "tagline2": {
     id: "tagline2",
-    title: "UI Engineer"
+    title: "UI Architect"
   },
   "locale": {
     id: "locale",

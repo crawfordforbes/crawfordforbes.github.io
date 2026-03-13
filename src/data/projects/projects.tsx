@@ -35,7 +35,7 @@ export const projectData: Record<string, ProjectType> = {
     imageIds: ["sunshine-nights-desktop", "sunshine-nights-press-page"],
     githubLink: "https://github.com/crawfordforbes/sunshinev3",
     externalLink:"http://sunshinenights.com/",
-    roleIds: ["developer", "solo"],
+    roleIds: ["architect", "developer", "solo"],
     description: (
       <>
         <article className='description-with-title'>
@@ -70,7 +70,7 @@ export const projectData: Record<string, ProjectType> = {
     id: "crawford-forbes",
     title: "Crawford Forbes Portfolio",
     imageIds: ["crawford-forbes-header", "crawford-forbes-projects-index", "crawford-forbes-projects-detail"],
-    roleIds: ["developer", "designer", "solo"],
+    roleIds: ["architect", "developer", "designer", "solo"],
     featured: true,
     description: (
       <>
@@ -115,7 +115,7 @@ export const projectData: Record<string, ProjectType> = {
     id: "moneytree",
     title: "MoneyTree Explorer",
     imageIds: ["moneytree-history-filter-selection", "moneytree-history-unfiltered", "moneytree-pie-charts"],
-    roleIds: ["developer", "contributor"],
+    roleIds: ["architect", "developer", "contributor"],
     featured: true,
     description: (
       <>
@@ -150,7 +150,7 @@ export const projectData: Record<string, ProjectType> = {
     imageIds: ["palm-springs-hero", "palm-springs-listings", "palm-springs-media-gallery", "palm-springs-midcentury-modern-design"],
     externalLink: "https://www.visitpalmsprings.com/",
     roleIds: ["developer", "lead", "contributor"],
-    featured: true,
+    featured: false,
     description: (
       <>
         <article className='description-with-title'>
