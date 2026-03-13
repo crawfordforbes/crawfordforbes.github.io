@@ -41,7 +41,7 @@ export const roleData: Record<string, RoleType> = {
   },
   "contributor": {
     id: "contributor",
-    title: "Collaborative",
+    title: "Contributor",
     iconClass: ['fas', 'people-group'],
     filterable: true,
   },
