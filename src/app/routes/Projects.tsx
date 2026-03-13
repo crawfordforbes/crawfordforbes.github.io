@@ -5,7 +5,6 @@ import HexHeader from "@/components/panels/HexHeader"
 import Hero from "@/components/panels/Hero"
 import IntroPanel from "@/components/panels/IntroPanel"
 import TextPanel from "@/components/panels/TextPanel"
-import FavoriteTechs from "@/components/panels/FavoriteTechs"
 import Footer from "@/components/panels/Footer"
 
 const ProjectIndex = lazy(() => import("@/features/projects/ProjectIndex"))
@@ -43,12 +42,6 @@ function Projects() {
         </ComponentErrorBoundary>
       </main>
       <footer>
-        <ComponentErrorBoundary componentName="TextPanel">
-          <TextPanel textPanelId="favorites-title" />
-        </ComponentErrorBoundary>
-        <ComponentErrorBoundary componentName="FavoriteTechs">
-          <FavoriteTechs />
-        </ComponentErrorBoundary>
         <ComponentErrorBoundary componentName="Footer">
           <Footer />
         </ComponentErrorBoundary>
