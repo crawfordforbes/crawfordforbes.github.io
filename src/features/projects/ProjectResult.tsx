@@ -81,7 +81,7 @@ function ProjectResult({
   }, [project?.techIds, selectedTechIds, hoveredFilters, selectTechFilterClick, highlightFilterHover]);
 
   const roleBadges = useMemo(() => {
-    return project?.roleIds?.map((roleId: string) => {
+    return project?.roleIds?.filter(roleId => roleData[roleId]?.filterable).map((roleId: string) => {
       const role = roleData[roleId];
       if (!role) return null;
 
@@ -104,7 +104,7 @@ function ProjectResult({
     });
   }, [project?.roleIds, selectedRoleIds, hoveredFilters, selectRoleFilterClick, highlightFilterHover]);
 
-  const hasRoleIds = !!(project?.roleIds && project?.roleIds.length > 0);
+  const hasRoleIds = !!(project?.roleIds && project?.roleIds.length > 0)
   const hasTechIds = !!(project?.techIds && project?.techIds.length > 0);
   const hasLinks = !!(project?.githubLink || project?.externalLink);
   const footerLinkHexWidth = 132

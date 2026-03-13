@@ -4,5 +4,5 @@ type IntroPanelContent = {
 };
 
 export const introPanelContent: IntroPanelContent = {
-  title: "Building polished, data-driven web apps with a focus on performance and accessibility.",
+  title: "Architecting high-performance, data-driven systems where intentional design meets engineering integrity.",
 }

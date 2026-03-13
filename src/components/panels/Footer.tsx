@@ -1,7 +1,8 @@
 import Badge from '@/components/global/Badge'
+import Hex from '@/features/hexes/Hex'
 
 import { badgeData } from '@/data/global/badges';
-import { footerContent } from '@/data/content/footer'
+import { footerContent, footerStatus } from '@/data/content/footer'
 
 import './styles/footer.css'
 
@@ -26,19 +27,24 @@ function Footer() {
   }
 
   return (
-    <footer className="footer">
+    <div className="main-footer">
+      <div className="footer-content">
+        <div className="text-content">
+          <h2 className="title">{badgeData.name.title}</h2>
+          <p className="description">{footerContent.description}</p>
+          <div className="status hex-row">
+            <Hex hexWidth={16} hexClass="footer-hex" />{footerStatus.description}
+          </div>
+        </div>
 
-      <div className="footer-content text-content">
-        <h2 className="title">{badgeData.name.title}</h2>
-        <p className="description">{footerContent.description}</p>
-        <p className="copyright">© {new Date().getFullYear()} Crawford Forbes</p>
+        <ul className="nav-links">
+          {renderBadges()}
+        </ul>
       </div>
-
-      <ul className="nav-links">
-        {renderBadges()}
-      </ul>
-            
-    </footer>
+      <div className="copyright">
+        <p>© {new Date().getFullYear()} Crawford Forbes</p>
+      </div>
+    </div>
   )
 }
 
