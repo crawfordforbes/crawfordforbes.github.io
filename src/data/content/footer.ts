@@ -1,5 +1,5 @@
 export const footerContent = {
-  description: "I’m a UI Architect with a decade of experience building for the web. I like solving complex problems with clean code and helping teams ship high-performance interfaces.",
+  description: "UI Architect with a decade of experience building for the web. I like solving complex problems with clean code and helping teams ship high-performance interfaces.",
 }
 
 export const footerStatus = {
