@@ -1,129 +1,154 @@
 # Crawford Forbes — Portfolio
 
-This repository contains my professional portfolio site, a production‑minded single page application that demonstrates modern front‑end engineering, performance work, and practical media pipelines.
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white&style=flat-square)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&style=flat-square)
+![Deployed](https://img.shields.io/badge/Deployed-GitHub%20Pages-222?logo=github&style=flat-square)
+![Tests](https://github.com/crawfordforbes/crawfordforbes.github.io/actions/workflows/deploy-pages.yml/badge.svg)
 
-### Architectural Note: 
-This codebase is currently being used to test the limits of AI-driven scaffolding and Agentic workflows. As part of this experiment, you may encounter instances of "speculative complexity" (e.g., redundant abstraction layers or over-engineered utility patterns) introduced during the automated build phase.
-I am currently in a refactoring cycle to prune these experimental patterns back to a minimalist production state.
+My personal portfolio site — a single-page app built with React and TypeScript. The site showcases past projects, but the codebase itself is also meant to reflect how I work day-to-day.
 
-Live site: https://crawfordforbes.com
-
-## At a glance
-
-- Built with React + TypeScript and Vite for fast iteration and small bundles
-- Focused on front‑end performance, accessibility, and pragmatic full‑stack tooling
-- Includes automated image and video optimization pipelines, analytics, and CI/CD
+**Live:** https://crawfordforbes.com
 
 ---
 
-## Technical Stack
+## About this project
 
-- React 19 + TypeScript
-- Vite (SWC) for builds and dev server
-- React Router for client routing
-- Sharp for image processing; FFmpeg (scripts) for video transcoding
-- GitHub Actions for CI/CD and GitHub Pages deployment
+The portfolio is as much a part of my work as anything listed in it. I built it to have something I could point to that shows both the finished product and the thinking behind it — the asset pipeline, the testing setup, the CI/CD configuration.
 
-## Key Capabilities
+The V2 transition was tracked as a proper project: a phased roadmap with scoped [GitHub Issues](https://github.com/crawfordforbes/crawfordforbes.github.io/issues) for architectural milestones, technical debt, and feature parity. Ten phases, each with acceptance criteria and affected files listed. The full [project board](https://github.com/users/crawfordforbes/projects/1) is public if you want to see the history. It's the same workflow I'd use on a team.
 
-- Dynamic project filtering with URL persistence
-- Responsive, accessible UI with keyboard support and semantic markup
-- Automated asset pipeline producing AVIF/WebP/JPEG variants and WebM/MP4 video outputs
-- Performance-led improvements: bundle splitting, asset optimization, and LCP tuning
-- Observability: GA4 integration (analytics), error hooks ready for Sentry
-- Security: Content Security Policy (CSP) configured and reviewed
+Current Lighthouse scores:
+
+| Metric | Score |
+|---|---|
+| Performance | 94\* |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+\* Hosted on GitHub Pages; the gap is likely infrastructure-related rather than anything in the app itself.
+
+Some things worth noting:
+
+- **Agentic workflow** — built using a structured LLM-assisted process:
+  - **Orchestration** — authored custom prompt files, copilot instructions, and GitHub Issues directly from the project roadmap
+  - **Execution loop** — a "fetch → propose → approve → implement → revise" cycle: the AI fetches an issue, proposes a plan, checks in before touching anything, then we iterate until it's done
+  - **The goal** — a repeatable, high-velocity engineering loop rather than AI autocomplete
+- **Component architecture** — feature-scoped modules (`src/features/`) with co-located hooks, styles, and tests; shared primitives under `src/components/global/`
+- **Performance** — AVIF/WebP/JPEG responsive images via a Sharp pipeline, WebM/MP4 video with tuned CRF values, and code-split bundles
+- **Routing & state** — React Router 7 with URL-persistent project filters, so deep links always work
+- **Type safety** — strict TypeScript throughout; a separate `tsconfig.declarations.json` emits types for shared utilities
+- **Testing** — Vitest + Testing Library; tests run before every deploy and will cancel it if they fail
+- **Security** — Content Security Policy headers configured and reviewed; no secrets in source
+- **Observability** — GA4 with a dev-mode kill-switch; error boundaries wired up and compatible with Sentry
+
+---
+
+## Stack
+
+| Layer | Choice |
+|---|---|
+| UI | React 19 + TypeScript |
+| Build | Vite 7 (SWC) |
+| Routing | React Router 7 |
+| Styling | CSS Modules (component-scoped) |
+| Icons | Font Awesome 7 |
+| Carousel | Splide (patched for React 19 via `patch-package`) |
+| Images | Sharp (AVIF / WebP / JPEG pipeline) |
+| Video | FFmpeg (WebM + MP4 transcode scripts) |
+| Testing | Vitest + @testing-library/react |
+| CI/CD | GitHub Actions → GitHub Pages |
+
+---
+
+## CI/CD
+
+Two workflows run on `master`:
+
+1. **`deploy-pages.yml`** — installs dependencies, runs tests, builds, then deploys to GitHub Pages. A failing test cancels the deploy.
+2. **`typecheck.yml`** — runs `tsc` (strict) and emits declaration files; npm module cache is keyed on `package-lock.json` for faster runs.
+
+Both use concurrency groups so rapid pushes cancel stale runs rather than queuing.
+
+---
 
 ## Repo structure
 
+The codebase is organized by feature rather than by file type, so the logic, types, hooks, styles, and tests for a given domain all live together.
+
 ```
 src/
-├── app/              # App entry, routing, global styles
-├── components/       # Reusable UI components
-├── features/         # Feature modules (projects, hexes)
-├── data/             # Canonical project + content data
-└── utils/            # Utilities (analytics, performance, images)
+├── app/              # App entry, routing, global layout
+├── components/
+│   ├── global/       # OptimizedImage, VideoPlayer, Caption, ErrorBoundary…
+│   └── panels/       # Page-level layout panels
+├── features/
+│   ├── projects/     # Project index, detail, filtering, routing hooks
+│   └── hexes/        # Hexagonal decorative grid feature
+├── data/
+│   ├── projects/     # Canonical project records, tech tags, role tags
+│   └── content/      # Global copy and metadata
+└── utils/            # analytics, performance, image helpers
+scripts/
+├── optimize-images.cjs       # Sharp pipeline (AVIF / WebP / JPEG)
+├── optimize-hero-images.cjs  # Hero-specific compression pass
+└── transcode-videos.cjs      # FFmpeg WebM + MP4 outputs
 ```
+
+---
 
 ## Development
 
-### Prerequisites
+**Prerequisites:** Node.js 20.x or 22.x, npm 10+
 
-- Node.js 20.x or 22.x
-- npm 10+
-
-### Common commands
-
-```powershell
-# Install dependencies
+```bash
+# Install
 npm install
 
-# Dev server with HMR
+# Dev server (HMR)
 npm run dev
 
-# Build (types + Vite build)
+# Build — runs tsc strict-check, then Vite build
 npm run build
 
-# Full build (assets + transcode + build)
+# Full build — runs asset pipelines first, then build
 npm run build:full
 
-# Preview production build locally
+# Preview the production bundle locally
 npm run preview
 
-# Image optimization (Sharp pipeline)
-npm run images:build
+# Tests
+npm test
 
-# Hero image optimization (separate helper)
-npm run hero:optimize
-
-# Video transcoding (FFmpeg pipeline)
-npm run videos:build
-
-# Bundle analyzer
-npm run analyze
+# Tests with coverage report
+npm run test:coverage
 ```
 
-Notes:
-- `build` runs the type checks and Vite build.
-- `build:full` runs image + video pipelines and then the standard build (use for CI or when assets changed).
+### Asset pipeline commands
 
-## Asset & Media Optimization
-
-- Images: `scripts/optimize-images.cjs` (AVIF/WebP/JPEG outputs). The site serves responsive `<picture>` sources via `OptimizedImage`.
-- Hero images: `scripts/optimize-hero-images.cjs` for one‑off/hero-specific compressions.
-- Videos: `scripts/transcode-videos.cjs` produces WebM + MP4 variants with tuned CRF settings for small bundle impact.
-- Use `npm run analyze` after a build to inspect the `dist/` composition and spot regressions.
-
-See `docs/IMAGE_OPTIMIZATION.md` and `docs/VIDEO_PIPELINE.md` for details and recommended quality settings.
-
-## Analytics & Debugging
-
-- Google Analytics 4 is integrated in `src/utils/analytics.ts`. For local testing the file exposes an `enableInDevelopment` flag — ensure it is `false` in production builds.
-- Use GA DebugView (or the browser console) to verify events. The app queues events until analytics finishes initializing to avoid dropped hits during app boot.
-
-## Build & Deployment
-
-- CI: GitHub Actions runs type checks and builds on push to `master`.
-- Deployment: Artifacts are published to GitHub Pages; `404.html` includes an SPA fallback for deep links.
-- Recommended preview flow:
-
-```powershell
-npm run build:full    # if you changed images/videos
-npm run preview
+```bash
+npm run images:build   # AVIF / WebP / JPEG variants via Sharp
+npm run hero:optimize  # Hero-specific compression pass
+npm run videos:build   # WebM + MP4 transcoding via FFmpeg
+npm run analyze        # Bundle composition report (run after build)
 ```
 
-## Accessibility & Quality
+`build:full` chains `images:build → videos:build → build`. Use it when assets have changed; the standard `build` skips the pipeline for speed.
 
-- The site targets WCAG best practices (semantic HTML, focus management, skip links). Run a quick axe or Lighthouse accessibility pass before major demos.
+---
 
-## Contributing
+## Design notes
 
-This is primarily a personal portfolio. Bug reports and small improvements are welcome via issues or PRs.
+The hexagonal motif started as research into elevation mapping — I got interested in how hex grids handle spatial data and wanted to bring that geometry into the UI. Early versions used large hex project cards, but they didn't scale and the layouts got unwieldy. Eventually I pulled the hex concept back to a decorative role and moved project cards to rounded rectangles with pill filters, which turned out to be a better fit for the content anyway.
+
+The color choices were just as deliberate; I wanted to invoke the beauty of the surrounding desert. A lot of portfolio sites feel a bit flat to me, so I leaned into vibrant gradients and bold accents. The goal was something that felt energetic but still readable. 
+
+---
 
 ## License
 
-Code is MIT licensed. All design/content © Crawford Forbes.
-
----
+Code is MIT licensed. All design and content © Crawford Forbes.
 
 **Contact:** crawford.forbes@gmail.com  
 **LinkedIn:** [linkedin.com/in/crawfordforbes](https://linkedin.com/in/crawfordforbes)  
