@@ -52,7 +52,7 @@ Some things worth noting:
 | UI | React 19 + TypeScript |
 | Build | Vite 7 (SWC) |
 | Routing | React Router 7 |
-| Styling | CSS Modules (component-scoped) |
+| Styling | Plain CSS, colocated per component |
 | Icons | Font Awesome 7 |
 | Carousel | Splide (patched for React 19 via `patch-package`) |
 | Images | Sharp (AVIF / WebP / JPEG pipeline) |

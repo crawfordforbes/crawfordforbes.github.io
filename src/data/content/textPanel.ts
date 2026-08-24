@@ -9,11 +9,11 @@ export const textPanelContent: Record<string, TextPanelContent> = {
   "about-me": {
     "id": "about-me",
     "description":`
-      <p>I’m a UI Architect who integrates ambitious design with pragmatic engineering. With a decade of experience building enterprise SPAs and high-volume platforms, I turn complex data requirements into maintainable, high-performance code.</p>
+      <p>I’m a Software Engineer with a decade of experience building enterprise SPAs, high-volume platforms, and complex front-end systems. I specialize in translating complex data requirements into maintainable, high-performance code, focusing heavily on application state, performance optimization, and scalable component architecture.</p>
 
-      <p>At Simpleview, I spent seven years shaping the core architecture of tourism sites for global destinations and leading dev teams to ship ~30 projects annually. I’m at my best when hands-on with code, mentoring developers, and collaborating across product teams to solve interesting problems.</p>
+      <p>At Simpleview, I spent seven years shaping the front-end architecture for global destination platforms and leading dev teams to ship roughly 30 projects annually. I thrive when I'm deep in the codebase, mentoring engineers, and collaborating across product teams to untangle tough technical challenges.</p>
 
-      <p>Currently looking for a role where I can remain deeply hands-on with code while contributing to high-level architecture. My ideal fit is a product-focused team where I can solve complex technical problems and translate creative vision into high-performance production reality.</p>
+      <p>I’m looking for my next role within a collaborative engineering team. Whether contributing directly as an individual developer, driving front-end architecture, or leading projects, I’m open to any role where I can solve interesting technical problems, write clean code, and ship great software.</p>
     `
   },
   "projects-title": {

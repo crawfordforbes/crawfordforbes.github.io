@@ -4,5 +4,5 @@ type IntroPanelContent = {
 };
 
 export const introPanelContent: IntroPanelContent = {
-  title: "Architecting high-performance, data-driven systems where intentional design meets engineering integrity.",
+  title: "Architecting high-performance, data-dense applications with scalable state and clean component design.",
 }
